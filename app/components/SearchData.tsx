@@ -1,5 +1,7 @@
+'use client'
 import React, { useState, useEffect, useRef } from 'react';
-import { useNavigate, useSearchParams } from 'react-router-dom';
+import { useSearchParams } from 'next/navigation';
+// import { useNavigate, useSearchParams } from 'react-router-dom';
 import DisplayData from './DisplayData';
 import { Button } from '@mui/material';
 import Input from '@mui/material/Input';
@@ -61,75 +63,66 @@ const StyledInput = styled(Input)(({ theme }) => ({
 }));
 
 //main search to spotify
-const SearchData = ({
-  setOffset,
-  offset,
-  setResponse,
-  response,
-  setAudioInfo,
-  audioInfo,
-  setSearchResult,
-  searchResult,
-}) => {
-  const navigate = useNavigate();
+const SearchData = () => {
+  // const navigate = useNavigate();
   const [inputField, setInputField] = useState<string>('');
   const searchInputRef = useRef<HTMLInputElement>(null);
   const [showInput, setShowInput] = useState(false);
-  const [searchParams] = useSearchParams();
-  const initialSearchQuery = searchParams.get('q') || '';
-  const query = searchParams.get('q') || '';
-  const hasFetchedForQueryRef = useRef(false);  
+  // const [searchParams] = useSearchParams();
+  // const initialSearchQuery = searchParams.get('q') || '';
+  // const query = searchParams.get('q') || '';
+  // const hasFetchedForQueryRef = useRef(false);  
 
-  useEffect(() => {
-    if (query && !hasFetchedForQueryRef.current) {  
-      setInputField(query);
-      fetchData(1, query);
-      hasFetchedForQueryRef.current = true;  
-    }
-  }, [query]);
+  // useEffect(() => {
+  //   if (query && !hasFetchedForQueryRef.current) {  
+  //     setInputField(query);
+  //     fetchData(1, query);
+  //     hasFetchedForQueryRef.current = true;  
+  //   }
+  // }, [query]);
 
-  useEffect(() => {
-    if (offset > 1) {
-      fetchData(offset);
-    }
-  }, [offset]);
+  // useEffect(() => {
+  //   if (offset > 1) {
+  //     fetchData(offset);
+  //   }
+  // }, [offset]);
 
-  const fetchData = (newOffset = 1, query = inputField) => {
-    const idCache: string[] = [];
-    if (query.trim() !== '') {
-      const searchQuery = encodeURIComponent(query);
-      //prod
-      // fetch(`http://api.bpmkey.com/api/search?query=${searchQuery}&offset=${newOffset}`)
-      //dev
-      fetch(`/api/search?query=${searchQuery}&offset=${newOffset}`)
-        .then(res => res.json())
-        .then(data => {
-          data.tracks.items.forEach((item) => {
-            idCache.push(item.id);
-          })
-          const searchData = data.tracks.items;
-          navigate(`/?q=${searchQuery}`)
-          setResponse(prev => [...prev, ...searchData]);
-          setSearchResult(query || inputField);
-          //prod
-          // fetch(`http://api.bpmkey.com/api/advancedSearch?query=${idCache.join(',')}`)
-          //dev
-          fetch(`/api/advancedSearch?query=${idCache.join(',')}`)
-            .then(res => res.json())
-            .then(data => {
-              const additionalData = data.audio_features
-              setAudioInfo(prev => [...prev, ...additionalData]);
-            })
-            .catch(error => {
-              console.error('Error in advanced search:', error);
-            }); 
-          setOffset(newOffset);
-        })
-        .catch(error => {
-          console.error('Error:', error);
-        });
-    }
-  };
+  // const fetchData = (newOffset = 1, query = inputField) => {
+  //   const idCache: string[] = [];
+  //   if (query.trim() !== '') {
+  //     const searchQuery = encodeURIComponent(query);
+  //     //prod
+  //     fetch(`https://api.bpmkey.com/api/search?query=${searchQuery}&offset=${newOffset}`)
+  //     //dev
+  //     // fetch(`/api/search?query=${searchQuery}&offset=${newOffset}`)
+  //       .then(res => res.json())
+  //       .then(data => {
+  //         data.tracks.items.forEach((item) => {
+  //           idCache.push(item.id);
+  //         })
+  //         const searchData = data.tracks.items;
+  //         navigate(`/?q=${searchQuery}`)
+  //         setResponse(prev => [...prev, ...searchData]);
+  //         setSearchResult(query || inputField);
+  //         //prod
+  //         fetch(`https://api.bpmkey.com/api/advancedSearch?query=${idCache.join(',')}`)
+  //         //dev
+  //         // fetch(`/api/advancedSearch?query=${idCache.join(',')}`) 
+  //           .then(res => res.json())
+  //           .then(data => {
+  //             const additionalData = data.audio_features
+  //             setAudioInfo(prev => [...prev, ...additionalData]);
+  //           })
+  //           .catch(error => {
+  //             console.error('Error in advanced search:', error);
+  //           }); 
+  //         setOffset(newOffset);
+  //       })
+  //       .catch(error => {
+  //         console.error('Error:', error);
+  //       });
+  //   }
+  // };
 
   const handleFormSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();

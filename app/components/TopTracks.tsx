@@ -1,16 +1,14 @@
-'use client'
-import React from 'react';
-import { useRef, useState } from 'react';
+// import React, { useState, useEffect, useRef, useMemo } from 'react';
 // import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import { createTheme, Box, Button, Card, CardContent, CardMedia, Grid, IconButton, styled, Typography, Theme } from '@mui/material';
 // import DisplayData from './DisplayData';
-import GradeOutlinedIcon from '@mui/icons-material/GradeOutlined';
-import GradeIcon from '@mui/icons-material/Grade';
-import PlayArrowIcon from '@mui/icons-material/PlayArrow';
-import StopIcon from '@mui/icons-material/Stop';
+// import GradeOutlinedIcon from '@mui/icons-material/GradeOutlined';
+// import GradeIcon from '@mui/icons-material/Grade';
+// import PlayArrowIcon from '@mui/icons-material/PlayArrow';
+// import StopIcon from '@mui/icons-material/Stop';
 import { grey } from '@mui/material/colors';
-import { Artist,DataItem, AudioDataItem, ResultItem  } from '../types/dataTypes';
-// import AdSense from './AdSense';
+import { Artist,DataItem, AudioDataItem, ResultItem } from '../types/dataTypes';
+import PlayButton from './PlayButton';
 
 interface KeyMapping {
   [key: number]: [string, string];
@@ -20,27 +18,18 @@ type KeyConvertFunction = (num: number, mode: number) => string;
 type CombinedDataType = DataItem & AudioDataItem;
 
 //styled buttons
-const SmallPlayButton = styled(IconButton)(({ theme }) => ({
-  color: theme.palette.primary.contrastText,
-  backgroundColor: grey[900],
-  '&:hover': {
-    color: 'white',
-    backgroundColor: '#00e676'
-  },
-  fontSize: '15px',
-  width: '40px',
-  height: '40px',
-}));
+// const SmallPlayButton = styled(IconButton)(({ theme }) => ({
+//   color: theme.palette.primary.contrastText,
+//   backgroundColor: grey[900],
+//   '&:hover': {
+//     color: 'white',
+//     backgroundColor: '#00e676'
+//   },
+//   fontSize: '15px',
+//   width: '40px',
+//   height: '40px',
+// }));
 
-const LoadButton = styled(Button)(({ theme }) => ({
-  color: theme.palette.primary.contrastText,
-  backgroundColor: theme.palette.secondary.dark,
-  '&:hover': {
-    backgroundColor: theme.palette.secondary.light,
-    color: theme.palette.secondary.contrastText,
-  },
-  // padding: theme.spacing(1.2),
-}));
 
 //bpm and key helper conversions
 const keyConvert: KeyConvertFunction = (num: number, mode: number): string => {
@@ -72,8 +61,7 @@ function tempoRound(num: number): number {
 }
 
 const TopTracks = () => {
-  // const [combinedTracks, setCombinedTracks] = useState(
-    const combinedTracks = 
+  const combinedTracks =
     [
       {
         "name": "Paint The Town Red",
@@ -476,35 +464,69 @@ const TopTracks = () => {
         "valence": 0.873
       }
     ]
-
-  const [currentlyPlayingUrl, setCurrentlyPlayingUrl] = useState<string | null>(null);
-  const audioRef = useRef<HTMLAudioElement | null>(null);
+    const previewUrl = combinedTracks.map(item => item.preview_url);
+  // const [currentlyPlayingUrl, setCurrentlyPlayingUrl] = useState<string | null>(null);
+  // const audioRef = useRef<HTMLAudioElement | null>(null);
   // const navigate = useNavigate();
 
 
-  const playAudio = (event: React.MouseEvent, previewUrl: string | null) => {
-    event.stopPropagation();
-    event.preventDefault();
-    if (audioRef.current && previewUrl) {
-      audioRef.current.volume = .3;
+  // const playAudio = (event: React.MouseEvent, previewUrl: string | null) => {
+  //   event.stopPropagation();
+  //   event.preventDefault();
+  //   if (audioRef.current && previewUrl) {
+  //     audioRef.current.volume = .3;
 
-      if (audioRef.current.src === previewUrl && !audioRef.current.paused) {
-        audioRef.current.pause();
-        setCurrentlyPlayingUrl(null);
-      } else {
-        if (!audioRef.current.paused) {
-          // Stop currently playing audio if there is any
-          audioRef.current.pause();
-        }
-        audioRef.current.src = previewUrl;
-        audioRef.current.play();
-        setCurrentlyPlayingUrl(previewUrl);
-      }
-    }
-  };
-  
+  //     if (audioRef.current.src === previewUrl && !audioRef.current.paused) {
+  //       audioRef.current.pause();
+  //       setCurrentlyPlayingUrl(null);
+  //     } else {
+  //       if (!audioRef.current.paused) {
+  //         // Stop currently playing audio if there is any
+  //         audioRef.current.pause();
+  //       }
+  //       audioRef.current.src = previewUrl;
+  //       audioRef.current.play();
+  //       setCurrentlyPlayingUrl(previewUrl);
+  //     }
+  //   }
+  // };
+  //old fetch for top tracks
+  // useEffect(() => {
+  //   async function fetchData() {
+  //     try {
+  //       const topTracksResponse = await fetch('/api/toptracks');
+
+  //       const rawCombinedData = await topTracksResponse.json();
+
+  //       const processedData = rawCombinedData.map(item => {
+  //         const { name, preview_url, explicit, popularity, artists, id } = item;
+  //         const images = item.album.images[0].url;
+  //         const release_date = item.album.release_date;
+  //         const albums = item.album.name;
+  //         const key = keyConvert(item.key, item.mode);
+  //         const tempo = tempoRound(item.tempo);
+  //         const { loudness, energy, acousticness, analysis_url, danceability, duration_ms, instrumentalness, liveness, time_signature, track_href, uri, valence } = item;
+
+  //         return {
+  //           name, images, id, preview_url, release_date, artists, albums, explicit, popularity,
+  //           key, tempo, loudness, energy, acousticness, analysis_url, danceability, duration_ms, instrumentalness, liveness, time_signature, track_href, uri, valence
+  //         };
+  //       });
+  //       // console.log(processedData);
+  //       setCombinedTracks(processedData);
+
+  //     } catch (err) {
+  //       console.log(err);
+  //     }
+  //   }
+
+  //   fetchData();
+  // }, []);
+
+  // console.log(combinedTracks)
   return (
     <div>
+
       <Box>
         <Grid container item xs={12} justifyContent='center' alignItems='center' >
           {combinedTracks.length > 0 && (
@@ -702,7 +724,10 @@ const TopTracks = () => {
                               display: 'flex',
                               justifyContent: 'center'
                             }} >
-                              {item.preview_url && (
+                              {item.preview_url &&(
+                                <PlayButton previewUrl={item.preview_url}/>
+                              )}
+                              {/* {item.preview_url && (
                                 <SmallPlayButton className='preview-button' sx={{
                                   boxShadow: 3,
                                   borderRadius: '50px',
@@ -731,7 +756,7 @@ const TopTracks = () => {
                                   )}
                                 </SmallPlayButton>
                               )}
-                              <audio ref={audioRef}></audio>
+                              <audio ref={audioRef}></audio> */}
                             </Grid>
 
                             {/* </Grid> */}

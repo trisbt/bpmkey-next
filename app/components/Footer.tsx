@@ -1,6 +1,7 @@
 import React, { FC } from 'react';
-import { Link as RouterLink } from 'react-router-dom';
-import { Box, Link, Typography } from '@mui/material';
+import Link from 'next/link';
+// import { Link as RouterLink } from 'react-router-dom';
+import { Box,Typography } from '@mui/material';
 
 const Footer: FC = () => {
   return (
@@ -59,7 +60,7 @@ const Footer: FC = () => {
 
           }}>
             Song data provided by
-            <Link component={RouterLink} to={'https://www.spotify.com'} sx={{
+            <Link href={'https://www.spotify.com'} sx={{
               textDecoration: 'none',
               color: 'inherit',
               display: 'flex',

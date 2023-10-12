@@ -1,5 +1,8 @@
-import { useState, MouseEvent, useEffect } from 'react';
-import { useNavigation, useSearchParams, useNavigate, Link } from "react-router-dom";
+// 'use client'
+// import { useState, MouseEvent, useEffect } from 'react';
+// import { useSearchParams, Link } from 'next/navigation';
+import Link from 'next/link'
+// import { useNavigation, useSearchParams, useNavigate, Link } from "react-router-dom";
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -13,30 +16,17 @@ import MenuItem from '@mui/material/MenuItem';
 import MenuIcon from '@mui/icons-material/Menu';
 import { Card, Hidden } from '@mui/material';
 import Popper from '@mui/material/Popper';
-// import musicpluglogow from '../assets/musicpluglogow.png';
 import SearchData from './SearchData';
+import SearchBar from './SearchBar';
 
-interface MenuState {
-  anchorElUser: null | HTMLElement;
-}
+// interface MenuState {
+//   anchorElUser: null | HTMLElement;
+// }
 
-function ResponsiveAppBar({ setOffset, offset, setResponse, response, setAudioInfo, audioInfo, setSearchResult, searchResult }) {
+function Navbar({
+  // setOffset, offset, setResponse, response, setAudioInfo, audioInfo, setSearchResult, searchResult 
+}) {
 
-  const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
-  const [searchParams, setSearchParams] = useSearchParams();
-  const navigate = useNavigate();
-
-  const handleOpenUserMenu = (event: MouseEvent<HTMLElement>) => {
-    setAnchorElUser(event.currentTarget);
-  };
-  const handleCloseUserMenu = () => {
-    setAnchorElUser(null);
-  };
-  const handleHomeClick = (event: React.MouseEvent<HTMLElement>) => {
-    event.preventDefault();
-    setSearchParams({ q: '' });
-    window.location.href = '/';
-  }
   return (
     <div>
       <AppBar position="static"
@@ -46,14 +36,14 @@ function ResponsiveAppBar({ setOffset, offset, setResponse, response, setAudioIn
         }}
       >
         <Container maxWidth="xl">
-          <Toolbar  disableGutters sx={{
+          <Toolbar disableGutters sx={{
             minHeight: '45px',
             '@media (max-width: 600px)': {
               minHeight: '52px',
             }
           }}>
             <Box sx={{
-              position: 'relative', 
+              position: 'relative',
               display: 'flex',
               height: '40px',
               alignItems: 'center',
@@ -70,15 +60,15 @@ function ResponsiveAppBar({ setOffset, offset, setResponse, response, setAudioIn
                 boxShadow: '0',
                 overflow: 'hidden'
               }}>
-                <Link to="/" onClick={handleHomeClick}>
-                  <Typography fontFamily={'logo'} sx={{
-                    fontSize: '35px',
-                    textAlign: 'center',
-                    transform: 'scaleY(1.4)',
-                  }}>
-                    BPMKEY
-                  </Typography>
-                  {/* <img src={musicpluglogow} alt="Plug Logo" className='plug-logo' /> */}
+                <Link href="/" >
+                <Typography className='font-custom' sx={{
+                  color:'white',
+                  fontSize: '35px',
+                  textAlign: 'center',
+                  transform: 'scaleY(1.4)',
+                }}>
+                  BPMKEY
+                </Typography>
                 </Link>
               </Card>
             </Box>
@@ -104,16 +94,17 @@ function ResponsiveAppBar({ setOffset, offset, setResponse, response, setAudioIn
               width: '0px',
               // backgroundColor:'green',
             }}>
-              <SearchData
-                setResponse={setResponse}
-                response={response}
-                setAudioInfo={setAudioInfo}
-                audioInfo={audioInfo}
-                setSearchResult={setSearchResult}
-                searchResult={searchResult}
-                setOffset={setOffset}
-                offset={offset}
-              />
+              <SearchBar/>
+              {/* <SearchData
+                // setResponse={setResponse}
+                // response={response}
+                // setAudioInfo={setAudioInfo}
+                // audioInfo={audioInfo}
+                // setSearchResult={setSearchResult}
+                // searchResult={searchResult}
+                // setOffset={setOffset}
+                // offset={offset}
+              /> */}
             </Box>
 
 
@@ -123,4 +114,4 @@ function ResponsiveAppBar({ setOffset, offset, setResponse, response, setAudioIn
     </div >
   );
 }
-export default ResponsiveAppBar;
+export default Navbar;

@@ -95,16 +95,6 @@ function Navbar({
               // backgroundColor:'green',
             }}>
               <SearchBar/>
-              {/* <SearchData
-                // setResponse={setResponse}
-                // response={response}
-                // setAudioInfo={setAudioInfo}
-                // audioInfo={audioInfo}
-                // setSearchResult={setSearchResult}
-                // searchResult={searchResult}
-                // setOffset={setOffset}
-                // offset={offset}
-              /> */}
             </Box>
 
 

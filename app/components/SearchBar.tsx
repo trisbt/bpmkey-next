@@ -67,7 +67,7 @@ const SearchBar = () => {
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
-				setShowInput(false);
+		setShowInput(false);
 		router.push(`/search?q=${query}`);
 	};
 
@@ -91,7 +91,7 @@ const SearchBar = () => {
 								placeholder='Search for songs, artists, albums...'
 								type='text'
 								value={query}
-                onChange={(e) => setQuery(e.target.value)}
+								onChange={(e) => setQuery(e.target.value)}
 							/>
 						</FormControl>
 						<ColorButton type='submit' variant='outlined'>

@@ -1,59 +1,30 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { Box, Button, Card, CardMedia, CardContent, createTheme, Fade, Grid, IconButton, LinearProgress, Modal, Paper, styled, Typography, } from '@mui/material';
-import { useParams, useLocation, Link } from 'react-router-dom';
-import GradeOutlinedIcon from '@mui/icons-material/GradeOutlined';
-import GradeIcon from '@mui/icons-material/Grade';
-import PlayArrowIcon from '@mui/icons-material/PlayArrow';
-import StopIcon from '@mui/icons-material/Stop';
-import { grey } from '@mui/material/colors';
-import SearchCredits from './SearchCredits';
-import SearchData from './SearchData';
-import SearchByIdOrArtistSong from '../utils/SearchByIdOrArtistSong';
-import { Artist, LocationState, ResultItem, SongDetails, SongPageProps } from '@appTypes/dataTypes';
+import React from 'react'
+import { useRouter } from 'next/router';
+import Link from 'next/link';
+import GetAccessToken from '../actions/GetAccessToken';
+import GetSpotifyById from '../actions/GetSpotifyById';
+// import { styled } from '@mui/material';
+import { Box, Button, Card, CardMedia, CardContent, createTheme, Fade, Grid, IconButton, LinearProgress, Modal, Paper, Typography, } from '@mui/material';
 
 
+// const Item = (Paper) => ({
+//   // backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#f5f5f5',
+//   // ...theme.typography.body1,
 
-const PlayButton = styled(Button)(({ theme }) => ({
-  color: theme.palette.primary.contrastText,
-  backgroundColor: grey[900],
-  '&:hover': {
-    color: 'white',
-    backgroundColor: '#00e676'
-  },
-  fontSize: '15px',
-  width: '200px',
-  height: '50px',
-  lineHeight: '0',
-}));
-const SmallPlayButton = styled(IconButton)(({ theme }) => ({
-  color: theme.palette.primary.contrastText,
-  backgroundColor: grey[900],
-  '&:hover': {
-    color: 'white',
-    backgroundColor: '#00e676'
-  },
-  fontSize: '15px',
-  width: '50px',
-  height: '50px',
-}));
-  const Item = styled(Paper)(({ theme }) => ({
-    backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#f5f5f5',
-    ...theme.typography.body1,
+//   // padding: theme.spacing(1),
+//   textAlign: 'center',
+//   // color: theme.palette.text.secondary,
+// }));
 
-    padding: theme.spacing(1),
-    textAlign: 'center',
-    color: theme.palette.text.secondary,
-  }));
+//helpers
+// const transformSpotifyURItoURL = (uri) => {
+//   const match = uri.match(/spotify:track:([a-zA-Z0-9]+)/);
 
-const transformSpotifyURItoURL = (uri) => {
-  const match = uri.match(/spotify:track:([a-zA-Z0-9]+)/);
-
-  if (match && match[1]) {
-      return `https://open.spotify.com/track/${match[1]}`;
-  }
-  return null; // or throw an error or return the original URI, as per your needs
-}
-
+//   if (match && match[1]) {
+//       return `https://open.spotify.com/track/${match[1]}`;
+//   }
+//   return null;
+// }
 
 //progress value color function
 function determineColor(value: number): string {
@@ -76,74 +47,13 @@ const msConvert = (num: number): string => {
   return minutes + ':' + formattedSeconds;
 }
 
-//main page func
-const SongPage = (props: SongPageProps) => {
-  const location = useLocation();
-  const state = location.state as LocationState;
-  const [open, setOpen] = useState<boolean>(false);
-  const [aliasFromChild, setAliasFromChild] = useState<string | null>(null);
-  const [currentlyPlayingUrl, setCurrentlyPlayingUrl] = useState<string | null>(null);
-  const audioRef = useRef<HTMLAudioElement | null>(null);
-  const [fetchedData, setFetchedData] = useState<{ songDetails: ResultItem} | null>(null);
-  const { id, name, artist } = useParams();
-  const dataToUse = state || fetchedData;
-  const songDetails = dataToUse?.songDetails;
-
-
-    //for navigation directly to page
-    useEffect(() => {
-      if (!state) {
-        async function fetchData() {
-          const data = await SearchByIdOrArtistSong({ id: id});
-          setFetchedData(data);
-        }
-        fetchData();
-      }
-    }, [state, id]);
-
-  const playAudio = (event: React.MouseEvent, previewUrl: string | null) => {
-    if (audioRef.current && previewUrl) {
-      audioRef.current.volume = .3;
-
-      if (audioRef.current.src === previewUrl && !audioRef.current.paused) {
-        audioRef.current.pause();
-        setCurrentlyPlayingUrl(null);
-      } else {
-        if (!audioRef.current.paused) {
-          // Stop currently playing audio if there is any
-          audioRef.current.pause();
-        }
-        audioRef.current.src = previewUrl;
-        audioRef.current.play();
-        setCurrentlyPlayingUrl(previewUrl);
-      }
-    }
-  };
-
-  //can show aliases for artist not used from songid
-  const handleAlias = (alias: string[]) => {
-    console.log(alias.join(', ').replace(/\s?\(.*?\)\s?/g, ''));
-    setAliasFromChild(alias.join(', ').replace(/\s?\(.*?\)\s?/g, ''));
-  };
-
-  //handles for img modal
-  const handleOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-  };
-
-  const Item = styled(Paper)(({ theme }) => ({
-    backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#f5f5f5',
-    ...theme.typography.body1,
-
-    padding: theme.spacing(1),
-    textAlign: 'center',
-    color: theme.palette.text.secondary,
-  }));
-
+const SongPage = async ({ params }) => {
+  const song = decodeURIComponent(params.song[0]);
+  const artist = decodeURIComponent(params.song[1]);
+  const id = params.song[2];
+  const token = await GetAccessToken();
+  const songDetails = await GetSpotifyById(token, id);
+  // console.log(songDetails)
   return (
     <div className='song-page-container'>
       {songDetails && (
@@ -181,7 +91,7 @@ const SongPage = (props: SongPageProps) => {
               >
                 <CardMedia
                   component="img"
-                  onClick={handleOpen}
+                  // onClick={handleOpen}
                   sx={{
                     cursor: 'pointer',
                     boxShadow: 2,
@@ -192,7 +102,7 @@ const SongPage = (props: SongPageProps) => {
                   image={songDetails.images}
                   alt={songDetails.name}
                 />
-                <Modal
+                {/* <Modal
                   open={open}
                   onClose={handleClose}
                   closeAfterTransition
@@ -212,7 +122,7 @@ const SongPage = (props: SongPageProps) => {
                       style={{ width: '50%', height: 'auto', boxShadow: '2px 2px 10px rgba(0, 0, 0, 0.5)', }}
                     />
                   </Fade>
-                </Modal>
+                </Modal> */}
               </Grid>
 
               {/* song info */}
@@ -223,21 +133,25 @@ const SongPage = (props: SongPageProps) => {
                   <Typography variant="h4">{songDetails.artists[0]?.name}</Typography>
                   <Typography variant="subtitle1">{songDetails.albums}</Typography>
                   <Typography variant="subtitle2">Released: {songDetails.release_date}</Typography>
-                  <Typography>{aliasFromChild}</Typography>
+                  {/* <Typography>{aliasFromChild}</Typography> */}
 
                   <Grid item container xs={12} alignItems='center' justifyContent='space-between' >
 
                     {/*link spotify render*/}
-                    <Link to={transformSpotifyURItoURL(songDetails.uri)}>
+                    {/* <Link href ={
+                      // transformSpotifyURItoURL(
+                        songDetails.uri
+                        // )
+                      }>
                       <svg
                         style={{ marginLeft: '-8px', paddingTop: '5px' }}
                         xmlns="http://www.w3.org/2000/svg" width="62" height="62" viewBox="0 0 24 24">
                         <path fill="#00e676" d="M17.9 10.9C14.7 9 9.35 8.8 6.3 9.75c-.5.15-1-.15-1.15-.6c-.15-.5.15-1 .6-1.15c3.55-1.05 9.4-.85 13.1 1.35c.45.25.6.85.35 1.3c-.25.35-.85.5-1.3.25m-.1 2.8c-.25.35-.7.5-1.05.25c-2.7-1.65-6.8-2.15-9.95-1.15c-.4.1-.85-.1-.95-.5c-.1-.4.1-.85.5-.95c3.65-1.1 8.15-.55 11.25 1.35c.3.15.45.65.2 1m-1.2 2.75c-.2.3-.55.4-.85.2c-2.35-1.45-5.3-1.75-8.8-.95c-.35.1-.65-.15-.75-.45c-.1-.35.15-.65.45-.75c3.8-.85 7.1-.5 9.7 1.1c.35.15.4.55.25.85M12 2A10 10 0 0 0 2 12a10 10 0 0 0 10 10a10 10 0 0 0 10-10A10 10 0 0 0 12 2Z" />
                       </svg>
-                    </Link>
+                    </Link> */}
 
                     {/*play button render*/}
-                    {songDetails.preview_url && (
+                    {/* {songDetails.preview_url && (
                       <PlayButton className='preview-button' sx={{
                         boxShadow: 3,
                         borderRadius: '50px',
@@ -267,11 +181,11 @@ const SongPage = (props: SongPageProps) => {
                         )}
                       </PlayButton>
                     )}
-                    <audio ref={audioRef}></audio>
+                    <audio ref={audioRef}></audio> */}
 
 
                     {/*small play button render*/}
-                    {songDetails.preview_url && (
+                    {/* {songDetails.preview_url && (
                       <SmallPlayButton className='preview-button' sx={{
                         display: { xs: 'flex', sm: 'flex', md: 'none' },
                         boxShadow: 3,
@@ -300,7 +214,7 @@ const SongPage = (props: SongPageProps) => {
                         )}
                       </SmallPlayButton>
                     )}
-                    <audio ref={audioRef}></audio>
+                    <audio ref={audioRef}></audio> */}
 
                   </Grid>
                 </Grid>
@@ -308,28 +222,28 @@ const SongPage = (props: SongPageProps) => {
                 {/* Other Details, shows inline with song details on large screens */}
                 <Grid container item spacing={2} xs={1} justifyContent='center' sx={{ display: { xs: 'none', sm: 'none', md: 'none', lg: 'flex' } }}>
                   <Grid item xs={3} >
-                    <Item>
+                    <Paper>
                       Key
                       <Typography variant="h5" color='text.primary' >{songDetails.key}</Typography>
-                    </Item>
+                    </Paper>
                   </Grid>
                   <Grid item xs={3}>
-                    <Item>
+                    <Paper>
                       Tempo
                       <Typography variant="h5" color='text.primary' >{songDetails.tempo}</Typography>
-                    </Item>
+                    </Paper>
                   </Grid>
                   <Grid item xs={3}>
-                    <Item>
+                    <Paper>
                       Duration
                       <Typography variant="h5" color='text.primary' >{msConvert(songDetails.duration_ms)}</Typography>
-                    </Item>
+                    </Paper>
                   </Grid>
                   <Grid item xs={3}>
-                    <Item>
+                    <Paper>
                       Time Signature
                       <Typography variant="h5" color='text.primary' >{`${songDetails.time_signature} / 4`}</Typography>
-                    </Item>
+                    </Paper>
                   </Grid>
 
                 </Grid>
@@ -339,28 +253,28 @@ const SongPage = (props: SongPageProps) => {
               {/* Other Details, shows flex with song details on smaller screens */}
               <Grid container item xs={12} spacing={2} sx={{ display: { xs: 'flex', sm: 'flex', md: 'flex', lg: 'none' } }}>
                 <Grid item xs={6} md={3} >
-                  <Item>
+                  <Paper>
                     Key
                     <Typography variant="h5" color='text.primary' >{songDetails.key}</Typography>
-                  </Item>
+                  </Paper>
                 </Grid>
                 <Grid item xs={6} md={3}>
-                  <Item>
+                  <Paper>
                     Tempo
                     <Typography variant="h5" color='text.primary' >{songDetails.tempo}</Typography>
-                  </Item>
+                  </Paper>
                 </Grid>
                 <Grid item xs={6} md={3}>
-                  <Item>
+                  <Paper>
                     Duration
                     <Typography variant="h5" color='text.primary' >{msConvert(songDetails.duration_ms)}</Typography>
-                  </Item>
+                  </Paper>
                 </Grid>
                 <Grid item xs={6} md={3}>
-                  <Item>
+                  <Paper>
                     Time Signature
                     <Typography variant="h5" color='text.primary' >{`${songDetails.time_signature} / 4`}</Typography>
-                  </Item>
+                  </Paper>
                 </Grid>
 
               </Grid>
@@ -526,7 +440,7 @@ const SongPage = (props: SongPageProps) => {
 
               }}>Credits</Typography>
 
-              <SearchCredits artists={songDetails.artists} song={songDetails.name} onReceiveAlias={handleAlias} />
+              {/* <SearchCredits artists={songDetails.artists} song={songDetails.name} onReceiveAlias={handleAlias} /> */}
 
             </Grid>
           </Grid>

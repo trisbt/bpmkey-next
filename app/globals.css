@@ -22,6 +22,22 @@
   font-style: normal;
 }
 
+.background-image {
+  background-image: linear-gradient(to bottom, rgba(40, 60, 80, 0.5) 0%, #282c34 20%, rgba(80, 108, 185, 1) 90%), url('../public/Musicplugbg.jpg');
+  background-size: contain;
+}
+.background-gradient{
+  background-image: repeating-linear-gradient(140deg, rgb(109, 97, 168), #282c34 25%, rgb(80, 108, 185));
+}
+.searchform-container {
+  display: flex;
+  justify-content: center;
+  padding-right: 5em
+}
+.loadmore {
+  display: flex;
+  justify-content: center;
+}
 body {
   color: rgb(var(--foreground-rgb));
   background: linear-gradient(

@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { useRef, useState, useEffect } from 'react';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import StopIcon from '@mui/icons-material/Stop';
-import { createTheme, Box, Button, Card, CardContent, CardMedia, Grid, IconButton, styled, Typography, Theme } from '@mui/material';
+import { Box, Button, Card, CardContent, CardMedia, Grid, IconButton, styled, Typography } from '@mui/material';
 import { grey } from '@mui/material/colors';
 import { Artist, DataItem, AudioDataItem, ResultItem } from '../types/dataTypes';
 import PlayButton from './PlayButton';

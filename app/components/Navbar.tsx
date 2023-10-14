@@ -1,8 +1,4 @@
-// 'use client'
-// import { useState, MouseEvent, useEffect } from 'react';
-// import { useSearchParams, Link } from 'next/navigation';
 import Link from 'next/link'
-// import { useNavigation, useSearchParams, useNavigate, Link } from "react-router-dom";
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -19,20 +15,14 @@ import Popper from '@mui/material/Popper';
 import SearchData from './SearchData';
 import SearchBar from './SearchBar';
 
-// interface MenuState {
-//   anchorElUser: null | HTMLElement;
-// }
 
-function Navbar({
-  // setOffset, offset, setResponse, response, setAudioInfo, audioInfo, setSearchResult, searchResult 
-}) {
+function Navbar() {
 
   return (
     <div>
       <AppBar position="static"
         sx={{
           backgroundColor: '#0047d4',
-
         }}
       >
         <Container maxWidth="xl">
@@ -92,12 +82,9 @@ function Navbar({
             <Box display='flex' flexGrow={1} justifyContent='center' sx={{
               margin: 0,
               width: '0px',
-              // backgroundColor:'green',
             }}>
               <SearchBar/>
             </Box>
-
-
           </Toolbar>
         </Container>
       </AppBar >

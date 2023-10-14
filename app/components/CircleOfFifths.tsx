@@ -133,7 +133,7 @@ const CircleOfFifths = ({ activeSlice, setActiveSlice }) => {
         height: '300px',
       }}>
         <Grid item xs={12} sx={{
-          height: '300px',
+          height: '270px',
         }}>
           <Doughnut
             data={chartData}

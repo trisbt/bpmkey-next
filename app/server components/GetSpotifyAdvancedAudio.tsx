@@ -37,7 +37,8 @@ const GetSpotifyAdvancedAudio = async (token, ids) => {
     const res = await fetch(`https://api.spotify.com/v1/audio-features/?ids=${ids}`, {
       headers: {
         'Authorization': 'Bearer ' + token
-      }
+      },
+      cache:'no-store',
     });
 
     const data = await res.json();

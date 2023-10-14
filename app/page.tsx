@@ -2,7 +2,7 @@ import Image from 'next/image'
 import { Grid } from '@mui/material'
 import Splash from './components/Splash'
 import TopTracks from './components/TopTracks'
-import GetTopTracks from './actions/GetTopTracks'
+import GetTopTracks from './server components/GetTopTracks'
 
 export default function Home() {
   return (

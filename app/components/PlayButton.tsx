@@ -1,12 +1,46 @@
-'use client'
-import React from 'react'
-import { useRef, useState, useEffect } from 'react';
-import { IconButton } from '@mui/material';
+'use client';
+import React from 'react';
+import { useRef, useState } from 'react';
+import { IconButton, Hidden, Button, styled } from '@mui/material';
+import { grey } from '@mui/material/colors';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import StopIcon from '@mui/icons-material/Stop';
 
+const StyledPlayButton = styled(Button)(() => ({
+	'&&': {
+		color: '#fff',
+		backgroundColor: '#212121',
+		'&:hover': {
+			color: 'white',
+			backgroundColor: '#00e676'
+		},
+		fontSize: '15px',
+		width: '200px',
+		height: '50px',
+		lineHeight: '0',
+		boxShadow: 3,
+		borderRadius: '50px',
+	}
+}));
 
-const PlayButton = ({ previewUrl, currentlyPlaying, setCurrentlyPlaying }) => {
+const StyledPlayButtonSmall = styled(Button)(() => ({
+	'&&': {
+		color: '#fff',
+		backgroundColor: '#212121',
+		'&:hover': {
+			color: 'white',
+			backgroundColor: '#00e676'
+		},
+		fontSize: '15px',
+		minWidth: '50px',
+		height: '50px',
+		borderRadius: '50%',
+	}
+
+}));
+
+const PlayButton = ({ previewUrl }) => {
+	const [isPlaying, setIsPlaying] = useState(false);
 	const audioRef = useRef(null);
 
 	const togglePlayback = (event) => {
@@ -16,33 +50,61 @@ const PlayButton = ({ previewUrl, currentlyPlaying, setCurrentlyPlaying }) => {
 		if (audioRef.current && previewUrl) {
 			audioRef.current.volume = 0.3;
 
-			if (currentlyPlaying && currentlyPlaying !== audioRef.current) {
-				currentlyPlaying.pause();  // Pause any other playing audio
-			}
-
-			if (audioRef.current.paused) {
-				audioRef.current.src = previewUrl;
-				audioRef.current.play();
-				setCurrentlyPlaying(audioRef.current);  // Save this audio's reference
-			} else {
+			if (isPlaying) {
 				audioRef.current.pause();
-				setCurrentlyPlaying(null);  // Set no audio as currently playing
+				setIsPlaying(false);
+			} else {
+				if (audioRef.current.src !== previewUrl) {
+					audioRef.current.src = previewUrl;
+				}
+				audioRef.current.play();
+				setIsPlaying(true);
 			}
 		}
 	};
 
 	return (
 		<div>
-			<IconButton
-				onClick={togglePlayback}
-				className="play-button text-white bg-black hover:text-white hover:bg-green-500 text-sm w-10 h-10"
-			>
-				{currentlyPlaying === audioRef.current ? <StopIcon /> : <PlayArrowIcon />}
-			</IconButton>
+			<Hidden smUp>
+				<StyledPlayButtonSmall
+					onClick={togglePlayback}
+					className="play-button-small text-white bg-black hover:text-white hover:bg-green-500 text-sm"
+				>
+					{isPlaying ? <StopIcon aria-label="stop"
+						sx={{
+							height: 36,
+							width: 36,
+						}}
+					/>
+						:
+						<PlayArrowIcon aria-label="play/pause"
+							sx={{
+								height: 35,
+								width: 35,
+							}}
+						/>}
+				</StyledPlayButtonSmall>
+			</Hidden>
 
-			<audio ref={audioRef} src={previewUrl} onEnded={() => setCurrentlyPlaying(false)} />
+			<Hidden smDown>
+				<StyledPlayButton
+					onClick={togglePlayback}
+					className="play-button-lg text-white bg-black hover:text-white hover:bg-green-500 text-sm w-10 h-10"
+				>
+					{isPlaying
+						? <>
+							<StopIcon />
+							Stop Track
+						</>
+						: <>
+							<PlayArrowIcon />
+							Preview Track
+						</>}
+				</StyledPlayButton>
+			</Hidden>
+			<audio ref={audioRef} onEnded={() => setIsPlaying(false)} />
 		</div>
 	);
-}
+};
 
 export default PlayButton;

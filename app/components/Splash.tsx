@@ -5,7 +5,7 @@ import { Card, Typography} from '@mui/material';
 const Splash = () => {
 
     return (
-        <div>
+        <div className='splash'>
             <Card sx={{
                 display: 'flex',
                 justifyContent: 'center',

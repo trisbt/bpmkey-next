@@ -1,3 +1,4 @@
+'use client'
 import React, { useState } from 'react';
 import { ArcElement } from "chart.js";
 import Chart from "chart.js/auto";

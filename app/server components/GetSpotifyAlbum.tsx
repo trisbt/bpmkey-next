@@ -1,4 +1,5 @@
-import GetAccessToken from "./GetAccessToken"
+import React from 'react'
+import GetAccessToken from "./GetAccessToken";
 import GetSpotifyAdvancedAudio from "./GetSpotifyAdvancedAudio";
 
 interface KeyMapping {
@@ -34,35 +35,36 @@ function tempoRound(num: number): number {
     return Math.round(num * 2) / 2;
 }
 
-const GetSpotifyArtist = async (id) => {
+const GetSpotifyAlbum = async (id) => {
     const token = await GetAccessToken();
-    const mainRes = await fetch(`https://api.spotify.com/v1/artists/${id}/top-tracks?market=ES`, {
+    const mainRes = await fetch(`https://api.spotify.com/v1/albums/${id}/tracks?limit=50`, {
         headers: {
             'Authorization': 'Bearer ' + token
         }
     });
 
     const data = await mainRes.json();
-    const mainData = data.tracks.map((item) => {
-        const { name, album, preview_url, explicit, popularity } = item;
-        const artists = item.artists
-        const images = album.images[0].url;
-        const id = item.id;
-        const release_date = item.album.release_date;
-        const albums = item.album.name;
-        return { name, images, id, preview_url, release_date, artists, albums, explicit, popularity };
+    const mainData = data.items
+    .filter(item => item.name) 
+    .map((item) => {
+        const { name, id, album, preview_url, explicit } = item;
+        const artists = item.artists;
+        const albums = item.album?.name; 
+        return { name, id, preview_url, artists, albums, explicit };
     });
+
     const ids = mainData.map(item => item.id);
     const audioData = await GetSpotifyAdvancedAudio(token, ids);
     const results = [];
     for (let i = 0; i < mainData.length; i++) {
-      const combinedObject = {
-        ...mainData[i],
-        ...audioData[i]
-      };
-      results.push(combinedObject);
+        const combinedObject = {
+            ...mainData[i],
+            ...audioData[i]
+        };
+        results.push(combinedObject);
     }
+
     return results;
-    
 }
-export default GetSpotifyArtist;
+
+export default GetSpotifyAlbum;

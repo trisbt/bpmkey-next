@@ -4,7 +4,7 @@ import Link from 'next/link';
 import GetSpotifyById from '../server components/GetSpotifyById';
 import PlayButton from '../components/PlayButton';
 import ImageModal from '../components/ImageModal';
-import { styled } from '@mui/material';
+import { styled } from "@mui/material/styles";
 import { Box, Button, Card, CardMedia, CardContent, createTheme, Fade, Grid, IconButton, LinearProgress, Modal, Paper, Typography, } from '@mui/material';
 
 //helpers
@@ -98,14 +98,25 @@ const SongPage = async ({ params }) => {
                     <Typography variant="h4" sx={{
                       transition: 'color 0.3s',
                       '&:hover': {
-                        color: '#00b0ff',
-                        fontStyle:'italic'
+                        color: '#8bc34a',
+                        fontStyle: 'italic'
                       }
                     }}
                     >{songDetails.artists[0]?.name}
                     </Typography>
                   </Link>
-                  <Typography variant="subtitle1">{songDetails.albums}</Typography>
+
+                  <Link href={`/album/${songDetails.albums}/${songDetails.albumId}`}>
+                    <Typography variant="subtitle1" sx={{
+                      transition: 'color 0.3s',
+                      '&:hover': {
+                        color: '#8bc34a',
+                        fontStyle: 'italic'
+                      }
+                    }}>
+                      {songDetails.albums}
+                    </Typography>
+                  </Link>
                   <Typography variant="subtitle2">Released: {songDetails.release_date}</Typography>
 
                   <Grid item container xs={12} alignItems='center' justifyContent='space-between' >

@@ -4,7 +4,16 @@ import Link from 'next/link';
 import { useRef, useState, useEffect } from 'react';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import StopIcon from '@mui/icons-material/Stop';
-import { Box, Button, Card, CardContent, CardMedia, Grid, IconButton, styled, Typography } from '@mui/material';
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import CardMedia from '@mui/material/CardMedia';
+import Grid from '@mui/material/Grid';
+import IconButton from '@mui/material/IconButton';
+import { styled } from "@mui/material/styles";
+import TextField from '@mui/material/TextField';
+import Typography from '@mui/material/Typography';
 import { grey } from '@mui/material/colors';
 import { Artist, DataItem, AudioDataItem, ResultItem } from '../types/dataTypes';
 import PlayButton from './PlayButton';
@@ -46,7 +55,6 @@ const TopTracks = ({ results }) => {
       }
     }
   };
-  // console.log(results)
   return (
     <div>
       <Box>

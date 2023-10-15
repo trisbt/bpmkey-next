@@ -1,7 +1,10 @@
 'use client';
 import React from 'react';
 import { useRef, useState } from 'react';
-import { IconButton, Hidden, Button, styled } from '@mui/material';
+import IconButton from '@mui/material/IconButton';
+import Button from '@mui/material/Button';
+import Hidden from '@mui/material/Hidden';
+import { styled } from "@mui/material/styles";
 import { grey } from '@mui/material/colors';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import StopIcon from '@mui/icons-material/Stop';

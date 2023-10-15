@@ -98,6 +98,7 @@ export interface SongDetails {
 }
 
 
-export interface SongPageProps {
-
+export interface KeyMapping {
+  [key: number]: [string, string];
 }
+export type KeyConvertFunction = (num: number, mode: number) => string;

@@ -1,10 +1,18 @@
 'use client'
 import React from 'react'
 import { useState, useRef, useEffect } from 'react';
-import {
-	createTheme, Box, Button, Card, CardContent, CardMedia, Grid,
-	IconButton, styled, TextField, Typography, Theme, Accordion
-} from '@mui/material';
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import CardMedia from '@mui/material/CardMedia';
+import Grid from '@mui/material/Grid';
+import IconButton from '@mui/material/IconButton';
+import { styled } from "@mui/material/styles";
+import TextField from '@mui/material/TextField';
+import Typography from '@mui/material/Typography';
+import { Theme } from '@mui/material';
+import Accordion from '@mui/material/Accordion';
 import PlayButton from '../components/PlayButton';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import StopIcon from '@mui/icons-material/Stop';
@@ -97,7 +105,7 @@ const ArtistTopTracksCards = ({ results, artist }) => {
 	const [openAccordion, setOpenAccordion] = useState<string | null>(null);
 	const keyAccordionRef = useRef(null);
 	const bpmAccordionRef = useRef(null);
-	console.log(results)
+
 	const playAudio = (event: React.MouseEvent, previewUrl: string | null) => {
 		event.stopPropagation();
 		event.preventDefault();
@@ -118,31 +126,6 @@ const ArtistTopTracksCards = ({ results, artist }) => {
 			}
 		}
 	};
-	// const handleLoadMore = () => {
-	// 	const nextOffset = offset + 25;
-	// 	setOffset(nextOffset);
-	// };
-
-	//load more effect
-	// useEffect(() => {
-	// 	const fetchData = async () => {
-	// 		const newResults = await GetSpotifySearch(searchQuery, offset);
-
-	// 		if (offset === 1) {
-	// 			setSearchResults(newResults);
-	// 		} else {
-	// 			setSearchResults(prevResults => [...prevResults, ...newResults]);
-	// 		}
-	// 	};
-	// 	fetchData();
-	// }, [offset, searchQuery]);
-
-	//new search effect
-	// useEffect(() => {
-	// 	if (searchQuery) {
-	// 		setOffset(1);
-	// 	}
-	// }, [searchQuery]);
 
 	//filter effect
 	useEffect(() => {
@@ -506,22 +489,6 @@ const ArtistTopTracksCards = ({ results, artist }) => {
 									</Link>
 								</Grid>
 							))}
-						{/* <Grid item xs={12} sx={{
-							paddingTop: '1em',
-							paddingBottom: '1em',
-						}}>
-							<div className='loadmore'>
-								<LoadButton
-									onClick={handleLoadMore}
-									variant='outlined'
-									size='large'
-									sx={{
-										// marginBottom: '30px',
-									}}
-								>Load More...
-								</LoadButton>
-							</div>
-						</Grid> */}
 					</>
 				)}
 			</Grid >

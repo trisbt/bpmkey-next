@@ -26,7 +26,7 @@ const Footer: FC = () => {
           }}>
             Bpmkey.com is your plug to finding information for any song, including BPM, Key, and Song Credits.
           </Typography>
-          <hr />
+          <hr className="border-t-2 border-gray-300 my-4" />
           <Typography variant="subtitle1" color='#FFFFFF' gutterBottom sx={{
             letterSpacing: '1px',
             textAlign: 'center',
@@ -36,7 +36,8 @@ const Footer: FC = () => {
           </Typography>
         </Box>
       </Box>
-      <hr />
+      <hr className="border-gray-400"/>
+
       <Box
         sx={{
           backgroundColor: '#FFFFFF',

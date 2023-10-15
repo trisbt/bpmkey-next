@@ -36,20 +36,20 @@ const SmallPlayButton = styled(IconButton)(({ theme }) => ({
   width: '50px',
   height: '50px',
 }));
-  const Item = styled(Paper)(({ theme }) => ({
-    backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#f5f5f5',
-    ...theme.typography.body1,
+const Item = styled(Paper)(({ theme }) => ({
+  backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#f5f5f5',
+  ...theme.typography.body1,
 
-    padding: theme.spacing(1),
-    textAlign: 'center',
-    color: theme.palette.text.secondary,
-  }));
+  padding: theme.spacing(1),
+  textAlign: 'center',
+  color: theme.palette.text.secondary,
+}));
 
 const transformSpotifyURItoURL = (uri) => {
   const match = uri.match(/spotify:track:([a-zA-Z0-9]+)/);
 
   if (match && match[1]) {
-      return `https://open.spotify.com/track/${match[1]}`;
+    return `https://open.spotify.com/track/${match[1]}`;
   }
   return null; // or throw an error or return the original URI, as per your needs
 }
@@ -84,22 +84,22 @@ const SongPage = (props: SongPageProps) => {
   const [aliasFromChild, setAliasFromChild] = useState<string | null>(null);
   const [currentlyPlayingUrl, setCurrentlyPlayingUrl] = useState<string | null>(null);
   const audioRef = useRef<HTMLAudioElement | null>(null);
-  const [fetchedData, setFetchedData] = useState<{ songDetails: ResultItem} | null>(null);
+  const [fetchedData, setFetchedData] = useState<{ songDetails: ResultItem } | null>(null);
   const { id, name, artist } = useParams();
   const dataToUse = state || fetchedData;
   const songDetails = dataToUse?.songDetails;
 
 
-    //for navigation directly to page
-    useEffect(() => {
-      if (!state) {
-        async function fetchData() {
-          const data = await SearchByIdOrArtistSong({ id: id});
-          setFetchedData(data);
-        }
-        fetchData();
+  //for navigation directly to page
+  useEffect(() => {
+    if (!state) {
+      async function fetchData() {
+        const data = await SearchByIdOrArtistSong({ id: id });
+        setFetchedData(data);
       }
-    }, [state, id]);
+      fetchData();
+    }
+  }, [state, id]);
 
   const playAudio = (event: React.MouseEvent, previewUrl: string | null) => {
     if (audioRef.current && previewUrl) {
@@ -388,8 +388,11 @@ const SongPage = (props: SongPageProps) => {
                 </Grid>
                 <Grid>
                   <LinearProgress variant="determinate" value={((songDetails.loudness + 60) / 60) * 100} sx={{
-                    marginBottom: '.5em',
-                    paddingBottom: '.2em',
+                    '&&': {
+                      height:'4px'
+                      marginBottom: '.5em',
+                      paddingBottom: '3em',
+                    },
                     '& .MuiLinearProgress-barColorPrimary': {
                       backgroundImage: determineColor(((songDetails.loudness + 60) / 60) * 100)
                     }

@@ -15,8 +15,8 @@ import Slider from '@mui/material/Slider';
 import { useRouter } from 'next/navigation';
 import { useSearchParams } from 'next/navigation'
 import Link from 'next/link';
-import GetSpotifySearch from '../server components/GetSpotifySearch';
-import CircleOfFifths from '../components/CircleOfFifths';
+import CircleOfFifths from '@/app/components/CircleOfFifths';
+// import CircleOfFifths from '../components/CircleOfFifths';
 
 const SmallPlayButton = styled(IconButton)(() => ({
 	'&&': {
@@ -81,11 +81,11 @@ const TempoAccordionDetails = styled(AccordionDetails)({
 	boxShadow: '0px 6px 10px #0d47a1',
 });
 
-const SearchCards = ({ results }) => {
+const ArtistTopTracksCards = ({ results, artist }) => {
 	const [currentlyPlayingUrl, setCurrentlyPlayingUrl] = useState<string | null>(null);
 	const audioRef = useRef<HTMLAudioElement | null>(null);
 	const [searchResults, setSearchResults] = useState(results);
-	const [offset, setOffset] = useState<number>(1);
+	// const [offset, setOffset] = useState<number>(1);
 	const router = useRouter();
 	const searchParams = useSearchParams()
 	const searchQuery = searchParams.get('q')
@@ -97,7 +97,7 @@ const SearchCards = ({ results }) => {
 	const [openAccordion, setOpenAccordion] = useState<string | null>(null);
 	const keyAccordionRef = useRef(null);
 	const bpmAccordionRef = useRef(null);
-
+	console.log(results)
 	const playAudio = (event: React.MouseEvent, previewUrl: string | null) => {
 		event.stopPropagation();
 		event.preventDefault();
@@ -118,37 +118,37 @@ const SearchCards = ({ results }) => {
 			}
 		}
 	};
-	const handleLoadMore = () => {
-		const nextOffset = offset + 25;
-		setOffset(nextOffset);
-	};
+	// const handleLoadMore = () => {
+	// 	const nextOffset = offset + 25;
+	// 	setOffset(nextOffset);
+	// };
 
 	//load more effect
-	useEffect(() => {
-		const fetchData = async () => {
-			const newResults = await GetSpotifySearch(searchQuery, offset);
+	// useEffect(() => {
+	// 	const fetchData = async () => {
+	// 		const newResults = await GetSpotifySearch(searchQuery, offset);
 
-			if (offset === 1) {
-				setSearchResults(newResults);
-			} else {
-				setSearchResults(prevResults => [...prevResults, ...newResults]);
-			}
-		};
-		fetchData();
-	}, [offset, searchQuery]);
+	// 		if (offset === 1) {
+	// 			setSearchResults(newResults);
+	// 		} else {
+	// 			setSearchResults(prevResults => [...prevResults, ...newResults]);
+	// 		}
+	// 	};
+	// 	fetchData();
+	// }, [offset, searchQuery]);
 
 	//new search effect
-	useEffect(() => {
-		if (searchQuery) {
-			setOffset(1);
-		}
-	}, [searchQuery]);
+	// useEffect(() => {
+	// 	if (searchQuery) {
+	// 		setOffset(1);
+	// 	}
+	// }, [searchQuery]);
 
 	//filter effect
 	useEffect(() => {
 		setActiveSlice(null);
 		setTempoSelect([0, 200]);
-	}, [offset, searchQuery]);
+	}, [searchQuery]);
 
 	//close accordion
 	useEffect(() => {
@@ -201,7 +201,7 @@ const SearchCards = ({ results }) => {
 	return (
 		<Box>
 			<Grid container item xs={12} justifyContent='center' alignItems='center' >
-				{searchResults.length > 0 && (
+				{searchResults && (
 					<>
 						{/* text row */}
 						<Grid item xs={11} md={8}>
@@ -230,7 +230,7 @@ const SearchCards = ({ results }) => {
 										fontSize: '14px'
 									},
 								}}>
-									Results for: {searchQuery}
+								{decodeURIComponent(artist)} top tracks
 								</Typography>
 							</Card>
 						</Grid>
@@ -506,7 +506,7 @@ const SearchCards = ({ results }) => {
 									</Link>
 								</Grid>
 							))}
-						<Grid item xs={12} sx={{
+						{/* <Grid item xs={12} sx={{
 							paddingTop: '1em',
 							paddingBottom: '1em',
 						}}>
@@ -521,7 +521,7 @@ const SearchCards = ({ results }) => {
 								>Load More...
 								</LoadButton>
 							</div>
-						</Grid>
+						</Grid> */}
 					</>
 				)}
 			</Grid >
@@ -529,4 +529,4 @@ const SearchCards = ({ results }) => {
 	)
 }
 
-export default SearchCards
+export default ArtistTopTracksCards;

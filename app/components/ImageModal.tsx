@@ -1,6 +1,6 @@
 'use client'
 import React, { useState } from 'react';
-import { Modal, Fade } from '@mui/material';
+import { Modal, Fade, Box } from '@mui/material';
 
 interface ImageModalProps {
     songDetails: {
@@ -29,7 +29,6 @@ const ImageModal: React.FC<ImageModalProps> = ({ songDetails }) => {
                 onClick={handleOpen}
                 style={{
                     cursor: 'pointer',
-                    boxShadow: 2,
                 }}
             />
             <Modal
@@ -39,17 +38,25 @@ const ImageModal: React.FC<ImageModalProps> = ({ songDetails }) => {
                 BackdropProps={{
                     timeout: 500,
                 }}
-                style={{
+                sx={{
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
                 }}
             >
                 <Fade in={open}>
-                    <img
+                    <Box
+                        component="img"
                         src={songDetails.images}
                         alt={songDetails.name}
-                        style={{ width: '50%', height: 'auto', boxShadow: '2px 2px 10px rgba(0, 0, 0, 0.5)' }}
+                        sx={{
+                            width: '50%',
+                            height: 'auto',
+                            boxShadow: '2px 2px 10px rgba(0, 0, 0, 0.5)',
+                            "@media (max-width: 500px)": {
+                                width: '80%',
+                            }
+                        }}
                     />
                 </Fade>
             </Modal>

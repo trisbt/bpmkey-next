@@ -1,3 +1,4 @@
+import GetAccessToken from "./GetAccessToken";
 import GetSpotifyAdvancedAudio from "./GetSpotifyAdvancedAudio";
 interface KeyMapping {
     [key: number]: [string, string];
@@ -32,7 +33,8 @@ function tempoRound(num: number): number {
     return Math.round(num * 2) / 2;
 }
 
-const GetSpotifyById = async (token, id) => {
+const GetSpotifyById = async (id) => {
+    const token = await GetAccessToken();
     const mainRes = await fetch(`https://api.spotify.com/v1/tracks/${id}`, {
         headers: {
             'Authorization': 'Bearer ' + token
@@ -40,9 +42,12 @@ const GetSpotifyById = async (token, id) => {
     });
 
     const trackData = await mainRes.json();
+
     const basicData = {
         name: trackData.name,
         images: trackData.album.images[0].url,
+        albumId: trackData.album.id,
+        artistId: trackData.artists[0].id,
         id: trackData.id,
         preview_url: trackData.preview_url,
         release_date: trackData.album.release_date,

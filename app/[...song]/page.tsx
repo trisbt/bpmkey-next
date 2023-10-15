@@ -1,7 +1,6 @@
 import React from 'react'
 import { useRouter } from 'next/router';
 import Link from 'next/link';
-import GetAccessToken from '../server components/GetAccessToken';
 import GetSpotifyById from '../server components/GetSpotifyById';
 import PlayButton from '../components/PlayButton';
 import ImageModal from '../components/ImageModal';
@@ -43,9 +42,8 @@ const SongPage = async ({ params }) => {
   const song = decodeURIComponent(params.song[0]);
   const artist = decodeURIComponent(params.song[1]);
   const id = params.song[2];
-  const token = await GetAccessToken();
-  const songDetails = await GetSpotifyById(token, id);
-  // console.log(songDetails)
+  const songDetails = await GetSpotifyById(id);
+
   return (
     <div className='song-page-container background-gradient'>
       {songDetails && (
@@ -81,26 +79,43 @@ const SongPage = async ({ params }) => {
               <Grid
                 item xs={12} sm={5} md={4} lg={3}
               >
-                <CardMedia/>
-                <ImageModal songDetails={songDetails} />
+                <CardMedia sx={{
+                  cursor: 'pointer',
+                  boxShadow: 2,
+                  "@media (max-width: 500px)": {
+                    width: '75%',
+                  }
+                }}>
+                  <ImageModal songDetails={songDetails} />
+                </CardMedia>
               </Grid>
               {/* song info */}
               <Grid item container xs={12} sm={7} md={7.5} lg={9} direction="column" justifyContent="space-between" >
 
                 <Grid item >
                   <Typography variant="h5" color='text.primary'>{songDetails.name}</Typography>
-                  <Typography variant="h4">{songDetails.artists[0]?.name}</Typography>
+                  <Link href={`/artists/${songDetails.artists[0].name}/${songDetails.artistId}`}>
+                    <Typography variant="h4" sx={{
+                      transition: 'color 0.3s',
+                      '&:hover': {
+                        color: '#00b0ff',
+                        fontStyle:'italic'
+                      }
+                    }}
+                    >{songDetails.artists[0]?.name}
+                    </Typography>
+                  </Link>
                   <Typography variant="subtitle1">{songDetails.albums}</Typography>
                   <Typography variant="subtitle2">Released: {songDetails.release_date}</Typography>
 
                   <Grid item container xs={12} alignItems='center' justifyContent='space-between' >
 
                     {/*link spotify render*/}
-                    <Link href ={
+                    <Link href={
                       transformSpotifyURItoURL(
                         songDetails.uri
-                        )
-                      }>
+                      )
+                    }>
                       <svg
                         style={{ marginLeft: '-8px', paddingTop: '5px' }}
                         xmlns="http://www.w3.org/2000/svg" width="62" height="62" viewBox="0 0 24 24">
@@ -110,73 +125,8 @@ const SongPage = async ({ params }) => {
 
                     {/*play button render*/}
                     {songDetails.preview_url && (
-                      <PlayButton previewUrl={songDetails.preview_url}/>
+                      <PlayButton previewUrl={songDetails.preview_url} />
                     )}
-                    {/* {songDetails.preview_url && (
-                      <PlayButton className='preview-button' sx={{
-                        boxShadow: 3,
-                        borderRadius: '50px',
-                        display: { xs: 'none', sm: 'none', md: 'flex' },
-                      }}
-                        onClick={(event) => playAudio(event, songDetails.preview_url)}>
-                        {currentlyPlayingUrl === songDetails.preview_url ? (
-                          <>
-                            <StopIcon aria-label="stop"
-                              sx={{
-                                height: 35,
-                                width: 35,
-                              }}
-                            />
-                            Stop track
-                          </>
-                        ) : (
-                          <>
-                            <PlayArrowIcon aria-label="play/pause"
-                              sx={{
-                                height: 35,
-                                width: 35,
-                              }}
-                            />
-                            Preview track
-                          </>
-                        )}
-                      </PlayButton>
-                    )}
-                    <audio ref={audioRef}></audio> */}
-
-
-                    {/*small play button render*/}
-                    {/* {songDetails.preview_url && (
-                      <SmallPlayButton className='preview-button' sx={{
-                        display: { xs: 'flex', sm: 'flex', md: 'none' },
-                        boxShadow: 3,
-                        width: '3.5em',
-                        height: '3.5em',
-                      }}
-                        onClick={(event) => playAudio(event, songDetails.preview_url)}>
-                        {currentlyPlayingUrl === songDetails.preview_url ? (
-                          <>
-                            <StopIcon aria-label="stop"
-                              sx={{
-                                height: 36,
-                                width: 36,
-                              }}
-                            />
-                          </>
-                        ) : (
-                          <>
-                            <PlayArrowIcon aria-label="play/pause"
-                              sx={{
-                                height: 35,
-                                width: 35,
-                              }}
-                            />
-                          </>
-                        )}
-                      </SmallPlayButton>
-                    )}
-                    <audio ref={audioRef}></audio> */}
-
                   </Grid>
                 </Grid>
 
@@ -264,7 +214,7 @@ const SongPage = async ({ params }) => {
                 <Grid>
                   <LinearProgress variant="determinate" value={((songDetails.loudness + 60) / 60) * 100} sx={{
                     marginBottom: '.5em',
-                    paddingBottom: '.2em',
+                    paddingBottom: '.5em',
                     '& .MuiLinearProgress-barColorPrimary': {
                       backgroundImage: determineColor(((songDetails.loudness + 60) / 60) * 100)
                     }
@@ -283,7 +233,7 @@ const SongPage = async ({ params }) => {
                 <Grid>
                   <LinearProgress color='primary' variant="determinate" value={songDetails.energy * 100} sx={{
                     marginBottom: '.5em',
-                    paddingBottom: '.2em',
+                    paddingBottom: '.5em',
                     '& .MuiLinearProgress-barColorPrimary': {
                       backgroundImage: determineColor(songDetails.energy * 100)
                     }
@@ -302,7 +252,7 @@ const SongPage = async ({ params }) => {
                 <Grid>
                   <LinearProgress color='primary' variant="determinate" value={songDetails.valence * 100} sx={{
                     marginBottom: '.5em',
-                    paddingBottom: '.2em',
+                    paddingBottom: '.5em',
                     '& .MuiLinearProgress-barColorPrimary': {
                       backgroundImage: determineColor(songDetails.valence * 100)
                     }
@@ -321,7 +271,7 @@ const SongPage = async ({ params }) => {
                 <Grid>
                   <LinearProgress color='primary' variant="determinate" value={songDetails.acousticness * 100} sx={{
                     marginBottom: '.5em',
-                    paddingBottom: '.2em',
+                    paddingBottom: '.5em',
                     '& .MuiLinearProgress-barColorPrimary': {
                       backgroundImage: determineColor(songDetails.acousticness * 100)
                     }
@@ -340,7 +290,7 @@ const SongPage = async ({ params }) => {
                 <Grid>
                   <LinearProgress color='primary' variant="determinate" value={songDetails.danceability * 100} sx={{
                     marginBottom: '.5em',
-                    paddingBottom: '.2em',
+                    paddingBottom: '.5em',
                     '& .MuiLinearProgress-barColorPrimary': {
                       backgroundImage: determineColor(songDetails.danceability * 100)
                     }
@@ -360,7 +310,7 @@ const SongPage = async ({ params }) => {
                 <Grid>
                   <LinearProgress color='primary' variant="determinate" value={songDetails.liveness * 100} sx={{
                     marginBottom: '.5em',
-                    paddingBottom: '.2em',
+                    paddingBottom: '.5em',
                     '& .MuiLinearProgress-barColorPrimary': {
                       backgroundImage: determineColor(songDetails.liveness * 100)
                     }
@@ -380,7 +330,7 @@ const SongPage = async ({ params }) => {
                 <Grid>
                   <LinearProgress color='primary' variant="determinate" value={songDetails.popularity} sx={{
                     marginBottom: '.5em',
-                    paddingBottom: '.2em',
+                    paddingBottom: '.5em',
                     '& .MuiLinearProgress-barColorPrimary': {
                       backgroundImage: determineColor(songDetails.popularity)
                     }

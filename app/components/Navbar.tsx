@@ -14,6 +14,7 @@ import { Card, Hidden } from '@mui/material';
 import Popper from '@mui/material/Popper';
 import SearchData from './SearchData';
 import SearchBar from './SearchBar';
+import { logoFont } from '../fonts';
 
 
 function Navbar() {
@@ -51,7 +52,7 @@ function Navbar() {
                 overflow: 'hidden'
               }}>
                 <Link href="/" >
-                <Typography className='font-custom' sx={{
+                <Typography className={logoFont.className} sx={{
                   color:'white',
                   fontSize: '35px',
                   textAlign: 'center',

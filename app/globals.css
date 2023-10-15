@@ -8,20 +8,20 @@
   --background-end-rgb: 255, 255, 255;
 }
 
-@media (prefers-color-scheme: dark) {
+/* @media (prefers-color-scheme: dark) {
   :root {
     --foreground-rgb: 255, 255, 255;
     --background-start-rgb: 0, 0, 0;
     --background-end-rgb: 0, 0, 0;
   }
-}
+} */
 
-@font-face {
+/* @font-face {
   font-family: 'Speed';
   src: url('../public/A4SPEED-Bold.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
-}
+} */
 
 .background-image {
   background-image: linear-gradient(to bottom, rgba(40, 60, 80, 0.5) 0%, #282c34 20%, rgba(80, 108, 185, 1) 90%), url('../public/Musicplugbg.jpg');
@@ -68,9 +68,6 @@ body {
       transparent,
       rgb(var(--background-end-rgb))) rgb(var(--background-start-rgb));
 }
-.play-button-lg{
-
-}
 .pie-container {
   display: flex;
   margin-bottom: 1em;
@@ -106,12 +103,7 @@ hr {
   margin: 10px;
 }
 
-@media (max-width: 500px){
-  .modal-img{
-    width: 75%;
-  }
- 
-}
+
 @media (max-width: 600px) {
   .card-buttons {
     display: flex;
@@ -119,8 +111,6 @@ hr {
     height: 120px;
     justify-content: flex-end;
   }
-
-
 }
 
 @media (max-width: 700px) {

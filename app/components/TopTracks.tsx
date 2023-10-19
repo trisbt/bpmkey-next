@@ -166,11 +166,11 @@ const TopTracks = ({ results }) => {
                               paddingTop: '.8rem',
                             }
                           }}>
-                            <Grid item xs={3} sm={6}  >
+                            <Grid item xs={4} sm={6}  >
 
                               <Typography variant="subtitle1" color="text.secondary" component="div"
                                 sx={{
-                                  display: 'flex', flexDirection: 'column', alignItems: 'center', lineHeight: '0.5rem',
+                                  display: 'flex', flexDirection: 'column', alignItems: 'center', lineHeight: '1rem',
                                   "@media (max-width: 600px)": {
                                     fontSize: '.8em',
                                   }
@@ -188,7 +188,7 @@ const TopTracks = ({ results }) => {
 
                             </Grid>
 
-                            <Grid item xs={3.5} sm={6} sx={{
+                            <Grid item xs={4} sm={6} sx={{
                               "@media (max-width: 600px)": {
                                 marginRight: '.5em',
                               }
@@ -196,7 +196,7 @@ const TopTracks = ({ results }) => {
 
                               <Typography variant="subtitle1" color="text.secondary" component="div"
                                 sx={{
-                                  display: 'flex', flexDirection: 'column', alignItems: 'center', lineHeight: '0.5rem',
+                                  display: 'flex', flexDirection: 'column', alignItems: 'center', lineHeight: '1rem',
                                   "@media (max-width: 600px)": {
                                     fontSize: '.8em',
                                   }
@@ -215,7 +215,7 @@ const TopTracks = ({ results }) => {
                             </Grid>
 
                             {/* preview button */}
-                            <Grid item xs={2.5} sm={6} sx={{
+                            <Grid item xs={3} sm={6} sx={{
                               display: 'flex',
                               justifyContent: 'center'
                             }} >

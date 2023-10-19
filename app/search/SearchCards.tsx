@@ -218,9 +218,9 @@ const SearchCards = ({ results }) => {
 									display: 'flex',
 									flexDirection: 'row',
 									margin: '10px 10px 0',
-									boxShadow: 3,
+									boxShadow: 0,
 									justifyContent: 'center',
-									backgroundColor: 'rgb(0, 71, 212, .6)',
+									backgroundColor: 'transparent',
 								}}
 							>
 								<Typography variant='h5' sx={{
@@ -233,12 +233,13 @@ const SearchCards = ({ results }) => {
 									WebkitTextFillColor: 'transparent',
 									letterSpacing: '1px',
 									borderRadius: '2px',
-									textTransform: 'uppercase',
+									fontStyle:'italic',
+									// textTransform: 'uppercase',
 									'@media (max-width: 600px)': {
-										fontSize: '14px'
+										fontSize: '20px'
 									},
 								}}>
-									Results for: {searchQuery}
+									results for: {searchQuery}
 								</Typography>
 							</Card>
 						</Grid>
@@ -418,7 +419,7 @@ const SearchCards = ({ results }) => {
 														</Typography>
 													</Grid>
 
-													<Grid container item xs={12} sm={5} alignItems='center' rowSpacing={1} sx={{
+													<Grid container item xs={12} sm={6} alignItems='center' rowSpacing={1} sx={{
 														"@media (max-width: 600px)": {
 															paddingTop: '.8rem',
 														}
@@ -427,7 +428,7 @@ const SearchCards = ({ results }) => {
 															{/* <Card sx={{ width: '90%' }}> */}
 															<Typography variant="subtitle1" color="text.secondary" component="div"
 																sx={{
-																	display: 'flex', flexDirection: 'column', alignItems: 'center', lineHeight: '0.5rem',
+																	display: 'flex', flexDirection: 'column', alignItems: 'center', lineHeight: '1rem',
 																	"@media (max-width: 600px)": {
 																		fontSize: '.8em',
 																	}
@@ -453,7 +454,7 @@ const SearchCards = ({ results }) => {
 															{/* <Card sx={{ width: '90%' }}> */}
 															<Typography variant="subtitle1" color="text.secondary" component="div"
 																sx={{
-																	display: 'flex', flexDirection: 'column', alignItems: 'center', lineHeight: '0.5rem',
+																	display: 'flex', flexDirection: 'column', alignItems: 'center', lineHeight: '1rem',
 																	"@media (max-width: 600px)": {
 																		fontSize: '.8em',
 																	}

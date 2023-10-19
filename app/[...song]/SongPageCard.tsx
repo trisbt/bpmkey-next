@@ -125,7 +125,7 @@ const SongPageCard = ({ songDetails, song, artist, id }) => {
                     <Typography variant="h4" sx={{
                       transition: 'color 0.3s',
                       '&:hover': {
-                        color: '#8bc34a',
+                        color: '#3f51b5',
                         fontStyle: 'italic'
                       }
                     }}
@@ -137,7 +137,7 @@ const SongPageCard = ({ songDetails, song, artist, id }) => {
                     <Typography variant="subtitle1" sx={{
                       transition: 'color 0.3s',
                       '&:hover': {
-                        color: '#8bc34a',
+                        color: '#3f51b5',
                         fontStyle: 'italic'
                       }
                     }}>

@@ -193,12 +193,13 @@ const ArtistTopTracksCards = ({ results, artist }) => {
 									display: 'flex',
 									flexDirection: 'row',
 									margin: '10px 10px 0',
-									boxShadow: 3,
+									boxShadow: 0,
 									justifyContent: 'center',
-									backgroundColor: 'rgb(0, 71, 212, .6)',
+									// backgroundColor: 'rgb(0, 71, 212, .6)',
+									backgroundColor:'transparent'
 								}}
 							>
-								<Typography variant='h5' sx={{
+								<Typography variant='h4' sx={{
 									display: 'flex',
 									alignItems: 'center',
 									color: '#e8eaf6',
@@ -208,12 +209,13 @@ const ArtistTopTracksCards = ({ results, artist }) => {
 									WebkitTextFillColor: 'transparent',
 									letterSpacing: '1px',
 									borderRadius: '2px',
-									textTransform: 'uppercase',
+									// fontStyle:'italic',
+									// textTransform: 'uppercase',
 									'@media (max-width: 600px)': {
 										fontSize: '14px'
 									},
 								}}>
-								{decodeURIComponent(artist)} top tracks
+								Top Tracks by {decodeURIComponent(artist)} 
 								</Typography>
 							</Card>
 						</Grid>
@@ -402,7 +404,7 @@ const ArtistTopTracksCards = ({ results, artist }) => {
 															{/* <Card sx={{ width: '90%' }}> */}
 															<Typography variant="subtitle1" color="text.secondary" component="div"
 																sx={{
-																	display: 'flex', flexDirection: 'column', alignItems: 'center', lineHeight: '0.5rem',
+																	display: 'flex', flexDirection: 'column', alignItems: 'center', lineHeight: '1rem',
 																	"@media (max-width: 600px)": {
 																		fontSize: '.8em',
 																	}
@@ -428,7 +430,7 @@ const ArtistTopTracksCards = ({ results, artist }) => {
 															{/* <Card sx={{ width: '90%' }}> */}
 															<Typography variant="subtitle1" color="text.secondary" component="div"
 																sx={{
-																	display: 'flex', flexDirection: 'column', alignItems: 'center', lineHeight: '0.5rem',
+																	display: 'flex', flexDirection: 'column', alignItems: 'center', lineHeight: '1rem',
 																	"@media (max-width: 600px)": {
 																		fontSize: '.8em',
 																	}

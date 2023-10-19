@@ -423,7 +423,7 @@ const SearchCards = ({ results }) => {
 															paddingTop: '.8rem',
 														}
 													}}>
-														<Grid item xs={3} sm={6}  >
+														<Grid item xs={4} sm={6}  >
 															{/* <Card sx={{ width: '90%' }}> */}
 															<Typography variant="subtitle1" color="text.secondary" component="div"
 																sx={{
@@ -445,7 +445,7 @@ const SearchCards = ({ results }) => {
 															{/* </Card> */}
 														</Grid>
 
-														<Grid item xs={3.5} sm={6} sx={{
+														<Grid item xs={4} sm={6} sx={{
 															"@media (max-width: 600px)": {
 																marginRight: '.5em',
 															}
@@ -472,7 +472,7 @@ const SearchCards = ({ results }) => {
 														</Grid>
 
 														{/* preview button */}
-														<Grid item xs={2.5} sm={6} sx={{
+														<Grid item xs={3} sm={6} sx={{
 															display: 'flex',
 															justifyContent: 'center'
 														}} >

@@ -101,7 +101,7 @@ export async function GetCredits(album, artist, song) {
 
 		// Check if creditsArr is empty after all fetch attempts
 		if (creditsArr.length === 0) {
-			creditsArr.push('no credits');
+			creditsArr.push('no credits available at this time');
 		}
 		function processCredits(credits) {
 			const result = {};

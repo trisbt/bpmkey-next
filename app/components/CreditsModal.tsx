@@ -65,9 +65,12 @@ const CreditsModal: React.FC<CreditsModalProps> = ({ open, handleClose, credits 
                         <CloseOutlined />
                     </IconButton>
                     <Typography variant="h4" color='text.primary' sx={{
-                        paddingBottom: '1em',
+                        // paddingBottom: '1em',
                     }}>Credits</Typography>
-
+                    <Typography variant="subtitle1" color='text.primary' sx={{
+                        fontStyle:'italic', 
+                        paddingBottom: '1em',
+                    }}>via Discogs</Typography>
                     <ul style={{
                         columns: '2',
                         paddingInlineStart: '0',

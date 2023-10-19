@@ -35,8 +35,8 @@ const StyledPlayButtonSmall = styled(Button)(() => ({
 			backgroundColor: '#00e676'
 		},
 		fontSize: '15px',
-		minWidth: '50px',
-		height: '50px',
+		minWidth: '55px',
+		height: '55px',
 		borderRadius: '50%',
 	}
 
@@ -68,7 +68,7 @@ const PlayButton = ({ previewUrl }) => {
 
 	return (
 		<div>
-			<Hidden smUp>
+			<Hidden mdUp>
 				<StyledPlayButtonSmall
 					onClick={togglePlayback}
 					className="play-button-small text-white bg-black hover:text-white hover:bg-green-500 text-sm"
@@ -89,7 +89,7 @@ const PlayButton = ({ previewUrl }) => {
 				</StyledPlayButtonSmall>
 			</Hidden>
 
-			<Hidden smDown>
+			<Hidden mdDown>
 				<StyledPlayButton
 					onClick={togglePlayback}
 					className="play-button-lg text-white bg-black hover:text-white hover:bg-green-500 text-sm w-10 h-10"

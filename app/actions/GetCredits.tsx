@@ -16,7 +16,7 @@ function prepQuery(query) {
 function isSongMatch(trackTitle, song) {
 	const normalizedTrackTitle = prepQuery(trackTitle)
 	const normalizedSong = prepQuery(song)
-	const noFeatSong = normalizedSong.replace(/\(.*\)/, "").trim();
+	const noFeatSong = song.replace(/\(.*\)/, "").trim().toLowerCase();
 	return normalizedTrackTitle === normalizedSong ||
 		normalizedTrackTitle === noFeatSong ||
 		getStringBeforeParenthesis(normalizedSong) === getStringBeforeParenthesis(normalizedTrackTitle);
@@ -27,13 +27,11 @@ export async function GetCredits(album, artist, song) {
 	artist = decodeURIComponent(artist);
 	song = decodeURIComponent(song)
 	console.log(album, artist, song)
-	const discogsToken = process.env.discogsToken;
 	const discogsKey = process.env.discogsKey;
 	const discogsSecret = process.env.discogsSecret;
-	// if (artist === 'Travis Scott') artist = 'Travis Scott(2)';
 	// Get search results and any master ids
 	const res = await fetch(`https://api.discogs.com/database/search?release_title=${encodeURIComponent(album)}&artist=${encodeURIComponent(artist)}`, {
-		cache: 'no-store',
+		// cache: 'no-store',
 		headers: {
 			'User-Agent': 'BpmKeyDev/1.0 +http://bpmkey.com',
 			'Authorization': `Discogs key=${discogsKey}, secret=${discogsSecret}`,
@@ -68,7 +66,7 @@ export async function GetCredits(album, artist, song) {
 		for (let i = 0; i < 5; i++) {
 
 			const masterRes = await fetch(`https://api.discogs.com/releases/${versionsIds[i]}`, {
-				cache: 'no-store',
+				// cache: 'no-store',
 				headers: {
 					'User-Agent': 'BpmKeyDev/1.0 +http://bpmkey.com',
 					'Authorization': `Discogs key=${discogsKey}, secret=${discogsSecret}`,

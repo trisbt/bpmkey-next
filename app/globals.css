@@ -23,6 +23,7 @@
   font-style: normal;
 } */
 
+
 .background-image {
   background-image: linear-gradient(to bottom, rgba(40, 60, 80, 0.5) 0%, #282c34 20%, rgba(80, 108, 185, 1) 90%), url('../public/Musicplugbg.jpg');
   background-size: contain;

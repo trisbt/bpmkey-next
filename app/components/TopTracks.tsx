@@ -35,6 +35,7 @@ const SmallPlayButton = styled(IconButton)(() => ({
 const TopTracks = ({ results }) => {
   const [currentlyPlayingUrl, setCurrentlyPlayingUrl] = useState<string | null>(null);
   const audioRef = useRef<HTMLAudioElement | null>(null);
+
   const playAudio = (event: React.MouseEvent, previewUrl: string | null) => {
     event.stopPropagation();
     event.preventDefault();
@@ -156,7 +157,7 @@ const TopTracks = ({ results }) => {
                                 fontSize: '.7em',
                               }
                             }}>
-                              {item.albums}
+                              {item.album.name}
                             </Typography>
                           </Grid>
 

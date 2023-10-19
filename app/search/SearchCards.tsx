@@ -10,6 +10,7 @@ import Grid from '@mui/material/Grid';
 import IconButton from '@mui/material/IconButton';
 import { styled } from "@mui/material/styles";
 import TextField from '@mui/material/TextField';
+import Typography from '@mui/material/Typography';
 import { Theme } from '@mui/material';
 import Accordion from '@mui/material/Accordion';
 import PlayButton from '../components/PlayButton';
@@ -22,7 +23,7 @@ import Slider from '@mui/material/Slider';
 import { useRouter } from 'next/navigation';
 import { useSearchParams } from 'next/navigation'
 import Link from 'next/link';
-import GetSpotifySearch from '../server components/GetSpotifySearch';
+import GetSpotifySearch from '../server_components/GetSpotifySearch';
 import CircleOfFifths from '../components/CircleOfFifths';
 
 const SmallPlayButton = styled(IconButton)(() => ({
@@ -308,7 +309,7 @@ const SearchCards = ({ results }) => {
 												/>
 												<Button type="submit" variant="contained"
 													sx={{
-														'&&':{
+														'&&': {
 															color: 'white',
 															backgroundColor: '#4d97f8',
 															'&:hover': {
@@ -316,7 +317,7 @@ const SearchCards = ({ results }) => {
 																// You can add more styles here if needed
 															},
 														}
-													
+
 													}}
 												>
 													Filter Tempo

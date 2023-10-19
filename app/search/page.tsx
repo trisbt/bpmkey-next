@@ -1,6 +1,6 @@
 import React from 'react'
 import { useRouter } from 'next/router';
-import GetSpotifySearch from '../server components/GetSpotifySearch';
+import GetSpotifySearch from '../server_components/GetSpotifySearch';
 import SearchCards from './SearchCards';
 
 const SearchPage = async ({ searchParams }) => {

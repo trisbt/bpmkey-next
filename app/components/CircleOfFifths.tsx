@@ -19,28 +19,28 @@ const data = [
   { id: 5, value: 10, label: 'E' },
   { id: 6, value: 10, label: 'B' },
   { id: 7, value: 10, label: 'Gb' },
-  { id: 8, value: 10, label: 'Db' },
-  { id: 9, value: 10, label: 'Ab' },
-  { id: 10, value: 10, label: 'Eb' },
-  { id: 11, value: 10, label: 'Bb' },
+  { id: 8, value: 10, label: 'D♭' },
+  { id: 9, value: 10, label: 'A♭' },
+  { id: 10, value: 10, label: 'E♭' },
+  { id: 11, value: 10, label: 'B♭' },
   { id: 12, value: 10, label: 'F' },
 ];
 const minorKeys = [
   { id: 1, value: 10, label: 'Am' },
   { id: 2, value: 10, label: 'Em' },
   { id: 3, value: 10, label: 'Bm' },
-  { id: 4, value: 10, label: 'F#m' },
-  { id: 5, value: 10, label: 'C#m' },
-  { id: 6, value: 10, label: 'G#m' },
-  { id: 7, value: 10, label: 'Ebm' },
-  { id: 8, value: 10, label: 'Bbm' },
+  { id: 4, value: 10, label: 'F♯m' },
+  { id: 5, value: 10, label: 'C♯m' },
+  { id: 6, value: 10, label: 'G♯m' },
+  { id: 7, value: 10, label: 'E♭m' },
+  { id: 8, value: 10, label: 'B♭m' },
   { id: 9, value: 10, label: 'Fm' },
   { id: 10, value: 10, label: 'Cm' },
   { id: 11, value: 10, label: 'Gm' },
   { id: 12, value: 10, label: 'Dm' },
 ];
 
-const defaultColors: string[] = Array(data.length).fill(grey[500]);
+const defaultColors: string[] = Array(data.length).fill(grey[800]);
 const hoverColors: string[] = ['#b71c1c', '#ff5722', '#ff9800', '#ffeb3b', '#8bc34a', '#4caf50', '#26a69a', '#00bcd4', '#03a9f4', '#3f51b5', '#673ab7', '#9c27b0'];
 
 
@@ -93,7 +93,7 @@ const CircleOfFifths = ({ activeSlice, setActiveSlice }) => {
         display: true,
         color: '#fff',
         font: {
-          size: 15,
+          size: 13,
           weight: 700,
         },
         anchor: 'center' as 'center',
@@ -102,7 +102,7 @@ const CircleOfFifths = ({ activeSlice, setActiveSlice }) => {
           if (context.datasetIndex === 0) {
             return -12;  // offset for major labels
           } else {
-            return 0;  // default offset for minor labels
+            return -8;  // default offset for minor labels
           }
         },
 

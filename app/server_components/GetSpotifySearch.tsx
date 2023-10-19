@@ -5,7 +5,7 @@ import GetSpotifyAdvancedAudio from "./GetSpotifyAdvancedAudio";
 const GetSpotifySearch = async (query, offset) => {
 
     const token = await GetAccessToken();
-    const limit = 25;
+    const limit = 50;
     // const offset = req.query.offset;
     // const offset = 1
     const res = await fetch(`https://api.spotify.com/v1/search?q=${query}&type=artist%2Ctrack&limit=${limit}&offset=${offset}`, {

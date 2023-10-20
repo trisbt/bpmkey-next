@@ -1,10 +1,9 @@
 import GetSpotifyArtist from '@/app/server_components/GetSpotifyArtist'
 import React from 'react'
 import ArtistTopTracksCards from './ArtistTopTracksCards'
+import { ArtistPageProps } from '@/app/types/pageTypes'
 
-const ArtistPage = async ({ params }) => {
-
-  // let offset = 1
+const ArtistPage: React.FC<ArtistPageProps> = async ({ params }) => {
   const artist = params.artist[0];
   const id = params.artist[1];
   const results = await GetSpotifyArtist(id);

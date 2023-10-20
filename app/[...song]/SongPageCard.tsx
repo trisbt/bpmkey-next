@@ -7,13 +7,15 @@ import GetSpotifyById from '../server_components/GetSpotifyById';
 import PlayButton from '../components/PlayButton';
 import ImageModal from '../components/ImageModal';
 import { styled } from "@mui/material/styles";
+import {Hidden} from '@mui/material';
 import { Box, Button, Card, CardMedia, CardContent, createTheme, Fade, Grid, IconButton, LinearProgress, Modal, Paper, Typography, } from '@mui/material';
 import { GetCredits } from '../actions/GetCredits';
 import CreditsModal from '../components/CreditsModal';
-
-
+import { SongPageCardProps } from '../types/cardTypes';
+import { Credits } from '../types/dataTypes';
+import { DisplaySettings } from '@mui/icons-material';
 //helpers
-const transformSpotifyURItoURL = (uri) => {
+const transformSpotifyURItoURL = (uri: string): string | null => {
   const match = uri.match(/spotify:track:([a-zA-Z0-9]+)/);
 
   if (match && match[1]) {
@@ -60,18 +62,35 @@ const CreditsButton = styled(Button)(() => ({
   }
 }));
 
-const SongPageCard = ({ songDetails, song, artist, id }) => {
-  const [showCredits, setShowCredits] = useState(false);
-  const [credits, setCredits] = useState(null)
+const SmallCreditsButton = styled(Button)(() => ({
+  '&&': {
+    color: '#fff',
+    backgroundColor: '#212121',
+    '&:hover': {
+      color: 'white',
+      backgroundColor: '#00e676'
+    },
+    fontSize: '15px',
+    width: '100px',
+    height: '50px',
+    lineHeight: '0',
+    boxShadow: 3,
+    borderRadius: '50px',
+  }
+}));
+
+const SongPageCard: React.FC<SongPageCardProps> = ({ songDetails, song, artist, id }) => {
+  const [showCredits, setShowCredits] = useState<boolean>(false);
+  const [credits, setCredits] = useState<Credits>(null)
 
   const handleClick = async () => {
     if (!credits) { // Fetch only if credits haven't been fetched before
-      const res = await GetCredits(songDetails.albums, artist, song);
+      const res: Credits = await GetCredits(songDetails.albums, artist, song);
       setCredits(res);
     }
     setShowCredits(true);
   }
-  // console.log(showCredits)
+
   return (
     <div className='song-page-container background-gradient'>
       {songDetails && (
@@ -160,23 +179,40 @@ const SongPageCard = ({ songDetails, song, artist, id }) => {
                         <path fill="#00e676" d="M17.9 10.9C14.7 9 9.35 8.8 6.3 9.75c-.5.15-1-.15-1.15-.6c-.15-.5.15-1 .6-1.15c3.55-1.05 9.4-.85 13.1 1.35c.45.25.6.85.35 1.3c-.25.35-.85.5-1.3.25m-.1 2.8c-.25.35-.7.5-1.05.25c-2.7-1.65-6.8-2.15-9.95-1.15c-.4.1-.85-.1-.95-.5c-.1-.4.1-.85.5-.95c3.65-1.1 8.15-.55 11.25 1.35c.3.15.45.65.2 1m-1.2 2.75c-.2.3-.55.4-.85.2c-2.35-1.45-5.3-1.75-8.8-.95c-.35.1-.65-.15-.75-.45c-.1-.35.15-.65.45-.75c3.8-.85 7.1-.5 9.7 1.1c.35.15.4.55.25.85M12 2A10 10 0 0 0 2 12a10 10 0 0 0 10 10a10 10 0 0 0 10-10A10 10 0 0 0 12 2Z" />
                       </svg>
                     </Link>
-
-                    {/*credits button render*/}
-                    {!showCredits ? (
-                      <form action={handleClick}>
-                        <CreditsButton type="submit">Get Credits</CreditsButton>
-                      </form>
-                    ) : (
-                      <CreditsModal
-                        open={showCredits}
-                        handleClose={() => setShowCredits(false)}
-                        credits={credits}
-                      />
-                    )}
                     {/*play button render*/}
                     {songDetails.preview_url && (
                       <PlayButton previewUrl={songDetails.preview_url} />
                     )}
+                    {/*credits button render*/}
+                    <Hidden only={['sm', 'md', 'lg', 'xl']}>
+                      {/* This will be displayed only on xs screens */}
+                      {!showCredits ? (
+                        <form action={handleClick}>
+                          <SmallCreditsButton type="submit">Credits</SmallCreditsButton>
+                        </form>
+                      ) : (
+                        <CreditsModal
+                          open={showCredits}
+                          handleClose={() => setShowCredits(false)}
+                          credits={credits}
+                        />
+                      )}
+                    </Hidden>
+
+                    <Hidden only={['xs']}>
+                      {/* This will be displayed on sm, md, lg, xl screens */}
+                      {!showCredits ? (
+                        <form action={handleClick}>
+                          <CreditsButton type="submit">Get Credits</CreditsButton>
+                        </form>
+                      ) : (
+                        <CreditsModal
+                          open={showCredits}
+                          handleClose={() => setShowCredits(false)}
+                          credits={credits}
+                        />
+                      )}
+                    </Hidden>
                   </Grid>
                 </Grid>
 

@@ -102,7 +102,6 @@ const AlbumTrackCards = ({ results, album }) => {
 	//sort hooks
 	const [sortOrder, setSortOrder] = useState<"asc" | "desc" | null>(null);
 	const [sortBy, setSortBy] = useState<"tempo" | "key" | null>(null);
-
 	//filter hooks
 	const [activeSlice, setActiveSlice] = useState<string | null>(null);
 	const [tempoSelect, setTempoSelect] = React.useState([0, 200]);
@@ -157,7 +156,6 @@ const AlbumTrackCards = ({ results, album }) => {
 			setSortOrder("asc");
 		}
 	};
-
 
 	//tempo filter
 	const valuetext = (value) => {
@@ -224,7 +222,7 @@ const AlbumTrackCards = ({ results, album }) => {
 									fontWeight: 'bold',
 									background: '#e8eaf6',
 									WebkitBackgroundClip: 'text',
-									WebkitTextFillColor: 'transparent',
+									// WebkitTextFillColor: 'transparent',
 									letterSpacing: '1px',
 									borderRadius: '2px',
 									fontStyle:'italic',

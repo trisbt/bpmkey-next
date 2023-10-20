@@ -25,6 +25,7 @@ import { useSearchParams } from 'next/navigation'
 import Link from 'next/link';
 import GetSpotifySearch from '../server_components/GetSpotifySearch';
 import CircleOfFifths from '../components/CircleOfFifths';
+import { reverseKeyConvert } from '@/app/utils';
 
 const SmallPlayButton = styled(IconButton)(() => ({
 	'&&': {
@@ -50,7 +51,18 @@ const LoadButton = styled(Button)(({ theme }) => ({
 		color: theme.palette.secondary.contrastText,
 	},
 }));
-
+const SortButton = styled(Button)(({ theme }) => ({
+	'&&': {
+		minHeight: '4px',
+		padding: '0px 10px',
+		color: 'white',
+		// backgroundColor: 'white',
+	},
+	'&:hover': {
+		backgroundColor: '#00e676',
+		color: theme.palette.secondary.contrastText,
+	},
+}));
 const StyledAccordionSummary = styled(AccordionSummary)(({ theme }) => ({
 	minHeight: '4px',
 	padding: '0px 10px',
@@ -70,7 +82,7 @@ const KeyAccordionDetails = styled(AccordionDetails)({
 	position: 'absolute',
 	zIndex: 2,
 	left: '100%',
-	transform: 'translateX(-38%)',
+	transform: 'translateX(-48%)',
 	width: '250px',
 	height: '280px',
 	backdropFilter: 'blur(15px)',
@@ -82,7 +94,7 @@ const TempoAccordionDetails = styled(AccordionDetails)({
 	position: 'absolute',
 	zIndex: 2,
 	left: '100%',
-	transform: 'translateX(-60%)',
+	transform: 'translateX(-75%)',
 	backdropFilter: 'blur(15px)',
 	borderRadius: '1em',
 	width: '300px',
@@ -97,6 +109,9 @@ const SearchCards = ({ results }) => {
 	const router = useRouter();
 	const searchParams = useSearchParams()
 	const searchQuery = searchParams.get('q')
+		//sort hooks
+		const [sortOrder, setSortOrder] = useState<"asc" | "desc" | null>(null);
+		const [sortBy, setSortBy] = useState<"tempo" | "key" | null>(null);
 	//filter hooks
 	const [activeSlice, setActiveSlice] = useState<string | null>(null);
 	const [tempoSelect, setTempoSelect] = React.useState([0, 200]);
@@ -167,6 +182,16 @@ const SearchCards = ({ results }) => {
 		};
 	}, [openAccordion]);
 
+		//sorting
+		const handleSort = (attribute: "tempo" | "key") => {
+			if (sortBy === attribute && sortOrder === "asc") {
+				setSortOrder("desc");
+			} else {
+				setSortBy(attribute);
+				setSortOrder("asc");
+			}
+		};
+
 	//tempo filter
 	const valuetext = (value) => {
 		return `${value} bpm`;
@@ -221,6 +246,7 @@ const SearchCards = ({ results }) => {
 									boxShadow: 0,
 									justifyContent: 'center',
 									backgroundColor: 'transparent',
+									paddingBottom: '1em',
 								}}
 							>
 								<Typography variant='h5' sx={{
@@ -230,7 +256,7 @@ const SearchCards = ({ results }) => {
 									fontWeight: 'bold',
 									background: '#e8eaf6',
 									WebkitBackgroundClip: 'text',
-									WebkitTextFillColor: 'transparent',
+									// WebkitTextFillColor: 'transparent',
 									letterSpacing: '1px',
 									borderRadius: '2px',
 									fontStyle:'italic',
@@ -243,118 +269,165 @@ const SearchCards = ({ results }) => {
 								</Typography>
 							</Card>
 						</Grid>
-						<Grid item container className='py-3' justifyContent='center' xs={12} md={8}>
-							<Grid item xs={2}>
-								<Accordion
-									ref={keyAccordionRef}
-									expanded={openAccordion === 'keyAccordion'}
-									onChange={() => setOpenAccordion(prev => prev === 'keyAccordion' ? null : 'keyAccordion')}
-								>
-									<StyledAccordionSummary
-										expandIcon={<ExpandMoreIcon />}
-									>
-										<Typography fontSize='0.8rem' >Key</Typography>
-									</StyledAccordionSummary>
 
-									<KeyAccordionDetails>
-										<Box>
-											<CircleOfFifths activeSlice={activeSlice} setActiveSlice={setActiveSlice} />
+						<Box border={1} borderColor="grey.500" borderRadius={2} m={0} sx ={{
+							width:'65vw',
+							'@media (max-width: 900px)':{
+								width:'90vw',
+							}
+						}}>
+							{/* sort */}
+							<Grid item container justifyContent='center' xs={12} md={8} spacing={1}>
+								<Grid item xs={10} container alignItems="center" spacing={1}> {/* Added container and alignItems */}
+									<Grid item> {/* Wrap Typography in a Grid item */}
+										<Typography fontSize='1rem' color='white'>Sort by: </Typography>
+									</Grid>
+									<Grid item > {/* Wrap the SortButton in a Grid item */}
+										<SortButton onClick={() => handleSort("key")}>
+											<Typography fontSize='1rem' sx={{ textTransform: 'none', }}>
+												Key
+											</Typography>
+											{sortBy === "key" && sortOrder === "asc" ? "↑" : "↓"}
+										</SortButton>
+									</Grid>
+									<Grid item> {/* Wrap the next SortButton in a Grid item */}
+										<SortButton onClick={() => handleSort("tempo")}>
+											<Typography fontSize='1rem'>BPM</Typography>
+											{sortBy === "tempo" && sortOrder === "asc" ? "↑" : "↓"}
+										</SortButton>
+									</Grid>
+								</Grid>
+							</Grid>
+
+							{/*/ filter */}
+							<Grid item container className='py-1' justifyContent='center' xs={12} md={8} spacing={1}>
+								<Grid item xs={10} container alignItems="center" spacing={1}> {/* Added container and alignItems */}
+									<Grid item >
+										<Typography fontSize='1rem' color='white'>Filter by:</Typography>
+									</Grid>
+									<Grid item >
+										<Accordion
+											ref={keyAccordionRef}
+											expanded={openAccordion === 'keyAccordion'}
+											onChange={() => setOpenAccordion(prev => prev === 'keyAccordion' ? null : 'keyAccordion')}
+										>
+											<StyledAccordionSummary
+												expandIcon={<ExpandMoreIcon />}
+											>
+												<Typography fontSize='0.8rem' >Key</Typography>
+											</StyledAccordionSummary>
+
+											<KeyAccordionDetails>
+												<Box>
+													<CircleOfFifths activeSlice={activeSlice} setActiveSlice={setActiveSlice} />
+												</Box>
+											</KeyAccordionDetails>
+
+										</Accordion>
+									</Grid>
+
+									<Grid item >
+										<Accordion
+											ref={bpmAccordionRef}
+											expanded={openAccordion === 'bpmAccordion'}
+											onChange={() => setOpenAccordion(prev => prev === 'bpmAccordion' ? null : 'bpmAccordion')}
+										>
+											<StyledAccordionSummary
+												expandIcon={<ExpandMoreIcon />}
+											>
+												<Typography fontSize='0.8rem' >BPM</Typography>
+											</StyledAccordionSummary>
+											<TempoAccordionDetails>
+												<form onSubmit={handleTempoSubmit}>
+													<Box sx={{
+														display: 'flex',
+														height: '200px',
+														width: '270px',
+														flexDirection: 'column',
+														justifyContent: 'center',
+													}}>
+														<Slider
+															min={0}
+															max={200}
+															getAriaLabel={() => 'Tempo'}
+															value={sliderValue}
+															onChange={handleTempoSelect}
+															valueLabelDisplay="on"
+															getAriaValueText={valuetext}
+														/>
+														<TextField
+															value={textFieldTempo}
+															onChange={handleTextFieldChange}
+															id="filled-basic"
+															label="select a range or enter a bpm"
+															variant="filled"
+															autoComplete="off"
+															InputProps={{
+																style: {
+																	backgroundColor: '#eceff1',
+																}
+															}}
+														/>
+														<Button type="submit" variant="contained"
+															sx={{
+																'&&': {
+																	color: 'white',
+																	backgroundColor: '#4d97f8',
+																	'&:hover': {
+																		backgroundColor: '#3746a2',
+																	},
+																}
+
+															}}
+														>
+															Filter Tempo
+														</Button>
+													</Box>
+												</form>
+
+											</TempoAccordionDetails>
+										</Accordion>
+									</Grid>
+
+									<Grid item paddingLeft={'2px'}>
+										<Box
+											onClick={handleReset}
+											variant="contained"
+											color="#ffecb3"
+											sx={{
+												// backgroundColor:'purple',
+												display: 'flex',
+												justifyContent: 'center',
+												alignItems: 'center',
+												cursor: 'pointer',
+												width: '60px',
+												height: '24px',
+
+											}}
+										>
+											Reset
 										</Box>
 
-									</KeyAccordionDetails>
-
-								</Accordion>
+									</Grid>
+								</Grid>
 							</Grid>
-
-							<Grid item xs={2}>
-								<Accordion
-									ref={bpmAccordionRef}
-									expanded={openAccordion === 'bpmAccordion'}
-									onChange={() => setOpenAccordion(prev => prev === 'bpmAccordion' ? null : 'bpmAccordion')}
-								>
-									<StyledAccordionSummary
-										expandIcon={<ExpandMoreIcon />}
-									>
-										<Typography fontSize='0.8rem' >BPM</Typography>
-									</StyledAccordionSummary>
-									<TempoAccordionDetails>
-										<form onSubmit={handleTempoSubmit}>
-											<Box sx={{
-												display: 'flex',
-												height: '200px',
-												width: '270px',
-												flexDirection: 'column',
-												justifyContent: 'center',
-											}}>
-												<Slider
-													min={0}
-													max={200}
-													getAriaLabel={() => 'Tempo'}
-													value={sliderValue}
-													onChange={handleTempoSelect}
-													valueLabelDisplay="on"
-													getAriaValueText={valuetext}
-												/>
-												<TextField
-													value={textFieldTempo}
-													onChange={handleTextFieldChange}
-													id="filled-basic"
-													label="select a range or enter a bpm"
-													variant="filled"
-													autoComplete="off"
-													InputProps={{
-														style: {
-															backgroundColor: '#eceff1',
-														}
-													}}
-												/>
-												<Button type="submit" variant="contained"
-													sx={{
-														'&&': {
-															color: 'white',
-															backgroundColor: '#4d97f8',
-															'&:hover': {
-																backgroundColor: '#3746a2',  // This will be the color on hover. Adjust as needed.
-																// You can add more styles here if needed
-															},
-														}
-
-													}}
-												>
-													Filter Tempo
-												</Button>
-											</Box>
-										</form>
-
-									</TempoAccordionDetails>
-								</Accordion>
-							</Grid>
-
-							<Grid item xs={1} paddingLeft={'2px'}>
-								<Box
-									onClick={handleReset}
-									variant="contained"
-									color="#ffecb3"
-									sx={{
-										// backgroundColor:'purple',
-										display: 'flex',
-										justifyContent: 'center',
-										alignItems: 'center',
-										cursor: 'pointer',
-										width: '60px',
-										height: '24px'
-									}}
-								>
-									Reset
-								</Box>
-
-							</Grid>
-						</Grid>
+						</Box>
 						{/* main search */}
 						{searchResults
 							.filter(item => (!activeSlice || item.key === activeSlice) && item.tempo >= tempoSelect[0] && item.tempo <= tempoSelect[1])
+							.sort((a, b) => {
+								if (sortBy && sortOrder) {
+									if (sortBy === "key") {
+										const aValue = reverseKeyConvert(a.key) || 0;
+										const bValue = reverseKeyConvert(b.key) || 0;
+										return sortOrder === "asc" ? aValue - bValue : bValue - aValue;
+									} else {
+										return sortOrder === "asc" ? a[sortBy] - b[sortBy] : b[sortBy] - a[sortBy];
+									}
+								}
+								return 0;
+							})
 							.map((item: ResultItem, index: number) => (
-
 								<Grid item xs={11} md={8} key={index}>
 									{/* each card */}
 									<Link href={`/${item.name}/${item.artists[0].name}/${item.id}`}>

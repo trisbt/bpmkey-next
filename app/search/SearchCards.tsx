@@ -365,7 +365,7 @@ const SearchCards = ({ results }) => {
 												margin: '10px 10px 0',
 												boxShadow: 3,
 												"&:hover": {
-													backgroundColor: "#f5f5f5",
+													backgroundColor: "#e0e0e0",
 												}
 											}}
 										>
@@ -419,7 +419,7 @@ const SearchCards = ({ results }) => {
 														</Typography>
 													</Grid>
 
-													<Grid container item xs={12} sm={6} alignItems='center' rowSpacing={1} sx={{
+													<Grid container item xs={12} sm={5} alignItems='center' rowSpacing={1} sx={{
 														"@media (max-width: 600px)": {
 															paddingTop: '.8rem',
 														}

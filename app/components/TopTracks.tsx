@@ -107,7 +107,7 @@ const TopTracks = ({ results }) => {
                         margin: '10px 10px 0',
                         boxShadow: 3,
                         "&:hover": {
-                          backgroundColor: "#f5f5f5",
+                          backgroundColor: "#e0e0e0",
                         }
                       }}
                     >

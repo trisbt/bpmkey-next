@@ -2,13 +2,6 @@ import TopTracks from "../components/TopTracks";
 import GetAccessToken from "./GetAccessToken";
 import GetSpotifyAdvancedAudio from "./GetSpotifyAdvancedAudio";
 
-interface KeyMapping {
-    [key: number]: [string, string];
-}
-type KeyConvertFunction = (num: number, mode: number) => string;
-
-type CombinedDataType = DataItem & AudioDataItem;
-
 
 //bpm and key helper conversions
 

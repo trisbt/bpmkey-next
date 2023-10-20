@@ -341,7 +341,7 @@ const ArtistTopTracksCards = ({ results, artist }) => {
 												margin: '10px 10px 0',
 												boxShadow: 3,
 												"&:hover": {
-													backgroundColor: "#f5f5f5",
+													backgroundColor: "#e0e0e0",
 												}
 											}}
 										>
@@ -449,7 +449,7 @@ const ArtistTopTracksCards = ({ results, artist }) => {
 														</Grid>
 
 														{/* preview button */}
-														<Grid item xs={2.5} sm={6} sx={{
+														<Grid item xs={3} sm={6} sx={{
 															display: 'flex',
 															justifyContent: 'center'
 														}} >

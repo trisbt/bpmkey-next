@@ -109,9 +109,9 @@ const SearchCards = ({ results }) => {
 	const router = useRouter();
 	const searchParams = useSearchParams()
 	const searchQuery = searchParams.get('q')
-		//sort hooks
-		const [sortOrder, setSortOrder] = useState<"asc" | "desc" | null>(null);
-		const [sortBy, setSortBy] = useState<"tempo" | "key" | null>(null);
+	//sort hooks
+	const [sortOrder, setSortOrder] = useState<"asc" | "desc" | null>(null);
+	const [sortBy, setSortBy] = useState<"tempo" | "key" | null>(null);
 	//filter hooks
 	const [activeSlice, setActiveSlice] = useState<string | null>(null);
 	const [tempoSelect, setTempoSelect] = React.useState([0, 200]);
@@ -182,15 +182,15 @@ const SearchCards = ({ results }) => {
 		};
 	}, [openAccordion]);
 
-		//sorting
-		const handleSort = (attribute: "tempo" | "key") => {
-			if (sortBy === attribute && sortOrder === "asc") {
-				setSortOrder("desc");
-			} else {
-				setSortBy(attribute);
-				setSortOrder("asc");
-			}
-		};
+	//sorting
+	const handleSort = (attribute: "tempo" | "key") => {
+		if (sortBy === attribute && sortOrder === "asc") {
+			setSortOrder("desc");
+		} else {
+			setSortBy(attribute);
+			setSortOrder("asc");
+		}
+	};
 
 	//tempo filter
 	const valuetext = (value) => {
@@ -259,7 +259,7 @@ const SearchCards = ({ results }) => {
 									// WebkitTextFillColor: 'transparent',
 									letterSpacing: '1px',
 									borderRadius: '2px',
-									fontStyle:'italic',
+									fontStyle: 'italic',
 									// textTransform: 'uppercase',
 									'@media (max-width: 600px)': {
 										fontSize: '20px'
@@ -270,10 +270,10 @@ const SearchCards = ({ results }) => {
 							</Card>
 						</Grid>
 
-						<Box border={1} borderColor="grey.500" borderRadius={2} m={0} sx ={{
-							width:'65vw',
-							'@media (max-width: 900px)':{
-								width:'90vw',
+						<Box border={1} borderColor="grey.500" borderRadius={2} m={0} sx={{
+							width: '65vw',
+							'@media (max-width: 900px)': {
+								width: '90vw',
 							}
 						}}>
 							{/* sort */}

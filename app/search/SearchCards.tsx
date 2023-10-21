@@ -117,7 +117,7 @@ const SearchCards = ({ results }) => {
 	const [sortOrder, setSortOrder] = useState<"asc" | "desc" | null>(null);
 	const [sortBy, setSortBy] = useState<"tempo" | "key" | null>(null);
 	//filter hooks
-	const [activeSlice, setActiveSlice] = useState(null);
+	const [activeSlice, setActiveSlice] = useState([]);
 	const [tempoSelect, setTempoSelect] = React.useState([0, 200]);
 
 	const playAudio = (event: React.MouseEvent, previewUrl: string | null) => {
@@ -222,7 +222,11 @@ const SearchCards = ({ results }) => {
 
 						{/* main search */}
 						{searchResults
-							.filter(item => (!activeSlice || item.key === activeSlice) && item.tempo >= tempoSelect[0] && item.tempo <= tempoSelect[1])
+							.filter(item => 
+								(!activeSlice || activeSlice.length === 0 || activeSlice.includes(item.key)) 
+								&& item.tempo >= tempoSelect[0] 
+								&& item.tempo <= tempoSelect[1]
+							)
 							.sort((a, b) => {
 								if (sortBy && sortOrder) {
 									if (sortBy === "key") {

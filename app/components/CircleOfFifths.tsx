@@ -47,6 +47,8 @@ const hoverColors: string[] = ['#b71c1c', '#ff5722', '#ff9800', '#ffeb3b', '#8bc
 const CircleOfFifths = ({ activeSlice, setActiveSlice }) => {
 
   const handleChartInteraction = (evt, elements) => {
+    const currentActiveSlice = activeSlice || []; // Default to empty array if null
+
     if (elements && elements.length) {
       const clickedElement = elements[0];
       let label;
@@ -55,9 +57,15 @@ const CircleOfFifths = ({ activeSlice, setActiveSlice }) => {
       } else if (clickedElement.datasetIndex === 1) {
         label = minorKeys[clickedElement.index].label;
       }
-      setActiveSlice(prev => prev === label ? null : label);
+
+      if (currentActiveSlice.includes(label)) {
+        setActiveSlice(prev => (prev || []).filter(slice => slice !== label));
+      } else {
+        setActiveSlice(prev => [...(prev || []), label]);
+      }
     }
   };
+
 
   const chartData = {
     labels: [...data.map(d => d.label), ...minorKeys.map(d => d.label)],
@@ -65,7 +73,9 @@ const CircleOfFifths = ({ activeSlice, setActiveSlice }) => {
       {
         // label: "Major Keys",
         data: data.map(d => d.value),
-        backgroundColor: data.map((_, index) => activeSlice === data[index].label ? hoverColors[index] : defaultColors[index]),
+        backgroundColor: data.map((_, index) =>
+          (activeSlice || []).includes(data[index].label) ? hoverColors[index] : defaultColors[index]
+        ),
         hoverBackgroundColor: hoverColors,
         // to make it an inner circle:
         weight: 0.5
@@ -73,7 +83,9 @@ const CircleOfFifths = ({ activeSlice, setActiveSlice }) => {
       {
         // label: "Minor Keys",
         data: minorKeys.map(d => d.value),
-        backgroundColor: minorKeys.map((_, index) => activeSlice === minorKeys[index].label ? hoverColors[index] : defaultColors[index]),
+        backgroundColor: data.map((_, index) =>
+          (activeSlice || []).includes(minorKeys[index].label) ? hoverColors[index] : defaultColors[index]
+        ),
         hoverBackgroundColor: hoverColors
       }
     ]
@@ -81,7 +93,7 @@ const CircleOfFifths = ({ activeSlice, setActiveSlice }) => {
   };
 
   const options = {
-    cutout: '20%', 
+    cutout: '20%',
     plugins: {
       tooltip: {
         enabled: false

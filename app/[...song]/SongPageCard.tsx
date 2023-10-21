@@ -23,7 +23,6 @@ const transformSpotifyURItoURL = (uri: string): string | null => {
   }
   return null;
 }
-
 //progress value color function
 function determineColor(value: number): string {
   if (value > 80) {

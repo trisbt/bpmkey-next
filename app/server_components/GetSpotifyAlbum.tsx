@@ -4,7 +4,7 @@ import GetSpotifyAdvancedAudio from "./GetSpotifyAdvancedAudio";
 
 
 
-const GetSpotifyAlbum = async (id) => {
+const GetSpotifyAlbum = async (id: string) => {
     const token = await GetAccessToken();
     const mainRes = await fetch(`https://api.spotify.com/v1/albums/${id}/tracks?limit=50`, {
         headers: {
@@ -18,8 +18,8 @@ const GetSpotifyAlbum = async (id) => {
     .map((item) => {
         const { name, id, album, preview_url, explicit } = item;
         const artists = item.artists;
-        const albums = item.album?.name; 
-        return { name, id, preview_url, artists, albums, explicit };
+        // const albums = item.album?.name; 
+        return { name, id, preview_url, artists, explicit };
     });
 
     const ids = mainData.map(item => item.id);

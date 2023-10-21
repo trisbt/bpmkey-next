@@ -1,19 +1,21 @@
 'use server'
 import React from 'react'
-function getStringBeforeParenthesis(str) {
+import { ProcessedCredit } from '../types/dataTypes';
+
+function getStringBeforeParenthesis(str: string): string {
 	const indexOfParenthesis = str.indexOf('(');
 	if (indexOfParenthesis !== -1) {
 		return str.substring(0, indexOfParenthesis).trim();
 	}
 	return str;
 }
-function normalizeString(str) {
+function normalizeString(str: string): string {
 	return str.replace(/’/g, "'");
 }
 function prepQuery(query) {
 	return query.replace(/[^\w\s]/g, '').toLowerCase();
 }
-function isSongMatch(trackTitle, song) {
+function isSongMatch(trackTitle: string, song: string): boolean {
 	const normalizedTrackTitle = prepQuery(trackTitle)
 	const normalizedSong = prepQuery(song)
 	const noFeatSong = song.replace(/\(.*\)/, "").trim().toLowerCase();
@@ -22,7 +24,7 @@ function isSongMatch(trackTitle, song) {
 		getStringBeforeParenthesis(normalizedSong) === getStringBeforeParenthesis(normalizedTrackTitle);
 }
 
-export async function GetCredits(album, artist, song) {
+export async function GetCredits(album: string, artist: string, song: string): Promise<ProcessedCredit[] | string[]> {
 	album = decodeURIComponent(album);
 	artist = decodeURIComponent(artist);
 	song = decodeURIComponent(song)
@@ -64,37 +66,33 @@ export async function GetCredits(album, artist, song) {
 
 		// Loop through up to 5 versionIds or until credits are found
 		for (let i = 0; i < 5; i++) {
-
 			const masterRes = await fetch(`https://api.discogs.com/releases/${versionsIds[i]}`, {
-				// cache: 'no-store',
 				headers: {
 					'User-Agent': 'BpmKeyDev/1.0 +http://bpmkey.com',
 					'Authorization': `Discogs key=${discogsKey}, secret=${discogsSecret}`,
 				}
 			});
-			console.log('X-Discogs-Ratelimit:', masterRes.headers.get('X-Discogs-Ratelimit'));
-			console.log('X-Discogs-Ratelimit-Used:', masterRes.headers.get('X-Discogs-Ratelimit-Used'));
-			console.log('X-Discogs-Ratelimit-Remaining:', masterRes.headers.get('X-Discogs-Ratelimit-Remaining'));
+			// console.log('X-Discogs-Ratelimit:', masterRes.headers.get('X-Discogs-Ratelimit'));
+			// console.log('X-Discogs-Ratelimit-Used:', masterRes.headers.get('X-Discogs-Ratelimit-Used'));
+			// console.log('X-Discogs-Ratelimit-Remaining:', masterRes.headers.get('X-Discogs-Ratelimit-Remaining'));
 			const masterData = await masterRes.json();
-			// console.log(masterData);
 			if (masterData.hasOwnProperty('tracklist')) {
 				for (const track of masterData.tracklist) {
 					if (track.hasOwnProperty('extraartists') && isSongMatch(track.title, song)) {
 						const crew = track.extraartists;
-						// console.log(crew)
+
 						// Build the credits array
 						for (const per of crew) {
 							creditsArr.push(per.role, per.name);
 						}
 						found = true;
-						// break;  
 					}
 				}
 			}
 			const rateLimitRemaining = parseInt(masterRes.headers.get('X-Discogs-Ratelimit-Remaining'), 10);
 			if (rateLimitRemaining <= 5) {
 				// console.log("Rate limit too low, exiting loop.");
-				return "Rate limit reached";  
+				return "Rate limit reached";
 			}
 
 		}

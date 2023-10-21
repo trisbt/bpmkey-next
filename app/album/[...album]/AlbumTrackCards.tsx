@@ -25,6 +25,8 @@ import { useSearchParams } from 'next/navigation'
 import Link from 'next/link';
 import CircleOfFifths from '@/app/components/CircleOfFifths';
 import { reverseKeyConvert } from '@/app/utils';
+import { AlbumDetails } from '@/app/types/dataTypes';
+import { AlbumPageCardProps } from '@/app/types/cardTypes';
 
 const SmallPlayButton = styled(IconButton)(() => ({
 	'&&': {
@@ -91,11 +93,10 @@ const TempoAccordionDetails = styled(AccordionDetails)({
 	boxShadow: '0px 6px 10px #0d47a1',
 });
 
-const AlbumTrackCards = ({ results, album }) => {
+const AlbumTrackCards: React.FC<AlbumPageCardProps> = ({ results, album }) => {
 	const [currentlyPlayingUrl, setCurrentlyPlayingUrl] = useState<string | null>(null);
 	const audioRef = useRef<HTMLAudioElement | null>(null);
-	const [searchResults, setSearchResults] = useState(results);
-	// const [offset, setOffset] = useState<number>(1);
+	const [searchResults, setSearchResults] = useState<AlbumDetails>(results);
 	const router = useRouter();
 	const searchParams = useSearchParams()
 	const searchQuery = searchParams.get('q')
@@ -104,9 +105,9 @@ const AlbumTrackCards = ({ results, album }) => {
 	const [sortBy, setSortBy] = useState<"tempo" | "key" | null>(null);
 	//filter hooks
 	const [activeSlice, setActiveSlice] = useState<string | null>(null);
-	const [tempoSelect, setTempoSelect] = React.useState([0, 200]);
-	const [sliderValue, setSliderValue] = useState([80, 140]);
-	const [textFieldTempo, setTextFieldTempo] = useState('');
+	const [tempoSelect, setTempoSelect] = useState<[number, number]>([0, 200]);
+	const [sliderValue, setSliderValue] = useState<[number, number]>([80, 140]);
+	const [textFieldTempo, setTextFieldTempo] = useState<string>('');
 	const [openAccordion, setOpenAccordion] = useState<string | null>(null);
 	const keyAccordionRef = useRef(null);
 	const bpmAccordionRef = useRef(null);
@@ -158,7 +159,7 @@ const AlbumTrackCards = ({ results, album }) => {
 	};
 
 	//tempo filter
-	const valuetext = (value) => {
+	const valuetext = (value: string): string => {
 		return `${value} bpm`;
 	}
 	const handleTempoSelect = (event, tempo) => {
@@ -225,7 +226,7 @@ const AlbumTrackCards = ({ results, album }) => {
 									// WebkitTextFillColor: 'transparent',
 									letterSpacing: '1px',
 									borderRadius: '2px',
-									fontStyle:'italic',
+									fontStyle: 'italic',
 									// textTransform: 'uppercase',
 									'@media (max-width: 600px)': {
 										fontSize: '22px'
@@ -236,10 +237,10 @@ const AlbumTrackCards = ({ results, album }) => {
 							</Card>
 						</Grid>
 
-						<Box border={1} borderColor="grey.500" borderRadius={2} m={0} sx ={{
-							width:'65vw',
-							'@media (max-width: 900px)':{
-								width:'90vw',
+						<Box border={1} borderColor="grey.500" borderRadius={2} m={0} sx={{
+							width: '65vw',
+							'@media (max-width: 900px)': {
+								width: '90vw',
 							}
 						}}>
 							{/* sort */}

@@ -42,7 +42,27 @@ export interface SongDetails {
   uri: string;
   valence: number;
 }
-
+export interface AlbumDetails{
+  name: string;
+  id: string;
+  preview_url: string;
+  artists: Artist[];
+  explicit: boolean;
+  key: string;
+  tempo: number;
+  loudness: number;
+  energy: number;
+  acousticness: number;
+  analysis_url: string;
+  danceability: number;
+  duration_ms: number;
+  instrumentalness: number;
+  liveness: number;
+  time_signature: number;
+  track_href: string;
+  uri: string;
+  valence: number;
+}
 export interface CreditEntry {
   role: string;
   artist_name?: string;
@@ -50,7 +70,22 @@ export interface CreditEntry {
 
 export type Credits = CreditEntry[];
 
+export type Track = {
+  title: string;
+  extraartists?: Array<{
+      role: string;
+      name: string;
+  }>;
+};
 
+export type MasterData = {
+  tracklist?: Track[];
+};
+
+export type ProcessedCredit = {
+  role: string;
+  artist_name: string;
+};
 
 
 // export interface Artist {

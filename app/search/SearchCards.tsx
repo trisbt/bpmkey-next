@@ -117,7 +117,7 @@ const SearchCards = ({ results }) => {
 	const [sortOrder, setSortOrder] = useState<"asc" | "desc" | null>(null);
 	const [sortBy, setSortBy] = useState<"tempo" | "key" | null>(null);
 	//filter hooks
-	const [activeSlice, setActiveSlice] = useState<string | null>(null);
+	const [activeSlice, setActiveSlice] = useState(null);
 	const [tempoSelect, setTempoSelect] = React.useState([0, 200]);
 
 	const playAudio = (event: React.MouseEvent, previewUrl: string | null) => {
@@ -181,7 +181,7 @@ const SearchCards = ({ results }) => {
 									boxShadow: 0,
 									justifyContent: 'center',
 									backgroundColor: 'transparent',
-									paddingBottom: '1em',
+									// paddingBottom: '1em',
 								}}
 							>
 								<Typography variant='h5' sx={{

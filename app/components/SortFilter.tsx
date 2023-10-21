@@ -1,3 +1,4 @@
+'use client'
 import React from 'react'
 import { useState, useEffect, useRef } from 'react';
 import Box from '@mui/material/Box';
@@ -18,7 +19,21 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import Hidden from '@mui/material/Hidden';
 import { FilterListTwoTone } from '@mui/icons-material';
 import Slider from '@mui/material/Slider';
+import Drawer from '@mui/material/Drawer';
+import SwipeableDrawer from '@mui/material/SwipeableDrawer';
+import List from '@mui/material/List';
+import Divider from '@mui/material/Divider';
+import ListItem from '@mui/material/ListItem';
+import ListItemButton from '@mui/material/ListItemButton';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import ListItemText from '@mui/material/ListItemText';
+import InboxIcon from '@mui/icons-material/MoveToInbox';
+import MailIcon from '@mui/icons-material/Mail';
+import Collapse from '@mui/material/Collapse';
+
 import CircleOfFifths from '../components/CircleOfFifths';
+
+type Anchor = 'bottom';
 
 const SortButton = styled(Button)(({ theme }) => ({
   '&&': {
@@ -32,6 +47,19 @@ const SortButton = styled(Button)(({ theme }) => ({
     color: theme.palette.secondary.contrastText,
   },
 }));
+const SortFilterButton = styled(Button)(({ theme }) => ({
+  '&&': {
+    minHeight: '4px',
+    padding: '0px 10px',
+    color: 'white',
+    // backgroundColor: '#0d47a1',
+  },
+  '&:hover': {
+    // backgroundColor: '#00e676',
+    color: theme.palette.secondary.contrastText,
+  },
+}));
+
 const StyledAccordionSummary = styled(AccordionSummary)(({ theme }) => ({
   minHeight: '4px',
   padding: '0px 10px',
@@ -71,6 +99,9 @@ const TempoAccordionDetails = styled(AccordionDetails)({
 });
 
 const SortFilter = ({ searchQuery, offset, sortOrder, setSortOrder, sortBy, setSortBy, tempoSelect, setTempoSelect, activeSlice, setActiveSlice }) => {
+  const [isOpen, setIsOpen] = useState(false);
+  const [openKey, setOpenKey] = useState(false);
+  const [openTempo, setOpenTempo] = useState(false);
   const [sliderValue, setSliderValue] = useState([80, 140]);
   const [textFieldTempo, setTextFieldTempo] = useState('');
   const [openAccordion, setOpenAccordion] = useState<string | null>(null);
@@ -91,6 +122,17 @@ const SortFilter = ({ searchQuery, offset, sortOrder, setSortOrder, sortBy, setS
       document.removeEventListener('mousedown', handleOutsideClick);
     };
   }, [openAccordion]);
+
+  const toggleDrawer = (open: boolean) => (event: React.KeyboardEvent | React.MouseEvent) => {
+    if (
+      event.type === 'keydown' &&
+      ((event as React.KeyboardEvent).key === 'Tab' ||
+        (event as React.KeyboardEvent).key === 'Shift')
+    ) {
+      return;
+    }
+    setIsOpen(open);
+  };
 
   //sorting
   const handleSort = (attribute: "tempo" | "key") => {
@@ -141,6 +183,115 @@ const SortFilter = ({ searchQuery, offset, sortOrder, setSortOrder, sortBy, setS
       setOpenAccordion(null);
     }
   };
+  const list = () => (
+    <Box
+      sx={{ width: 'auto' }}
+      role="presentation"
+    // onClick={toggleDrawer(false)}
+    // onKeyDown={toggleDrawer(false)}
+    >
+      <List>
+
+        <ListItem disablePadding>
+          <ListItemButton onClick={() => setOpenKey(!openKey)}>
+            <ListItemText primary={<Typography fontSize='1rem' color='black'>Filter by: Key</Typography>} />
+          </ListItemButton>
+          <Collapse in={openKey} timeout="auto" unmountOnExit>
+            <Box p={1}>
+              <CircleOfFifths activeSlice={activeSlice} setActiveSlice={setActiveSlice} />
+            </Box>
+          </Collapse>
+        </ListItem>
+
+        <ListItem disablePadding>
+          <ListItemButton onClick={() => setOpenTempo(!openTempo)}>
+            <ListItemText primary={<Typography fontSize='1rem' color='black'>Filter by: BPM</Typography>} />
+          </ListItemButton>
+          <Collapse in={openTempo} timeout="auto" unmountOnExit>
+            <Box p={2}>  {/* Add padding if needed */}
+              {/* Place your Tempo Component here */}
+              <form onSubmit={handleTempoSubmit}>
+                <Box sx={{
+                  display: 'flex',
+                  height: '120px',
+                  width: '220px',
+                  flexDirection: 'column',
+                  justifyContent: 'center',
+                }}>
+                  <Slider
+                    min={0}
+                    max={200}
+                    getAriaLabel={() => 'Tempo'}
+                    value={sliderValue}
+                    onChange={handleTempoSelect}
+                    valueLabelDisplay="on"
+                    getAriaValueText={valuetext}
+                  />
+                  <TextField
+                    value={textFieldTempo}
+                    onChange={handleTextFieldChange}
+                    id="filled-basic"
+                    label="select a range or enter a bpm"
+                    variant="filled"
+                    autoComplete="off"
+                    InputProps={{
+                      style: {
+                        backgroundColor: '#eceff1',
+                      }
+                    }}
+                  />
+                  <Button type="submit" variant="contained"
+                    sx={{
+                      '&&': {
+                        color: 'white',
+                        backgroundColor: '#4d97f8',
+                        '&:hover': {
+                          backgroundColor: '#3746a2',
+                        },
+                      }
+                    }}
+                  >
+                    Filter Tempo
+                  </Button>
+                </Box>
+              </form>
+            </Box>
+          </Collapse>
+        </ListItem>
+
+        <ListItem disablePadding>
+          <ListItemButton onClick={() => handleSort("key")}>
+            <ListItemText sx={{
+              fontSize: '1rem',
+              color: 'black'
+            }}>
+              Sort by: Key
+            </ListItemText>
+            {sortBy === "key" && sortOrder === "asc" ? "↑" : "↓"}
+          </ListItemButton>
+        </ListItem>
+
+        <ListItem disablePadding>
+          <ListItemButton onClick={() => handleSort("tempo")}>
+            <ListItemText sx={{
+              fontSize: '1rem',
+              color: 'black'
+            }}>
+              Sort by: BPM
+            </ListItemText>
+            {sortBy === "tempo" && sortOrder === "asc" ? "↑" : "↓"}
+          </ListItemButton>
+        </ListItem>
+
+        <ListItem disablePadding>
+          <ListItemButton onClick={handleReset}>
+            <ListItemText primary={<Typography fontSize='1rem' color='black'>Reset</Typography>} />
+          </ListItemButton>
+        </ListItem>
+      </List>
+    </Box>
+  );
+
   return (
     <div>
       <Hidden smDown>
@@ -153,15 +304,9 @@ const SortFilter = ({ searchQuery, offset, sortOrder, setSortOrder, sortBy, setS
               width: '90vw',
             }
           }}>
-
-          {/* <Grid item container justifyContent='center' xs={12} md={8} spacing={1}>
-          
-          </Grid> */}
-
-
           <Grid item container className='py-1' justifyContent='space-between' xs={12} spacing={1}>
             {/*/ filter */}
-            <Grid item xs={6} container alignItems="center" spacing={1}> {/* Added container and alignItems */}
+            <Grid item xs={12} sm={6} container alignItems="center" spacing={1}>
               <Grid item >
                 <Typography fontSize='1rem' color='white'>Filter by:</Typography>
               </Grid>
@@ -270,14 +415,19 @@ const SortFilter = ({ searchQuery, offset, sortOrder, setSortOrder, sortBy, setS
 
               </Grid>
             </Grid>
+
             {/* sort */}
-            <Grid item xs={5} container alignItems="center" justifyContent='flex-end' spacing={0}> {/* Added container and alignItems */}
+            <Grid item xs={12} sm={5} container alignItems="center" justifyContent='flex-end' spacing={0} sx={{
+              '@media (max-width: 600px)': {
+                justifyContent: 'flex-start',
+              }
+            }}>
               <Grid item> {/* Wrap Typography in a Grid item */}
                 <Typography fontSize='1rem' color='white'>Sort by: </Typography>
               </Grid>
               <Grid item > {/* Wrap the SortButton in a Grid item */}
                 <SortButton onClick={() => handleSort("key")}>
-                  <Typography fontSize='1rem' sx={{ textTransform: 'none', }}>
+                  <Typography fontSize='.9rem' sx={{ textTransform: 'none', }}>
                     Key
                   </Typography>
                   {sortBy === "key" && sortOrder === "asc" ? "↑" : "↓"}
@@ -285,14 +435,33 @@ const SortFilter = ({ searchQuery, offset, sortOrder, setSortOrder, sortBy, setS
               </Grid>
               <Grid item> {/* Wrap the next SortButton in a Grid item */}
                 <SortButton onClick={() => handleSort("tempo")}>
-                  <Typography fontSize='1rem'>BPM</Typography>
+                  <Typography fontSize='.9rem'>BPM</Typography>
                   {sortBy === "tempo" && sortOrder === "asc" ? "↑" : "↓"}
                 </SortButton>
               </Grid>
             </Grid>
           </Grid>
-
         </Box>
+      </Hidden>
+      <Hidden smUp>
+        <Box sx={{
+          display: 'flex',
+          justifyContent: 'flex-start',
+          width: '86vw'
+        }}>
+          <SortFilterButton onClick={toggleDrawer(true)}>
+            Filter
+            <FilterListTwoTone />
+          </SortFilterButton>
+        </Box>
+        <SwipeableDrawer
+          anchor="bottom"
+          open={isOpen}
+          onClose={toggleDrawer(false)}
+          swipeAreaWidth={0} // Disables swipe to open
+        >
+          {list()}
+        </SwipeableDrawer>
       </Hidden>
     </div>
   )

@@ -108,6 +108,7 @@ const SortFilter = ({ searchQuery, offset, sortOrder, setSortOrder, sortBy, setS
   const keyAccordionRef = useRef(null);
   const bpmAccordionRef = useRef(null);
   const [filterOpen, setFilterOpen] = useState(false);
+
   //filter effect
   useEffect(() => {
     setActiveSlice(null);
@@ -130,6 +131,10 @@ const SortFilter = ({ searchQuery, offset, sortOrder, setSortOrder, sortBy, setS
         (event as React.KeyboardEvent).key === 'Shift')
     ) {
       return;
+    }
+    if (!open) {
+      setOpenKey(false);
+      setOpenTempo(false);
     }
     setIsOpen(open);
   };
@@ -294,6 +299,7 @@ const SortFilter = ({ searchQuery, offset, sortOrder, setSortOrder, sortBy, setS
 
   return (
     <div>
+      {/* desktop screen */}
       <Hidden smDown>
         <Box
           border={1}
@@ -443,6 +449,7 @@ const SortFilter = ({ searchQuery, offset, sortOrder, setSortOrder, sortBy, setS
           </Grid>
         </Box>
       </Hidden>
+      {/* mobile screen */}
       <Hidden smUp>
         <Box sx={{
           display: 'flex',

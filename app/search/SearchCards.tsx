@@ -67,43 +67,7 @@ const SortButton = styled(Button)(({ theme }) => ({
 		color: theme.palette.secondary.contrastText,
 	},
 }));
-const StyledAccordionSummary = styled(AccordionSummary)(({ theme }) => ({
-	minHeight: '4px',
-	padding: '0px 10px',
-	'&.Mui-expanded': {
-		minHeight: '4px',
-		padding: '0px 10px',
-	},
-	'& > .MuiAccordionSummary-content': {
-		margin: '0',
-		'&.Mui-expanded': {
-			margin: '0',
-		}
-	}
-}));
 
-const KeyAccordionDetails = styled(AccordionDetails)({
-	position: 'absolute',
-	zIndex: 2,
-	left: '100%',
-	transform: 'translateX(-48%)',
-	width: '250px',
-	height: '280px',
-	backdropFilter: 'blur(15px)',
-	borderRadius: '1em',
-	boxShadow: '0px 6px 10px #0d47a1',
-});
-
-const TempoAccordionDetails = styled(AccordionDetails)({
-	position: 'absolute',
-	zIndex: 2,
-	left: '100%',
-	transform: 'translateX(-75%)',
-	backdropFilter: 'blur(15px)',
-	borderRadius: '1em',
-	width: '300px',
-	boxShadow: '0px 6px 10px #0d47a1',
-});
 
 const SearchCards = ({ results }) => {
 	const [currentlyPlayingUrl, setCurrentlyPlayingUrl] = useState<string | null>(null);
@@ -217,7 +181,6 @@ const SearchCards = ({ results }) => {
 							setSortBy={setSortBy}
 							sortBy={sortBy}
 						>
-
 						</SortFilter>
 
 						{/* main search */}

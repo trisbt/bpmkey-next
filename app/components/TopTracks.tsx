@@ -86,7 +86,7 @@ const TopTracks = ({ results }) => {
                     WebkitTextFillColor: 'transparent',
                     letterSpacing: '1px',
                     borderRadius: '2px',
-                    textTransform: 'uppercase',
+                    // textTransform: 'uppercase',
                     '@media (max-width: 600px)': {
                       fontSize: '24px'
                     },

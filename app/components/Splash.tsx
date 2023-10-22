@@ -13,7 +13,7 @@ const Splash = () => {
                 justifyContent: 'center',
                 background: 'linear-gradient(rgba(100,100,100,.5) 50%, transparent)',
                 width: '100vw',
-                height: '15em',
+                height: '12em',
             }}>
                 <Card sx={{
                     display: 'flex',

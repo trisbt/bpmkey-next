@@ -64,23 +64,32 @@ const CreditsModal: React.FC<CreditsModalProps> = ({ open, handleClose, credits 
                     >
                         <CloseOutlined />
                     </IconButton>
+
                     <Typography variant="h4" color='text.primary' sx={{
                         // paddingBottom: '1em',
                     }}>Credits</Typography>
                     <Typography variant="subtitle1" color='text.primary' sx={{
-                        fontStyle:'italic', 
+                        fontStyle: 'italic',
                         paddingBottom: '1em',
                     }}>via Discogs</Typography>
-                    <ul style={{
-                        columns: '2',
-                        paddingInlineStart: '0',
-                    }}>
-                        {credits.map((el) => (
-                            <li key={el.artist_name}>
-                                <span className="even-credit">{el.artist_name}</span><span className="odd-credit"> - {el.role}</span>
-                            </li>
-                        ))}
-                    </ul>
+
+                    {credits.length === 1 && credits[0].role === "no credits available at this time" ? (
+                        <Typography variant="subtitle2" color='text.primary' sx={{ textAlign: 'center' }}>
+                            {credits[0].role}
+                        </Typography>
+                    ) : (
+                        <ul style={{
+                            columns: '2',
+                            paddingInlineStart: '0',
+                        }}>
+                            {credits.map((el) => (
+                                <li key={el.artist_name}>
+                                    <span className="even-credit">{el.artist_name}</span><span className="odd-credit"> - {el.role}</span>
+                                </li>
+                            ))}
+                        </ul>
+                    )}
+
                 </Box>
             </Fade>
         </Modal>

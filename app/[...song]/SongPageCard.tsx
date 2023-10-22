@@ -89,7 +89,7 @@ const SongPageCard: React.FC<SongPageCardProps> = ({ songDetails, song, artist, 
     }
     setShowCredits(true);
   }
-
+console.log(credits)
   return (
     <div className='song-page-container background-gradient'>
       {songDetails && (

@@ -56,43 +56,7 @@ const SortButton = styled(Button)(({ theme }) => ({
 	},
 }));
 
-const StyledAccordionSummary = styled(AccordionSummary)(({ theme }) => ({
-	minHeight: '4px',
-	padding: '0px 10px',
-	'&.Mui-expanded': {
-		minHeight: '4px',
-		padding: '0px 10px',
-	},
-	'& > .MuiAccordionSummary-content': {
-		margin: '0',
-		'&.Mui-expanded': {
-			margin: '0',
-		}
-	}
-}));
 
-const KeyAccordionDetails = styled(AccordionDetails)({
-	position: 'absolute',
-	zIndex: 2,
-	left: '100%',
-	transform: 'translateX(-48%)',
-	width: '250px',
-	height: '280px',
-	backdropFilter: 'blur(15px)',
-	borderRadius: '1em',
-	boxShadow: '0px 6px 10px #0d47a1',
-});
-
-const TempoAccordionDetails = styled(AccordionDetails)({
-	position: 'absolute',
-	zIndex: 2,
-	left: '100%',
-	transform: 'translateX(-75%)',
-	backdropFilter: 'blur(15px)',
-	borderRadius: '1em',
-	width: '300px',
-	boxShadow: '0px 6px 10px #0d47a1',
-});
 
 const AlbumTrackCards: React.FC<AlbumPageCardProps> = ({ results, album }) => {
 	const [currentlyPlayingUrl, setCurrentlyPlayingUrl] = useState<string | null>(null);
@@ -234,14 +198,14 @@ const AlbumTrackCards: React.FC<AlbumPageCardProps> = ({ results, album }) => {
 													}}>
 														<Typography component="div" color="text.primary" variant="h5" sx={{
 															"@media (max-width: 600px)": {
-																fontSize: '1rem'
+																fontSize: '.9rem'
 															},
 														}}>
 															{item.name}
 														</Typography>
 														<Typography variant="h6" color="text.secondary" component="div" sx={{
 															"@media (max-width: 600px)": {
-																fontSize: '1rem'
+																fontSize: '.8rem'
 															},
 														}}>
 															{item.artists.map((artist, index) => (
@@ -262,7 +226,7 @@ const AlbumTrackCards: React.FC<AlbumPageCardProps> = ({ results, album }) => {
 														}
 													}}>
 
-														<Grid item xs={2} sx={{
+														<Grid item xs={4} sx={{
 															display: 'flex',
 															justifyContent: 'center'
 														}} >
@@ -298,7 +262,7 @@ const AlbumTrackCards: React.FC<AlbumPageCardProps> = ({ results, album }) => {
 															<audio ref={audioRef} onEnded={() => setCurrentlyPlayingUrl(null)}></audio>
 														</Grid>
 
-														<Grid item xs={6}   >
+														<Grid item xs={5}   >
 															{/* <Card sx={{ width: '90%' }}> */}
 															<Typography variant="subtitle1" color="text.secondary" component="div"
 																sx={{
@@ -311,7 +275,7 @@ const AlbumTrackCards: React.FC<AlbumPageCardProps> = ({ results, album }) => {
 																Key
 																<Typography className='song-sub-info' variant="h4" color="text.primary" component="div" sx={{
 																	"@media (max-width: 600px)": {
-																		fontSize: '1.5rem',
+																		fontSize: '1.2rem',
 																	}
 																}}>
 																	{item.key}
@@ -320,7 +284,7 @@ const AlbumTrackCards: React.FC<AlbumPageCardProps> = ({ results, album }) => {
 															{/* </Card> */}
 														</Grid>
 
-														<Grid item xs={4} sx={{
+														<Grid item xs={3} sx={{
 															"@media (max-width: 600px)": {
 																// marginRight: '.5em',
 															}
@@ -337,7 +301,7 @@ const AlbumTrackCards: React.FC<AlbumPageCardProps> = ({ results, album }) => {
 																BPM
 																<Typography className='song-sub-info' variant="h4" color="text.primary" component="div" sx={{
 																	"@media (max-width: 600px)": {
-																		fontSize: '1.5rem',
+																		fontSize: '1.2rem',
 																	}
 																}}>
 																	{item.tempo}
@@ -346,10 +310,7 @@ const AlbumTrackCards: React.FC<AlbumPageCardProps> = ({ results, album }) => {
 															{/* </Card> */}
 														</Grid>
 
-														{/* preview button */}
-
 													</Grid>
-
 												</Grid>
 											</CardContent>
 										</Card>

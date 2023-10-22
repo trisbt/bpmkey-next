@@ -7,13 +7,14 @@ import GetSpotifyById from '../server_components/GetSpotifyById';
 import PlayButton from '../components/PlayButton';
 import ImageModal from '../components/ImageModal';
 import { styled } from "@mui/material/styles";
-import {Hidden} from '@mui/material';
+import { Hidden } from '@mui/material';
 import { Box, Button, Card, CardMedia, CardContent, createTheme, Fade, Grid, IconButton, LinearProgress, Modal, Paper, Typography, } from '@mui/material';
 import { GetCredits } from '../actions/GetCredits';
 import CreditsModal from '../components/CreditsModal';
 import { SongPageCardProps } from '../types/cardTypes';
 import { Credits } from '../types/dataTypes';
 import { DisplaySettings } from '@mui/icons-material';
+import SongRecs from './SongRecs';
 //helpers
 const transformSpotifyURItoURL = (uri: string): string | null => {
   const match = uri.match(/spotify:track:([a-zA-Z0-9]+)/);
@@ -78,7 +79,7 @@ const SmallCreditsButton = styled(Button)(() => ({
   }
 }));
 
-const SongPageCard: React.FC<SongPageCardProps> = ({ songDetails, song, artist, id }) => {
+const SongPageCard: React.FC<SongPageCardProps> = ({ songDetails, song, artist, id, recs }) => {
   const [showCredits, setShowCredits] = useState<boolean>(false);
   const [credits, setCredits] = useState<Credits>(null)
 
@@ -89,7 +90,7 @@ const SongPageCard: React.FC<SongPageCardProps> = ({ songDetails, song, artist, 
     }
     setShowCredits(true);
   }
-console.log(credits)
+
   return (
     <div className='song-page-container background-gradient'>
       {songDetails && (
@@ -436,8 +437,10 @@ console.log(credits)
 
             </Grid>
           </Grid>
+          <SongRecs recs = {recs}/>
         </Card>
       )}
+      
     </div>
   )
 }

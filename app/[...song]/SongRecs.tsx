@@ -27,6 +27,7 @@ import CircleOfFifths from '@/app/components/CircleOfFifths';
 import SortFilter from '@/app/components/SortFilter';
 import { reverseKeyConvert } from '@/app/utils';
 
+
 const SmallPlayButton = styled(IconButton)(() => ({
 	'&&': {
 		color: 'white',
@@ -54,12 +55,10 @@ const SortButton = styled(Button)(({ theme }) => ({
 	},
 }));
 
-
-
-const ArtistTopTracksCards = ({ results, artist }) => {
-	const [currentlyPlayingUrl, setCurrentlyPlayingUrl] = useState<string | null>(null);
+const SongRecs = ({recs}) => {
+    const [currentlyPlayingUrl, setCurrentlyPlayingUrl] = useState<string | null>(null);
 	const audioRef = useRef<HTMLAudioElement | null>(null);
-	const [searchResults, setSearchResults] = useState(results);
+	const [searchResults, setSearchResults] = useState(recs);
 	// const [offset, setOffset] = useState<number>(1);
 	const router = useRouter();
 	const searchParams = useSearchParams()
@@ -94,6 +93,7 @@ const ArtistTopTracksCards = ({ results, artist }) => {
 	};
 
 	return (
+		<div>
 		<Box>
 			<Grid container item xs={12} justifyContent='center' alignItems='center' >
 				{searchResults && (
@@ -113,7 +113,7 @@ const ArtistTopTracksCards = ({ results, artist }) => {
 								<Typography variant='h4' sx={{
 									display: 'flex',
 									alignItems: 'center',
-									color: '#e8eaf6',
+									// color: '#e8eaf6',
 									fontWeight: 'bold',
 									background: '#e8eaf6',
 									WebkitBackgroundClip: 'text',
@@ -126,7 +126,7 @@ const ArtistTopTracksCards = ({ results, artist }) => {
 										fontSize: '20px'
 									},
 								}}>
-									Top Tracks by {decodeURIComponent(artist)}
+									You may also like
 								</Typography>
 							</Card>
 						</Grid>
@@ -329,7 +329,8 @@ const ArtistTopTracksCards = ({ results, artist }) => {
 				)}
 			</Grid >
 		</Box>
+		</div>
 	)
 }
 
-export default ArtistTopTracksCards;
+export default SongRecs;

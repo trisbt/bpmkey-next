@@ -1,47 +1,49 @@
 import React from 'react';
 import Card from '@mui/material/Card';
+import { Box } from '@mui/material';
 import Typography from '@mui/material/Typography';
-
+import { publicSans } from '../fonts';
 
 const Splash = () => {
 
     return (
         <div className='splash'>
-            <Card sx={{
+            <Box sx={{
                 display: 'flex',
                 justifyContent: 'center',
-                textAlign: 'center',
-                width: '60vw',
-                alignContent:'center',
-                borderRadius:'.5em',
-                backgroundColor: 'rgb(200,200,200,.5)',
-                boxShadow: 0,
+                background: 'linear-gradient(rgba(100,100,100,.5) 50%, transparent)',
+                width: '100vw',
+                height: '15em',
             }}>
-                <Typography variant='h2' component="h2" sx={{
-                    display:'flex',
-                    alignItems:'center',
-                    color: '#e8eaf6',
-                    fontWeight: 'bold',
-                    background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',
-                    WebkitBackgroundClip: 'text',
-                    WebkitTextFillColor: 'transparent',
-                    letterSpacing: '1px',
-                    backdropFilter: 'blur(9px)',
-                    padding: '0.5rem',
-
-                    borderRadius: '2px',
-                    textTransform: 'uppercase',
-                    '@media (max-width: 1100px)': {
-                        fontSize: '44px'
-                    },
-                    '@media (max-width: 600px)': {
-                        fontSize: '24px'
-                    },
+                <Card sx={{
+                    display: 'flex',
+                    justifyContent: 'center',
+                    textAlign: 'center',
+                    width: '80vw',
+                    backgroundColor: 'transparent',
+                    boxShadow: 0,
                 }}>
-                    Find A Song's Key, Tempo, and Credits
-                    {/* Under Construction check back soon */}
-                </Typography>
-            </Card>
+                    <Typography variant='h2' component="h2" sx={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        fontWeight: 'bold',
+                        background:'#fcfcfc',
+                        // background: 'linear-gradient(45deg, #fcfcfe 0%, #bdbdbd 90%)',
+                        WebkitBackgroundClip: 'text',
+                        WebkitTextFillColor: 'transparent',
+                        textTransform: 'uppercase',
+                        '@media (max-width: 1100px)': {
+                            fontSize: '44px'
+                        },
+                        '@media (max-width: 600px)': {
+                            fontSize: '34px'
+                        },
+                    }}>
+                        Find A Song's Key, Tempo, and Credits
+                        {/* Under Construction check back soon */}
+                    </Typography>
+                </Card>
+            </Box>
         </div>
     );
 }

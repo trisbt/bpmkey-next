@@ -18,6 +18,7 @@ import { grey } from '@mui/material/colors';
 import { Artist, DataItem, AudioDataItem, ResultItem } from '../types/dataTypes';
 import PlayButton from './PlayButton';
 
+
 const SmallPlayButton = styled(IconButton)(() => ({
  '&&': {
     color: 'white',
@@ -74,7 +75,8 @@ const TopTracks = ({ results }) => {
                     backgroundColor: 'rgb(0, 71, 212, .6)',
                   }}
                 >
-                  <Typography variant='h4' sx={{
+                  <Typography variant='h4' 
+                  sx={{
                     display: 'flex',
                     alignItems: 'center',
                     color: '#e8eaf6',

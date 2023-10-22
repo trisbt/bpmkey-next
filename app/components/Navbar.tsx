@@ -29,40 +29,40 @@ function Navbar() {
         <Container maxWidth="xl">
           <Toolbar disableGutters sx={{
             minHeight: '45px',
-            '@media (max-width: 600px)': {
-              minHeight: '52px',
-            }
           }}>
-            <Box sx={{
-              position: 'relative',
-              display: 'flex',
-              height: '40px',
-              alignItems: 'center',
-              justifyContent: 'center',
-              overflow: 'hidden',
-            }}>
+
               <Card sx={{
                 display: 'flex',
                 height: '40px',
-                width: '175px',
-                // alignItems: 'flex',
+                width: '180px',
                 justifyContent: 'center',
+               
                 backgroundColor: 'transparent',
                 boxShadow: '0',
-                overflow: 'hidden'
+                // overflow: 'hidden',
+                '@media (max-width:500px)': {
+                  justifyContent: 'flex-start',
+                  alignItems: 'center',
+                  paddingLeft:'1px',
+                  height:'35px',
+                  paddingTop:'9px',
+                }
               }}>
-                <Link href="/" >
-                <Typography className={logoFont.className} sx={{
-                  color:'white',
-                  fontSize: '35px',
-                  textAlign: 'center',
-                  transform: 'scaleY(1.4)',
-                }}>
-                  BPMKEY
-                </Typography>
+                <Link href="/">
+                  <Typography className={logoFont.className} sx={{
+                    color: 'white',
+                    fontSize: '35px',
+                    textAlign: 'center',
+                    transform: 'scaleY(1.4)',
+                    '@media (max-width:500px)': {
+                      fontSize: '28px',
+                    }
+                  }}>
+                    BPMKEY
+                  </Typography>
                 </Link>
               </Card>
-            </Box>
+ 
 
             {/* desktop and mobile search bar*/}
             <Hidden only={['sm', 'md', 'lg', 'xl']}>
@@ -84,7 +84,7 @@ function Navbar() {
               margin: 0,
               width: '0px',
             }}>
-              <SearchBar/>
+              <SearchBar />
             </Box>
           </Toolbar>
         </Container>

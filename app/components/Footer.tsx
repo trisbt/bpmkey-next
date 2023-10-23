@@ -70,15 +70,8 @@ const Footer: FC = () => {
 
           }}>
             Song data provided by
-            <Link href={'https://www.spotify.com'} sx={{
-              textDecoration: 'none',
-              color: 'inherit',
-              alignItems: 'center',
-              ':hover': {
-                cursor: 'pointer',
-              }
+            <Link href={'https://www.spotify.com'} className="customLink">
 
-            }}>
               <span style={{ display: 'flex', alignItems: 'center' }}>
                 <svg
                   style={{

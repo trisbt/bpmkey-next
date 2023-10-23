@@ -169,11 +169,8 @@ const SongPageCard: React.FC<SongPageCardProps> = ({ songDetails, song, artist, 
                     <Grid item container xs={12} alignItems='center' justifyContent='space-between' >
 
                       {/*link spotify render*/}
-                      <Link href={
-                        transformSpotifyURItoURL(
-                          songDetails.uri
-                        )
-                      }>
+                     <Link href={transformSpotifyURItoURL(songDetails.uri) as string}>
+
                         <svg
                           // style={{ marginLeft: '-8px', paddingTop: '5px' }}
                           xmlns="http://www.w3.org/2000/svg" width="62" height="62" viewBox="0 0 24 24">

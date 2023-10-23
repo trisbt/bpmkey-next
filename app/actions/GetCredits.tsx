@@ -1,6 +1,10 @@
 'use server'
 import React from 'react'
-import { ProcessedCredit } from '../types/dataTypes';
+import { Credits, ProcessedCredit, CreditsResult } from '../types/dataTypes';
+
+interface SearchResultItem {
+	uri?: string;
+}
 
 function getStringBeforeParenthesis(str: string): string {
 	const indexOfParenthesis = str.indexOf('(');
@@ -12,7 +16,7 @@ function getStringBeforeParenthesis(str: string): string {
 function normalizeString(str: string): string {
 	return str.replace(/’/g, "'");
 }
-function prepQuery(query) {
+function prepQuery(query: string): string {
 	return query.replace(/[^\w\s]/g, '').toLowerCase();
 }
 function isSongMatch(trackTitle: string, song: string): boolean {
@@ -24,11 +28,11 @@ function isSongMatch(trackTitle: string, song: string): boolean {
 		getStringBeforeParenthesis(normalizedSong) === getStringBeforeParenthesis(normalizedTrackTitle);
 }
 
-export async function GetCredits(album: string, artist: string, song: string): Promise<ProcessedCredit[] | string[]> {
+export async function GetCredits(album: string, artist: string, song: string): Promise<Credits> {
 	album = decodeURIComponent(album);
 	artist = decodeURIComponent(artist);
 	song = decodeURIComponent(song)
-	console.log(album, artist, song)
+
 	const discogsKey = process.env.discogsKey;
 	const discogsSecret = process.env.discogsSecret;
 	// Get search results and any master ids
@@ -42,7 +46,7 @@ export async function GetCredits(album: string, artist: string, song: string): P
 	const result = await res.json();
 	const searchResults = result.results;
 
-	function getReleaseIds(arr, query) {
+	function getReleaseIds(arr: SearchResultItem[], query: string): number[] {
 		const preppedQuery = prepQuery(query).replace(/\s+/g, '');
 		return arr
 			.filter(item =>
@@ -50,7 +54,7 @@ export async function GetCredits(album: string, artist: string, song: string): P
 				item.uri.toLowerCase().startsWith('/release')
 			)
 			.map(item => {
-				const parts = item.uri.split('/');
+				const parts = item.uri!.split('/');
 				const idPart = parts[2].split('-')[0];
 				return Number(idPart);
 			});
@@ -89,10 +93,12 @@ export async function GetCredits(album: string, artist: string, song: string): P
 					}
 				}
 			}
-			const rateLimitRemaining = parseInt(masterRes.headers.get('X-Discogs-Ratelimit-Remaining'), 10);
+			const rateLimitHeader = masterRes.headers.get('X-Discogs-Ratelimit-Remaining');
+			const rateLimitRemaining = rateLimitHeader ? parseInt(rateLimitHeader, 10) : 0;
 			if (rateLimitRemaining <= 5) {
 				// console.log("Rate limit too low, exiting loop.");
-				return "Rate limit reached";
+				creditsArr.push("Rate limit reached");
+				return creditsArr;
 			}
 
 		}
@@ -101,8 +107,9 @@ export async function GetCredits(album: string, artist: string, song: string): P
 		if (creditsArr.length === 0) {
 			creditsArr.push('no credits available at this time');
 		}
-		function processCredits(credits) {
-			const result = {};
+		const processCredits = (credits: string[]):ProcessedCredit[] => {
+			const result: CreditsResult = {};
+
 			for (let i = 0; i < credits.length; i += 2) {
 				const role = credits[i];
 				const artist = credits[i + 1];
@@ -117,6 +124,6 @@ export async function GetCredits(album: string, artist: string, song: string): P
 			return Object.values(result);
 		}
 		const processedCredits = processCredits(creditsArr);
-		return processedCredits
+		return processedCredits;
 	}
 }

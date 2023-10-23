@@ -12,7 +12,6 @@ import MenuItem from '@mui/material/MenuItem';
 import MenuIcon from '@mui/icons-material/Menu';
 import { Card, Hidden } from '@mui/material';
 import Popper from '@mui/material/Popper';
-import SearchData from './SearchData';
 import SearchBar from './SearchBar';
 import { logoFont } from '../fonts';
 

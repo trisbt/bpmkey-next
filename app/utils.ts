@@ -27,9 +27,9 @@ export const keyConvert: KeyConvertFunction = (num: number, mode: number): strin
 export const tempoRound = (num: number): number =>{
     return Math.round(num * 2) / 2;
 }
-export const valuetext = (value) => {
+export const valuetext = (value: number): string => {
     return `${value} bpm`;
-}
+  }
 
 export const reverseKeyConvert: ReverseKeyConvertFunction = (key: string): number | null => {
     const reverseChart: { [key: string]: number } = {

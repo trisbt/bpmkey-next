@@ -1,6 +1,7 @@
 import { keyConvert, tempoRound, valuetext } from "../utils";
+import { AdvancedAudioItem } from "../types/serverTypes";
 
-const GetSpotifyAdvancedAudio = async (token, ids) => {
+const GetSpotifyAdvancedAudio = async (token: string, ids: string[]) => {
   const res = await fetch(`https://api.spotify.com/v1/audio-features/?ids=${ids}`, {
     headers: {
       'Authorization': 'Bearer ' + token
@@ -9,7 +10,7 @@ const GetSpotifyAdvancedAudio = async (token, ids) => {
   });
 
   const data = await res.json();
-  const audioData = data.audio_features.map((item) => {
+  const audioData = data.audio_features.map((item: AdvancedAudioItem) => {
     if (item) {
       const key = keyConvert(item.key, item.mode);
       const tempo = tempoRound(item.tempo);

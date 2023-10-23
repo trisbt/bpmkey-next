@@ -32,6 +32,15 @@
 .background-gradient {
   background-image: repeating-linear-gradient(140deg, rgb(109, 97, 168), #282c34 25%, rgb(80, 108, 185));
 }
+.customLink {
+  text-decoration: none;
+  color: inherit;
+  align-items: center;
+}
+
+.customLink:hover {
+  cursor: pointer;
+}
 
 .searchform-container {
   display: flex;

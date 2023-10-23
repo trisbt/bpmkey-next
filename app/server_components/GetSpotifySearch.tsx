@@ -1,13 +1,12 @@
 'use server'
 import GetAccessToken from "./GetAccessToken";
 import GetSpotifyAdvancedAudio from "./GetSpotifyAdvancedAudio";
+import { GetTracksItem } from "../types/serverTypes";
 
-const GetSpotifySearch = async (query, offset) => {
+const GetSpotifySearch = async (query: string | null, offset: number) => {
 
     const token = await GetAccessToken();
     const limit = 50;
-    // const offset = req.query.offset;
-    // const offset = 1
     const res = await fetch(`https://api.spotify.com/v1/search?q=${query}&type=artist%2Ctrack&limit=${limit}&offset=${offset}`, {
         headers: {
             'Authorization': 'Bearer ' + token
@@ -18,7 +17,7 @@ const GetSpotifySearch = async (query, offset) => {
         throw new Error('Error in search fetch');
     }
     const data = await res.json();
-    const mainData = data.tracks.items.map((item) => {
+    const mainData = data.tracks.items.map((item: GetTracksItem) => {
         const { name, album, preview_url, explicit, popularity } = item;
         const artists = item.artists
         const images = album.images[0].url;
@@ -27,7 +26,7 @@ const GetSpotifySearch = async (query, offset) => {
         const albums = item.album.name;
         return { name, images, id, preview_url, release_date, artists, albums, explicit, popularity };
     });
-    const ids = mainData.map(item => item.id);
+    const ids = mainData.map((item: GetTracksItem) => item.id);
     const audioData = await GetSpotifyAdvancedAudio(token, ids);
     const results = [];
     for (let i = 0; i < mainData.length; i++) {

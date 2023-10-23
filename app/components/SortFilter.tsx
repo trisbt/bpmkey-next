@@ -30,10 +30,23 @@ import ListItemText from '@mui/material/ListItemText';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
 import Collapse from '@mui/material/Collapse';
-
 import CircleOfFifths from '../components/CircleOfFifths';
+import { valuetext } from '../utils';
 
 type Anchor = 'bottom';
+
+interface SortFilterProps {
+  searchQuery: string | null;
+  offset: number | null;
+  sortOrder: "asc" | "desc" | null;
+  sortBy: "tempo" | "key" | null;
+  tempoSelect: [number, number];
+  activeSlice: string[];
+  setSortOrder: React.Dispatch<React.SetStateAction<"asc" | "desc" | null>>;
+  setSortBy: React.Dispatch<React.SetStateAction<"tempo" | "key" | null>>;
+  setActiveSlice: React.Dispatch<React.SetStateAction<string[]>>;
+  setTempoSelect: React.Dispatch<React.SetStateAction<[number, number]>>;
+}
 
 const SortButton = styled(Button)(({ theme }) => ({
   '&&': {
@@ -98,20 +111,20 @@ const TempoAccordionDetails = styled(AccordionDetails)({
   boxShadow: '0px 6px 10px #0d47a1',
 });
 
-const SortFilter = ({ searchQuery, offset, sortOrder, setSortOrder, sortBy, setSortBy, tempoSelect, setTempoSelect, activeSlice, setActiveSlice }) => {
-  const [isOpen, setIsOpen] = useState(false);
-  const [openKey, setOpenKey] = useState(false);
-  const [openTempo, setOpenTempo] = useState(false);
-  const [sliderValue, setSliderValue] = useState([80, 140]);
-  const [textFieldTempo, setTextFieldTempo] = useState('');
+const SortFilter: React.FC<SortFilterProps> = ({ searchQuery, offset, sortOrder, setSortOrder, sortBy, setSortBy, tempoSelect, setTempoSelect, activeSlice, setActiveSlice }) => {
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [openKey, setOpenKey] = useState<boolean>(false);
+  const [openTempo, setOpenTempo] = useState<boolean>(false);
+  const [sliderValue, setSliderValue] = useState<[number, number]>([80, 140]);
+  const [textFieldTempo, setTextFieldTempo] = useState<string>('');
   const [openAccordion, setOpenAccordion] = useState<string | null>(null);
-  const keyAccordionRef = useRef(null);
-  const bpmAccordionRef = useRef(null);
-  const [filterOpen, setFilterOpen] = useState(false);
+  const keyAccordionRef = useRef<HTMLDivElement | null>(null);
+  const bpmAccordionRef = useRef<HTMLDivElement | null>(null);
+  const [filterOpen, setFilterOpen] = useState<boolean>(false);
 
   //filter effect
   useEffect(() => {
-    setActiveSlice(null);
+    setActiveSlice([]);
     setTempoSelect([0, 200]);
   }, [offset, searchQuery]);
 
@@ -150,14 +163,16 @@ const SortFilter = ({ searchQuery, offset, sortOrder, setSortOrder, sortBy, setS
   };
 
   //tempo filter
-  const valuetext = (value) => {
-    return `${value} bpm`;
-  }
-  const handleTempoSelect = (event, tempo) => {
-    setSliderValue(tempo);
-  };
 
-  const handleTempoSubmit = (event) => {
+  const handleTempoSelect = (event: Event, value: number | number[], activeThumb: number) => {
+    if (Array.isArray(value)) {
+      setSliderValue(value as [number, number]);
+    } else {
+      setSliderValue([value, value]);
+    }
+  };
+  
+  const handleTempoSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     if (textFieldTempo) {
@@ -167,27 +182,38 @@ const SortFilter = ({ searchQuery, offset, sortOrder, setSortOrder, sortBy, setS
     }
   };
 
-  const handleTextFieldChange = (event) => {
-    const value = event.target.value.replace(/[^0-9]/g, '');  // Only allow digits
-    setTextFieldTempo(value);
+  const handleTextFieldChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const inputValue = event.target.value;
+    const numericValue = parseFloat(inputValue);
+  
+    if (!isNaN(numericValue)) {
+      setTextFieldTempo(numericValue.toString()); // Store the numeric value as a string
+    } else {
+      setTextFieldTempo(''); // Clear the textfield if it's not numeric
+    }
   };
+  
   //reset filter
-  const handleReset = (event) => {
-    event.preventDefault();  // To prevent the default behavior
+  const handleReset = (event: React.MouseEvent<HTMLElement>) => {
+    event.preventDefault();  
     setTempoSelect([0, 200]);
     setSliderValue([80, 140]);
-    setTextFieldTempo('');  // Clear the textfield
-    setActiveSlice('');
+    setTextFieldTempo('');  
+    setActiveSlice([]);
   };
-  const handleOutsideClick = (event) => {
-    if (keyAccordionRef.current && !keyAccordionRef.current.contains(event.target) && openAccordion === 'keyAccordion') {
-      setOpenAccordion(null);
-    }
 
-    if (bpmAccordionRef.current && !bpmAccordionRef.current.contains(event.target) && openAccordion === 'bpmAccordion') {
+  const handleOutsideClick = (event: Event) => {
+    const target = event.target as Node;  // Use Node because it could be an HTMLElement or a Text node
+  
+    if (keyAccordionRef.current && !keyAccordionRef.current.contains(target) && openAccordion === 'keyAccordion') {
+      setOpenAccordion(null);
+    }
+  
+    if (bpmAccordionRef.current && !bpmAccordionRef.current.contains(target) && openAccordion === 'bpmAccordion') {
       setOpenAccordion(null);
     }
   };
+
   const list = () => (
     <Box
       sx={{ width: 'auto' }}
@@ -403,7 +429,6 @@ const SortFilter = ({ searchQuery, offset, sortOrder, setSortOrder, sortBy, setS
               <Grid item paddingLeft={'2px'}>
                 <Box
                   onClick={handleReset}
-                  variant="contained"
                   color="#ffecb3"
                   sx={{
                     // backgroundColor:'purple',
@@ -465,6 +490,7 @@ const SortFilter = ({ searchQuery, offset, sortOrder, setSortOrder, sortBy, setS
           anchor="bottom"
           open={isOpen}
           onClose={toggleDrawer(false)}
+          onOpen={() => {}}
           swipeAreaWidth={0} // Disables swipe to open
         >
           {list()}

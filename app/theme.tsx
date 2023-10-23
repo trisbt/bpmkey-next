@@ -3,7 +3,7 @@ import { createTheme } from "@mui/material";
 export const theme = createTheme({
     typography: {
     //   fontFamily: '"Montserrat", sans-serif',
-    fontWeight: 900,
+    // fontWeight: 900,
     },
     palette: {
       primary: {

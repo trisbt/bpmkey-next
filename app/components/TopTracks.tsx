@@ -15,8 +15,9 @@ import { styled } from "@mui/material/styles";
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import { grey } from '@mui/material/colors';
-import { Artist, DataItem, AudioDataItem, ResultItem } from '../types/dataTypes';
 import PlayButton from './PlayButton';
+import { TopTracksCardProps } from '../types/cardTypes';
+import { TopTracksDetails } from '../types/dataTypes';
 
 
 const SmallPlayButton = styled(IconButton)(() => ({
@@ -33,7 +34,7 @@ const SmallPlayButton = styled(IconButton)(() => ({
   height: '40px',
 }));
 
-const TopTracks = ({ results }) => {
+const TopTracks: React.FC<TopTracksCardProps> = ({ results }) => {
   const [currentlyPlayingUrl, setCurrentlyPlayingUrl] = useState<string | null>(null);
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
@@ -97,7 +98,7 @@ const TopTracks = ({ results }) => {
               </Grid>
 
               {/* main search */}
-              {results.map((item: ResultItem, index: number) => (
+              {results.map((item: TopTracksDetails, index: number) => (
 
                 <Grid item xs={11} md={8} key={index}>
                   {/* each card */}

@@ -1,12 +1,18 @@
 import GetSpotifyArtist from '@/app/server_components/GetSpotifyArtist'
 import React from 'react'
 import ArtistTopTracksCards from './ArtistTopTracksCards'
-import { ArtistPageProps } from '@/app/types/pageTypes'
+import { SongDetails } from '@/app/types/dataTypes'
+// import { ArtistPageProps } from '@/app/types/pageTypes'
 
-const ArtistPage: React.FC<ArtistPageProps> = async ({ params }) => {
+const ArtistPage = async ({
+  params,
+}: {
+  params: { artist: [string, string, string] };
+}) => {
   const artist = params.artist[0];
   const id = params.artist[1];
-  const results = await GetSpotifyArtist(id);
+  const results: SongDetails[] = await GetSpotifyArtist(id);
+  
 
   return (
     <div className='background-gradient'>

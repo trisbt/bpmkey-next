@@ -1,9 +1,7 @@
 import GetAccessToken from "./GetAccessToken";
 import GetSpotifyAdvancedAudio from "./GetSpotifyAdvancedAudio";
 
-
-
-const GetSpotifyById = async (id) => {
+const GetSpotifyById = async (id: string) => {
     const token = await GetAccessToken();
     const mainRes = await fetch(`https://api.spotify.com/v1/tracks/${id}`, {
         headers: {

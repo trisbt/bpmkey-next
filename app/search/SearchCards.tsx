@@ -29,7 +29,8 @@ import GetSpotifySearch from '../server_components/GetSpotifySearch';
 import CircleOfFifths from '../components/CircleOfFifths';
 import SortFilter from '../components/SortFilter';
 import { reverseKeyConvert } from '@/app/utils';
-
+import { SearchPageCardProps } from '../types/cardTypes';
+import { SearchDetails } from '../types/dataTypes';
 
 const SmallPlayButton = styled(IconButton)(() => ({
 	'&&': {
@@ -44,7 +45,6 @@ const SmallPlayButton = styled(IconButton)(() => ({
 	width: '40px',
 	height: '40px',
 }));
-
 const LoadButton = styled(Button)(({ theme }) => ({
 	'&&': {
 		color: theme.palette.primary.contrastText,
@@ -68,21 +68,20 @@ const SortButton = styled(Button)(({ theme }) => ({
 	},
 }));
 
-
-const SearchCards = ({ results }) => {
+const SearchCards: React.FC<SearchPageCardProps> = ({ results }) => {
 	const [currentlyPlayingUrl, setCurrentlyPlayingUrl] = useState<string | null>(null);
 	const audioRef = useRef<HTMLAudioElement | null>(null);
 	const [searchResults, setSearchResults] = useState(results);
 	const [offset, setOffset] = useState<number>(1);
 	const router = useRouter();
 	const searchParams = useSearchParams()
-	const searchQuery = searchParams.get('q')
+	const searchQuery: string | null = searchParams.get('q');
 	//sort hooks
 	const [sortOrder, setSortOrder] = useState<"asc" | "desc" | null>(null);
 	const [sortBy, setSortBy] = useState<"tempo" | "key" | null>(null);
 	//filter hooks
-	const [activeSlice, setActiveSlice] = useState([]);
-	const [tempoSelect, setTempoSelect] = React.useState([0, 200]);
+	const [activeSlice, setActiveSlice] = useState<string[]>([]);
+	const [tempoSelect, setTempoSelect] = useState<[number, number]>([0, 200]);
 
 	const playAudio = (event: React.MouseEvent, previewUrl: string | null) => {
 		event.stopPropagation();
@@ -180,8 +179,8 @@ const SearchCards = ({ results }) => {
 							sortOrder={sortOrder}
 							setSortBy={setSortBy}
 							sortBy={sortBy}
-						>
-						</SortFilter>
+						/>
+						
 
 						{/* main search */}
 						{searchResults
@@ -202,7 +201,7 @@ const SearchCards = ({ results }) => {
 								}
 								return 0;
 							})
-							.map((item: ResultItem, index: number) => (
+							.map((item: SearchDetails, index: number) => (
 								<Grid item xs={11} md={8} key={index}>
 									{/* each card */}
 									<Link href={`/${item.name}/${item.artists[0].name}/${item.id}`}>

@@ -8,6 +8,7 @@ import { styled } from "@mui/material/styles";
 import { grey } from '@mui/material/colors';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import StopIcon from '@mui/icons-material/Stop';
+import { PlayButtonProps } from '../types/dataTypes';
 
 const StyledPlayButton = styled(Button)(() => ({
 	'&&': {
@@ -42,11 +43,11 @@ const StyledPlayButtonSmall = styled(Button)(() => ({
 
 }));
 
-const PlayButton = ({ previewUrl }) => {
-	const [isPlaying, setIsPlaying] = useState(false);
-	const audioRef = useRef(null);
+const PlayButton: React.FC<PlayButtonProps> = ({ previewUrl }) => {
+	const [isPlaying, setIsPlaying] = useState<boolean>(false);
+	const audioRef = useRef<HTMLAudioElement | null>(null);
 
-	const togglePlayback = (event) => {
+	const togglePlayback = (event:React.MouseEvent) => {
 		event.stopPropagation();
 		event.preventDefault();
 

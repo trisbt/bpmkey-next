@@ -13,7 +13,7 @@ import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import { Theme } from '@mui/material';
 import Accordion from '@mui/material/Accordion';
-import PlayButton from '../components/PlayButton';
+import PlayButton from '@/app/components/PlayButton';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import StopIcon from '@mui/icons-material/Stop';
 import AccordionSummary from '@mui/material/AccordionSummary';
@@ -26,6 +26,8 @@ import Link from 'next/link';
 import CircleOfFifths from '@/app/components/CircleOfFifths';
 import SortFilter from '@/app/components/SortFilter';
 import { reverseKeyConvert } from '@/app/utils';
+import { SongDetails } from '@/app/types/dataTypes';
+import { ArtistPageCardProps } from '@/app/types/cardTypes';
 
 const SmallPlayButton = styled(IconButton)(() => ({
 	'&&': {
@@ -56,21 +58,21 @@ const SortButton = styled(Button)(({ theme }) => ({
 
 
 
-const ArtistTopTracksCards = ({ results, artist }) => {
+const ArtistTopTracksCards: React.FC<ArtistPageCardProps> = ({ results, artist }) => {
 	const [currentlyPlayingUrl, setCurrentlyPlayingUrl] = useState<string | null>(null);
 	const audioRef = useRef<HTMLAudioElement | null>(null);
-	const [searchResults, setSearchResults] = useState(results);
+	const [searchResults, setSearchResults] = useState<SongDetails[]>(results);
 	// const [offset, setOffset] = useState<number>(1);
 	const router = useRouter();
 	const searchParams = useSearchParams()
-	const searchQuery = searchParams.get('q')
+	const searchQuery: string | null = searchParams.get('q');
 	//sort hooks
 	const [sortOrder, setSortOrder] = useState<"asc" | "desc" | null>(null);
 	const [sortBy, setSortBy] = useState<"tempo" | "key" | null>(null);
 	//filter hooks
-	const [activeSlice, setActiveSlice] = useState<string | null>(null);
-	const [tempoSelect, setTempoSelect] = React.useState([0, 200]);
-	const offset = null;
+	const [activeSlice, setActiveSlice] = useState<string[]>([]);
+	const [tempoSelect, setTempoSelect] = useState<[number, number]>([0, 200]);
+	const offset: null = null;
 
 	const playAudio = (event: React.MouseEvent, previewUrl: string | null) => {
 		event.stopPropagation();
@@ -142,8 +144,8 @@ const ArtistTopTracksCards = ({ results, artist }) => {
 							sortOrder={sortOrder}
 							setSortBy={setSortBy}
 							sortBy={sortBy}
-						>
-						</SortFilter>
+						/>
+						
 						{/* main search */}
 						{searchResults
 							.filter(item =>
@@ -163,7 +165,7 @@ const ArtistTopTracksCards = ({ results, artist }) => {
 								}
 								return 0;
 							})
-							.map((item: ResultItem, index: number) => (
+							.map((item: SongDetails, index: number) => (
 
 								<Grid item xs={11} md={8} key={index}>
 									{/* each card */}

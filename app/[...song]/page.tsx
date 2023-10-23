@@ -2,19 +2,23 @@ import React from 'react'
 import SongPageCard from './SongPageCard'
 import GetSpotifyById from '../server_components/GetSpotifyById'
 import GetSpotifyRecs from '../server_components/GetSpotifyRecs'
-import { SongPageProps } from '../types/pageTypes'
-import { SongDetails } from '../types/dataTypes'
+// import { SongPageProps } from '../types/pageTypes'
+import { SongDetails, Recs } from '../types/dataTypes'
 
 
-const SongPage: React.FC<SongPageProps> = async ({ params }) => {
+
+const SongPage = async({
+  params,
+}: {
+  params: { song: [string, string, string] };
+}) =>{
   const song = params.song[0];
   const artist = params.song[1];
   const id = params.song[2];
   const songDetails: SongDetails = await GetSpotifyById(id);
   const seedArtist = songDetails.artistId;
+  const recs: Recs[] = await GetSpotifyRecs(id, seedArtist)
 
-  const recs = await GetSpotifyRecs(id, seedArtist)
-  // console.log(recs)
   return (
     <div className='background-gradient'>
       <SongPageCard songDetails={songDetails} artist={artist} song={song} id={id} recs={recs} />
@@ -22,4 +26,4 @@ const SongPage: React.FC<SongPageProps> = async ({ params }) => {
   )
 }
 
-export default SongPage
+export default SongPage;

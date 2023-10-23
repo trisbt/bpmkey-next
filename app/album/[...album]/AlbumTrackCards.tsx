@@ -13,7 +13,7 @@ import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import { Theme } from '@mui/material';
 import Accordion from '@mui/material/Accordion';
-import PlayButton from '../components/PlayButton';
+import PlayButton from '@/app/components/PlayButton';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import StopIcon from '@mui/icons-material/Stop';
 import AccordionSummary from '@mui/material/AccordionSummary';
@@ -61,17 +61,17 @@ const SortButton = styled(Button)(({ theme }) => ({
 const AlbumTrackCards: React.FC<AlbumPageCardProps> = ({ results, album }) => {
 	const [currentlyPlayingUrl, setCurrentlyPlayingUrl] = useState<string | null>(null);
 	const audioRef = useRef<HTMLAudioElement | null>(null);
-	const [searchResults, setSearchResults] = useState<AlbumDetails>(results);
+	const [searchResults, setSearchResults] = useState<AlbumDetails[]>(results);
 	const router = useRouter();
 	const searchParams = useSearchParams()
-	const searchQuery = searchParams.get('q')
+	const searchQuery: string | null = searchParams.get('q');
 	//sort hooks
 	const [sortOrder, setSortOrder] = useState<"asc" | "desc" | null>(null);
 	const [sortBy, setSortBy] = useState<"tempo" | "key" | null>(null);
 	//filter hooks
-	const [activeSlice, setActiveSlice] = useState<string | null>(null);
+	const [activeSlice, setActiveSlice] = useState<string[]>([]);
 	const [tempoSelect, setTempoSelect] = useState<[number, number]>([0, 200]);
-	const offset = null;
+	const offset: null = null;
 
 	const playAudio = (event: React.MouseEvent, previewUrl: string | null) => {
 		event.stopPropagation();
@@ -146,9 +146,9 @@ const AlbumTrackCards: React.FC<AlbumPageCardProps> = ({ results, album }) => {
 							sortOrder={sortOrder}
 							setSortBy={setSortBy}
 							sortBy={sortBy}
-						>
+						/>
 
-						</SortFilter>
+
 						{/* main search */}
 						{searchResults
 							.filter(item =>
@@ -168,7 +168,7 @@ const AlbumTrackCards: React.FC<AlbumPageCardProps> = ({ results, album }) => {
 								}
 								return 0;
 							})
-							.map((item: ResultItem, index: number) => (
+							.map((item: AlbumDetails, index: number) => (
 
 								<Grid item xs={11} md={8} key={index}>
 									{/* each card */}

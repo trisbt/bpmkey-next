@@ -65,7 +65,7 @@ const SearchBar = () => {
 	const [showInput, setShowInput] = useState(false);
 	const router = useRouter();
 
-	const handleSubmit = (e) => {
+	const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 		setShowInput(false);
 		router.push(`/search?q=${query}`);

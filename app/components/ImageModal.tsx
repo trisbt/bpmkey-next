@@ -24,7 +24,8 @@ const ImageModal: React.FC<ImageModalProps> = ({ songDetails }) => {
     return (
         <>
             <Image
-                className='modal-img'
+                width={500}
+                height={500}
                 src={songDetails.images}
                 alt={songDetails.name}
                 onClick={handleOpen}

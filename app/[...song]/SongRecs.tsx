@@ -113,7 +113,7 @@ const SongRecs = ({recs}) => {
 								<Typography variant='h4' sx={{
 									display: 'flex',
 									alignItems: 'center',
-									// color: '#e8eaf6',
+									color: '#e8eaf6',
 									fontWeight: 'bold',
 									background: '#e8eaf6',
 									WebkitBackgroundClip: 'text',

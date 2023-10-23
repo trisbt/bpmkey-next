@@ -39,17 +39,24 @@
   padding-right: 5em
 }
 
+.song-page-main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
 .song-page-container {
   display: flex;
   justify-content: center;
   padding-top: 2em;
-  padding-bottom: 8em;
-  /* padding-right: 5em */
+  padding-bottom: 2em;
 }
-.splash{
-  /* padding-top: 2em; */
-  /* padding-bottom: 4em; */
+
+.recs-page-container {
+  display: flex;
+  justify-content: center;
 }
+
 .paper-card {
   background-color: #f5f5f5;
   padding: .5em;

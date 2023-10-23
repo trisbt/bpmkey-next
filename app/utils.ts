@@ -16,7 +16,6 @@ export const keyConvert: KeyConvertFunction = (num: number, mode: number): strin
         '11': ['B', 'G♯m'],
     }
 
-
     if (mode === 1) {
         return chart[num][0];
     } else if (mode === 0) {

@@ -1,6 +1,5 @@
 import React from 'react'
 import SongPageCard from './SongPageCard'
-import SongRecs from './SongRecs'
 import GetSpotifyById from '../server_components/GetSpotifyById'
 import GetSpotifyRecs from '../server_components/GetSpotifyRecs'
 import { SongPageProps } from '../types/pageTypes'
@@ -18,8 +17,7 @@ const SongPage: React.FC<SongPageProps> = async ({ params }) => {
   // console.log(recs)
   return (
     <div className='background-gradient'>
-      <SongPageCard songDetails={songDetails} artist={artist} song={song} id={id} recs = {recs}/>
-      
+      <SongPageCard songDetails={songDetails} artist={artist} song={song} id={id} recs={recs} />
     </div>
   )
 }

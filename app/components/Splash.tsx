@@ -27,7 +27,7 @@ const Splash = () => {
                         display: 'flex',
                         alignItems: 'center',
                         fontWeight: 'bold',
-                        background:'#fcfcfc',
+                        background: '#fcfcfc',
                         // background: 'linear-gradient(45deg, #fcfcfe 0%, #bdbdbd 90%)',
                         WebkitBackgroundClip: 'text',
                         WebkitTextFillColor: 'transparent',
@@ -39,7 +39,7 @@ const Splash = () => {
                             fontSize: '34px'
                         },
                     }}>
-                        Find A Song's Key, Tempo, and Credits
+                        Find A Song&apos;s Key, Tempo, and Credits
                         {/* Under Construction check back soon */}
                     </Typography>
                 </Card>

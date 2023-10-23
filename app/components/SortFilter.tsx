@@ -130,8 +130,7 @@ const SortFilter: React.FC<SortFilterProps> = ({ searchQuery, offset, sortOrder,
 
   //close accordion
   useEffect(() => {
-    document.addEventListener('mousedown', handleOutsideClick);
-
+    document.addEventListener('mousedown', handleOutsideClick)
     return () => {
       document.removeEventListener('mousedown', handleOutsideClick);
     };

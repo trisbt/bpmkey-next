@@ -1,5 +1,5 @@
 import localFont from 'next/font/local'
-import { Public_Sans } from 'next/font/google'
+import { Archivo } from 'next/font/google'
 
 export const logoFont = localFont({
     src: '../public/A4SPEED-Bold.ttf',
@@ -7,8 +7,9 @@ export const logoFont = localFont({
     display: 'swap',
   })
 
-export const publicSans = Public_Sans({
-  // weight: '600',
+export const archivo = Archivo({
+  // weight: '700',
   subsets: ['latin'],
+  style:['italic', 'normal'],
   display: 'swap',
 })

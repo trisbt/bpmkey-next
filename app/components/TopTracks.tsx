@@ -70,7 +70,7 @@ const TopTracks: React.FC<TopTracksCardProps> = ({ results }) => {
                   sx={{
                     display: 'flex',
                     flexDirection: 'row',
-                    margin: '10px 10px 0',
+                    margin: '0px 10px 0',
                     boxShadow: 3,
                     justifyContent: 'center',
                     backgroundColor: 'rgb(0, 71, 212, .6)',

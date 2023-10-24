@@ -12,6 +12,7 @@ import { Context } from 'chartjs-plugin-datalabels';
 import { grey } from '@mui/material/colors';
 import GetRandom from '../server_components/GetRandom';
 import { useRouter } from 'next/navigation';
+import { CircularProgress, Backdrop } from '@mui/material';
 
 Chart.register(ArcElement)
 interface ExtendedArcElement extends ArcElement {
@@ -55,8 +56,10 @@ const hoverColors: string[] = ['#b71c1c', '#ff5722', '#ff9800', '#ffeb3b', '#8bc
 
 const SplashCircleOfFifths = () => {
     const [activeSlice, setActiveSlice] = useState<string | null>(null);
+    const [isLoading, setIsLoading] = useState<boolean>(false);
+
     const router = useRouter();
-    
+
     const handleChartInteraction = async (
         event: ChartEvent,
         elements: ActiveElement[],
@@ -72,10 +75,17 @@ const SplashCircleOfFifths = () => {
             }
 
             if (label) {
-                setActiveSlice(prev => prev === label ? null : label);
-                const res = await GetRandom(label);
-                const url = `/${res.name}/${res.artist}/${res.id}`;
-                router.push(url);
+                setIsLoading(true); // Set isLoading to true before fetching data
+
+                try {
+                    const res = await GetRandom(label);
+                    const url = `/${res.name}/${res.artist}/${res.id}`;
+                    router.push(url);
+                } catch (error) {
+                    console.error("Error fetching data:", error);
+                } finally {
+                    setIsLoading(false); // Set isLoading to false after fetching is complete
+                }
             }
         }
     };
@@ -150,33 +160,46 @@ const SplashCircleOfFifths = () => {
 
     return (
         <div className='splash-pie-container'>
+            <div style={{ position: 'relative', height: '100%' }}>
+                <Grid container spacing={0} sx={{
+                    height: '300px',
 
-            <Grid container spacing={0} sx={{
-                height: '300px',
-
-            }}>
-                <Grid item xs={12} sx={{
-                    height: '270px',
-                    '@media (max-width: 600px)': {
-                        height: '200px'
-                    },
                 }}>
-                    <Doughnut
-                        data={chartData}
-                        plugins={[ChartDataLabels as any]}
-                        height={340}
-                        width={340}
-                        options={{
-                            ...options,
-                            onClick: handleChartInteraction,  // for desktop clicks
-                        }}
-                        onTouchEnd={handleChartInteraction as any}  // for mobile touches
-                    />
+                    <Grid item xs={12} sx={{
+                        height: '270px',
+                        '@media (max-width: 600px)': {
+                            height: '200px'
+                        },
+                    }}>
+                        <Doughnut
+                            data={chartData}
+                            plugins={[ChartDataLabels as any]}
+                            height={340}
+                            width={340}
+                            options={{
+                                ...options,
+                                onClick: handleChartInteraction,  // for desktop clicks
+                            }}
+                            onTouchEnd={handleChartInteraction as any}  // for mobile touches
+                        />
 
+                    </Grid>
                 </Grid>
-            </Grid>
-
-        </div>
+                {isLoading && (
+                    <div style={{
+                        position: 'absolute',
+                        top: '50%',
+                        left: '50%',
+                        transform: 'translate(-50%, -50%)',
+                        zIndex: 10
+                    }}>
+                        <CircularProgress size='4em' sx={{
+                            color: "#00e676"
+                        }} />
+                    </div>
+                )}
+            </div>
+        </div >
     );
 }
 export default SplashCircleOfFifths;

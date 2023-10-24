@@ -1,4 +1,5 @@
 import { Artist, Images, Album } from "./dataTypes";
+
 export interface AdvancedAudioItem {
     key: number;
     tempo: number;

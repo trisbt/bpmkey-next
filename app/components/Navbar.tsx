@@ -38,7 +38,6 @@ function Navbar() {
                
                 backgroundColor: 'transparent',
                 boxShadow: '0',
-                // overflow: 'hidden',
                 '@media (max-width:500px)': {
                   justifyContent: 'flex-start',
                   alignItems: 'center',

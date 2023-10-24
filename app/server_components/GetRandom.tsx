@@ -1,24 +1,26 @@
 'use server'
 import GetAccessToken from "./GetAccessToken";
-// import GetSpotifyRecs from "./GetSpotifyRecs";
 import { reverseKeyModeConvert } from "../utils";
+import { TopTracksItem, TopTracksSubItem } from "../types/serverTypes";
+import { Artist } from "../types/dataTypes";
 
-const GetRandom = async (key) => {
+const GetRandom = async (key: string) => {
     const rev = reverseKeyModeConvert(key);
-    const revKey = rev.key;
-    const revMode = rev?.mode;
+    if (!rev) {
+        return;
+    }
+    const revKey: number = rev.key;
+    const revMode: number = rev?.mode;
     const token = await GetAccessToken();
     const res = await fetch(`https://api.spotify.com/v1/playlists/37i9dQZEVXbNG2KDcFcKOF?si=ce928cdd687a4612/tracks`, {
         headers: {
             'Authorization': 'Bearer ' + token
         },
-        // cache: 'no-store'
     });
 
     const data = await res.json();
-    const trackData = data.tracks.items.slice(0, 5).map((item) => item.track);
-
-    const artistIds = [].concat(...trackData.map(item => item.artists.map(artist => artist.id)));
+    const trackData = data.tracks.items.slice(0, 5).map((item: TopTracksItem) => item.track);
+    const artistIds = [].concat(...trackData.map((item: TopTracksSubItem) => item.artists.map((artist: Artist) => artist.id)));
     const seedArtist = artistIds.slice(0, 2).join();
 
     // const seedSong = data.tracks.items.slice(0, 5).map((item) => item.track.id).slice(0, 2).join();
@@ -103,7 +105,7 @@ const GetRandom = async (key) => {
             "world-music"
         ]
 
-    const getRandomGenres = (genres) => {
+    const getRandomGenres = (genres: string[]) => {
         const results = ['hip-hop'];
         const tempArr = [...genres];
 

@@ -2,10 +2,7 @@ import React from 'react'
 import SongPageCard from './SongPageCard'
 import GetSpotifyById from '../server_components/GetSpotifyById'
 import GetSpotifyRecs from '../server_components/GetSpotifyRecs'
-// import { SongPageProps } from '../types/pageTypes'
 import { SongDetails, Recs } from '../types/dataTypes'
-
-
 
 const SongPage = async({
   params,

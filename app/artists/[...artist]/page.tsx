@@ -2,7 +2,6 @@ import GetSpotifyArtist from '@/app/server_components/GetSpotifyArtist'
 import React from 'react'
 import ArtistTopTracksCards from './ArtistTopTracksCards'
 import { SongDetails } from '@/app/types/dataTypes'
-// import { ArtistPageProps } from '@/app/types/pageTypes'
 
 const ArtistPage = async ({
   params,

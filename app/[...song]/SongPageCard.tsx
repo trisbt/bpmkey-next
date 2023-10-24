@@ -107,7 +107,6 @@ const SongPageCard: React.FC<SongPageCardProps> = ({ songDetails, song, artist, 
           }}>
             <Grid item container xs={12} direction='row' justifyContent="center" padding='0'
               sx={{
-                // backgroundColor:'#1a237e',
                 width: '100vw',
                 height: '8vh',
                 alignItems: 'center',
@@ -282,7 +281,6 @@ const SongPageCard: React.FC<SongPageCardProps> = ({ songDetails, song, artist, 
 
               <Grid item container xs={12} >
                 <CardContent sx={{
-                  // backgroundColor: 'green',
                   width: '100vw',
                 }}>
 
@@ -425,7 +423,6 @@ const SongPageCard: React.FC<SongPageCardProps> = ({ songDetails, song, artist, 
               </Grid>
 
               <Grid item container xs={10} md={6}
-                // backgroundColor ='red'
                 flexDirection='column'
                 alignContent="center"
                 alignItems='center'

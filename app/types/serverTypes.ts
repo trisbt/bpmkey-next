@@ -38,3 +38,6 @@ export interface TopTracksItem{
     is_local: boolean;
     track: GetTracksItem;
 }
+export interface TopTracksSubItem{
+    artists: Artist[];
+}

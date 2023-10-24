@@ -36,7 +36,6 @@ const GetSpotifySearch = async (query: string | null, offset: number) => {
       };
       results.push(combinedObject);
     }
-    // console.log(results.length);
     return results;
 }
 

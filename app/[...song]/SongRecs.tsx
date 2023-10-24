@@ -49,7 +49,6 @@ const SortButton = styled(Button)(({ theme }) => ({
 		minHeight: '4px',
 		padding: '0px 10px',
 		color: 'white',
-		// backgroundColor: 'white',
 	},
 	'&:hover': {
 		backgroundColor: '#00e676',
@@ -119,11 +118,9 @@ const SongRecs: React.FC<RecsCardProps> = ({ recs }) => {
 										fontWeight: 'bold',
 										background: '#e8eaf6',
 										WebkitBackgroundClip: 'text',
-										// WebkitTextFillColor: 'transparent',
 										letterSpacing: '1px',
 										borderRadius: '2px',
 										fontStyle: 'italic',
-										// textTransform: 'uppercase',
 										'@media (max-width: 600px)': {
 											fontSize: '20px'
 										},

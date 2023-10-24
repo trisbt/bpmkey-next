@@ -79,7 +79,7 @@ const SplashCircleOfFifths = () => {
 
                 try {
                     const res = await GetRandom(label);
-                    const url = `/${res.name}/${res.artist}/${res.id}`;
+                    const url = `/${res!.name}/${res!.artist}/${res!.id}`;
                     router.push(url);
                 } catch (error) {
                     console.error("Error fetching data:", error);
@@ -193,9 +193,7 @@ const SplashCircleOfFifths = () => {
                         transform: 'translate(-50%, -50%)',
                         zIndex: 10
                     }}>
-                        <CircularProgress size='4em' sx={{
-                            color: "#00e676"
-                        }} />
+                        <CircularProgress size='4em'/>
                     </div>
                 )}
             </div>

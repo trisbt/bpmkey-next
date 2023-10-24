@@ -53,7 +53,6 @@ const SortButton = styled(Button)(({ theme }) => ({
     minHeight: '4px',
     padding: '0px 10px',
     color: 'white',
-    // backgroundColor: 'white',
   },
   '&:hover': {
     backgroundColor: '#00e676',
@@ -65,10 +64,8 @@ const SortFilterButton = styled(Button)(({ theme }) => ({
     minHeight: '4px',
     padding: '0px 10px',
     color: 'white',
-    // backgroundColor: '#0d47a1',
   },
   '&:hover': {
-    // backgroundColor: '#00e676',
     color: theme.palette.secondary.contrastText,
   },
 }));
@@ -430,7 +427,6 @@ const SortFilter: React.FC<SortFilterProps> = ({ searchQuery, offset, sortOrder,
                   onClick={handleReset}
                   color="#ffecb3"
                   sx={{
-                    // backgroundColor:'purple',
                     display: 'flex',
                     justifyContent: 'center',
                     alignItems: 'center',

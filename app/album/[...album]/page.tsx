@@ -1,7 +1,6 @@
 import GetSpotifyAlbum from '@/app/server_components/GetSpotifyAlbum';
 import React from 'react'
 import AlbumTrackCards from './AlbumTrackCards';
-// import { AlbumPageProps } from '@/app/types/pageTypes';
 import { AlbumDetails } from '@/app/types/dataTypes';
 
 const AlbumPage = async ({

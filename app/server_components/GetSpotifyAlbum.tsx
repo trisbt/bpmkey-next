@@ -17,7 +17,6 @@ const GetSpotifyAlbum = async (id: string) => {
     .map((item: AlbumItem) => {
         const { name, id, album, preview_url, explicit } = item;
         const artists = item.artists;
-        // const albums = item.album?.name; 
         return { name, id, preview_url, artists, explicit };
     });
 

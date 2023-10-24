@@ -60,7 +60,6 @@ const SortButton = styled(Button)(({ theme }) => ({
 		minHeight: '4px',
 		padding: '0px 10px',
 		color: 'white',
-		// backgroundColor: 'white',
 	},
 	'&:hover': {
 		backgroundColor: '#00e676',
@@ -144,7 +143,6 @@ const SearchCards: React.FC<SearchPageCardProps> = ({ results }) => {
 									boxShadow: 0,
 									justifyContent: 'center',
 									backgroundColor: 'transparent',
-									// paddingBottom: '1em',
 								}}
 							>
 								<Typography variant='h5' sx={{
@@ -154,11 +152,9 @@ const SearchCards: React.FC<SearchPageCardProps> = ({ results }) => {
 									fontWeight: 'bold',
 									background: '#e8eaf6',
 									WebkitBackgroundClip: 'text',
-									// WebkitTextFillColor: 'transparent',
 									letterSpacing: '1px',
 									borderRadius: '2px',
 									fontStyle: 'italic',
-									// textTransform: 'uppercase',
 									'@media (max-width: 600px)': {
 										fontSize: '20px'
 									},
@@ -328,7 +324,7 @@ const SearchCards: React.FC<SearchPageCardProps> = ({ results }) => {
 																<SmallPlayButton className='preview-button' sx={{
 																	boxShadow: 3,
 																	borderRadius: '50px',
-																	// display: { xs: 'flex', sm: 'none', md: 'none' },
+													
 																}}
 																	onClick={(event) => playAudio(event, item.preview_url || null)}
 																>
@@ -371,9 +367,7 @@ const SearchCards: React.FC<SearchPageCardProps> = ({ results }) => {
 									onClick={handleLoadMore}
 									variant='outlined'
 									size='large'
-									sx={{
-										// marginBottom: '30px',
-									}}
+								
 								>Load More...
 								</LoadButton>
 							</div>

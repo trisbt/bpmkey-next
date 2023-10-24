@@ -28,7 +28,6 @@ const GetTopTracks = async () => {
         };
         results.push(combinedObject);
     }
-    // console.log(results)
     return <TopTracks results={results} />;
 }
 

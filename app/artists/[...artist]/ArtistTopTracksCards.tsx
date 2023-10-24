@@ -62,7 +62,6 @@ const ArtistTopTracksCards: React.FC<ArtistPageCardProps> = ({ results, artist }
 	const [currentlyPlayingUrl, setCurrentlyPlayingUrl] = useState<string | null>(null);
 	const audioRef = useRef<HTMLAudioElement | null>(null);
 	const [searchResults, setSearchResults] = useState<SongDetails[]>(results);
-	// const [offset, setOffset] = useState<number>(1);
 	const router = useRouter();
 	const searchParams = useSearchParams()
 	const searchQuery: string | null = searchParams.get('q');
@@ -119,11 +118,9 @@ const ArtistTopTracksCards: React.FC<ArtistPageCardProps> = ({ results, artist }
 									fontWeight: 'bold',
 									background: '#e8eaf6',
 									WebkitBackgroundClip: 'text',
-									// WebkitTextFillColor: 'transparent',
 									letterSpacing: '1px',
 									borderRadius: '2px',
 									fontStyle: 'italic',
-									// textTransform: 'uppercase',
 									'@media (max-width: 600px)': {
 										fontSize: '20px'
 									},

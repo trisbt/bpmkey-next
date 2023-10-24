@@ -60,12 +60,7 @@ const TopTracks: React.FC<TopTracksCardProps> = ({ results }) => {
   };
   return (
     <div>
-      <Box sx ={{
-        '@media (max-width: 600px)': {
-					// height: '20em'
-          // marginTop: '-50px'
-				},
-      }}>
+      <Box >
         <Grid container item xs={12} justifyContent='center' alignItems='center' >
           {results && (
             <>
@@ -92,7 +87,6 @@ const TopTracks: React.FC<TopTracksCardProps> = ({ results }) => {
                     WebkitTextFillColor: 'transparent',
                     letterSpacing: '1px',
                     borderRadius: '2px',
-                    // textTransform: 'uppercase',
                     '@media (max-width: 600px)': {
                       fontSize: '24px'
                     },

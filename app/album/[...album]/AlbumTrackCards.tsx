@@ -48,7 +48,6 @@ const SortButton = styled(Button)(({ theme }) => ({
 		minHeight: '4px',
 		padding: '0px 10px',
 		color: 'white',
-		// backgroundColor: 'white',
 	},
 	'&:hover': {
 		backgroundColor: '#00e676',
@@ -121,11 +120,9 @@ const AlbumTrackCards: React.FC<AlbumPageCardProps> = ({ results, album }) => {
 									fontWeight: 'bold',
 									background: '#e8eaf6',
 									WebkitBackgroundClip: 'text',
-									// WebkitTextFillColor: 'transparent',
 									letterSpacing: '1px',
 									borderRadius: '2px',
 									fontStyle: 'italic',
-									// textTransform: 'uppercase',
 									'@media (max-width: 600px)': {
 										fontSize: '22px'
 									},
@@ -234,7 +231,6 @@ const AlbumTrackCards: React.FC<AlbumPageCardProps> = ({ results, album }) => {
 																<SmallPlayButton className='preview-button' sx={{
 																	boxShadow: 3,
 																	borderRadius: '50px',
-																	// display: { xs: 'flex', sm: 'none', md: 'none' },
 																}}
 																	onClick={(event) => playAudio(event, item.preview_url || null)}
 																>

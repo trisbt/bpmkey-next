@@ -14,7 +14,7 @@ const Splash = () => {
 				marginTop: '10px',
 				height: '32em',
 				'@media (max-width: 600px)': {
-					height: '18em'
+					height: '17em'
 				},
 			}}>
 				<Card sx={{
@@ -28,15 +28,15 @@ const Splash = () => {
 				// 	linear-gradient(45deg, rgba(0, 00, 0, .9) 0%, rgba(38, 50, 56, 0.8) 100%),
 				// 	linear-gradient(-45deg, rgba(38, 50, 56, 0.8) 0%, rgba(200, 200, 100, 0.5) 20%)
 				// `,
-				background: `
-				linear-gradient(105deg, rgba(0, 00, 0, 1) 0%, rgba(38, 50, 56, 0.8) 90%)
-	
-			`,
+					background: `
+						linear-gradient(105deg, rgba(0, 00, 0, 1) 0%, rgba(38, 50, 56, 0.8) 90%)
+						
+				`,
 					border: '1px solid rgba(192,192,192,0.5)', 
 					boxShadow: '0 0 10px 1px rgba(192,192,192,0.3)',
 					'@media (max-width: 600px)': {
 						height: '16em',
-						width: '100vw',
+						width: '97vw',
 					},
 
 				}}>
@@ -53,7 +53,6 @@ const Splash = () => {
 							display: 'flex',
 							flexDirection: 'column',
 							borderRadius: '20px',
-							// backgroundColor:'red',
 						}}>
 							<Typography variant='h2' component="h2"
 								className={archivo.className}

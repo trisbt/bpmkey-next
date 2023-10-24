@@ -29,11 +29,16 @@ export default function RootLayout({
       </head>
       <body className={inter.className}>
         {/* <ThemeRegistry options={{ key: 'mui' }}> */}
+        <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
           <Navbar />
-          <Suspense fallback = {<Loading/>}>
-          {children}
-          </Suspense>
+          <div style={{ flex: 1 }}>
+            <Suspense fallback={<Loading />}>
+              {children}
+            </Suspense>
+          </div>
           <Footer />
+        </div>
+
         {/* </ThemeRegistry>  */}
       </body>
     </html>

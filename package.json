@@ -19,6 +19,8 @@
     "chartjs-plugin-datalabels": "^2.2.0",
     "d3-shape": "^3.2.0",
     "dotenv": "^16.3.1",
+    "flubber": "^0.4.2",
+    "framer-motion": "^10.16.4",
     "next": "13.5.4",
     "react": "^18",
     "react-chartjs-2": "^5.2.0",

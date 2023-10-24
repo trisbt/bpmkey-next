@@ -17,6 +17,8 @@ const Splash = () => {
 				height: '30em',
 				padding: 1,
 				borderRadius: '.2em',
+				marginTop: '2em',
+				marginBottom: '2em',
 				// 	background: `
 				// 	linear-gradient(45deg, rgba(0, 00, 0, .9) 0%, rgba(38, 50, 56, 0.8) 100%),
 				// 	linear-gradient(-45deg, rgba(38, 50, 56, 0.8) 0%, rgba(200, 200, 100, 0.5) 20%)
@@ -30,7 +32,8 @@ const Splash = () => {
 				'@media (max-width: 600px)': {
 					height: '26em',
 					width: '95vw',
-					marginBottom:'2em',
+					marginTop: '1em',
+					marginBottom: '2em',
 				},
 
 			}}>
@@ -108,8 +111,8 @@ const Splash = () => {
 						justifyContent: 'center',
 						flexDirection: 'column',
 						'@media (max-width: 600px)': {
-							height:'20em',
-							
+							height: '20em',
+
 						},
 					}}>
 						<Card sx={{
@@ -122,7 +125,7 @@ const Splash = () => {
 							height: '20em',
 							'@media (max-width: 600px)': {
 								alignItems: 'flex-start',
-								height:'16em',
+								height: '16em',
 							},
 						}}>
 							<SplashCircleOfFifths />
@@ -146,8 +149,8 @@ const Splash = () => {
 									fontSize: '1.2em',
 									// paddingBottom: '5px',
 									'@media (max-width: 600px)': {
-										fontSize: '.8em',		
-										marginTop:'.8em'					
+										fontSize: '.8em',
+										marginTop: '.8em'
 									},
 								}}>
 								Get a random song by clicking on a key

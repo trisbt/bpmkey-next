@@ -16,7 +16,7 @@ const GetSpotifyRecs = async (seedSong: string, seedArtist: string, seedGenres?:
         }
     });
     const data = await res.json();
-    console.log(data)
+
     const mainData = data.tracks.map((item: GetTracksItem) => {
         const { name, album, preview_url, explicit, popularity } = item;
         const artists = item.artists

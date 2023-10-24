@@ -24,12 +24,12 @@ export const keyConvert: KeyConvertFunction = (num: number, mode: number): strin
         return "Unknown";
     }
 }
-export const tempoRound = (num: number): number =>{
+export const tempoRound = (num: number): number => {
     return Math.round(num * 2) / 2;
 }
 export const valuetext = (value: number): string => {
     return `${value} bpm`;
-  }
+}
 
 export const reverseKeyConvert: ReverseKeyConvertFunction = (key: string): number | null => {
     const reverseChart: { [key: string]: number } = {
@@ -45,6 +45,25 @@ export const reverseKeyConvert: ReverseKeyConvertFunction = (key: string): numbe
         'A': 9, 'F♯m': 9,
         'B♭': 10, 'Gm': 10,
         'B': 11, 'G♯m': 11
+    };
+
+    return reverseChart[key] ?? null;
+};
+
+export const reverseKeyModeConvert = (key: string): { key: number, mode: number } | null => {
+    const reverseChart: { [key: string]: { key: number, mode: number } } = {
+        'C': { key: 0, mode: 1 }, 'Am': { key: 0, mode: 0 },
+        'D♭': { key: 1, mode: 1 }, 'B♭m': { key: 1, mode: 0 },
+        'D': { key: 2, mode: 1 }, 'Bm': { key: 2, mode: 0 },
+        'E♭': { key: 3, mode: 1 }, 'Cm': { key: 3, mode: 0 },
+        'E': { key: 4, mode: 1 }, 'C♯m': { key: 4, mode: 0 },
+        'F': { key: 5, mode: 1 }, 'Dm': { key: 5, mode: 0 },
+        'G♭': { key: 6, mode: 1 }, 'E♭m': { key: 6, mode: 0 },
+        'G': { key: 7, mode: 1 }, 'Em': { key: 7, mode: 0 },
+        'A♭': { key: 8, mode: 1 }, 'Fm': { key: 8, mode: 0 },
+        'A': { key: 9, mode: 1 }, 'F♯m': { key: 9, mode: 0 },
+        'B♭': { key: 10, mode: 1 }, 'Gm': { key: 10, mode: 0 },
+        'B': { key: 11, mode: 1 }, 'G♯m': { key: 11, mode: 0 }
     };
 
     return reverseChart[key] ?? null;

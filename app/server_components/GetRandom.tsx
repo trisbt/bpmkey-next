@@ -1,12 +1,13 @@
 'use server'
 import GetAccessToken from "./GetAccessToken";
-import GetSpotifyRecs from "./GetSpotifyRecs";
-import { reverseKeyConvert } from "../utils";
+// import GetSpotifyRecs from "./GetSpotifyRecs";
+import { reverseKeyModeConvert } from "../utils";
 
 const GetRandom = async (key) => {
-    const numKey = reverseKeyConvert(key);
+    const rev = reverseKeyModeConvert(key);
+    const revKey = rev.key;
+    const revMode = rev?.mode;
     const token = await GetAccessToken();
-
     const res = await fetch(`https://api.spotify.com/v1/playlists/37i9dQZEVXbNG2KDcFcKOF?si=ce928cdd687a4612/tracks`, {
         headers: {
             'Authorization': 'Bearer ' + token
@@ -115,7 +116,9 @@ const GetRandom = async (key) => {
     }
     const seedGenres = getRandomGenres(genres);
 
-    const resByKey = await fetch(`https://api.spotify.com/v1/recommendations?limit=5&seed_artists=${seedArtist}&seed_genres=${seedGenres}&target_tempo=${numKey}`, {
+    const resByKey = await fetch(`https://api.spotify.com/v1/recommendations?limit=5&seed_artists=${seedArtist}&seed_genres=${seedGenres}
+    &min_key=${revKey}&max_key=${revKey}&min_mode=${revMode}&max_mode=${revMode}
+    `, {
         headers: {
             'Authorization': 'Bearer ' + token
         }

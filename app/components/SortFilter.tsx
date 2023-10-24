@@ -134,19 +134,25 @@ const SortFilter: React.FC<SortFilterProps> = ({ searchQuery, offset, sortOrder,
   }, [openAccordion]);
 
   const toggleDrawer = (open: boolean) => (event: React.KeyboardEvent | React.MouseEvent) => {
+    // Check for keyboard events that should not trigger the drawer behavior
     if (
-      event.type === 'keydown' &&
+      event && event.type === 'keydown' &&
       ((event as React.KeyboardEvent).key === 'Tab' ||
         (event as React.KeyboardEvent).key === 'Shift')
     ) {
       return;
     }
+
+    // If we're closing the drawer, reset certain states
     if (!open) {
       setOpenKey(false);
       setOpenTempo(false);
     }
+
+    // Set the open state for the drawer
     setIsOpen(open);
-  };
+};
+
 
   //sorting
   const handleSort = (attribute: "tempo" | "key") => {
@@ -176,6 +182,7 @@ const SortFilter: React.FC<SortFilterProps> = ({ searchQuery, offset, sortOrder,
     } else {
       setTempoSelect(sliderValue);
     }
+    setIsOpen(false);
   };
 
   const handleTextFieldChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -482,14 +489,15 @@ const SortFilter: React.FC<SortFilterProps> = ({ searchQuery, offset, sortOrder,
           </SortFilterButton>
         </Box>
         <SwipeableDrawer
-          anchor="bottom"
-          open={isOpen}
-          onClose={toggleDrawer(false)}
-          onOpen={() => {}}
-          swipeAreaWidth={0} // Disables swipe to open
-        >
-          {list()}
-        </SwipeableDrawer>
+    anchor="bottom"
+    open={isOpen}
+    onClose={toggleDrawer(false)}
+    onOpen={toggleDrawer(true)}  // Even though you've disabled swipe to open, it's still good to provide this handler.
+    swipeAreaWidth={0}
+>
+    {list()}
+</SwipeableDrawer>
+
       </Hidden>
     </div>
   )

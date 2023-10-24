@@ -63,7 +63,7 @@ const TopTracks: React.FC<TopTracksCardProps> = ({ results }) => {
       <Box sx ={{
         '@media (max-width: 600px)': {
 					// height: '20em'
-          marginTop: '-50px'
+          // marginTop: '-50px'
 				},
       }}>
         <Grid container item xs={12} justifyContent='center' alignItems='center' >

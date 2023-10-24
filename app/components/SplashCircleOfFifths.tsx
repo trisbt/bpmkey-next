@@ -149,7 +149,7 @@ const SplashCircleOfFifths = () => {
     };
 
     return (
-        <div className='pie-container'>
+        <div className='splash-pie-container'>
 
             <Grid container spacing={0} sx={{
                 height: '300px',

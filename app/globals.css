@@ -89,6 +89,10 @@ body {
   display: flex;
   margin-bottom: 1em;
 }
+.splash-pie-container {
+  display: flex;
+  /* margin-bottom: 1em; */
+}
 
 li {
   list-style: none;

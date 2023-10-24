@@ -15,8 +15,10 @@ import { styled } from "@mui/material/styles";
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import { grey } from '@mui/material/colors';
-import { Artist, DataItem, AudioDataItem, ResultItem } from '../types/dataTypes';
 import PlayButton from './PlayButton';
+import { TopTracksCardProps } from '../types/cardTypes';
+import { TopTracksDetails } from '../types/dataTypes';
+
 
 const SmallPlayButton = styled(IconButton)(() => ({
  '&&': {
@@ -32,7 +34,7 @@ const SmallPlayButton = styled(IconButton)(() => ({
   height: '40px',
 }));
 
-const TopTracks = ({ results }) => {
+const TopTracks: React.FC<TopTracksCardProps> = ({ results }) => {
   const [currentlyPlayingUrl, setCurrentlyPlayingUrl] = useState<string | null>(null);
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
@@ -58,7 +60,7 @@ const TopTracks = ({ results }) => {
   };
   return (
     <div>
-      <Box>
+      <Box >
         <Grid container item xs={12} justifyContent='center' alignItems='center' >
           {results && (
             <>
@@ -68,13 +70,14 @@ const TopTracks = ({ results }) => {
                   sx={{
                     display: 'flex',
                     flexDirection: 'row',
-                    margin: '10px 10px 0',
+                    margin: '0px 10px 0',
                     boxShadow: 3,
                     justifyContent: 'center',
                     backgroundColor: 'rgb(0, 71, 212, .6)',
                   }}
                 >
-                  <Typography variant='h4' sx={{
+                  <Typography variant='h4' 
+                  sx={{
                     display: 'flex',
                     alignItems: 'center',
                     color: '#e8eaf6',
@@ -84,7 +87,6 @@ const TopTracks = ({ results }) => {
                     WebkitTextFillColor: 'transparent',
                     letterSpacing: '1px',
                     borderRadius: '2px',
-                    textTransform: 'uppercase',
                     '@media (max-width: 600px)': {
                       fontSize: '24px'
                     },
@@ -95,7 +97,7 @@ const TopTracks = ({ results }) => {
               </Grid>
 
               {/* main search */}
-              {results.map((item: ResultItem, index: number) => (
+              {results.map((item: TopTracksDetails, index: number) => (
 
                 <Grid item xs={11} md={8} key={index}>
                   {/* each card */}
@@ -107,7 +109,7 @@ const TopTracks = ({ results }) => {
                         margin: '10px 10px 0',
                         boxShadow: 3,
                         "&:hover": {
-                          backgroundColor: "#f5f5f5",
+                          backgroundColor: "#e0e0e0",
                         }
                       }}
                     >
@@ -166,11 +168,11 @@ const TopTracks = ({ results }) => {
                               paddingTop: '.8rem',
                             }
                           }}>
-                            <Grid item xs={3} sm={6}  >
+                            <Grid item xs={4} sm={6}  >
 
                               <Typography variant="subtitle1" color="text.secondary" component="div"
                                 sx={{
-                                  display: 'flex', flexDirection: 'column', alignItems: 'center', lineHeight: '0.5rem',
+                                  display: 'flex', flexDirection: 'column', alignItems: 'center', lineHeight: '1rem',
                                   "@media (max-width: 600px)": {
                                     fontSize: '.8em',
                                   }
@@ -188,7 +190,7 @@ const TopTracks = ({ results }) => {
 
                             </Grid>
 
-                            <Grid item xs={3.5} sm={6} sx={{
+                            <Grid item xs={4} sm={6} sx={{
                               "@media (max-width: 600px)": {
                                 marginRight: '.5em',
                               }
@@ -196,7 +198,7 @@ const TopTracks = ({ results }) => {
 
                               <Typography variant="subtitle1" color="text.secondary" component="div"
                                 sx={{
-                                  display: 'flex', flexDirection: 'column', alignItems: 'center', lineHeight: '0.5rem',
+                                  display: 'flex', flexDirection: 'column', alignItems: 'center', lineHeight: '1rem',
                                   "@media (max-width: 600px)": {
                                     fontSize: '.8em',
                                   }
@@ -215,7 +217,7 @@ const TopTracks = ({ results }) => {
                             </Grid>
 
                             {/* preview button */}
-                            <Grid item xs={2.5} sm={6} sx={{
+                            <Grid item xs={3} sm={6} sx={{
                               display: 'flex',
                               justifyContent: 'center'
                             }} >

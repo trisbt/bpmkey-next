@@ -3,7 +3,6 @@ import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
-import ThemeRegistry from './ThemeRegistry'
 import Loading from './loading'
 import { Suspense } from 'react'
 
@@ -28,13 +27,15 @@ export default function RootLayout({
 
       </head>
       <body className={inter.className}>
-        {/* <ThemeRegistry options={{ key: 'mui' }}> */}
+        <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
           <Navbar />
-          <Suspense fallback = {<Loading/>}>
-          {children}
-          </Suspense>
+          <div style={{ flex: 1 }}>
+            <Suspense fallback={<Loading />}>
+              {children}
+            </Suspense>
+          </div>
           <Footer />
-        {/* </ThemeRegistry>  */}
+        </div>
       </body>
     </html>
   )

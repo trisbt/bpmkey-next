@@ -1,6 +1,7 @@
 'use client'
 import React, { useState } from 'react';
 import { Modal, Fade, Box } from '@mui/material';
+import Image from 'next/image';
 
 interface ImageModalProps {
     songDetails: {
@@ -22,8 +23,9 @@ const ImageModal: React.FC<ImageModalProps> = ({ songDetails }) => {
 
     return (
         <>
-            <img
-                className='modal-img'
+            <Image
+                width={500}
+                height={500}
                 src={songDetails.images}
                 alt={songDetails.name}
                 onClick={handleOpen}

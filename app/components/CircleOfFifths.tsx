@@ -2,14 +2,22 @@
 import React, { useState } from 'react';
 import { ArcElement } from "chart.js";
 import Chart from "chart.js/auto";
+import { ChartEvent, ActiveElement, ChartTypeRegistry, Point, BubbleDataPoint } from 'chart.js';
 import { Pie, Doughnut } from 'react-chartjs-2';
 import Grid from '@mui/material/Grid'
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
+import {Context} from 'chartjs-plugin-datalabels';
 import { grey } from '@mui/material/colors';
+import { CircleOfFifthsProps } from '../types/dataTypes';
 
 Chart.register(ArcElement)
+interface ExtendedArcElement extends ArcElement {
+  datasetIndex: number;
+  index: number;
+}
+
 
 const data = [
   { id: 1, value: 10, label: 'C' },
@@ -44,20 +52,32 @@ const defaultColors: string[] = Array(data.length).fill(grey[800]);
 const hoverColors: string[] = ['#b71c1c', '#ff5722', '#ff9800', '#ffeb3b', '#8bc34a', '#4caf50', '#26a69a', '#00bcd4', '#03a9f4', '#3f51b5', '#673ab7', '#9c27b0'];
 
 
-const CircleOfFifths = ({ activeSlice, setActiveSlice }) => {
+const CircleOfFifths: React.FC<CircleOfFifthsProps> = ({ activeSlice, setActiveSlice }) => {
 
-  const handleChartInteraction = (evt, elements) => {
+  const handleChartInteraction = (
+    event: ChartEvent, 
+    elements: ActiveElement[], 
+    chart: Chart<keyof ChartTypeRegistry, (number | Point | [number, number] | BubbleDataPoint | null)[], unknown>
+  ) => {
     if (elements && elements.length) {
       const clickedElement = elements[0];
-      let label;
+      let label: string | undefined;
       if (clickedElement.datasetIndex === 0) {
         label = data[clickedElement.index].label;
       } else if (clickedElement.datasetIndex === 1) {
         label = minorKeys[clickedElement.index].label;
       }
-      setActiveSlice(prev => prev === label ? null : label);
+
+      if (label) {
+        if (activeSlice?.includes(label)) {
+          setActiveSlice(prev => prev ? prev.filter(slice => slice !== label) : []);
+        } else {
+          setActiveSlice(prev => [...(prev || []), label!]); // use non-null assertion for label
+        }
+      }
     }
   };
+
 
   const chartData = {
     labels: [...data.map(d => d.label), ...minorKeys.map(d => d.label)],
@@ -65,7 +85,9 @@ const CircleOfFifths = ({ activeSlice, setActiveSlice }) => {
       {
         // label: "Major Keys",
         data: data.map(d => d.value),
-        backgroundColor: data.map((_, index) => activeSlice === data[index].label ? hoverColors[index] : defaultColors[index]),
+        backgroundColor: data.map((_, index) =>
+          (activeSlice || []).includes(data[index].label) ? hoverColors[index] : defaultColors[index]
+        ),
         hoverBackgroundColor: hoverColors,
         // to make it an inner circle:
         weight: 0.5
@@ -73,7 +95,9 @@ const CircleOfFifths = ({ activeSlice, setActiveSlice }) => {
       {
         // label: "Minor Keys",
         data: minorKeys.map(d => d.value),
-        backgroundColor: minorKeys.map((_, index) => activeSlice === minorKeys[index].label ? hoverColors[index] : defaultColors[index]),
+        backgroundColor: data.map((_, index) =>
+          (activeSlice || []).includes(minorKeys[index].label) ? hoverColors[index] : defaultColors[index]
+        ),
         hoverBackgroundColor: hoverColors
       }
     ]
@@ -81,7 +105,7 @@ const CircleOfFifths = ({ activeSlice, setActiveSlice }) => {
   };
 
   const options = {
-    cutout: '20%', 
+    cutout: '20%',
     plugins: {
       tooltip: {
         enabled: false
@@ -98,7 +122,7 @@ const CircleOfFifths = ({ activeSlice, setActiveSlice }) => {
         },
         anchor: 'center' as 'center',
         align: 'end' as const,
-        offset: (context) => {
+        offset: (context: Context) => {
           if (context.datasetIndex === 0) {
             return -12;  // offset for major labels
           } else {
@@ -106,7 +130,7 @@ const CircleOfFifths = ({ activeSlice, setActiveSlice }) => {
           }
         },
 
-        formatter: (value, context) => {
+        formatter: (value: string, context: Context) => {
           // Check if the current slice is from the first dataset (major keys)
           if (context.datasetIndex === 0) {
             return data[context.dataIndex].label;
@@ -144,7 +168,7 @@ const CircleOfFifths = ({ activeSlice, setActiveSlice }) => {
               ...options,
               onClick: handleChartInteraction,  // for desktop clicks
             }}
-            onTouchEnd={handleChartInteraction}  // for mobile touches
+            onTouchEnd={handleChartInteraction as any}  // for mobile touches
           />
 
         </Grid>

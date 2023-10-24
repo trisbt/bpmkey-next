@@ -3,14 +3,12 @@ import React from 'react';
 import { styled } from "@mui/material/styles";
 import { Modal, Fade, Box, Typography, IconButton } from '@mui/material';
 import { CloseOutlined } from '@mui/icons-material';
+import { Credits, ProcessedCredit } from '../types/dataTypes';
 
 interface CreditsModalProps {
     open: boolean;
     handleClose: () => void;
-    credits: {
-        artist_name: string;
-        role: string;
-    }[];
+    credits: Credits;
 }
 
 const CreditsModal: React.FC<CreditsModalProps> = ({ open, handleClose, credits }) => {
@@ -64,23 +62,33 @@ const CreditsModal: React.FC<CreditsModalProps> = ({ open, handleClose, credits 
                     >
                         <CloseOutlined />
                     </IconButton>
-                    <Typography variant="h4" color='text.primary' sx={{
-                        // paddingBottom: '1em',
-                    }}>Credits</Typography>
+
+                    <Typography variant="h4" color='text.primary' >Credits</Typography>
                     <Typography variant="subtitle1" color='text.primary' sx={{
-                        fontStyle:'italic', 
+                        fontStyle: 'italic',
                         paddingBottom: '1em',
                     }}>via Discogs</Typography>
-                    <ul style={{
-                        columns: '2',
-                        paddingInlineStart: '0',
-                    }}>
-                        {credits.map((el) => (
-                            <li key={el.artist_name}>
-                                <span className="even-credit">{el.artist_name}</span><span className="odd-credit"> - {el.role}</span>
-                            </li>
-                        ))}
-                    </ul>
+
+{credits && credits.length === 1 && typeof credits[0] === 'object' && 'role' in credits[0] && credits[0].role === "no credits available at this time" ? (
+    <Typography variant="subtitle2" color='text.primary' sx={{ textAlign: 'center' }}>
+        {credits[0].role}
+    </Typography>
+) : (
+    <ul style={{
+        columns: '2',
+        paddingInlineStart: '0',
+    }}>
+        {credits && credits.map((el) => (
+            typeof el === 'object' && 'artist_name' in el ? (
+                <li key={el.artist_name}>
+                    <span className="even-credit">{el.artist_name}</span><span className="odd-credit"> - {el.role}</span>
+                </li>
+            ) : null
+        ))}
+    </ul>
+)}
+
+
                 </Box>
             </Fade>
         </Modal>

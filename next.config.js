@@ -5,4 +5,8 @@ module.exports = {
     experimental: {
       serverActions: true,
     },
+    images: {
+      domains: ['i.scdn.co'],
+      
+    },
   }

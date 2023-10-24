@@ -1,41 +1,9 @@
 import GetAccessToken from "./GetAccessToken"
 import GetSpotifyAdvancedAudio from "./GetSpotifyAdvancedAudio";
+import { keyConvert, tempoRound } from "../utils";
+import { GetTracksItem } from "../types/serverTypes";
 
-interface KeyMapping {
-    [key: number]: [string, string];
-}
-type KeyConvertFunction = (num: number, mode: number) => string;
-
-const keyConvert: KeyConvertFunction = (num: number, mode: number): string => {
-    const chart: KeyMapping = {
-        '0': ['C', 'Am'],
-        '1': ['D♭', 'B♭m'],
-        '2': ['D', 'Bm'],
-        '3': ['E♭', 'Cm'],
-        '4': ['E', 'C♯m'],
-        '5': ['F', 'Dm'],
-        '6': ['G♭', 'E♭m'],
-        '7': ['G', 'Em'],
-        '8': ['A♭', 'Fm'],
-        '9': ['A', 'F♯m'],
-        '10': ['B♭', 'Gm'],
-        '11': ['B', 'G♯m'],
-    }
-    
-
-    if (mode === 1) {
-        return chart[num][0];
-    } else if (mode === 0) {
-        return chart[num][1];
-    } else {
-        return "Unknown";
-    }
-}
-function tempoRound(num: number): number {
-    return Math.round(num * 2) / 2;
-}
-
-const GetSpotifyArtist = async (id) => {
+const GetSpotifyArtist = async (id: string) => {
     const token = await GetAccessToken();
     const mainRes = await fetch(`https://api.spotify.com/v1/artists/${id}/top-tracks?market=ES`, {
         headers: {
@@ -44,7 +12,7 @@ const GetSpotifyArtist = async (id) => {
     });
 
     const data = await mainRes.json();
-    const mainData = data.tracks.map((item) => {
+    const mainData = data.tracks.map((item: GetTracksItem) => {
         const { name, album, preview_url, explicit, popularity } = item;
         const artists = item.artists
         const images = album.images[0].url;
@@ -53,7 +21,7 @@ const GetSpotifyArtist = async (id) => {
         const albums = item.album.name;
         return { name, images, id, preview_url, release_date, artists, albums, explicit, popularity };
     });
-    const ids = mainData.map(item => item.id);
+    const ids = mainData.map((item: GetTracksItem) => item.id);
     const audioData = await GetSpotifyAdvancedAudio(token, ids);
     const results = [];
     for (let i = 0; i < mainData.length; i++) {

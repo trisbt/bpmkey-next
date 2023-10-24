@@ -1,3 +1,4 @@
+'use server'
 import TopTracks from "../components/TopTracks";
 import GetAccessToken from "./GetAccessToken";
 import GetSpotifyAdvancedAudio from "./GetSpotifyAdvancedAudio";

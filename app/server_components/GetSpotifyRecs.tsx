@@ -1,14 +1,22 @@
 import GetAccessToken from "./GetAccessToken";
 import GetSpotifyAdvancedAudio from "./GetSpotifyAdvancedAudio";
 import { GetTracksItem } from "../types/serverTypes";
-const GetSpotifyRecs = async (seedSong: string, seedArtist: string) => {
+const GetSpotifyRecs = async (seedSong: string, seedArtist: string, seedGenres?:string) => {
     const token = await GetAccessToken();
-    const res = await fetch(`https://api.spotify.com/v1/recommendations?seed_artists=${seedArtist}&seed_tracks=${seedSong}`, {
+    let uri = `https://api.spotify.com/v1/recommendations?seed_artists=${seedArtist}&seed_tracks=${seedSong}`;
+    
+
+    if (seedGenres) {
+        uri += `&seed_genres=${seedGenres}`;
+    }
+    
+    const res = await fetch(uri, {
         headers: {
             'Authorization': 'Bearer ' + token
         }
     });
     const data = await res.json();
+    console.log(data)
     const mainData = data.tracks.map((item: GetTracksItem) => {
         const { name, album, preview_url, explicit, popularity } = item;
         const artists = item.artists

@@ -28,7 +28,7 @@ const data = [
     { id: 4, value: 10, label: 'A' },
     { id: 5, value: 10, label: 'E' },
     { id: 6, value: 10, label: 'B' },
-    { id: 7, value: 10, label: 'Gb' },
+    { id: 7, value: 10, label: 'G♭' },
     { id: 8, value: 10, label: 'D♭' },
     { id: 9, value: 10, label: 'A♭' },
     { id: 10, value: 10, label: 'E♭' },

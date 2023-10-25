@@ -1,7 +1,8 @@
 'use client'
 import React from 'react';
 import Link from 'next/link';
-import { useRef, useState, useEffect } from 'react';
+import Image from 'next/image';
+import { useRef, useState } from 'react';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import StopIcon from '@mui/icons-material/Stop';
 import Box from '@mui/material/Box';
@@ -14,7 +15,6 @@ import IconButton from '@mui/material/IconButton';
 import { styled } from "@mui/material/styles";
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
-import { grey } from '@mui/material/colors';
 import PlayButton from './PlayButton';
 import { TopTracksCardProps } from '../types/cardTypes';
 import { TopTracksDetails } from '../types/dataTypes';
@@ -58,6 +58,7 @@ const TopTracks: React.FC<TopTracksCardProps> = ({ results }) => {
       }
     }
   };
+  
   return (
     <div>
       <Box >
@@ -123,10 +124,11 @@ const TopTracks: React.FC<TopTracksCardProps> = ({ results }) => {
                         <Grid container >
                           {/* image */}
                           <Grid item xs={3} sm={2} >
-                            <CardMedia
-                              component="img"
-                              image={item.album.images[0].url}
+                            <Image
+                              src={item.album.images[0].url}
                               alt={item.name}
+                              width = {150}
+                              height = {150}
                             />
                           </Grid>
                           {/* song info */}
@@ -250,7 +252,7 @@ const TopTracks: React.FC<TopTracksCardProps> = ({ results }) => {
                                   )}
                                 </SmallPlayButton>
                               )}
-                              <audio ref={audioRef}></audio>
+                              <audio ref={audioRef}/>
                             </Grid>
                           </Grid>
                         </Grid>

@@ -2,9 +2,10 @@
 import React from 'react'
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
-import { Button } from '@mui/material';
+import { Box, Button } from '@mui/material';
 import Input from '@mui/material/Input';
 import { FormControl } from '@mui/material';
+import { Typography } from '@mui/material';
 import { createTheme, ThemeProvider, styled, Theme } from '@mui/material/styles';
 import SearchIcon from '@mui/icons-material/Search';
 import { Hidden } from '@mui/material';
@@ -101,11 +102,23 @@ const SearchBar = () => {
 				</Hidden>
 
 				<Hidden smUp>
-					{!showInput ? (
-						<SmallColorButton onClick={() => setShowInput(true)} variant='outlined'>
-							<SearchIcon sx={{ fontSize: '28px' }} />
 
-						</SmallColorButton>
+					{!showInput ? (
+						<Box>
+							<SmallColorButton onClick={() => setShowInput(true)} variant='outlined'>
+								<Box sx ={{
+									width:'10em'
+								}}>
+									<Typography variant='subtitle2' color='#f5f5f5' fontWeight={800} sx={{
+										fontSize: '.8em'
+									}}>
+										Search for songs...
+									</Typography>
+								</Box>
+								<SearchIcon sx={{ fontSize: '28px' }} />
+
+							</SmallColorButton>
+						</Box>
 					) : (
 						<form className='sm-searchform' onSubmit={handleSubmit}
 							style={{

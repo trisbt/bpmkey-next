@@ -1,16 +1,16 @@
 import Image from 'next/image'
-import { Grid } from '@mui/material'
 import Splash from './components/Splash'
 import TopTracks from './components/TopTracks'
 import GetTopTracks from './server_components/GetTopTracks'
-
+import { ThemeProvider } from '@mui/material'
+import { archivoTheme } from './theme'
 export default function Home() {
   return (
-    <div className='background-image'>
-      <Grid item container justifyContent={'center'} xs={12}>
+    <div className='background-image flex flex-col items-center'>
+      <ThemeProvider theme={archivoTheme}>
         <Splash />
-        <GetTopTracks />
-      </Grid>
+      </ThemeProvider>
+      <GetTopTracks />
     </div>
   )
 }

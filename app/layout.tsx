@@ -5,6 +5,7 @@ import Navbar from './components/Navbar'
 import Footer from './components/Footer'
 import Loading from './loading'
 import { Suspense } from 'react'
+import { Analytics } from '@vercel/analytics/react'
 
 
 const inter = Inter({ subsets: ['latin'] })
@@ -32,6 +33,7 @@ export default function RootLayout({
           <div style={{ flex: 1 }}>
             <Suspense fallback={<Loading />}>
               {children}
+              <Analytics />
             </Suspense>
           </div>
           <Footer />

@@ -81,7 +81,6 @@ function Navbar() {
 
             <Box display='flex' flexGrow={1} justifyContent='center' sx={{
               margin: -1.5,
-              // width: '0px',
             }}>
               <SearchBar />
             </Box>

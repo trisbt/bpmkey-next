@@ -1,6 +1,7 @@
 'use client'
 import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { useRef, useState, useEffect } from 'react';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import StopIcon from '@mui/icons-material/Stop';
@@ -123,10 +124,11 @@ const TopTracks: React.FC<TopTracksCardProps> = ({ results }) => {
                         <Grid container >
                           {/* image */}
                           <Grid item xs={3} sm={2} >
-                            <CardMedia
-                              component="img"
-                              image={item.album.images[0].url}
+                            <Image
+                              src={item.album.images[0].url}
                               alt={item.name}
+                              width = {150}
+                              height = {150}
                             />
                           </Grid>
                           {/* song info */}

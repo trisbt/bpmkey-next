@@ -1,5 +1,6 @@
 'use client'
 import React from 'react'
+import Image from 'next/image';
 import { useState, useRef, useEffect } from 'react';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
@@ -188,9 +189,10 @@ const ArtistTopTracksCards: React.FC<ArtistPageCardProps> = ({ results, artist }
 												<Grid container >
 													{/* image */}
 													<Grid item xs={3} sm={2} >
-														<CardMedia
-															component="img"
-															image={item.images}
+														<Image
+															width = {150}
+															height = {150}
+															src={item.images}
 															alt={item.name}
 														/>
 													</Grid>

@@ -1,5 +1,6 @@
 'use client'
 import React from 'react'
+import Image from 'next/image';
 import { useState, useRef, useEffect } from 'react';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
@@ -176,13 +177,13 @@ const SearchCards: React.FC<SearchPageCardProps> = ({ results }) => {
 							setSortBy={setSortBy}
 							sortBy={sortBy}
 						/>
-						
+
 
 						{/* main search */}
 						{searchResults
-							.filter(item => 
-								(!activeSlice || activeSlice.length === 0 || activeSlice.includes(item.key)) 
-								&& item.tempo >= tempoSelect[0] 
+							.filter(item =>
+								(!activeSlice || activeSlice.length === 0 || activeSlice.includes(item.key))
+								&& item.tempo >= tempoSelect[0]
 								&& item.tempo <= tempoSelect[1]
 							)
 							.sort((a, b) => {
@@ -222,9 +223,10 @@ const SearchCards: React.FC<SearchPageCardProps> = ({ results }) => {
 												<Grid container >
 													{/* image */}
 													<Grid item xs={3} sm={2} >
-														<CardMedia
-															component="img"
-															image={item.images}
+														<Image
+															src={item.images}
+															width={150}
+															height={150}
 															alt={item.name}
 														/>
 													</Grid>
@@ -324,7 +326,7 @@ const SearchCards: React.FC<SearchPageCardProps> = ({ results }) => {
 																<SmallPlayButton className='preview-button' sx={{
 																	boxShadow: 3,
 																	borderRadius: '50px',
-													
+
 																}}
 																	onClick={(event) => playAudio(event, item.preview_url || null)}
 																>
@@ -367,7 +369,7 @@ const SearchCards: React.FC<SearchPageCardProps> = ({ results }) => {
 									onClick={handleLoadMore}
 									variant='outlined'
 									size='large'
-								
+
 								>Load More...
 								</LoadButton>
 							</div>

@@ -3,6 +3,7 @@ import GetSpotifyAdvancedAudio from "./GetSpotifyAdvancedAudio";
 
 const GetSpotifyById = async (id: string) => {
     const token = await GetAccessToken();
+
     const mainRes = await fetch(`https://api.spotify.com/v1/tracks/${id}`, {
         headers: {
             'Authorization': 'Bearer ' + token
@@ -25,6 +26,7 @@ const GetSpotifyById = async (id: string) => {
         popularity: trackData.popularity,
       };
     const audioData = await GetSpotifyAdvancedAudio(token, [id])
+
     const songDetails = { ...basicData, ...audioData[0] };
     return songDetails;
 }

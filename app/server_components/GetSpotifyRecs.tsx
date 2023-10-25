@@ -1,20 +1,22 @@
 import GetAccessToken from "./GetAccessToken";
 import GetSpotifyAdvancedAudio from "./GetSpotifyAdvancedAudio";
 import { GetTracksItem } from "../types/serverTypes";
-const GetSpotifyRecs = async (seedSong: string, seedArtist: string, seedGenres?:string) => {
+const GetSpotifyRecs = async (seedSong: string, seedArtist: string, seedGenres?: string) => {
+
     const token = await GetAccessToken();
-    let uri = `https://api.spotify.com/v1/recommendations?seed_artists=${seedArtist}&seed_tracks=${seedSong}`;
-    
+
+    let uri = `https://api.spotify.com/v1/recommendations?limit=10&seed_artists=${seedArtist}&seed_tracks=${seedSong}`;
 
     if (seedGenres) {
         uri += `&seed_genres=${seedGenres}`;
     }
-    
+
     const res = await fetch(uri, {
         headers: {
             'Authorization': 'Bearer ' + token
         }
     });
+
     const data = await res.json();
 
     const mainData = data.tracks.map((item: GetTracksItem) => {
@@ -37,7 +39,6 @@ const GetSpotifyRecs = async (seedSong: string, seedArtist: string, seedGenres?:
         };
         results.push(combinedObject);
     }
-
     return results;
 }
 

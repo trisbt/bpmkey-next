@@ -37,11 +37,12 @@ const CreditsModal: React.FC<CreditsModalProps> = ({ open, handleClose, credits 
                         flexDirection: 'column',
                         alignItems: 'center',
                         justifyContent: 'center',
+                      
                         width: '75%',
                         height: '75%',
                         backdropFilter: 'blur(25px)',
                         backgroundColor: '#f5f5f5',
-                        padding: '3em',
+                        padding: '2em',
                         boxShadow: '2px 2px 10px rgba(0, 0, 0, 0.7)',
                         "@media (max-width: 500px)": {
                             width: '80%',
@@ -69,24 +70,30 @@ const CreditsModal: React.FC<CreditsModalProps> = ({ open, handleClose, credits 
                         paddingBottom: '1em',
                     }}>via Discogs</Typography>
 
-{credits && credits.length === 1 && typeof credits[0] === 'object' && 'role' in credits[0] && credits[0].role === "no credits available at this time" ? (
-    <Typography variant="subtitle2" color='text.primary' sx={{ textAlign: 'center' }}>
-        {credits[0].role}
-    </Typography>
-) : (
-    <ul style={{
-        columns: '2',
-        paddingInlineStart: '0',
-    }}>
-        {credits && credits.map((el) => (
-            typeof el === 'object' && 'artist_name' in el ? (
-                <li key={el.artist_name}>
-                    <span className="even-credit">{el.artist_name}</span><span className="odd-credit"> - {el.role}</span>
-                </li>
-            ) : null
-        ))}
-    </ul>
-)}
+                    {credits && credits.length === 1 && typeof credits[0] === 'object' && 'role' in credits[0] && credits[0].role === "no credits available at this time" ? (
+                        <Typography variant="subtitle2" color='text.primary' sx={{ textAlign: 'center' }}>
+                            {credits[0].role}
+                        </Typography>
+                    ) : (
+                        <Box sx ={{
+                            // maxHeight: 'calc(75% - 3em)',
+                            overflowY: 'auto',
+                        }}>
+                        <ul style={{
+                            columns: '2',
+                            paddingInlineStart: '0',
+                          
+                        }}>
+                            {credits && credits.map((el) => (
+                                typeof el === 'object' && 'artist_name' in el ? (
+                                    <li key={el.artist_name}>
+                                        <span className="even-credit">{el.artist_name}</span><span className="odd-credit"> - {el.role}</span>
+                                    </li>
+                                ) : null
+                            ))}
+                        </ul>
+                        </Box>
+                    )}
 
 
                 </Box>

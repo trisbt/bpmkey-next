@@ -65,6 +65,7 @@ function Navbar() {
             {/* desktop and mobile search bar*/}
             <Hidden only={['sm', 'md', 'lg', 'xl']}>
               <Box display='flex' justifyContent='flex-end' sx={{
+                paddingRight:'.8em',
                 flexGrow: {
                   flexGrow: 3,  // default value for smaller screens
                   '@media (min-width:500px)': {
@@ -72,8 +73,10 @@ function Navbar() {
                   }
                 }
               }}>
-                <Typography variant='subtitle2' color='#f5f5f5' fontWeight={800}>
-                  {/* Search */}
+                <Typography variant='subtitle2' color='#f5f5f5' fontWeight={800} sx ={{
+                  fontSize:'.8em'
+                }}>
+                  Search for songs...
                 </Typography>
               </Box>
             </Hidden>

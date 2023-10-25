@@ -16,7 +16,7 @@ const Splash = () => {
 				width: '88vw',
 				height: '30em',
 				padding: 1,
-				borderRadius: '.2em',
+				borderRadius: '.5em',
 				marginTop: '2em',
 				marginBottom: '2em',
 				// 	background: `
@@ -52,6 +52,9 @@ const Splash = () => {
 						'@media (max-width: 600px)': {
 							textAlign: 'center',
 						},
+						'@media (min-width: 601px) and (max-width: 2200px)': {
+							paddingLeft: 4,
+						}
 					}}>
 						<Box sx={{
 							display: 'flex',
@@ -153,7 +156,7 @@ const Splash = () => {
 										marginTop: '.8em'
 									},
 								}}>
-								Get a random song by clicking on a key
+								Try getting a random song by clicking a key
 							</Typography>
 						</Box>
 					</Grid>

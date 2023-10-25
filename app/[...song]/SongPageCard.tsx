@@ -140,7 +140,7 @@ const SongPageCard: React.FC<SongPageCardProps> = ({ songDetails, song, artist, 
 
                   <Grid item >
                     <Typography variant="h5" color='text.primary'>{songDetails.name}</Typography>
-                    <Link href={`/artists/${songDetails.artists[0].name}/${songDetails.artistId}`}>
+                    <Link prefetch={false} href={`/artists/${songDetails.artists[0].name}/${songDetails.artistId}`}>
                       <Typography variant="h4" sx={{
                         transition: 'color 0.3s',
                         '&:hover': {
@@ -152,7 +152,7 @@ const SongPageCard: React.FC<SongPageCardProps> = ({ songDetails, song, artist, 
                       </Typography>
                     </Link>
 
-                    <Link href={`/album/${songDetails.albums}/${songDetails.albumId}`}>
+                    <Link prefetch={false} href={`/album/${songDetails.albums}/${songDetails.albumId}`}>
                       <Typography variant="subtitle1" sx={{
                         transition: 'color 0.3s',
                         '&:hover': {
@@ -168,7 +168,7 @@ const SongPageCard: React.FC<SongPageCardProps> = ({ songDetails, song, artist, 
                     <Grid item container xs={12} alignItems='center' justifyContent='space-between' >
 
                       {/*link spotify render*/}
-                     <Link href={transformSpotifyURItoURL(songDetails.uri) as string}>
+                     <Link prefetch={false} href={transformSpotifyURItoURL(songDetails.uri) as string}>
 
                         <svg
                           // style={{ marginLeft: '-8px', paddingTop: '5px' }}

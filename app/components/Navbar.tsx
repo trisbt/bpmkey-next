@@ -46,7 +46,7 @@ function Navbar() {
                   paddingTop:'6px',
                 }
               }}>
-                <Link href="/">
+                <Link prefetch={false} href="/">
                 <ThemeProvider theme={logoTheme}>
                   <Typography  sx={{
                     color: 'white',

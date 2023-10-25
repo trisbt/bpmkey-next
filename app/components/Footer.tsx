@@ -70,7 +70,7 @@ const Footer: FC = () => {
 
           }}>
             Song data provided by
-            <Link href={'https://www.spotify.com'} className="customLink">
+            <Link prefetch={false} href={'https://www.spotify.com'} className="customLink">
 
               <span style={{ display: 'flex', alignItems: 'center' }}>
                 <svg

@@ -169,7 +169,7 @@ const AlbumTrackCards: React.FC<AlbumPageCardProps> = ({ results, album }) => {
 
 								<Grid item xs={11} md={8} key={index}>
 									{/* each card */}
-									<Link href={`/${item.name}/${item.artists[0].name}/${item.id}`}>
+									<Link prefetch={false} href={`/${item.name}/${item.artists[0].name}/${item.id}`}>
 										<Card
 											sx={{
 												display: 'flex',

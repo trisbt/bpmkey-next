@@ -16,7 +16,7 @@ const Splash = () => {
 				width: '88vw',
 				height: '30em',
 				padding: 1,
-				borderRadius: '.2em',
+				borderRadius: '.5em',
 				marginTop: '2em',
 				marginBottom: '2em',
 				// 	background: `
@@ -156,7 +156,7 @@ const Splash = () => {
 										marginTop: '.8em'
 									},
 								}}>
-								Get a random song by clicking on a key
+								Try getting a random song by clicking a key
 							</Typography>
 						</Box>
 					</Grid>

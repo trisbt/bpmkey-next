@@ -2,8 +2,8 @@ import React from 'react';
 import Card from '@mui/material/Card';
 import { Box, Grid } from '@mui/material';
 import Typography from '@mui/material/Typography';
-import { archivo } from '../fonts';
 import SplashCircleOfFifths from './SplashCircleOfFifths';
+
 
 const Splash = () => {
 
@@ -62,7 +62,7 @@ const Splash = () => {
 							borderRadius: '20px',
 						}}>
 							<Typography variant='h2' component="h2"
-								className={archivo.className}
+
 								sx={{
 									fontWeight: '700',
 									background: 'linear-gradient(45deg, #fcfcfe 10%, #b3e5fc 80%)',
@@ -84,7 +84,7 @@ const Splash = () => {
 								{/* Under Construction check back soon */}
 							</Typography>
 							<Typography variant='h2' component="h2"
-								className={archivo.className}
+
 								sx={{
 									fontWeight: '600',
 									fontSize: '3.2em',
@@ -142,7 +142,7 @@ const Splash = () => {
 							},
 						}}>
 							<Typography variant='h2' component="h2"
-								className={archivo.className}
+
 								sx={{
 									textAlign: 'center',
 									fontWeight: '700',

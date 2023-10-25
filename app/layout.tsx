@@ -1,14 +1,14 @@
 import './globals.css'
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
 import Loading from './loading'
 import { Suspense } from 'react'
 import { Analytics } from '@vercel/analytics/react'
+import ThemeRegistry from './ThemeRegistry'
 
 
-const inter = Inter({ subsets: ['latin'] })
+
 
 
 export const metadata: Metadata = {
@@ -27,17 +27,19 @@ export default function RootLayout({
       <head>
 
       </head>
-      <body className={inter.className}>
-        <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
-          <Navbar />
-          <div style={{ flex: 1 }}>
-            <Suspense fallback={<Loading />}>
-              {children}
-              <Analytics />
-            </Suspense>
+      <body >
+        <ThemeRegistry options={{ key: 'mui' }}>
+          <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
+            <Navbar />
+            <div style={{ flex: 1 }}>
+              <Suspense fallback={<Loading />}>
+                {children}
+                <Analytics />
+              </Suspense>
+            </div>
+            <Footer />
           </div>
-          <Footer />
-        </div>
+        </ThemeRegistry>
       </body>
     </html>
   )

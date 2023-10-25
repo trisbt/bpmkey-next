@@ -13,8 +13,8 @@ import MenuIcon from '@mui/icons-material/Menu';
 import { Card, Hidden } from '@mui/material';
 import Popper from '@mui/material/Popper';
 import SearchBar from './SearchBar';
-import { logoFont } from '../fonts';
-
+import { ThemeProvider } from '@mui/material';
+import { logoTheme } from '../theme';
 
 function Navbar() {
 
@@ -47,7 +47,8 @@ function Navbar() {
                 }
               }}>
                 <Link href="/">
-                  <Typography className={logoFont.className} sx={{
+                <ThemeProvider theme={logoTheme}>
+                  <Typography  sx={{
                     color: 'white',
                     fontSize: '35px',
                     textAlign: 'center',
@@ -58,6 +59,7 @@ function Navbar() {
                   }}>
                     BPMKEY
                   </Typography>
+                  </ThemeProvider>
                 </Link>
               </Card>
  

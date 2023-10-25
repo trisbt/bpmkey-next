@@ -52,6 +52,9 @@ const Splash = () => {
 						'@media (max-width: 600px)': {
 							textAlign: 'center',
 						},
+						'@media (min-width: 601px) and (max-width: 2200px)': {
+							paddingLeft: 4,
+						}
 					}}>
 						<Box sx={{
 							display: 'flex',

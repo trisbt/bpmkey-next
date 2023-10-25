@@ -11,7 +11,7 @@ const GetSpotifySearch = async (query: string | null, offset: number) => {
         headers: {
             'Authorization': 'Bearer ' + token
         },
-        cache:'no-store',
+        // cache:'no-store',
     });
     if (!res.ok) {
         throw new Error('Error in search fetch');

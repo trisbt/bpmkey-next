@@ -32,7 +32,7 @@ function Navbar() {
 
               <Card sx={{
                 display: 'flex',
-                height: '40px',
+                height: '46px',
                 width: '180px',
                 justifyContent: 'center',
                
@@ -43,7 +43,7 @@ function Navbar() {
                   alignItems: 'center',
                   paddingLeft:'1px',
                   height:'35px',
-                  paddingTop:'9px',
+                  paddingTop:'6px',
                 }
               }}>
                 <Link href="/">
@@ -75,17 +75,13 @@ function Navbar() {
                   }
                 }
               }}>
-                <Typography variant='subtitle2' color='#f5f5f5' fontWeight={800} sx ={{
-                  fontSize:'.8em'
-                }}>
-                  Search for songs...
-                </Typography>
+             
               </Box>
             </Hidden>
 
             <Box display='flex' flexGrow={1} justifyContent='center' sx={{
-              margin: 0,
-              width: '0px',
+              margin: -1.5,
+              // width: '0px',
             }}>
               <SearchBar />
             </Box>

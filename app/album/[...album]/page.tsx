@@ -26,7 +26,7 @@ export async function generateMetadata(
 ): Promise<Metadata> {
   const album = params.album[0];
   return {
-    title: `${decodeURI(album)} BpmKey.com`,
+    title: `${decodeURI(album.replace(/-/g, ' '))} Bpm, Key, Credits BpmKey.com`,
     description:`Key BPM Credits finder for ${album}`
   }
 }

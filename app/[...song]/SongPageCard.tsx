@@ -27,6 +27,8 @@ import { SongPageCardProps } from '../types/cardTypes';
 import { Credits } from '../types/dataTypes';
 import DisplaySettings from '@mui/icons-material/DisplaySettings';
 import SongRecs from './SongRecs';
+import slugify from 'slugify';
+
 //helpers
 const transformSpotifyURItoURL = (uri: string): string | null => {
   const match = uri.match(/spotify:track:([a-zA-Z0-9]+)/);
@@ -95,6 +97,9 @@ const SongPageCard: React.FC<SongPageCardProps> = ({ songDetails, song, artist, 
   const [showCredits, setShowCredits] = useState<boolean>(false);
   const [credits, setCredits] = useState<Credits>(null)
 
+  const slugifiedAlbumName = slugify(songDetails.albums, { lower: true, strict: true });
+  const slugifiedArtistName = slugify(songDetails.artists[0].name, { lower: true, strict: true });
+
   const handleClick = async () => {
     if (!credits) { // Fetch only if credits haven't been fetched before
       const res: Credits = await GetCredits(songDetails.albums, artist, song);
@@ -132,7 +137,7 @@ const SongPageCard: React.FC<SongPageCardProps> = ({ songDetails, song, artist, 
 										fontSize: '22px'
 									},
 								}}>
-									Bpm, Key, Credits for {decodeURI(song)} by {decodeURI(artist)}
+									Bpm, Key, Credits for {decodeURI(song.replace(/-/g, ' '))} by {decodeURI(artist.replace(/-/g, ' '))}
 								</Typography>
 							</Card>
 						</Grid>
@@ -183,7 +188,7 @@ const SongPageCard: React.FC<SongPageCardProps> = ({ songDetails, song, artist, 
 
                   <Grid item >
                     <Typography variant="h5" color='text.primary'>{songDetails.name}</Typography>
-                    <Link prefetch={false} href={`/artists/${songDetails.artists[0].name}/${songDetails.artistId}`}>
+                    <Link prefetch={false} href={`/artists/${slugifiedArtistName}/${songDetails.artistId}`}>
                       <Typography variant="h4" sx={{
                         transition: 'color 0.3s',
                         '&:hover': {
@@ -195,7 +200,7 @@ const SongPageCard: React.FC<SongPageCardProps> = ({ songDetails, song, artist, 
                       </Typography>
                     </Link>
 
-                    <Link prefetch={false} href={`/album/${songDetails.albums}/${songDetails.albumId}`}>
+                    <Link prefetch={false} href={`/album/${slugifiedAlbumName}/${songDetails.albumId}`}>
                       <Typography variant="subtitle1" sx={{
                         transition: 'color 0.3s',
                         '&:hover': {

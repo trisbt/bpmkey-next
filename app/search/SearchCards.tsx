@@ -32,6 +32,7 @@ import SortFilter from '../components/SortFilter';
 import { reverseKeyConvert } from '@/app/utils';
 import { SearchPageCardProps } from '../types/cardTypes';
 import { SearchDetails } from '../types/dataTypes';
+import slugify from 'slugify';
 
 const SmallPlayButton = styled(IconButton)(() => ({
 	'&&': {
@@ -160,7 +161,7 @@ const SearchCards: React.FC<SearchPageCardProps> = ({ results }) => {
 										fontSize: '20px'
 									},
 								}}>
-									results for: {searchQuery}
+									results for: {searchQuery.replace(/-/g, ' ')}
 								</Typography>
 							</Card>
 						</Grid>
@@ -201,7 +202,10 @@ const SearchCards: React.FC<SearchPageCardProps> = ({ results }) => {
 							.map((item: SearchDetails, index: number) => (
 								<Grid item xs={11} md={8} key={index}>
 									{/* each card */}
-									<Link prefetch={false} href={`/${item.name}/${item.artists[0].name}/${item.id}`}>
+									<Link prefetch={false} href={`
+									/${slugify(item.name, { lower: true, strict: true })}
+									/${slugify(item.artists[0].name, { lower: true, strict: true })}
+									/${item.id}`}>
 										<Card
 											sx={{
 												display: 'flex',

@@ -28,6 +28,7 @@ import { reverseKeyConvert } from '@/app/utils';
 import SortFilter from '@/app/components/SortFilter';
 import { AlbumDetails } from '@/app/types/dataTypes';
 import { AlbumPageCardProps } from '@/app/types/cardTypes';
+import slugify from 'slugify';
 
 const SmallPlayButton = styled(IconButton)(() => ({
 	'&&': {
@@ -127,7 +128,7 @@ const AlbumTrackCards: React.FC<AlbumPageCardProps> = ({ results, album }) => {
 										fontSize: '22px'
 									},
 								}}>
-									{decodeURIComponent(album)}
+									{decodeURIComponent(album.replace(/-/g, ' '))}
 								</Typography>
 							</Card>
 						</Grid>
@@ -169,7 +170,10 @@ const AlbumTrackCards: React.FC<AlbumPageCardProps> = ({ results, album }) => {
 
 								<Grid item xs={11} md={8} key={index}>
 									{/* each card */}
-									<Link prefetch={false} href={`/${item.name}/${item.artists[0].name}/${item.id}`}>
+									<Link prefetch={false} href={`
+									/${slugify(item.name, { lower: true, strict: true })}
+									/${slugify(item.artists[0].name, { lower: true, strict: true })}
+									/${item.id}`}>
 										<Card
 											sx={{
 												display: 'flex',

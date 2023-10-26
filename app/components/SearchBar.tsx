@@ -11,7 +11,7 @@ import { createTheme, ThemeProvider, styled, Theme } from '@mui/material/styles'
 import SearchIcon from '@mui/icons-material/Search';
 import Hidden from '@mui/material/Hidden';
 import CloseIcon from '@mui/icons-material/Close';
-
+import slugify from 'slugify';
 const theme: Theme = createTheme({
 	palette: {
 		primary: {
@@ -70,7 +70,8 @@ const SearchBar = () => {
 	const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 		setShowInput(false);
-		router.push(`/search?q=${query}`);
+		const searchQuery = slugify(query, { lower: true, strict: true })
+		router.push(`/search?q=${searchQuery}`);
 	};
 
 

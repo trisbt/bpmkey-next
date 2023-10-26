@@ -23,4 +23,17 @@ const SongPage = async({
   )
 }
 
+export async function generateMetadata(
+  { params, searchParams }: Props,
+  parent: ResolvingMetadata
+): Promise<Metadata> {
+  const song = params.song[0];
+  console.log(song)
+  const artist = params.song[1];
+  return {
+    title: `${decodeURI(song.replace(/-/g, ' '))} by ${decodeURI(artist.replace(/-/g, ' '))} Bpm, Key, Credits BpmKey.com`,
+    description:`Key BPM Credits finder for ${artist}`
+  }
+}
+
 export default SongPage;

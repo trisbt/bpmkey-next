@@ -29,7 +29,7 @@ import SortFilter from '@/app/components/SortFilter';
 import { reverseKeyConvert } from '@/app/utils';
 import { RecsCardProps } from '../types/cardTypes';
 import { Recs } from '../types/dataTypes';
-
+import slugify from 'slugify';
 
 const SmallPlayButton = styled(IconButton)(() => ({
 	'&&': {
@@ -143,7 +143,7 @@ const SongRecs: React.FC<RecsCardProps> = ({ recs }) => {
 								setSortBy={setSortBy}
 								sortBy={sortBy}
 							/>
-							
+
 							{/* main search */}
 							{searchResults
 								.filter(item =>
@@ -167,7 +167,10 @@ const SongRecs: React.FC<RecsCardProps> = ({ recs }) => {
 
 									<Grid item xs={11} md={8} key={index}>
 										{/* each card */}
-										<Link prefetch={false} href={`/${item.name}/${item.artists[0].name}/${item.id}`}>
+										<Link prefetch={false} href={`
+										/${slugify(item.name, { lower: true, strict: true })}
+										/${slugify(item.artists[0].name, { lower: true, strict: true })}
+										/${item.id}`}>
 											<Card
 												sx={{
 													display: 'flex',
@@ -190,8 +193,8 @@ const SongRecs: React.FC<RecsCardProps> = ({ recs }) => {
 														{/* image */}
 														<Grid item xs={3} sm={2} >
 															<Image
-																width = {150}
-																height = {150}
+																width={150}
+																height={150}
 																src={item.images}
 																alt={item.name}
 															/>

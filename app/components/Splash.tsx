@@ -5,7 +5,6 @@ import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import SplashCircleOfFifths from './SplashCircleOfFifths';
 
-
 const Splash = () => {
 
 	return (
@@ -109,58 +108,60 @@ const Splash = () => {
 							</Typography>
 						</Box >
 					</Grid>
-
-					<Grid item xs={12} sm={6.5} md={4.5} sx={{
-						display: 'flex',
-						justifyContent: 'center',
-						flexDirection: 'column',
-						'@media (max-width: 600px)': {
-							height: '20em',
-
-						},
-					}}>
-						<Card sx={{
+				
+						<Grid item xs={12} sm={6.5} md={4.5} sx={{
 							display: 'flex',
 							justifyContent: 'center',
-							textAlign: 'center',
-							alignItems: 'center',
-							backgroundColor: 'transparent',
-							boxShadow: 0,
-							height: '20em',
+							flexDirection: 'column',
 							'@media (max-width: 600px)': {
-								alignItems: 'flex-start',
-								height: '16em',
-							},
-						}}>
-							<SplashCircleOfFifths />
-						</Card>
-						<Box sx={{
-							display: 'flex',
-							justifyContent: 'center',
-							height: '5em',
-							'@media (max-width: 600px)': {
-								height: '8em'
-							},
-						}}>
-							<Typography variant='h2' component="h2"
+								height: '20em',
 
-								sx={{
-									textAlign: 'center',
-									fontWeight: '700',
-									background: '#90caf9',
-									WebkitBackgroundClip: 'text',
-									WebkitTextFillColor: 'transparent',
-									fontSize: '1.2em',
-									// paddingBottom: '5px',
-									'@media (max-width: 600px)': {
-										fontSize: '.8em',
-										marginTop: '.8em'
-									},
-								}}>
-								Try getting a random song by clicking a key
-							</Typography>
-						</Box>
-					</Grid>
+							},
+						}}>
+							<Card sx={{
+								display: 'flex',
+								justifyContent: 'center',
+								textAlign: 'center',
+								alignItems: 'center',
+								backgroundColor: 'transparent',
+								boxShadow: 0,
+								height: '20em',
+								'@media (max-width: 600px)': {
+									alignItems: 'flex-start',
+									height: '16em',
+								},
+							}}>
+								<SplashCircleOfFifths />
+							</Card>
+							<Box sx={{
+								display: 'flex',
+								justifyContent: 'center',
+								height: '5em',
+								'@media (max-width: 600px)': {
+									height: '8em'
+								},
+							}}>
+								<Typography variant='h2' component="h2"
+
+									sx={{
+										textAlign: 'center',
+										fontWeight: '700',
+										background: '#90caf9',
+										WebkitBackgroundClip: 'text',
+										WebkitTextFillColor: 'transparent',
+										fontSize: '1.2em',
+										// paddingBottom: '5px',
+										'@media (max-width: 600px)': {
+											fontSize: '.8em',
+											marginTop: '.8em'
+										},
+									}}>
+									Try getting a random song by clicking a key
+								</Typography>
+							</Box>
+						</Grid>
+			
+
 				</Grid>
 			</Card>
 

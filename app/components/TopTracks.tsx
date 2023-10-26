@@ -21,7 +21,7 @@ import { TopTracksDetails } from '../types/dataTypes';
 
 
 const SmallPlayButton = styled(IconButton)(() => ({
- '&&': {
+  '&&': {
     color: 'white',
     backgroundColor: 'black',
   },
@@ -58,7 +58,7 @@ const TopTracks: React.FC<TopTracksCardProps> = ({ results }) => {
       }
     }
   };
-  
+
   return (
     <div>
       <Box >
@@ -77,21 +77,21 @@ const TopTracks: React.FC<TopTracksCardProps> = ({ results }) => {
                     backgroundColor: 'rgb(0, 71, 212, .6)',
                   }}
                 >
-                  <Typography variant='h4' 
-                  sx={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    color: '#e8eaf6',
-                    fontWeight: 'bold',
-                    background: '#e8eaf6',
-                    WebkitBackgroundClip: 'text',
-                    WebkitTextFillColor: 'transparent',
-                    letterSpacing: '1px',
-                    borderRadius: '2px',
-                    '@media (max-width: 600px)': {
-                      fontSize: '24px'
-                    },
-                  }}>
+                  <Typography variant='h4'
+                    sx={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      color: '#e8eaf6',
+                      fontWeight: 'bold',
+                      background: '#e8eaf6',
+                      WebkitBackgroundClip: 'text',
+                      WebkitTextFillColor: 'transparent',
+                      letterSpacing: '1px',
+                      borderRadius: '2px',
+                      '@media (max-width: 600px)': {
+                        fontSize: '24px'
+                      },
+                    }}>
                     Daily Top Tracks
                   </Typography>
                 </Card>
@@ -127,8 +127,8 @@ const TopTracks: React.FC<TopTracksCardProps> = ({ results }) => {
                             <Image
                               src={item.album.images[0].url}
                               alt={item.name}
-                              width = {150}
-                              height = {150}
+                              width={150}
+                              height={150}
                             />
                           </Grid>
                           {/* song info */}
@@ -223,7 +223,7 @@ const TopTracks: React.FC<TopTracksCardProps> = ({ results }) => {
                               display: 'flex',
                               justifyContent: 'center'
                             }} >
-                                        {item.preview_url && (
+                              {item.preview_url && (
                                 <SmallPlayButton className='preview-button' sx={{
                                   boxShadow: 3,
                                   borderRadius: '50px',
@@ -252,7 +252,7 @@ const TopTracks: React.FC<TopTracksCardProps> = ({ results }) => {
                                   )}
                                 </SmallPlayButton>
                               )}
-                              <audio ref={audioRef}/>
+                              <audio ref={audioRef} />
                             </Grid>
                           </Grid>
                         </Grid>

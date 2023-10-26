@@ -1,6 +1,7 @@
 import React from 'react';
 import Card from '@mui/material/Card';
-import { Box, Grid } from '@mui/material';
+import Box from '@mui/material/Box';
+import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import SplashCircleOfFifths from './SplashCircleOfFifths';
 

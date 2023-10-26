@@ -7,13 +7,25 @@ import GetSpotifyById from '../server_components/GetSpotifyById';
 import PlayButton from '../components/PlayButton';
 import ImageModal from '../components/ImageModal';
 import { styled } from "@mui/material/styles";
-import { Hidden } from '@mui/material';
-import { Box, Button, Card, CardMedia, CardContent, createTheme, Fade, Grid, IconButton, LinearProgress, Modal, Paper, Typography, } from '@mui/material';
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import Card from '@mui/material/Card';
+import CardMedia from '@mui/material/CardMedia';
+import CardContent from '@mui/material/CardContent';
+import {createTheme} from '@mui/material';
+import Fade from '@mui/material/Fade';
+import Hidden from '@mui/material/Hidden';
+import Grid from '@mui/material/Grid';
+import IconButton from '@mui/material/IconButton';
+import LinearProgress from '@mui/material/LinearProgress';
+import Modal from '@mui/material/Modal';
+import Paper from '@mui/material/Paper';
+import Typography from '@mui/material/Typography';
 import { GetCredits } from '../actions/GetCredits';
 import CreditsModal from '../components/CreditsModal';
 import { SongPageCardProps } from '../types/cardTypes';
 import { Credits } from '../types/dataTypes';
-import { DisplaySettings } from '@mui/icons-material';
+import DisplaySettings from '@mui/icons-material/DisplaySettings';
 import SongRecs from './SongRecs';
 //helpers
 const transformSpotifyURItoURL = (uri: string): string | null => {
@@ -168,7 +180,7 @@ const SongPageCard: React.FC<SongPageCardProps> = ({ songDetails, song, artist, 
                     <Grid item container xs={12} alignItems='center' justifyContent='space-between' >
 
                       {/*link spotify render*/}
-                     <Link prefetch={false} href={transformSpotifyURItoURL(songDetails.uri) as string}>
+                      <Link prefetch={false} href={transformSpotifyURItoURL(songDetails.uri) as string}>
 
                         <svg
                           // style={{ marginLeft: '-8px', paddingTop: '5px' }}

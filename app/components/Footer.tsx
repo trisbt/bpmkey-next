@@ -1,6 +1,7 @@
 import React, { FC } from 'react';
 import Link from 'next/link';
-import { Box, Typography } from '@mui/material';
+import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
 
 const Footer: FC = () => {
   return (
@@ -87,7 +88,7 @@ const Footer: FC = () => {
             </Link>
           </Typography>
           <Typography variant="subtitle2" color='text.secondary' gutterBottom sx={{
-             '@media (max-width:600px)': {
+            '@media (max-width:600px)': {
               fontSize: '12px',
             }
           }}>

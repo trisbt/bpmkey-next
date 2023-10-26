@@ -14,7 +14,7 @@ const SearchPage = async ({
   let offset: number = 1
   const results: SearchDetails[] = await GetSpotifySearch(searchParams.q, offset);
   return (
-    <div className='background-gradient'>
+    <div className='background-gradient min-h-[100em]'>
       <SearchCards results={results} />
     </div>
   )

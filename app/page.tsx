@@ -6,7 +6,7 @@ import { ThemeProvider } from '@mui/material'
 import { archivoTheme } from './theme'
 export default function Home() {
   return (
-    <div className='background-image flex flex-col items-center'>
+    <div className='background-image flex flex-col items-center min-h-[140em]'>
       <ThemeProvider theme={archivoTheme}>
         <Splash />
       </ThemeProvider>

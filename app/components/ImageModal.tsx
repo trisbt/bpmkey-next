@@ -1,6 +1,8 @@
 'use client'
 import React, { useState } from 'react';
-import { Modal, Fade, Box } from '@mui/material';
+import Modal from '@mui/material/Modal';
+import Fade from '@mui/material/Fade';
+import Box from '@mui/material/Box';
 import Image from 'next/image';
 
 interface ImageModalProps {

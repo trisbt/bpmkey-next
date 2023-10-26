@@ -12,7 +12,8 @@ import { Context } from 'chartjs-plugin-datalabels';
 import { grey } from '@mui/material/colors';
 import GetRandom from '../server_components/GetRandom';
 import { useRouter } from 'next/navigation';
-import { CircularProgress, Backdrop } from '@mui/material';
+import CircularProgress from '@mui/material/CircularProgress';
+import Backdrop  from '@mui/material/Backdrop';
 
 Chart.register(ArcElement)
 interface ExtendedArcElement extends ArcElement {

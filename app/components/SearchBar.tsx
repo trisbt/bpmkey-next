@@ -2,13 +2,14 @@
 import React from 'react'
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
-import { Box, Button } from '@mui/material';
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
 import Input from '@mui/material/Input';
-import { FormControl } from '@mui/material';
-import { Typography } from '@mui/material';
+import FormControl from '@mui/material/FormControl';
+import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider, styled, Theme } from '@mui/material/styles';
 import SearchIcon from '@mui/icons-material/Search';
-import { Hidden } from '@mui/material';
+import Hidden from '@mui/material/Hidden';
 import CloseIcon from '@mui/icons-material/Close';
 
 const theme: Theme = createTheme({
@@ -106,8 +107,8 @@ const SearchBar = () => {
 					{!showInput ? (
 						<Box>
 							<SmallColorButton onClick={() => setShowInput(true)} variant='outlined'>
-								<Box sx ={{
-									width:'10em'
+								<Box sx={{
+									width: '10em'
 								}}>
 									<Typography variant='subtitle2' color='#f5f5f5' fontWeight={800} sx={{
 										fontSize: '.8em'

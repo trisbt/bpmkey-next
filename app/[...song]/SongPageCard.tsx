@@ -105,6 +105,37 @@ const SongPageCard: React.FC<SongPageCardProps> = ({ songDetails, song, artist, 
 
   return (
     <div className='song-page-main background-gradient'>
+      		<Grid item xs={11} md={8}>
+							<Card
+								sx={{
+									display: 'flex',
+									flexDirection: 'row',
+									margin: '20px 10px 0',
+									boxShadow: 0,
+									justifyContent: 'center',
+									backgroundColor: 'transparent',
+									// paddingBottom: '1em',
+								}}
+							>
+								<Typography variant='h4' sx={{
+									display: 'flex',
+									alignItems: 'center',
+									textAlign: 'center',
+									color: '#e8eaf6',
+									fontWeight: 'bold',
+									background: '#e8eaf6',
+									WebkitBackgroundClip: 'text',
+									letterSpacing: '1px',
+									borderRadius: '2px',
+									fontStyle: 'italic',
+									'@media (max-width: 600px)': {
+										fontSize: '22px'
+									},
+								}}>
+									Bpm, Key, Credits for {decodeURI(song)} by {decodeURI(artist)}
+								</Typography>
+							</Card>
+						</Grid>
       <div className='song-page-container '>
         {songDetails && (
           <Card sx={{

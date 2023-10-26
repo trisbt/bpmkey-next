@@ -1,186 +1,87 @@
-// import Skeleton from '@mui/material/Skeleton';
-// import Card from '@mui/material/Card';
-// import CardContent from '@mui/material/CardContent';
-// import Grid from '@mui/material/Grid';
+import Skeleton from '@mui/material/Skeleton';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import Grid from '@mui/material/Grid';
+import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
 
-// export const SkeletonTopTracks = () => {
-//   return (
-//     <Box >
-//         <Grid container item xs={12} justifyContent='center' alignItems='center' >
-//           {results && (
-//             <>
-//               {/* text row */}
-//               <Grid item xs={11} md={8}>
-//                 <Card
-//                   sx={{
-//                     display: 'flex',
-//                     flexDirection: 'row',
-//                     margin: '0px 10px 0',
-//                     boxShadow: 3,
-//                     justifyContent: 'center',
-//                     backgroundColor: 'rgb(0, 71, 212, .6)',
-//                   }}
-//                 >
-//                   <Typography variant='h4'
-//                     sx={{
-//                       display: 'flex',
-//                       alignItems: 'center',
-//                       color: '#e8eaf6',
-//                       fontWeight: 'bold',
-//                       background: '#e8eaf6',
-//                       WebkitBackgroundClip: 'text',
-//                       WebkitTextFillColor: 'transparent',
-//                       letterSpacing: '1px',
-//                       borderRadius: '2px',
-//                       '@media (max-width: 600px)': {
-//                         fontSize: '24px'
-//                       },
-//                     }}>
-//                     Daily Top Tracks
-//                   </Typography>
-//                 </Card>
-//               </Grid>
+export const SkeletonTopTracks = () => {
+	return (
+		<Box >
+			<Grid container item xs={12} justifyContent='center' alignItems='center' >
+						{/* text row */}
+						<Grid item xs={11} md={8}>
+							<Card
+								sx={{
+									display: 'flex',
+									flexDirection: 'row',
+									margin: '0px 10px 0',
+									boxShadow: 3,
+									justifyContent: 'center',
+									backgroundColor: 'rgb(0, 71, 212, .6)',
+								}}
+							>
+								<Typography variant='h4'
+									sx={{
+										display: 'flex',
+										alignItems: 'center',
+										color: '#e8eaf6',
+										fontWeight: 'bold',
+										background: '#e8eaf6',
+										WebkitBackgroundClip: 'text',
+										WebkitTextFillColor: 'transparent',
+										letterSpacing: '1px',
+										borderRadius: '2px',
+										'@media (max-width: 600px)': {
+											fontSize: '24px'
+										},
+									}}>
+									Daily Top Tracks
+								</Typography>
+							</Card>
+						</Grid>
 
-//               {/* main search */}
-//               {results.map((item: TopTracksDetails, index: number) => (
+						{/* main search */}
+						{Array.from({ length: 10 }).map((_, index) => (
 
-//                 <Grid item xs={11} md={8} key={index}>
-//                   {/* each card */}
-//                   <Link prefetch={false} href={`/${item.name}/${item.artists[0].name}/${item.id}`}>
-//                     <Card
-//                       sx={{
-//                         display: 'flex',
-//                         flexDirection: 'row',
-//                         margin: '10px 10px 0',
-//                         boxShadow: 3,
-//                         "&:hover": {
-//                           backgroundColor: "#e0e0e0",
-//                         }
-//                       }}
-//                     >
-//                       <CardContent sx={{
-//                         width: '80vw',
-//                         paddingBottom: '15px',
-//                         '&:last-child': {
-//                           paddingBottom: '15px',
-//                         }
-//                       }}>
-//                         <Grid container >
-//                           {/* image */}
-//                           <Grid item xs={3} sm={2} >
-//                             <Image
-//                               src={item.album.images[0].url}
-//                               alt={item.name}
-//                               width={150}
-//                               height={150}
-//                             />
-//                           </Grid>
-//                           {/* song info */}
-//                           <Grid item xs={9} sm={5} sx={{
-//                             paddingLeft: '.5em',
-//                           }}>
-//                             <Typography component="div" color="text.primary" variant="h5" sx={{
-//                               "@media (max-width: 600px)": {
-//                                 fontSize: '1rem'
-//                               },
-//                             }}>
-//                               {item.name}
-//                             </Typography>
-//                             <Typography variant="h6" color="text.secondary" component="div" sx={{
-//                               "@media (max-width: 600px)": {
-//                                 fontSize: '1rem'
-//                               },
-//                             }}>
-//                               {item.artists.map((artist, index) => (
-//                                 <span key={index}>
-//                                   {artist.name}
-//                                   {index < item.artists.length - 1 && (
-//                                     <span style={{ color: '#B3C7ED', fontStyle: 'italic', marginLeft: '5px', marginRight: '5px' }}>|</span>
-//                                   )}
-//                                 </span>
-//                               ))}
-//                             </Typography>
-//                             <Typography variant="subtitle1" color="text.secondary" component="div" sx={{
-//                               "@media (max-width: 600px)": {
-//                                 fontSize: '.7em',
-//                               }
-//                             }}>
-//                               {item.album.name}
-//                             </Typography>
-//                           </Grid>
-
-//                           <Grid container item xs={12} sm={5} alignItems='center' rowSpacing={1} sx={{
-//                             "@media (max-width: 600px)": {
-//                               paddingTop: '.8rem',
-//                             }
-//                           }}>
-//                             <Grid item xs={4} sm={6}  >
-
-//                               <Typography variant="subtitle1" color="text.secondary" component="div"
-//                                 sx={{
-//                                   display: 'flex', flexDirection: 'column', alignItems: 'center', lineHeight: '1rem',
-//                                   "@media (max-width: 600px)": {
-//                                     fontSize: '.8em',
-//                                   }
-//                                 }}
-//                               >
-//                                 Key
-//                                 <Typography className='song-sub-info' variant="h4" color="text.primary" component="div" sx={{
-//                                   "@media (max-width: 600px)": {
-//                                     fontSize: '1.5rem',
-//                                   }
-//                                 }}>
-//                                   {item.key}
-//                                 </Typography>
-//                               </Typography>
-
-//                             </Grid>
-
-//                             <Grid item xs={4} sm={6} sx={{
-//                               "@media (max-width: 600px)": {
-//                                 marginRight: '.5em',
-//                               }
-//                             }}>
-
-//                               <Typography variant="subtitle1" color="text.secondary" component="div"
-//                                 sx={{
-//                                   display: 'flex', flexDirection: 'column', alignItems: 'center', lineHeight: '1rem',
-//                                   "@media (max-width: 600px)": {
-//                                     fontSize: '.8em',
-//                                   }
-//                                 }}
-//                               >
-//                                 BPM
-//                                 <Typography className='song-sub-info' variant="h4" color="text.primary" component="div" sx={{
-//                                   "@media (max-width: 600px)": {
-//                                     fontSize: '1.5rem',
-//                                   }
-//                                 }}>
-//                                   {item.tempo}
-//                                 </Typography>
-//                               </Typography>
-
-//                             </Grid>
-
-//                             {/* preview button */}
-//                             <Grid item xs={3} sm={6} sx={{
-//                               display: 'flex',
-//                               justifyContent: 'center'
-//                             }} >
-                           
-//                             </Grid>
-//                           </Grid>
-//                         </Grid>
-//                       </CardContent>
-//                     </Card>
-//                   </Link>
-//                 </Grid>
-//               ))}
-//             </>
-//           )}
-//         </Grid >
-//       </Box>
-//   );
-// }
+							<Grid item xs={11} md={8} key={index}>
+								{/* each card */}
+									<Card
+										sx={{
+											display: 'flex',
+											flexDirection: 'row',
+											margin: '10px 10px 0',
+											boxShadow: 3,
+											"&:hover": {
+												backgroundColor: "#e0e0e0",
+											}
+										}}
+									>
+										<CardContent sx={{
+											width: '80vw',
+											paddingBottom: '15px',
+											'&:last-child': {
+												paddingBottom: '15px',
+											}
+										}}>
+											<Grid container >
+												{/* image */}
+												<Grid item xs={3} sm={2} >
+													<Skeleton
+														width={100}
+														height={150}
+													/>
+												</Grid>
+												{/* song info */}				
+											</Grid>
+										</CardContent>
+									</Card>
+					
+							</Grid>
+						))}
+			</Grid >
+		</Box>
+	);
+}
 
 

@@ -65,6 +65,5 @@ export const reverseKeyModeConvert = (key: string): { key: number, mode: number 
         'B♭': { key: 10, mode: 1 }, 'Gm': { key: 10, mode: 0 },
         'B': { key: 11, mode: 1 }, 'G♯m': { key: 11, mode: 0 }
     };
-    console.log(key)
     return reverseChart[key] ?? null;
 };

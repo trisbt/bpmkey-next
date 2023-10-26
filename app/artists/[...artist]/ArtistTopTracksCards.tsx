@@ -29,6 +29,7 @@ import SortFilter from '@/app/components/SortFilter';
 import { reverseKeyConvert } from '@/app/utils';
 import { SongDetails } from '@/app/types/dataTypes';
 import { ArtistPageCardProps } from '@/app/types/cardTypes';
+import slugify from 'slugify';
 
 const SmallPlayButton = styled(IconButton)(() => ({
 	'&&': {
@@ -106,7 +107,7 @@ const ArtistTopTracksCards: React.FC<ArtistPageCardProps> = ({ results, artist }
 								sx={{
 									display: 'flex',
 									flexDirection: 'row',
-									margin: '10px 10px 0',
+									margin: '10px 10px 10px',
 									boxShadow: 0,
 									justifyContent: 'center',
 									backgroundColor: 'transparent'
@@ -126,7 +127,7 @@ const ArtistTopTracksCards: React.FC<ArtistPageCardProps> = ({ results, artist }
 										fontSize: '20px'
 									},
 								}}>
-									Top Tracks by {decodeURIComponent(artist)}
+									Top Tracks by {decodeURIComponent(artist.replace(/-/g, ' '))}
 								</Typography>
 							</Card>
 						</Grid>
@@ -167,7 +168,10 @@ const ArtistTopTracksCards: React.FC<ArtistPageCardProps> = ({ results, artist }
 
 								<Grid item xs={11} md={8} key={index}>
 									{/* each card */}
-									<Link prefetch={false} href={`/${item.name}/${item.artists[0].name}/${item.id}`}>
+									<Link prefetch={false} href={`
+									/${slugify(item.name, { lower: true, strict: true })}
+									/${slugify(item.artists[0].name, { lower: true, strict: true })}
+									/${item.id}`}>
 										<Card
 											sx={{
 												display: 'flex',

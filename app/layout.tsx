@@ -8,7 +8,7 @@ import { Analytics } from '@vercel/analytics/react'
 import ThemeRegistry from './ThemeRegistry'
 
 export const metadata: Metadata = {
-  title: 'BpmKey.com',
+  title: `BpmKey - Find A Song's Key, BPM, and Credits`,
   description: `BpmKey - Find A Song's Key, BPM, and Credits`,
 
 }

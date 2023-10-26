@@ -18,7 +18,7 @@ import Typography from '@mui/material/Typography';
 import PlayButton from './PlayButton';
 import { TopTracksCardProps } from '../types/cardTypes';
 import { TopTracksDetails } from '../types/dataTypes';
-
+import slugify from 'slugify';
 
 const SmallPlayButton = styled(IconButton)(() => ({
   '&&': {
@@ -102,7 +102,7 @@ const TopTracks: React.FC<TopTracksCardProps> = ({ results }) => {
 
                 <Grid item xs={11} md={8} key={index}>
                   {/* each card */}
-                  <Link prefetch={false} href={`/${item.name}/${item.artists[0].name}/${item.id}`}>
+                  <Link prefetch={false} href={`/${slugify(item.name, { lower: true, strict: true })}/${slugify(item.artists[0].name, { lower: true, strict: true })}/${item.id}`}>
                     <Card
                       sx={{
                         display: 'flex',

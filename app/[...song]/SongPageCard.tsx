@@ -27,6 +27,8 @@ import { SongPageCardProps } from '../types/cardTypes';
 import { Credits } from '../types/dataTypes';
 import DisplaySettings from '@mui/icons-material/DisplaySettings';
 import SongRecs from './SongRecs';
+import slugify from 'slugify';
+
 //helpers
 const transformSpotifyURItoURL = (uri: string): string | null => {
   const match = uri.match(/spotify:track:([a-zA-Z0-9]+)/);
@@ -94,6 +96,8 @@ const SmallCreditsButton = styled(Button)(() => ({
 const SongPageCard: React.FC<SongPageCardProps> = ({ songDetails, song, artist, id, recs }) => {
   const [showCredits, setShowCredits] = useState<boolean>(false);
   const [credits, setCredits] = useState<Credits>(null)
+  const slugifiedAlbumName = slugify(songDetails.albums, { lower: true, strict: true });
+  const slugifiedArtistName = slugify(songDetails.artists[0].name, { lower: true, strict: true });
 
   const handleClick = async () => {
     if (!credits) { // Fetch only if credits haven't been fetched before
@@ -127,12 +131,40 @@ const SongPageCard: React.FC<SongPageCardProps> = ({ songDetails, song, artist, 
 									WebkitBackgroundClip: 'text',
 									letterSpacing: '1px',
 									borderRadius: '2px',
+									'@media (max-width: 600px)': {
+										fontSize: '22px'
+									},
+								}}>
+									Bpm, Key, Credits for 
+								</Typography>
+							</Card>
+              <Card
+								sx={{
+									display: 'flex',
+									flexDirection: 'row',
+									margin: '8px 10px 0',
+									boxShadow: 0,
+									justifyContent: 'center',
+									backgroundColor: 'transparent',
+									// paddingBottom: '1em',
+								}}
+							>
+								<Typography variant='h5' sx={{
+									display: 'flex',
+									alignItems: 'center',
+									textAlign: 'center',
+									color: '#e8eaf6',
+									// fontWeight: 'bold',
+									background: '#e8eaf6',
+									WebkitBackgroundClip: 'text',
+									letterSpacing: '1px',
+									borderRadius: '2px',
 									fontStyle: 'italic',
 									'@media (max-width: 600px)': {
 										fontSize: '22px'
 									},
 								}}>
-									Bpm, Key, Credits for {decodeURI(song)} by {decodeURI(artist)}
+									{songDetails.name} by {songDetails.artists[0].name}
 								</Typography>
 							</Card>
 						</Grid>
@@ -183,7 +215,7 @@ const SongPageCard: React.FC<SongPageCardProps> = ({ songDetails, song, artist, 
 
                   <Grid item >
                     <Typography variant="h5" color='text.primary'>{songDetails.name}</Typography>
-                    <Link prefetch={false} href={`/artists/${songDetails.artists[0].name}/${songDetails.artistId}`}>
+                    <Link prefetch={false} href={`/artists/${slugifiedArtistName}/${songDetails.artistId}`}>
                       <Typography variant="h4" sx={{
                         transition: 'color 0.3s',
                         '&:hover': {
@@ -195,7 +227,7 @@ const SongPageCard: React.FC<SongPageCardProps> = ({ songDetails, song, artist, 
                       </Typography>
                     </Link>
 
-                    <Link prefetch={false} href={`/album/${songDetails.albums}/${songDetails.albumId}`}>
+                    <Link prefetch={false} href={`/album/${slugifiedAlbumName}/${songDetails.albumId}`}>
                       <Typography variant="subtitle1" sx={{
                         transition: 'color 0.3s',
                         '&:hover': {

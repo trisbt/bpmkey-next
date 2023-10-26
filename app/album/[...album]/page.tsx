@@ -12,7 +12,7 @@ const AlbumPage = async ({
   const id = params.album[1];
   const results: AlbumDetails[] = await GetSpotifyAlbum(id);
   return (
-    <div className='background-gradient'>
+    <div className='background-gradient min-h-[40em]'>
       <AlbumTrackCards results={results} album={album} />
     </div>
   )

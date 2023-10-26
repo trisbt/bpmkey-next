@@ -13,7 +13,7 @@ export default function Home() {
       <ThemeProvider theme={archivoTheme}>
         <Splash />
       </ThemeProvider>
-      <Suspense fallback = {<SkeletonTopTracks/>}>
+      <Suspense fallback = {<div/>}>
         <GetTopTracks />
       </Suspense>
     </div>

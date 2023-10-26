@@ -161,7 +161,7 @@ const SearchCards: React.FC<SearchPageCardProps> = ({ results }) => {
 										fontSize: '20px'
 									},
 								}}>
-									results for: {searchQuery.replace(/-/g, ' ')}
+									results for: {searchQuery ? searchQuery.replace(/-/g, ' ') : ''}
 								</Typography>
 							</Card>
 						</Grid>

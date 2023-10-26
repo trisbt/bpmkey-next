@@ -2,7 +2,7 @@ import GetSpotifyArtist from '@/app/server_components/GetSpotifyArtist'
 import React from 'react'
 import ArtistTopTracksCards from './ArtistTopTracksCards'
 import { SongDetails } from '@/app/types/dataTypes'
-import type { Metadata } from 'next'
+import type { Metadata, ResolvingMetadata } from 'next'
 
 const ArtistPage = async ({
   params,
@@ -22,8 +22,11 @@ const ArtistPage = async ({
 }
 
 
-export async function generateMetadata(
-  { params, searchParams }: Props,
+export async function generateMetadata({
+  params,
+}: {
+  params: { artist: [string, string, string] };
+},
   parent: ResolvingMetadata
 ): Promise<Metadata> {
   const artist = params.artist[0];

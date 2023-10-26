@@ -2,7 +2,7 @@ import GetSpotifyAlbum from '@/app/server_components/GetSpotifyAlbum';
 import React from 'react'
 import AlbumTrackCards from './AlbumTrackCards';
 import { AlbumDetails } from '@/app/types/dataTypes';
-import type { Metadata } from 'next'
+import type { Metadata, ResolvingMetadata } from 'next'
 
 const AlbumPage = async ({
   params,
@@ -20,8 +20,11 @@ const AlbumPage = async ({
   )
 }
 
-export async function generateMetadata(
-  { params, searchParams }: Props,
+export async function generateMetadata({
+  params,
+}: {
+  params: { album: [string, string]  };
+},
   parent: ResolvingMetadata
 ): Promise<Metadata> {
   const album = params.album[0];

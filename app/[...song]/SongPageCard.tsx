@@ -96,7 +96,6 @@ const SmallCreditsButton = styled(Button)(() => ({
 const SongPageCard: React.FC<SongPageCardProps> = ({ songDetails, song, artist, id, recs }) => {
   const [showCredits, setShowCredits] = useState<boolean>(false);
   const [credits, setCredits] = useState<Credits>(null)
-
   const slugifiedAlbumName = slugify(songDetails.albums, { lower: true, strict: true });
   const slugifiedArtistName = slugify(songDetails.artists[0].name, { lower: true, strict: true });
 
@@ -132,12 +131,40 @@ const SongPageCard: React.FC<SongPageCardProps> = ({ songDetails, song, artist, 
 									WebkitBackgroundClip: 'text',
 									letterSpacing: '1px',
 									borderRadius: '2px',
+									'@media (max-width: 600px)': {
+										fontSize: '22px'
+									},
+								}}>
+									Bpm, Key, Credits for 
+								</Typography>
+							</Card>
+              <Card
+								sx={{
+									display: 'flex',
+									flexDirection: 'row',
+									margin: '8px 10px 0',
+									boxShadow: 0,
+									justifyContent: 'center',
+									backgroundColor: 'transparent',
+									// paddingBottom: '1em',
+								}}
+							>
+								<Typography variant='h5' sx={{
+									display: 'flex',
+									alignItems: 'center',
+									textAlign: 'center',
+									color: '#e8eaf6',
+									// fontWeight: 'bold',
+									background: '#e8eaf6',
+									WebkitBackgroundClip: 'text',
+									letterSpacing: '1px',
+									borderRadius: '2px',
 									fontStyle: 'italic',
 									'@media (max-width: 600px)': {
 										fontSize: '22px'
 									},
 								}}>
-									Bpm, Key, Credits for {decodeURI(song.replace(/-/g, ' '))} by {decodeURI(artist.replace(/-/g, ' '))}
+									{songDetails.name} by {songDetails.artists[0].name}
 								</Typography>
 							</Card>
 						</Grid>

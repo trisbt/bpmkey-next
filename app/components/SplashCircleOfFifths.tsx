@@ -14,6 +14,7 @@ import GetRandom from '../server_components/GetRandom';
 import { useRouter } from 'next/navigation';
 import CircularProgress from '@mui/material/CircularProgress';
 import Backdrop  from '@mui/material/Backdrop';
+import slugify from 'slugify';
 
 Chart.register(ArcElement)
 interface ExtendedArcElement extends ArcElement {
@@ -80,7 +81,7 @@ const SplashCircleOfFifths = () => {
 
                 try {
                     const res = await GetRandom(label);
-                    const url = `/${res!.name}/${res!.artist}/${res!.id}`;
+                    const url = `/${slugify(res!.name, { lower: true, strict: true })}/${slugify(res!.artist, { lower: true, strict: true })}/${res!.id}`;
                     router.push(url);
                 } catch (error) {
                     console.error("Error fetching data:", error);

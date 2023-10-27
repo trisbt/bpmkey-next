@@ -101,7 +101,7 @@ const SongPageCard: React.FC<SongPageCardProps> = ({ songDetails, song, artist, 
 
   const handleClick = async () => {
     if (!credits) { // Fetch only if credits haven't been fetched before
-      const res: Credits = await GetCredits(songDetails.albums, artist, song);
+      const res: Credits = await GetCredits(songDetails.albums, songDetails.artists[0].name, songDetails.name);
       setCredits(res);
     }
     setShowCredits(true);

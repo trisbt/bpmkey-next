@@ -1,4 +1,4 @@
-const GetAccessToken = async () => {
+const GetAccessToken = async (revalidate = 3600) => {
   const client_id = process.env.client_id;
   const client_secret = process.env.client_secret;
   const authOptions = {
@@ -15,7 +15,11 @@ const GetAccessToken = async () => {
     method: authOptions.method,
     headers: authOptions.headers,
     body: authOptions.body,
-    cache: 'no-store'
+    next:{
+      revalidate: revalidate,
+    }
+    
+
   });
 
   if (!res.ok) {

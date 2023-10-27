@@ -4,15 +4,15 @@ import GetAccessToken from "./GetAccessToken";
 import GetSpotifyAdvancedAudio from "./GetSpotifyAdvancedAudio";
 import { GetTracksItem, TopTracksItem } from "../types/serverTypes";
 
-//bpm and key helper conversions
-
+//revalidation every half week
 const GetTopTracks = async () => {
     const token = await GetAccessToken();
 
     const res = await fetch(`https://api.spotify.com/v1/playlists/37i9dQZEVXbNG2KDcFcKOF?si=ce928cdd687a4612/tracks`, {
         headers: {
             'Authorization': 'Bearer ' + token
-        }
+        },
+        revalidate: 302400
     });
 
     const data = await res.json();

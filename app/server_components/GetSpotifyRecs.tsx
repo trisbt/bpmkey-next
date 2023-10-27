@@ -16,7 +16,12 @@ const GetSpotifyRecs = async (seedSong: string, seedArtist: string, seedGenres?:
             'Authorization': 'Bearer ' + token
         }
     });
-
+    // console.log(res.statusText);
+    // console.log(res.status);
+    // if (res.status === 429) {
+    //     const retryAfter = res.headers.get('Retry-After');
+    //     console.log(`Retry-After header value: ${retryAfter}`);
+    // }
     const data = await res.json();
 
     const mainData = data.tracks.map((item: GetTracksItem) => {

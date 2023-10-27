@@ -61,7 +61,8 @@ const ImageModal: React.FC<ImageModalProps> = ({ songDetails }) => {
                                 width: '80%',
                             }
                         }}
-                    />
+                    >
+                    </Box>
                 </Fade>
             </Modal>
         </>

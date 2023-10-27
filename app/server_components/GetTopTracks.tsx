@@ -6,7 +6,30 @@ import { GetTracksItem, TopTracksItem } from "../types/serverTypes";
 
 //revalidation every half week
 const GetTopTracks = async () => {
-    const token = await GetAccessToken();
+    const client_id = process.env.client_id;
+    const client_secret = process.env.client_secret;
+    const authOptions = {
+      method: 'POST',
+      url: 'https://accounts.spotify.com/api/token',
+      headers: {
+        'Authorization': 'Basic ' + (Buffer.from(client_id + ':' + client_secret).toString('base64')),
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      body: 'grant_type=client_credentials'
+    };
+  
+    const auth = await fetch(authOptions.url, {
+      method: authOptions.method,
+      headers: authOptions.headers,
+      body: authOptions.body,
+      revalidate: 302400,
+    });
+  
+    if (!auth.ok) {
+      throw new Error('Spotify API access token not valid');
+    }
+    const awaitToken = await auth.json();
+    const token = awaitToken.access_token;
 
     const res = await fetch(`https://api.spotify.com/v1/playlists/37i9dQZEVXbNG2KDcFcKOF?si=ce928cdd687a4612/tracks`, {
         headers: {

@@ -22,6 +22,7 @@ const GetTopTracks = async () => {
     const audioData = await GetSpotifyAdvancedAudio(token, trackID);
 
     const results = [];
+
     for (let i = 0; i < trackData.length; i++) {
         const combinedObject = {
             ...trackData[i],

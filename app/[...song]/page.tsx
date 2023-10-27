@@ -18,9 +18,11 @@ const SongPage = async ({
   const recs: Recs[] = await GetSpotifyRecs(id, seedArtist)
 
   return (
-    <div className='background-gradient min-h-[100em]'>
-      <SongPageCard songDetails={songDetails} artist={artist} song={song} id={id} recs={recs} />
+
+    <div className='background-gradient min-h-[150em]'>
+        <SongPageCard songDetails={songDetails} artist={artist} song={song} id={id} recs={recs} />
     </div>
+
   )
 }
 

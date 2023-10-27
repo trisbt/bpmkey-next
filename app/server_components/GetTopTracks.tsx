@@ -34,7 +34,7 @@ const GetTopTracks = async () => {
         };
         results.push(combinedObject);
     }
-    return <TopTracks results={results} />;
+    return results ;
 }
 
 export default GetTopTracks;

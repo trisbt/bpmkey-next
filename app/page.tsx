@@ -7,14 +7,15 @@ import { archivoTheme } from './theme'
 import { Suspense } from 'react'
 import { SkeletonTopTracks } from './components/SkeletonTopTracks'
 
-export default function Home() {
+export default async function Home() {
+  const topTracksData = await GetTopTracks();
   return (
     <div className='background-image flex flex-col items-center min-h-[140em]'>
       <ThemeProvider theme={archivoTheme}>
         <Splash />
       </ThemeProvider>
       <Suspense fallback = {<div/>}>
-        <GetTopTracks />
+        <TopTracks results = {topTracksData}/>
       </Suspense>
     </div>
   )

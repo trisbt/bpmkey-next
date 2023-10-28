@@ -125,6 +125,7 @@ const TopTracks: React.FC<TopTracksCardProps> = ({ results }) => {
                           {/* image */}
                           <Grid item xs={3} sm={2} >
                             <Image
+                            
                               src={item.album.images[0].url}
                               alt={item.name}
                               width={150}

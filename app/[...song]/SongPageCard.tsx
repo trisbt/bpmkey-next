@@ -512,9 +512,9 @@ const SongPageCard: React.FC<SongPageCardProps> = ({ songDetails, song, artist, 
         )}
 
       </div>
-      <div className='recs-page-container'>
-        <SongRecs recs={recs} />
-      </div>
+      {/* <div className='recs-page-container'> */}
+        {/* <SongRecs recs={recs} /> */}
+      {/* </div> */}
     </div>
   )
 }

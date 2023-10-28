@@ -193,6 +193,7 @@ const SongRecs: React.FC<RecsCardProps> = ({ recs }) => {
 														{/* image */}
 														<Grid item xs={3} sm={2} >
 															<Image
+															unoptimized
 																width={150}
 																height={150}
 																src={item.images}

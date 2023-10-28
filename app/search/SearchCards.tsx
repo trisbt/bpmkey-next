@@ -228,7 +228,7 @@ const SearchCards: React.FC<SearchPageCardProps> = ({ results }) => {
 													{/* image */}
 													<Grid item xs={3} sm={2} >
 														<Image
-														unoptimized
+															unoptimized
 															src={item.images}
 															width={150}
 															height={150}

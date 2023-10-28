@@ -26,6 +26,7 @@ const ImageModal: React.FC<ImageModalProps> = ({ songDetails }) => {
     return (
         <>
             <Image
+                unoptimized
                 width={500}
                 height={500}
                 src={songDetails.images}

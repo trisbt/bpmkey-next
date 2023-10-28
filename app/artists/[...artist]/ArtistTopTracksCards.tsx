@@ -144,7 +144,7 @@ const ArtistTopTracksCards: React.FC<ArtistPageCardProps> = ({ results, artist }
 							setSortBy={setSortBy}
 							sortBy={sortBy}
 						/>
-						
+
 						{/* main search */}
 						{searchResults
 							.filter(item =>
@@ -194,8 +194,9 @@ const ArtistTopTracksCards: React.FC<ArtistPageCardProps> = ({ results, artist }
 													{/* image */}
 													<Grid item xs={3} sm={2} >
 														<Image
-															width = {150}
-															height = {150}
+															unoptimized
+															width={150}
+															height={150}
 															src={item.images}
 															alt={item.name}
 														/>

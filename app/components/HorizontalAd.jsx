@@ -12,21 +12,20 @@ function HorizontalAd() {
   }, []);
 
   return (
-    <div>
+    <div style={{ display: 'flex', justifyContent: 'center' }}>
       {/* AdSense Horizontal Ad unit */}
       <ins
         className="adsbygoogle"
         style={{
-          display:'inline-block',
-          justifyContent:'center',
-          width:'90vw',
-          height:'90px',
+          display: 'block',
+          width: '90vw',
+          height: '90px',
           // display: 'block', width: '88vw',
           // backgroundColor: 'white',  
         }}
         data-ad-client={`${process.env.NEXT_PUBLIC_GOOGLE_ADSENSE}`}
         data-ad-slot="7286492910"
-        data-ad-format="horizontal"
+        data-ad-format="auto"
         data-full-width-responsive="true">
       </ins>
     </div>

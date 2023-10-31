@@ -26,7 +26,7 @@ function VerticalAd() {
         }}
         data-ad-client={`${process.env.NEXT_PUBLIC_GOOGLE_ADSENSE}`}
         data-ad-slot="5255320436"
-        data-ad-format="auto"
+        data-ad-format="vertical"
         data-full-width-responsive="true">
       </ins>
     </div>

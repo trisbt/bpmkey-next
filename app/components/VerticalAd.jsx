@@ -18,8 +18,8 @@ function VerticalAd() {
         className="adsbygoogle"
         style={{
           display: 'inline-block',
-          width: '728px',
-          height: '90px',
+          width: '90px',
+          height: '728px',
           // display: 'block', 
           // backgroundColor:'white', 
           // width:'10em' 

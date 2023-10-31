@@ -3,10 +3,11 @@ import { useEffect } from 'react';
 
 function HorizontalAd() {
   useEffect(() => {
-    try {
-      (window.adsbygoogle = window.adsbygoogle || []).push({});
-    } catch (err) {
-      console.error(err);
+    const insElem = document.querySelector('.adsbygoogle:not([data-ad-loaded])');
+    if (insElem && !insElem.hasAttribute('data-adsbygoogle-status')) {
+      window.adsbygoogle = window.adsbygoogle || [];
+      window.adsbygoogle.push({});
+      insElem.setAttribute('data-ad-loaded', 'true'); // Mark this ins as loaded
     }
   }, []);
 
@@ -16,7 +17,10 @@ function HorizontalAd() {
       <ins
         className="adsbygoogle"
         style={{
-          display: 'block', width: '88vw',
+          display:'inline-block',
+          width:'728px',
+          height:'90px',
+          // display: 'block', width: '88vw',
           // backgroundColor: 'white',  
         }}
         data-ad-client={`${process.env.NEXT_PUBLIC_GOOGLE_ADSENSE}`}

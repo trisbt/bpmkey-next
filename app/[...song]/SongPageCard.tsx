@@ -12,7 +12,7 @@ import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
 import CardMedia from '@mui/material/CardMedia';
 import CardContent from '@mui/material/CardContent';
-import {createTheme} from '@mui/material';
+import { createTheme } from '@mui/material';
 import Fade from '@mui/material/Fade';
 import Hidden from '@mui/material/Hidden';
 import Grid from '@mui/material/Grid';
@@ -28,7 +28,9 @@ import { Credits } from '../types/dataTypes';
 import DisplaySettings from '@mui/icons-material/DisplaySettings';
 import SongRecs from './SongRecs';
 import slugify from 'slugify';
-
+import MultiAd from '../components/MultiAd';
+import CardAd from '../components/CardAd';
+import HorizontalAd from '../components/HorizontalAd';
 //helpers
 const transformSpotifyURItoURL = (uri: string): string | null => {
   const match = uri.match(/spotify:track:([a-zA-Z0-9]+)/);
@@ -109,65 +111,71 @@ const SongPageCard: React.FC<SongPageCardProps> = ({ songDetails, song, artist, 
 
   return (
     <div className='song-page-main background-gradient'>
-      		<Grid item xs={11} md={8}>
-							<Card
-								sx={{
-									display: 'flex',
-									flexDirection: 'row',
-									margin: '20px 10px 0',
-									boxShadow: 0,
-									justifyContent: 'center',
-									backgroundColor: 'transparent',
-									// paddingBottom: '1em',
-								}}
-							>
-								<Typography variant='h4' sx={{
-									display: 'flex',
-									alignItems: 'center',
-									textAlign: 'center',
-									color: '#e8eaf6',
-									fontWeight: 'bold',
-									background: '#e8eaf6',
-									WebkitBackgroundClip: 'text',
-									letterSpacing: '1px',
-									borderRadius: '2px',
-									'@media (max-width: 600px)': {
-										fontSize: '22px'
-									},
-								}}>
-									Bpm, Key, Credits for 
-								</Typography>
-							</Card>
-              <Card
-								sx={{
-									display: 'flex',
-									flexDirection: 'row',
-									margin: '8px 10px 0',
-									boxShadow: 0,
-									justifyContent: 'center',
-									backgroundColor: 'transparent',
-									// paddingBottom: '1em',
-								}}
-							>
-								<Typography variant='h5' sx={{
-									display: 'flex',
-									alignItems: 'center',
-									textAlign: 'center',
-									color: '#e8eaf6',
-									// fontWeight: 'bold',
-									background: '#e8eaf6',
-									WebkitBackgroundClip: 'text',
-									letterSpacing: '1px',
-									borderRadius: '2px',
-									fontStyle: 'italic',
-									'@media (max-width: 600px)': {
-										fontSize: '22px'
-									},
-								}}>
-									{songDetails.name} by {songDetails.artists[0].name}
-								</Typography>
-							</Card>
-						</Grid>
+      <Grid item xs={11} md={8}>
+        <Grid container item md={12} justifyContent='center' paddingBottom='1em'>
+          <HorizontalAd />
+        </Grid>
+        <Card
+          sx={{
+            display: 'flex',
+            flexDirection: 'row',
+            margin: '20px 10px 0',
+            boxShadow: 0,
+            justifyContent: 'center',
+            backgroundColor: 'transparent',
+            // paddingBottom: '1em',
+          }}
+        >
+          <Typography variant='h4' sx={{
+            display: 'flex',
+            alignItems: 'center',
+            textAlign: 'center',
+            color: '#e8eaf6',
+            fontWeight: 'bold',
+            background: '#e8eaf6',
+            WebkitBackgroundClip: 'text',
+            letterSpacing: '1px',
+            borderRadius: '2px',
+            '@media (max-width: 600px)': {
+              fontSize: '22px'
+            },
+          }}>
+            Bpm, Key, Credits for
+          </Typography>
+        </Card>
+
+        <Card
+          sx={{
+            display: 'flex',
+            flexDirection: 'row',
+            margin: '8px 10px 0',
+            boxShadow: 0,
+            justifyContent: 'center',
+            backgroundColor: 'transparent',
+            // paddingBottom: '1em',
+          }}
+        >
+          <Typography variant='h5' sx={{
+            display: 'flex',
+            alignItems: 'center',
+            textAlign: 'center',
+            color: '#e8eaf6',
+            // fontWeight: 'bold',
+            background: '#e8eaf6',
+            WebkitBackgroundClip: 'text',
+            letterSpacing: '1px',
+            borderRadius: '2px',
+            fontStyle: 'italic',
+            '@media (max-width: 600px)': {
+              fontSize: '22px'
+            },
+          }}>
+            {songDetails.name} by {songDetails.artists[0].name}
+          </Typography>
+        </Card>
+
+
+      </Grid>
       <div className='song-page-container '>
         {songDetails && (
           <Card sx={{
@@ -351,6 +359,10 @@ const SongPageCard: React.FC<SongPageCardProps> = ({ songDetails, song, artist, 
               </Grid>
             </Grid>
 
+            <Grid item display='flex' justifyContent='center' >
+              <MultiAd />
+            </Grid>
+
             {/* analysis row */}
             <Grid item container xs={12} justifyContent='center' >
 
@@ -513,7 +525,7 @@ const SongPageCard: React.FC<SongPageCardProps> = ({ songDetails, song, artist, 
 
       </div>
       {/* <div className='recs-page-container'> */}
-        {/* <SongRecs recs={recs} /> */}
+      {/* <SongRecs recs={recs} /> */}
       {/* </div> */}
     </div>
   )

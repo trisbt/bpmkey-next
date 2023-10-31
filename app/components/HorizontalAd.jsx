@@ -8,15 +8,18 @@ function HorizontalAd() {
     } catch (err) {
       console.error(err);
     }
-  }, []); 
+  }, []);
 
   return (
     <div>
-      AdSense Horizontal Ad unit
-      <ins 
+      {/* AdSense Horizontal Ad unit */}
+      <ins
         className="adsbygoogle"
-        style={{ display: 'block', width: '88vw', backgroundColor: 'white' }}
-        data-ad-client="ca-pub-5259100144989457"
+        style={{
+          display: 'block', width: '88vw',
+          // backgroundColor: 'white',  
+        }}
+        data-ad-client={`${process.env.NEXT_PUBLIC_GOOGLE_ADSENSE}`}
         data-ad-slot="7286492910"
         data-ad-format="auto"
         data-full-width-responsive="true">
@@ -27,4 +30,3 @@ function HorizontalAd() {
 
 export default HorizontalAd;
 
-  

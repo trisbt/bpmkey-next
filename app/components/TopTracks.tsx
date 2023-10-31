@@ -22,7 +22,7 @@ import slugify from 'slugify';
 import VerticalAd from './VerticalAd';
 import HorizontalAd from './HorizontalAd';
 import { Hidden } from '@mui/material';
-
+import CardAd from './CardAd';
 
 const SmallPlayButton = styled(IconButton)(() => ({
   '&&': {
@@ -74,6 +74,7 @@ const TopTracks: React.FC<TopTracksCardProps> = ({ results }) => {
                   <HorizontalAd />
                 </Grid>
               </Hidden>
+
               {/* text row */}
               <Grid item xs={11} md={8}>
                 <Card
@@ -118,14 +119,16 @@ const TopTracks: React.FC<TopTracksCardProps> = ({ results }) => {
                   <Grid container item xs={1}
                     display='flex'
                     justifyContent='flex-start'
+
                   >
+               
                     <VerticalAd />
-                    <VerticalAd />
+                    <Box height='20em' />
                     <VerticalAd />
                   </Grid>
                 </Hidden>
 
-                <Grid container item xs={12} lg={10}sx={{
+                <Grid container item xs={12} lg={10} sx={{
                   display: 'flex',
                   justifyContent: 'center'
                 }}>
@@ -293,15 +296,24 @@ const TopTracks: React.FC<TopTracksCardProps> = ({ results }) => {
                       </Link>
                     </Grid>
                   ))}
+
+                  {/* <Hidden lgUp> */}
+                  <Grid container item xs={11} md={10} justifyContent='center' paddingBottom='1em'>
+                    {/* <CardAd /> */}
+                  </Grid>
+                  {/* </Hidden> */}
                 </Grid>
 
-                 <Hidden lgDown>
+                <Hidden lgDown>
                   <Grid container item xs={1}
                     display='flex'
                     justifyContent='flex-end'
+
+                  // backgroundColor='red'
                   >
                     <VerticalAd />
-                    <VerticalAd />
+
+                    <Box height='20em' />
                     <VerticalAd />
                   </Grid>
                 </Hidden>

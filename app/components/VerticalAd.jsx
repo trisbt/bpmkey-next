@@ -12,11 +12,13 @@ function VerticalAd() {
 
     return (
       <div>
-        AdSense Ad unit
+        {/* AdSense Ad unit */}
         <ins 
           className="adsbygoogle"
-          style={{ display: 'block', backgroundColor:'white', width:'10em' }}
-          data-ad-client="ca-pub-5259100144989457"
+          style={{ display: 'block', 
+          // backgroundColor:'white', 
+          width:'10em' }}
+          data-ad-client={`${process.env.NEXT_PUBLIC_GOOGLE_ADSENSE}`}
           data-ad-slot="5255320436"
           data-ad-format="auto"
           data-full-width-responsive="true">

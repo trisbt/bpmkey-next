@@ -3,10 +3,11 @@ import { useEffect } from "react";
 
 function MultiAd() {
     useEffect(() => {
-        try {
-            (window.adsbygoogle = window.adsbygoogle || []).push({});
-        } catch (err) {
-            console.error(err);
+        const insElem = document.querySelector('.adsbygoogle:not([data-ad-loaded])');
+        if (insElem && !insElem.hasAttribute('data-adsbygoogle-status')) {
+          window.adsbygoogle = window.adsbygoogle || [];
+          window.adsbygoogle.push({});
+          insElem.setAttribute('data-ad-loaded', 'true'); // Mark this ins as loaded
         }
     }, []);
 
@@ -16,10 +17,13 @@ function MultiAd() {
             <ins
                 className="adsbygoogle"
                 style={{
-                    display: 'block',
+                    display: 'inline-block',
+                    width: '728px',
+                    height: '90px',
+                    // display: 'block',
                     // backgroundColor: 'black',
                     // height: '8em',
-                    width: '85vw',
+                    // width: '85vw',
                     borderRadius: '.2em',
                     // margin: '10px 10px 0',
                     // boxShadow: 3,

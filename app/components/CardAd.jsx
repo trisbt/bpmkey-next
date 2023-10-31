@@ -18,7 +18,7 @@ function CardAd() {
                 className="adsbygoogle"
                 style={{
                     display:'inline-block',
-          width:'728px',
+          width:'80vw',
           height:'90px',
                     // display: 'block',
                     // backgroundColor: 'black',

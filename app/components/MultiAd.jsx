@@ -18,7 +18,7 @@ function MultiAd() {
                 className="adsbygoogle"
                 style={{
                     display: 'inline-block',
-                    width: '728px',
+                    width: '90vw',
                     height: '90px',
                     // display: 'block',
                     // backgroundColor: 'black',

@@ -27,7 +27,7 @@ function HorizontalAd() {
         }}
         data-ad-client={`${process.env.NEXT_PUBLIC_GOOGLE_ADSENSE}`}
         data-ad-slot="7286492910"
-        data-ad-format="rectangle"
+        data-ad-format="auto"
         data-full-width-responsive="true">
       </ins>
     </div>

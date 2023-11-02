@@ -101,8 +101,10 @@ const AlbumTrackCards: React.FC<AlbumPageCardProps> = ({ results, album }) => {
 
 	return (
 		<Box>
-			<Grid container item auto justifyContent='center' paddingBottom='1em'>
-				<HorizontalAd />
+			<Grid container justifyContent="center" paddingBottom="1em">
+				<Grid item xs="auto">
+					<HorizontalAd />
+				</Grid>
 			</Grid>
 			<Grid container item xs={12} justifyContent='center' alignItems='center' >
 				{searchResults && (
@@ -401,8 +403,10 @@ const AlbumTrackCards: React.FC<AlbumPageCardProps> = ({ results, album }) => {
 					</>
 				)}
 			</Grid >
-			<Grid container item auto justifyContent='center' paddingBottom='1em'>
-				<HorizontalAd />
+			<Grid container justifyContent="center" paddingBottom="1em">
+				<Grid item xs="auto">
+					<HorizontalAd />
+				</Grid>
 			</Grid>
 		</Box>
 	)

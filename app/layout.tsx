@@ -7,12 +7,12 @@ import { Suspense } from 'react'
 import { Analytics } from '@vercel/analytics/react'
 import ThemeRegistry from './ThemeRegistry'
 import Script from 'next/script'
-import { Viewport } from 'next'
 
-export const viewport: Viewport = {
-  content: "width=device-width, initial-scale=1"
+export const viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 1,
 }
-
 
 export const metadata: Metadata = {
   title: `BpmKey - Find A Song's Key, BPM, and Credits`,

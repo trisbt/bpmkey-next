@@ -111,10 +111,11 @@ const SongPageCard: React.FC<SongPageCardProps> = ({ songDetails, song, artist, 
 
   return (
     <div className='song-page-main background-gradient'>
+      <Grid container item md={12} justifyContent='center' paddingBottom='1em'>
+        <HorizontalAd />
+      </Grid>
       <Grid item xs={11} md={8}>
-        <Grid container item md={12} justifyContent='center' paddingBottom='1em'>
-          <HorizontalAd />
-        </Grid>
+
         <Card
           sx={{
             display: 'flex',

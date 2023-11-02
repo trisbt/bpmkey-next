@@ -5,9 +5,9 @@ function CardAd() {
     useEffect(() => {
         const insElem = document.querySelector('.adsbygoogle:not([data-ad-loaded])');
         if (insElem && !insElem.hasAttribute('data-adsbygoogle-status')) {
-          window.adsbygoogle = window.adsbygoogle || [];
-          window.adsbygoogle.push({});
-          insElem.setAttribute('data-ad-loaded', 'true'); // Mark this ins as loaded
+            window.adsbygoogle = window.adsbygoogle || [];
+            window.adsbygoogle.push({});
+            insElem.setAttribute('data-ad-loaded', 'true'); // Mark this ins as loaded
         }
     }, []);
 
@@ -17,9 +17,10 @@ function CardAd() {
             <ins
                 className="adsbygoogle"
                 style={{
-                    display:'inline-block',
-          width:'80vw',
-          height:'90px',
+                    display: 'inline-block',
+                    width: '80vw',
+                    height: '200px',
+                    // border: '1px solid red',
                     // display: 'block',
                     // backgroundColor: 'black',
                     // height: '10em',

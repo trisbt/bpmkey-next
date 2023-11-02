@@ -19,7 +19,8 @@ function MultiAd() {
                 style={{
                     display: 'inline-block',
                     width: '90vw',
-                    height: '90px',
+                    height: '100px',
+                    // border:'1px solid red',
                     // display: 'block',
                     // backgroundColor: 'black',
                     // height: '8em',

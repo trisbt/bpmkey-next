@@ -139,9 +139,9 @@ const SearchCards: React.FC<SearchPageCardProps> = ({ results }) => {
 				{searchResults.length > 0 && (
 					<>
 						{/* <Hidden lgUp> */}
-							<Grid container item md={12} justifyContent='center' paddingBottom='1em'>
-								<HorizontalAd />
-							</Grid>
+						<Grid container item md={12} justifyContent='center' paddingBottom='1em'>
+							<HorizontalAd />
+						</Grid>
 						{/* </Hidden> */}
 						{/* text row */}
 						<Grid item xs={11} md={8}>
@@ -211,229 +211,229 @@ const SearchCards: React.FC<SearchPageCardProps> = ({ results }) => {
 								justifyContent='center'
 
 							>
-							{searchResults
-								.filter(item =>
-									(!activeSlice || activeSlice.length === 0 || activeSlice.includes(item.key))
-									&& item.tempo >= tempoSelect[0]
-									&& item.tempo <= tempoSelect[1]
-								)
-								.sort((a, b) => {
-									if (sortBy && sortOrder) {
-										if (sortBy === "key") {
-											const aValue = reverseKeyConvert(a.key) || 0;
-											const bValue = reverseKeyConvert(b.key) || 0;
-											return sortOrder === "asc" ? aValue - bValue : bValue - aValue;
-										} else {
-											return sortOrder === "asc" ? a[sortBy] - b[sortBy] : b[sortBy] - a[sortBy];
+								{searchResults
+									.filter(item =>
+										(!activeSlice || activeSlice.length === 0 || activeSlice.includes(item.key))
+										&& item.tempo >= tempoSelect[0]
+										&& item.tempo <= tempoSelect[1]
+									)
+									.sort((a, b) => {
+										if (sortBy && sortOrder) {
+											if (sortBy === "key") {
+												const aValue = reverseKeyConvert(a.key) || 0;
+												const bValue = reverseKeyConvert(b.key) || 0;
+												return sortOrder === "asc" ? aValue - bValue : bValue - aValue;
+											} else {
+												return sortOrder === "asc" ? a[sortBy] - b[sortBy] : b[sortBy] - a[sortBy];
+											}
 										}
-									}
-									return 0;
-								})
-								.map((item: SearchDetails, index: number) => {
-									const elements: React.ReactNode[] = [];
-									elements.push(
-										<Grid item xs={11} md={8} key={index}>
-											{/* each card */}
-											<Link prefetch={false} href={`
+										return 0;
+									})
+									.map((item: SearchDetails, index: number) => {
+										const elements: React.ReactNode[] = [];
+										elements.push(
+											<Grid item xs={11} md={8} key={index}>
+												{/* each card */}
+												<Link prefetch={false} href={`
 									/${slugify(item.name, { lower: true, strict: true })}
 									/${slugify(item.artists[0].name, { lower: true, strict: true })}
 									/${item.id}`}>
-												<Card
-													sx={{
-														display: 'flex',
-														flexDirection: 'row',
-														margin: '10px 10px 0',
-														boxShadow: 3,
-														"&:hover": {
-															backgroundColor: "#e0e0e0",
-														}
-													}}
-												>
-													<CardContent sx={{
-														width: '80vw',
-														paddingBottom: '15px',
-														'&:last-child': {
+													<Card
+														sx={{
+															display: 'flex',
+															flexDirection: 'row',
+															margin: '10px 10px 0',
+															boxShadow: 3,
+															"&:hover": {
+																backgroundColor: "#e0e0e0",
+															}
+														}}
+													>
+														<CardContent sx={{
+															width: '80vw',
 															paddingBottom: '15px',
-														}
-													}}>
-														<Grid container >
-															{/* image */}
-															<Grid item xs={3} sm={2} >
-																<Image
-																	unoptimized
-																	src={item.images}
-																	width={150}
-																	height={150}
-																	alt={item.name}
-																/>
-															</Grid>
-															{/* song info */}
-															<Grid item xs={9} sm={5} sx={{
-																paddingLeft: '.5em',
-															}}>
-																<Typography component="div" color="text.primary" variant="h5" sx={{
-																	"@media (max-width: 600px)": {
-																		fontSize: '1rem'
-																	},
+															'&:last-child': {
+																paddingBottom: '15px',
+															}
+														}}>
+															<Grid container >
+																{/* image */}
+																<Grid item xs={3} sm={2} >
+																	<Image
+																		unoptimized
+																		src={item.images}
+																		width={150}
+																		height={150}
+																		alt={item.name}
+																	/>
+																</Grid>
+																{/* song info */}
+																<Grid item xs={9} sm={5} sx={{
+																	paddingLeft: '.5em',
 																}}>
-																	{item.name}
-																</Typography>
-																<Typography variant="h6" color="text.secondary" component="div" sx={{
-																	"@media (max-width: 600px)": {
-																		fontSize: '1rem'
-																	},
-																}}>
-																	{item.artists.map((artist, index) => (
-																		<span key={index}>
-																			{artist.name}
-																			{index < item.artists.length - 1 && (
-																				<span style={{ color: '#B3C7ED', fontStyle: 'italic', marginLeft: '5px', marginRight: '5px' }}>|</span>
-																			)}
-																		</span>
-																	))}
-																</Typography>
-																<Typography variant="subtitle1" color="text.secondary" component="div" sx={{
-																	"@media (max-width: 600px)": {
-																		fontSize: '.7em',
-																	}
-																}}>
-																	{item.albums}
-																</Typography>
-															</Grid>
-
-															<Grid container item xs={12} sm={5} alignItems='center' rowSpacing={1} sx={{
-																"@media (max-width: 600px)": {
-																	paddingTop: '.8rem',
-																}
-															}}>
-																<Grid item xs={4} sm={6}  >
-																	{/* <Card sx={{ width: '90%' }}> */}
-																	<Typography variant="subtitle1" color="text.secondary" component="div"
-																		sx={{
-																			display: 'flex', flexDirection: 'column', alignItems: 'center', lineHeight: '1rem',
-																			"@media (max-width: 600px)": {
-																				fontSize: '.8em',
-																			}
-																		}}
-																	>
-																		Key
-																		<Typography className='song-sub-info' variant="h4" color="text.primary" component="div" sx={{
-																			"@media (max-width: 600px)": {
-																				fontSize: '1.5rem',
-																			}
-																		}}>
-																			{item.key}
-																		</Typography>
+																	<Typography component="div" color="text.primary" variant="h5" sx={{
+																		"@media (max-width: 600px)": {
+																			fontSize: '1rem'
+																		},
+																	}}>
+																		{item.name}
 																	</Typography>
-																	{/* </Card> */}
+																	<Typography variant="h6" color="text.secondary" component="div" sx={{
+																		"@media (max-width: 600px)": {
+																			fontSize: '1rem'
+																		},
+																	}}>
+																		{item.artists.map((artist, index) => (
+																			<span key={index}>
+																				{artist.name}
+																				{index < item.artists.length - 1 && (
+																					<span style={{ color: '#B3C7ED', fontStyle: 'italic', marginLeft: '5px', marginRight: '5px' }}>|</span>
+																				)}
+																			</span>
+																		))}
+																	</Typography>
+																	<Typography variant="subtitle1" color="text.secondary" component="div" sx={{
+																		"@media (max-width: 600px)": {
+																			fontSize: '.7em',
+																		}
+																	}}>
+																		{item.albums}
+																	</Typography>
 																</Grid>
 
-																<Grid item xs={4} sm={6} sx={{
+																<Grid container item xs={12} sm={5} alignItems='center' rowSpacing={1} sx={{
 																	"@media (max-width: 600px)": {
-																		marginRight: '.5em',
+																		paddingTop: '.8rem',
 																	}
 																}}>
-																	{/* <Card sx={{ width: '90%' }}> */}
-																	<Typography variant="subtitle1" color="text.secondary" component="div"
-																		sx={{
-																			display: 'flex', flexDirection: 'column', alignItems: 'center', lineHeight: '1rem',
-																			"@media (max-width: 600px)": {
-																				fontSize: '.8em',
-																			}
-																		}}
-																	>
-																		BPM
-																		<Typography className='song-sub-info' variant="h4" color="text.primary" component="div" sx={{
-																			"@media (max-width: 600px)": {
-																				fontSize: '1.5rem',
-																			}
-																		}}>
-																			{item.tempo}
-																		</Typography>
-																	</Typography>
-																	{/* </Card> */}
-																</Grid>
-
-																{/* preview button */}
-																<Grid item xs={3} sm={6} sx={{
-																	display: 'flex',
-																	justifyContent: 'center'
-																}} >
-																	{item.preview_url && (
-																		<SmallPlayButton className='preview-button' sx={{
-																			boxShadow: 3,
-																			borderRadius: '50px',
-
-																		}}
-																			onClick={(event) => playAudio(event, item.preview_url || null)}
+																	<Grid item xs={4} sm={6}  >
+																		{/* <Card sx={{ width: '90%' }}> */}
+																		<Typography variant="subtitle1" color="text.secondary" component="div"
+																			sx={{
+																				display: 'flex', flexDirection: 'column', alignItems: 'center', lineHeight: '1rem',
+																				"@media (max-width: 600px)": {
+																					fontSize: '.8em',
+																				}
+																			}}
 																		>
-																			{currentlyPlayingUrl === item.preview_url ? (
-																				<>
-																					<StopIcon aria-label="stop"
-																						sx={{
-																							height: 36,
-																							width: 36,
-																						}}
-																					/>
-																				</>
-																			) : (
-																				<>
-																					<PlayArrowIcon aria-label="play/pause"
-																						sx={{
-																							height: 35,
-																							width: 35,
-																						}}
-																					/>
-																				</>
-																			)}
-																		</SmallPlayButton>
-																	)}
-																	<audio ref={audioRef} onEnded={() => setCurrentlyPlayingUrl(null)}></audio>
+																			Key
+																			<Typography className='song-sub-info' variant="h4" color="text.primary" component="div" sx={{
+																				"@media (max-width: 600px)": {
+																					fontSize: '1.5rem',
+																				}
+																			}}>
+																				{item.key}
+																			</Typography>
+																		</Typography>
+																		{/* </Card> */}
+																	</Grid>
+
+																	<Grid item xs={4} sm={6} sx={{
+																		"@media (max-width: 600px)": {
+																			marginRight: '.5em',
+																		}
+																	}}>
+																		{/* <Card sx={{ width: '90%' }}> */}
+																		<Typography variant="subtitle1" color="text.secondary" component="div"
+																			sx={{
+																				display: 'flex', flexDirection: 'column', alignItems: 'center', lineHeight: '1rem',
+																				"@media (max-width: 600px)": {
+																					fontSize: '.8em',
+																				}
+																			}}
+																		>
+																			BPM
+																			<Typography className='song-sub-info' variant="h4" color="text.primary" component="div" sx={{
+																				"@media (max-width: 600px)": {
+																					fontSize: '1.5rem',
+																				}
+																			}}>
+																				{item.tempo}
+																			</Typography>
+																		</Typography>
+																		{/* </Card> */}
+																	</Grid>
+
+																	{/* preview button */}
+																	<Grid item xs={3} sm={6} sx={{
+																		display: 'flex',
+																		justifyContent: 'center'
+																	}} >
+																		{item.preview_url && (
+																			<SmallPlayButton className='preview-button' sx={{
+																				boxShadow: 3,
+																				borderRadius: '50px',
+
+																			}}
+																				onClick={(event) => playAudio(event, item.preview_url || null)}
+																			>
+																				{currentlyPlayingUrl === item.preview_url ? (
+																					<>
+																						<StopIcon aria-label="stop"
+																							sx={{
+																								height: 36,
+																								width: 36,
+																							}}
+																						/>
+																					</>
+																				) : (
+																					<>
+																						<PlayArrowIcon aria-label="play/pause"
+																							sx={{
+																								height: 35,
+																								width: 35,
+																							}}
+																						/>
+																					</>
+																				)}
+																			</SmallPlayButton>
+																		)}
+																		<audio ref={audioRef} onEnded={() => setCurrentlyPlayingUrl(null)}></audio>
+																	</Grid>
 																</Grid>
 															</Grid>
-														</Grid>
-													</CardContent>
-												</Card>
-											</Link>
-										</Grid>
-									);
-									if ((index + 1) % 5 === 0) {
-										elements.push(
-											<Grid item xs={11} md={8} key={"ad_" + index} display='flex' justifyContent='center'>
-												<Card
-													sx={{
-														width: '80vw',
-														display: 'flex',
-														// flexDirection: 'row',
-														justifyContent: 'center',
-														margin: '10px 10px 0',
-														boxShadow: 3,
-														"&:hover": {
-															backgroundColor: "#e0e0e0",
-														},
-														"@media (max-width: 600px)": {
-															width: '90vw',
-														}
-													}}
-												>
-													<CardContent sx={{
-														width: '80vw',
-														"@media (max-width: 600px)": {
-															width: '90vw',
-														}
-													}}>
-														<CardAd />
-													</CardContent>
-												</Card>
+														</CardContent>
+													</Card>
+												</Link>
 											</Grid>
 										);
-									}
+										if ((index + 1) % 5 === 0) {
+											elements.push(
+												<Grid item xs={11} md={8} key={"ad_" + index} display='flex' justifyContent='center'>
+													<Card
+														sx={{
+															width: '80vw',
+															display: 'flex',
+															// flexDirection: 'row',
+															justifyContent: 'center',
+															margin: '10px 10px 0',
+															boxShadow: 3,
+															"&:hover": {
+																backgroundColor: "#e0e0e0",
+															},
+															"@media (max-width: 600px)": {
+																width: '90vw',
+															}
+														}}
+													>
+														<CardContent sx={{
+															width: '80vw',
+															"@media (max-width: 600px)": {
+																width: '90vw',
+															}
+														}}>
+															<CardAd />
+														</CardContent>
+													</Card>
+												</Grid>
+											);
+										}
 
-									return elements;
-								})
-								.flat()
-							}
-									</Grid>
+										return elements;
+									})
+									.flat()
+								}
+							</Grid>
 							<Hidden mdDown>
 								<Grid container item xs={1}
 									display='flex'
@@ -461,7 +461,9 @@ const SearchCards: React.FC<SearchPageCardProps> = ({ results }) => {
 								</LoadButton>
 							</div>
 						</Grid>
-
+						<Grid container item md={12} justifyContent='center' paddingBottom='1em'>
+							<HorizontalAd />
+						</Grid>
 					</>
 				)}
 			</Grid >

@@ -20,6 +20,7 @@ function VerticalAd() {
           display: 'inline-block',
           width: '180px',
           height: '728px',
+          // border:'1px solid red',
           // display: 'block', 
           // backgroundColor:'white', 
           // width:'10em' 

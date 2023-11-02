@@ -87,12 +87,21 @@ const Footer: FC = () => {
 
             </Link>
           </Typography>
+
           <Typography variant="subtitle2" color='text.secondary' gutterBottom sx={{
             '@media (max-width:600px)': {
               fontSize: '12px',
             }
           }}>
             Credits data provided by Discogs - rate limiting applies
+          </Typography>
+
+          <Typography variant="subtitle2" color='text.secondary' gutterBottom sx={{
+            '@media (max-width:600px)': {
+              fontSize: '12px',
+            }
+          }}>
+            © 2023 BpmKey.com. All Rights Reserved. | <Link href="/privacy">[Privacy Policy]</Link>
           </Typography>
 
         </Box>

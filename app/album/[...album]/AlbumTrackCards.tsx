@@ -403,7 +403,7 @@ const AlbumTrackCards: React.FC<AlbumPageCardProps> = ({ results, album }) => {
 					</>
 				)}
 			</Grid >
-			<Grid container justifyContent="center" paddingBottom="1em">
+			<Grid container justifyContent="center" paddingTop='1em' paddingBottom="1em">
 				<Grid item xs="auto">
 					<HorizontalAd />
 				</Grid>

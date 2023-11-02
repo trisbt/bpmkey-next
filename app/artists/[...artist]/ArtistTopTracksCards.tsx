@@ -418,7 +418,7 @@ const ArtistTopTracksCards: React.FC<ArtistPageCardProps> = ({ results, artist }
 					</>
 				)}
 			</Grid >
-			<Grid container justifyContent="center" paddingBottom="1em">
+			<Grid container justifyContent="center" paddingTop='1em' paddingBottom="1em">
 				<Grid item xs="auto">
 					<HorizontalAd />
 				</Grid>

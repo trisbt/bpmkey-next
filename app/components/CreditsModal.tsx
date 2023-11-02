@@ -90,7 +90,7 @@ const CreditsModal: React.FC<CreditsModalProps> = ({ open, handleClose, credits 
                             }}>
                                 {credits && credits.map((el) => (
                                     typeof el === 'object' && 'artist_name' in el ? (
-                                        <li key={el.artist_name}>
+                                        <li key={el.artist_name} className='credits-list'>
                                             <span className="even-credit">{el.artist_name}</span><span className="odd-credit"> - {el.role}</span>
                                         </li>
                                     ) : null

@@ -97,7 +97,7 @@ const SmallCreditsButton = styled(Button)(() => ({
 
 const SongPageCard: React.FC<SongPageCardProps> = ({ songDetails, song, artist, id, recs }) => {
   const [showCredits, setShowCredits] = useState<boolean>(false);
-  const [credits, setCredits] = useState<Credits>(null)
+  const [credits, setCredits] = useState<Credits>(null);
   const slugifiedAlbumName = slugify(songDetails.albums, { lower: true, strict: true });
   const slugifiedArtistName = slugify(songDetails.artists[0].name, { lower: true, strict: true });
 

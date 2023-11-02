@@ -20,7 +20,7 @@ function MultiAd() {
                     display: 'inline-block',
                     width: '90vw',
                     height: '100px',
-                    border:'1px solid red',
+                    // border:'1px solid red',
                     borderRadius: '.2em',
                 }}
                 data-ad-client={`${process.env.NEXT_PUBLIC_GOOGLE_ADSENSE}`}

@@ -524,7 +524,9 @@ const SongPageCard: React.FC<SongPageCardProps> = ({ songDetails, song, artist, 
         )}
 
       </div>
-     
+      <Grid container item md={12} justifyContent='center' paddingBottom='1em'>
+        <HorizontalAd />
+      </Grid>
       {/* <div className='recs-page-container'> */}
       {/* <SongRecs recs={recs} /> */}
       {/* </div> */}

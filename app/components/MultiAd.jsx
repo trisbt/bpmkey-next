@@ -20,14 +20,8 @@ function MultiAd() {
                     display: 'inline-block',
                     width: '90vw',
                     height: '100px',
-                    // border:'1px solid red',
-                    // display: 'block',
-                    // backgroundColor: 'black',
-                    // height: '8em',
-                    // width: '85vw',
+                    border:'1px solid red',
                     borderRadius: '.2em',
-                    // margin: '10px 10px 0',
-                    // boxShadow: 3,
                 }}
                 data-ad-client={`${process.env.NEXT_PUBLIC_GOOGLE_ADSENSE}`}
                 data-ad-slot="3828865145"

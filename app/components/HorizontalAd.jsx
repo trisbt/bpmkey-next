@@ -18,8 +18,8 @@ function HorizontalAd() {
         className="adsbygoogle"
         style={{
           display: 'block',
-          width: '90vw',
-          height: '180px',
+          width: '95vw',
+          // height: '120px',
           // border: '1px solid red',
 
           // display: 'block', width: '88vw',

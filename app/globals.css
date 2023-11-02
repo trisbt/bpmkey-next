@@ -2,6 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  html,
+  body {
+    @apply w-full;
+  }
+}
+
 :root {
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
@@ -16,12 +23,6 @@
   }
 } */
 
-/* @font-face {
-  font-family: 'Speed';
-  src: url('../public/A4SPEED-Bold.ttf') format('truetype');
-  font-weight: normal;
-  font-style: normal;
-} */
 
 
 .background-image {
@@ -139,5 +140,10 @@ hr {
 @media (max-width: 700px) {
   .searchform-container {
     padding-right: 0;
+  }
+}
+@media (orientation: landscape) {
+  .landscape\:w-screen {
+    width: 100vw;
   }
 }

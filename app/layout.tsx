@@ -17,7 +17,6 @@ export const viewport = {
 export const metadata: Metadata = {
   title: `BpmKey - Find A Song's Key, BPM, and Credits`,
   description: `BpmKey - Find A Song's Key, BPM, and Credits`,
-
 }
 
 export default function RootLayout({
@@ -36,7 +35,7 @@ export default function RootLayout({
           crossOrigin="anonymous"
         />
       </head>
-      <body >
+      <body class="landscape:w-screen">
 
         <ThemeRegistry options={{ key: 'mui' }}>
           <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>

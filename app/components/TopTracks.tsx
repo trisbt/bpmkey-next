@@ -69,11 +69,11 @@ const TopTracks: React.FC<TopTracksCardProps> = ({ results }) => {
         <Grid container item xs={12} justifyContent='center' alignItems='center' >
           {results && (
             <>
-              <Hidden lgUp>
-                <Grid container item md={12} justifyContent='center' paddingBottom='1em'>
-                  <HorizontalAd />
-                </Grid>
-              </Hidden>
+              {/* <Hidden lgUp> */}
+              <Grid container item md={12} justifyContent='center' paddingBottom='1em'>
+                <HorizontalAd />
+              </Grid>
+              {/* </Hidden> */}
 
               {/* text row */}
               <Grid item xs={11} md={8}>
@@ -109,24 +109,20 @@ const TopTracks: React.FC<TopTracksCardProps> = ({ results }) => {
 
               {/* main search */}
               <Grid container item xs={12} display='flex' direction='row'
-                // wrap='no-wrap'
-                alignItems='flex-start'
+                alignContent='center'
+                alignItems='center'
                 justifyContent='space-between'
-
               >
-
-                <Hidden lgDown>
-                  <Grid container item xs={1}
-                    display='flex'
-                    justifyContent='flex-start'
-
-                  >
-               
+                <Grid container item xs={1}
+                  display='flex'
+                  justifyContent='flex-start'
+                >
+                  <Hidden lgDown>
                     <VerticalAd />
                     <Box height='20em' />
                     <VerticalAd />
-                  </Grid>
-                </Hidden>
+                  </Hidden>
+                </Grid>
 
                 <Grid container item xs={12} lg={10} sx={{
                   display: 'flex',
@@ -304,25 +300,25 @@ const TopTracks: React.FC<TopTracksCardProps> = ({ results }) => {
                   {/* </Hidden> */}
                 </Grid>
 
-                <Hidden lgDown>
-                  <Grid container item xs={1}
+                <Grid container item xs={1}
                     display='flex'
                     justifyContent='flex-end'
-
-                  // backgroundColor='red'
                   >
+                <Hidden lgDown>           
                     <VerticalAd />
-
                     <Box height='20em' />
                     <VerticalAd />
-                  </Grid>
                 </Hidden>
+                </Grid>
 
               </Grid>
             </>
           )}
         </Grid >
       </Box>
+      <Grid container item md={12} justifyContent='center' paddingBottom='1em'>
+        <HorizontalAd />
+      </Grid>
     </div >
   );
 

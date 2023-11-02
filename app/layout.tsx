@@ -7,7 +7,12 @@ import { Suspense } from 'react'
 import { Analytics } from '@vercel/analytics/react'
 import ThemeRegistry from './ThemeRegistry'
 import Script from 'next/script'
-import HorizontalAd from './components/HorizontalAd'
+
+export const viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 1,
+}
 
 export const metadata: Metadata = {
   title: `BpmKey - Find A Song's Key, BPM, and Credits`,
@@ -23,7 +28,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-      <Script
+        <Script
           id="Absence-banner"
           async
           strategy="lazyOnload"
@@ -32,7 +37,7 @@ export default function RootLayout({
         />
       </head>
       <body >
-   
+
         <ThemeRegistry options={{ key: 'mui' }}>
           <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
             <Navbar />
@@ -42,9 +47,6 @@ export default function RootLayout({
                 <Analytics />
               </Suspense>
             </div>
-
-            <HorizontalAd />
-
             <Footer />
           </div>
         </ThemeRegistry>

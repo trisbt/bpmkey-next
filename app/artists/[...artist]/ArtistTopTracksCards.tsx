@@ -105,11 +105,11 @@ const ArtistTopTracksCards: React.FC<ArtistPageCardProps> = ({ results, artist }
 			<Grid container item xs={12} justifyContent='center' alignItems='center' >
 				{searchResults && (
 					<>
-						<Hidden lgUp>
-						<Grid container item md={12} justifyContent='center' paddingBottom='1em'>
-							<HorizontalAd />
-						</Grid>
-						</Hidden>
+						{/* <Hidden lgUp> */}
+							<Grid container item md={12} justifyContent='center' paddingBottom='1em'>
+								<HorizontalAd />
+							</Grid>
+						{/* </Hidden> */}
 						{/* text row */}
 						<Grid item xs={11} md={8}>
 							<Card
@@ -160,19 +160,16 @@ const ArtistTopTracksCards: React.FC<ArtistPageCardProps> = ({ results, artist }
 							justifyContent='space-between'
 
 						>
-							<Hidden lgDown>
-								<Grid container item xs={1}
-
-									display='flex'
-									justifyContent='flex-start'
-
-								>
-
+							<Grid container item xs={1}
+								display='flex'
+								justifyContent='flex-start'
+							>
+								<Hidden lgDown>
 									<VerticalAd />
-									{/* <Box height='25em' /> */}
-									{/* <VerticalAd /> */}
-								</Grid>
-							</Hidden>
+									<Box height='20em' />
+									<VerticalAd />
+								</Hidden>
+							</Grid>
 
 							{/* main search */}
 							<Grid container item xs={12} lg={10} display='flex'
@@ -405,20 +402,20 @@ const ArtistTopTracksCards: React.FC<ArtistPageCardProps> = ({ results, artist }
 								}
 							</Grid>
 
-							<Hidden lgDown>
-								<Grid container item xs={1}
-									display='flex'
-									justifyContent='flex-end'
-
-								// backgroundColor='red'
-								>
+							<Grid container item xs={1}
+								display='flex'
+								justifyContent='flex-end'
+							>
+								<Hidden lgDown>
 									<VerticalAd />
-
 									<Box height='20em' />
-									{/* <VerticalAd /> */}
-								</Grid>
-							</Hidden>
+									<VerticalAd />
+								</Hidden>
+							</Grid>
 						</Grid >
+						<Grid container item md={12} justifyContent='center' paddingBottom='1em'>
+							<HorizontalAd />
+						</Grid>
 					</>
 				)}
 			</Grid >

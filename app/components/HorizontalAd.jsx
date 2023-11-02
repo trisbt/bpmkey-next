@@ -18,14 +18,16 @@ function HorizontalAd() {
         className="adsbygoogle"
         style={{
           display: 'block',
-          width: '90vw',
-          height: '90px',
+          width: '95vw',
+          height: '180px',
+          // border: '1px solid red',
+
           // display: 'block', width: '88vw',
           // backgroundColor: 'white',  
         }}
         data-ad-client={`${process.env.NEXT_PUBLIC_GOOGLE_ADSENSE}`}
         data-ad-slot="7286492910"
-        data-ad-format="auto"
+        data-ad-format="rectangle"
         data-full-width-responsive="true">
       </ins>
     </div>

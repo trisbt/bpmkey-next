@@ -35,7 +35,7 @@ export default function RootLayout({
           crossOrigin="anonymous"
         />
       </head>
-      <body class="landscape:w-screen">
+      <body className="landscape:w-screen">
 
         <ThemeRegistry options={{ key: 'mui' }}>
           <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>

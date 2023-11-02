@@ -265,14 +265,14 @@ const page = () => {
                         </Typography>
                     </Grid>
 
-                    <Grid item paddingTop='1em' >
+                    {/* <Grid item paddingTop='1em' >
                         <Typography variant='h5' fontWeight='bold' paddingBottom='.5em'>
                             14. Contact Us
                         </Typography>
                         <Typography variant='h7' paddingBottom='.5em'>
                             If you have any questions about this Privacy Policy, please contact us:
                         </Typography>
-                    </Grid>
+                    </Grid> */}
 
                 </Grid>
             </Grid>

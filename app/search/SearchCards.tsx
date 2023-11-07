@@ -402,7 +402,7 @@ const SearchCards: React.FC<SearchPageCardProps> = ({ results }) => {
 												<Grid item xs={11} md={8} key={"ad_" + index} display='flex' justifyContent='center'>
 													<Card
 														sx={{
-															width: '80vw',
+															width: '100vw',
 															display: 'flex',
 															// flexDirection: 'row',
 															justifyContent: 'center',
@@ -412,15 +412,13 @@ const SearchCards: React.FC<SearchPageCardProps> = ({ results }) => {
 																backgroundColor: "#e0e0e0",
 															},
 															"@media (max-width: 600px)": {
-																width: '90vw',
+																// width: '90vw',
 															}
 														}}
 													>
 														<CardContent sx={{
-															width: '80vw',
-															"@media (max-width: 600px)": {
-																width: '90vw',
-															}
+															width: '90vw',
+													
 														}}>
 															<CardAd />
 														</CardContent>

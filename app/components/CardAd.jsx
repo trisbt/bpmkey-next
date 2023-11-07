@@ -19,7 +19,7 @@ function CardAd() {
                 style={{
                     display: 'inline-block',
                     width: '100%',
-                    height: '150px',
+                    height: '200px',
                     // border: '1px solid red',
                 }}
                 data-ad-client={`${process.env.NEXT_PUBLIC_GOOGLE_ADSENSE}`}

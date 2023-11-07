@@ -24,9 +24,9 @@ function CardAd() {
                 }}
                 data-ad-client={`${process.env.NEXT_PUBLIC_GOOGLE_ADSENSE}`}
                
-                data-ad-slot="4317079602"
+                data-ad-slot="4917966981"
                 data-ad-format="fluid"
-                data-ad-layout-key="-fg-29+da-om+bz"
+                data-ad-layout-key="-hl+5+v-9g+fn"
                 data-full-width-responsive="true"
             >
             </ins>

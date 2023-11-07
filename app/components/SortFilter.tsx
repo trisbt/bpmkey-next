@@ -231,7 +231,7 @@ const SortFilter: React.FC<SortFilterProps> = ({ searchQuery, offset, sortOrder,
 
         <ListItem disablePadding>
           <ListItemButton onClick={() => setOpenKey(!openKey)}>
-            <ListItemText primary={<Typography fontSize='1rem' color='black'>Filter by: Key</Typography>} />
+            <ListItemText primary={<Typography fontSize='1rem' component="h1" color='black'>Filter by: Key</Typography>} />
           </ListItemButton>
           <Collapse in={openKey} timeout="auto" unmountOnExit>
             <Box p={1}>
@@ -242,7 +242,7 @@ const SortFilter: React.FC<SortFilterProps> = ({ searchQuery, offset, sortOrder,
 
         <ListItem disablePadding>
           <ListItemButton onClick={() => setOpenTempo(!openTempo)}>
-            <ListItemText primary={<Typography fontSize='1rem' color='black'>Filter by: BPM</Typography>} />
+            <ListItemText primary={<Typography component="h1" fontSize='1rem' color='black'>Filter by: BPM</Typography>} />
           </ListItemButton>
           <Collapse in={openTempo} timeout="auto" unmountOnExit>
             <Box p={2}>  {/* Add padding if needed */}
@@ -346,7 +346,7 @@ const SortFilter: React.FC<SortFilterProps> = ({ searchQuery, offset, sortOrder,
             {/*/ filter */}
             <Grid item xs={12} sm={6} container alignItems="center" spacing={1}>
               <Grid item >
-                <Typography fontSize='1rem' color='white'>Filter by:</Typography>
+                <Typography component="h1" fontSize='1rem' color='white'>Filter by:</Typography>
               </Grid>
               <Grid item >
                 <Accordion
@@ -357,7 +357,7 @@ const SortFilter: React.FC<SortFilterProps> = ({ searchQuery, offset, sortOrder,
                   <StyledAccordionSummary
                     expandIcon={<ExpandMoreIcon />}
                   >
-                    <Typography fontSize='0.8rem' >Key</Typography>
+                    <Typography component="h1" fontSize='0.8rem' >Key</Typography>
                   </StyledAccordionSummary>
 
                   <KeyAccordionDetails>
@@ -378,7 +378,7 @@ const SortFilter: React.FC<SortFilterProps> = ({ searchQuery, offset, sortOrder,
                   <StyledAccordionSummary
                     expandIcon={<ExpandMoreIcon />}
                   >
-                    <Typography fontSize='0.8rem' >BPM</Typography>
+                    <Typography component="h1" fontSize='0.8rem' >BPM</Typography>
                   </StyledAccordionSummary>
                   <TempoAccordionDetails>
                     <form onSubmit={handleTempoSubmit}>
@@ -463,7 +463,7 @@ const SortFilter: React.FC<SortFilterProps> = ({ searchQuery, offset, sortOrder,
               </Grid>
               <Grid item > {/* Wrap the SortButton in a Grid item */}
                 <SortButton onClick={() => handleSort("key")}>
-                  <Typography fontSize='.9rem' sx={{ textTransform: 'none', }}>
+                  <Typography component="h1" fontSize='.9rem' sx={{ textTransform: 'none', }}>
                     Key
                   </Typography>
                   {sortBy === "key" && sortOrder === "asc" ? "↑" : "↓"}
@@ -471,7 +471,7 @@ const SortFilter: React.FC<SortFilterProps> = ({ searchQuery, offset, sortOrder,
               </Grid>
               <Grid item> {/* Wrap the next SortButton in a Grid item */}
                 <SortButton onClick={() => handleSort("tempo")}>
-                  <Typography fontSize='.9rem'>BPM</Typography>
+                  <Typography component="h1" fontSize='.9rem'>BPM</Typography>
                   {sortBy === "tempo" && sortOrder === "asc" ? "↑" : "↓"}
                 </SortButton>
               </Grid>

@@ -5,8 +5,6 @@ import Chart from "chart.js/auto";
 import { ChartEvent, ActiveElement, ChartTypeRegistry, Point, BubbleDataPoint } from 'chart.js';
 import { Pie, Doughnut } from 'react-chartjs-2';
 import Grid from '@mui/material/Grid'
-import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
 import { Context } from 'chartjs-plugin-datalabels';
 import { grey } from '@mui/material/colors';

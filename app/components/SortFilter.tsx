@@ -92,9 +92,10 @@ const KeyAccordionDetails = styled(AccordionDetails)({
   transform: 'translateX(-48%)',
   width: '250px',
   height: '280px',
-  backdropFilter: 'blur(15px)',
+  backgroundColor:'#212121',
+  // backdropFilter: 'blur(15px)',
   borderRadius: '1em',
-  boxShadow: '0px 6px 10px #0d47a1',
+  boxShadow: '0px 6px 10px #42a5f5',
 });
 
 const TempoAccordionDetails = styled(AccordionDetails)({
@@ -102,10 +103,12 @@ const TempoAccordionDetails = styled(AccordionDetails)({
   zIndex: 2,
   left: '100%',
   transform: 'translateX(-75%)',
-  backdropFilter: 'blur(15px)',
+  backgroundColor:'#212121',
+    // backdropFilter: 'blur(15px)',
   borderRadius: '1em',
   width: '300px',
-  boxShadow: '0px 6px 10px #0d47a1',
+  boxShadow: '0px 6px 10px #42a5f5',
+  // boxShadow: '0px 0px 10px #0d47a1',
 });
 
 const SortFilter: React.FC<SortFilterProps> = ({ searchQuery, offset, sortOrder, setSortOrder, sortBy, setSortBy, tempoSelect, setTempoSelect, activeSlice, setActiveSlice }) => {

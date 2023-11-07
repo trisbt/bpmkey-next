@@ -4,19 +4,27 @@ import GetSpotifySearch from '../server_components/GetSpotifySearch';
 import SearchCards from './SearchCards';
 import { SearchDetails } from '../types/dataTypes';
 import type { Metadata, ResolvingMetadata } from 'next'
-
+// import { Suspense } from 'react';
+// import Loading from '../loading';
+// import dynamic from 'next/dynamic'
+// const SearchCards = dynamic(() => import('./SearchCards'), {
+//     // ssr: false,
+// })
 
 const SearchPage = async ({
   searchParams,
 }: {
   searchParams: { q: string };
 }) => {
-
+// console.log(searchParams.q)
+// const key = JSON.stringify(searchParams);
   let offset: number = 1
   const results: SearchDetails[] = await GetSpotifySearch(searchParams.q.replace(/-/g, ' '), offset);
   return (
     <div className='background-gradient min-h-[100em]'>
-      <SearchCards results={results} />
+      {/* <Suspense key = {key} fallback={<Loading/>}> */}
+        <SearchCards results={results} />
+      {/* </Suspense> */}
     </div>
   )
 }

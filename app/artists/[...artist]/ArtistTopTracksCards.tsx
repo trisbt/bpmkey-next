@@ -102,10 +102,8 @@ const ArtistTopTracksCards: React.FC<ArtistPageCardProps> = ({ results, artist }
 
 	return (
 		<Box>
-			<Grid container justifyContent="center" paddingBottom="1em">
-				<Grid item xs="auto">
-					<HorizontalAd />
-				</Grid>
+			<Grid container item md={12} justifyContent='center' paddingBottom='1em'>
+				<HorizontalAd />
 			</Grid>
 			<Grid container item xs={12} justifyContent='center' alignItems='center' >
 				{searchResults && (
@@ -418,10 +416,8 @@ const ArtistTopTracksCards: React.FC<ArtistPageCardProps> = ({ results, artist }
 					</>
 				)}
 			</Grid >
-			<Grid container justifyContent="center" paddingTop='1em' paddingBottom="1em">
-				<Grid item xs="auto">
-					<HorizontalAd />
-				</Grid>
+			<Grid container item md={12} justifyContent='center' paddingBottom='1em'>
+				<HorizontalAd />
 			</Grid>
 		</Box>
 	)

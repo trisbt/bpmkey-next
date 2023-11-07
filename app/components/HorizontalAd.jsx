@@ -21,9 +21,6 @@ function HorizontalAd() {
           width: '100%',
           height: '200px',
           // border: '1px solid red',
-
-          // display: 'block', width: '88vw',
-          // backgroundColor: 'white',  
         }}
         data-ad-client={`${process.env.NEXT_PUBLIC_GOOGLE_ADSENSE}`}
         data-ad-slot="7286492910"

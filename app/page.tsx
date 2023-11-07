@@ -17,11 +17,7 @@ export default async function Home() {
       <ThemeProvider theme={archivoTheme}>
         <Splash />
       </ThemeProvider>
-      <Suspense fallback={<div />}>
         <TopTracks results={topTracksData} />
-      </Suspense>
-
-   
     </div>
   )
 }

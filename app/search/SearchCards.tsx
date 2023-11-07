@@ -126,7 +126,7 @@ const SearchCards: React.FC<SearchPageCardProps> = ({ results }) => {
 		fetchData();
 	}, [offset, searchQuery]);
 
-	//new search effect
+	//new search reset offset effect
 	useEffect(() => {
 		if (searchQuery) {
 			setOffset(1);

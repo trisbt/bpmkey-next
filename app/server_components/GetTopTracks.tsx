@@ -7,15 +7,15 @@ import { GetTracksItem, TopTracksItem } from "../types/serverTypes";
 //revalidate every half week
 
 const GetTopTracks = async () => {
-    // const token = await GetAccessToken();
-    const token = await GetAccessToken(85600);
+    const token = await GetAccessToken();
+    // const token = await GetAccessToken(85600);
     const res = await fetch(`https://api.spotify.com/v1/playlists/37i9dQZEVXbNG2KDcFcKOF?si=ce928cdd687a4612/tracks`, {
         headers: {
             'Authorization': 'Bearer ' + token
         },
-        next: {
-            revalidate: 85600,
-        }
+        // next: {
+        //     revalidate: 85600,
+        // }
        
     });
     // if (!res.ok) {

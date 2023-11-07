@@ -41,10 +41,10 @@ export default function RootLayout({
           <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
             <Navbar />
             <div style={{ flex: 1 }}>
-              <Suspense fallback={<Loading />}>
+              {/* <Suspense fallback={<Loading />}> */}
                 {children}
                 <Analytics />
-              </Suspense>
+              {/* </Suspense> */}
             </div>
             <Footer />
           </div>

@@ -169,7 +169,7 @@ const SearchCards: React.FC<SearchPageCardProps> = ({ results }) => {
 										fontSize: '20px'
 									},
 								}}>
-									results for: {searchQuery ? searchQuery.replace(/-/g, ' ') : ''}
+									Bpm and Key results for: {searchQuery ? searchQuery.replace(/-/g, ' ') : ''}
 								</Typography>
 							</Card>
 						</Grid>
@@ -272,14 +272,14 @@ const SearchCards: React.FC<SearchPageCardProps> = ({ results }) => {
 																<Grid item xs={9} sm={5} sx={{
 																	paddingLeft: '.5em',
 																}}>
-																	<Typography component="h1" color="text.primary" variant="h5" sx={{
+																	<Typography color="text.primary" variant="h5" component="h1"sx={{
 																		"@media (max-width: 600px)": {
 																			fontSize: '1rem'
 																		},
 																	}}>
 																		{item.name}
 																	</Typography>
-																	<Typography variant="h6" color="text.secondary" component="h1" sx={{
+																	<Typography variant="h6" color="text.secondary" component="h1"sx={{
 																		"@media (max-width: 600px)": {
 																			fontSize: '1rem'
 																		},
@@ -293,7 +293,7 @@ const SearchCards: React.FC<SearchPageCardProps> = ({ results }) => {
 																			</span>
 																		))}
 																	</Typography>
-																	<Typography variant="subtitle1" color="text.secondary" component="h1"sx={{
+																	<Typography variant="subtitle1" color="text.secondary"component="h1" sx={{
 																		"@media (max-width: 600px)": {
 																			fontSize: '.7em',
 																		}
@@ -309,7 +309,7 @@ const SearchCards: React.FC<SearchPageCardProps> = ({ results }) => {
 																}}>
 																	<Grid item xs={4} sm={6}  >
 																		{/* <Card sx={{ width: '90%' }}> */}
-																		<Typography variant="subtitle1" color="text.secondary" component="h1"
+																		<Typography variant="subtitle1" component="h1"color="text.secondary"
 																			sx={{
 																				display: 'flex', flexDirection: 'column', alignItems: 'center', lineHeight: '1rem',
 																				"@media (max-width: 600px)": {
@@ -318,7 +318,7 @@ const SearchCards: React.FC<SearchPageCardProps> = ({ results }) => {
 																			}}
 																		>
 																			Key
-																			<Typography className='song-sub-info' variant="h4" color="text.primary" component="h1" sx={{
+																			<Typography className='song-sub-info' variant="h4" color="text.primary" sx={{
 																				"@media (max-width: 600px)": {
 																					fontSize: '1.5rem',
 																				}
@@ -335,7 +335,7 @@ const SearchCards: React.FC<SearchPageCardProps> = ({ results }) => {
 																		}
 																	}}>
 																		{/* <Card sx={{ width: '90%' }}> */}
-																		<Typography variant="subtitle1" color="text.secondary"component="h1"
+																		<Typography variant="subtitle1" color="text.secondary" component="h1"
 																			sx={{
 																				display: 'flex', flexDirection: 'column', alignItems: 'center', lineHeight: '1rem',
 																				"@media (max-width: 600px)": {
@@ -344,7 +344,7 @@ const SearchCards: React.FC<SearchPageCardProps> = ({ results }) => {
 																			}}
 																		>
 																			BPM
-																			<Typography className='song-sub-info' variant="h4" color="text.primary" component="h1" sx={{
+																			<Typography className='song-sub-info' variant="h4" color="text.primary" sx={{
 																				"@media (max-width: 600px)": {
 																					fontSize: '1.5rem',
 																				}

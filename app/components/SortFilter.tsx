@@ -92,7 +92,7 @@ const KeyAccordionDetails = styled(AccordionDetails)({
   transform: 'translateX(-48%)',
   width: '250px',
   height: '280px',
-  backgroundColor:'#212121',
+  backgroundColor: '#212121',
   // backdropFilter: 'blur(15px)',
   borderRadius: '1em',
   boxShadow: '0px 6px 10px #42a5f5',
@@ -103,8 +103,8 @@ const TempoAccordionDetails = styled(AccordionDetails)({
   zIndex: 2,
   left: '100%',
   transform: 'translateX(-75%)',
-  backgroundColor:'#212121',
-    // backdropFilter: 'blur(15px)',
+  backgroundColor: '#212121',
+  // backdropFilter: 'blur(15px)',
   borderRadius: '1em',
   width: '300px',
   boxShadow: '0px 6px 10px #42a5f5',
@@ -154,7 +154,7 @@ const SortFilter: React.FC<SortFilterProps> = ({ searchQuery, offset, sortOrder,
 
     // Set the open state for the drawer
     setIsOpen(open);
-};
+  };
 
 
   //sorting
@@ -176,7 +176,7 @@ const SortFilter: React.FC<SortFilterProps> = ({ searchQuery, offset, sortOrder,
       setSliderValue([value, value]);
     }
   };
-  
+
   const handleTempoSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
@@ -191,30 +191,30 @@ const SortFilter: React.FC<SortFilterProps> = ({ searchQuery, offset, sortOrder,
   const handleTextFieldChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const inputValue = event.target.value;
     const numericValue = parseFloat(inputValue);
-  
+
     if (!isNaN(numericValue)) {
       setTextFieldTempo(numericValue.toString()); // Store the numeric value as a string
     } else {
       setTextFieldTempo(''); // Clear the textfield if it's not numeric
     }
   };
-  
+
   //reset filter
   const handleReset = (event: React.MouseEvent<HTMLElement>) => {
-    event.preventDefault();  
+    event.preventDefault();
     setTempoSelect([0, 200]);
     setSliderValue([80, 140]);
-    setTextFieldTempo('');  
+    setTextFieldTempo('');
     setActiveSlice([]);
   };
 
   const handleOutsideClick = (event: Event) => {
     const target = event.target as Node;  // Use Node because it could be an HTMLElement or a Text node
-  
+
     if (keyAccordionRef.current && !keyAccordionRef.current.contains(target) && openAccordion === 'keyAccordion') {
       setOpenAccordion(null);
     }
-  
+
     if (bpmAccordionRef.current && !bpmAccordionRef.current.contains(target) && openAccordion === 'bpmAccordion') {
       setOpenAccordion(null);
     }
@@ -231,7 +231,7 @@ const SortFilter: React.FC<SortFilterProps> = ({ searchQuery, offset, sortOrder,
 
         <ListItem disablePadding>
           <ListItemButton onClick={() => setOpenKey(!openKey)}>
-            <ListItemText primary={<Typography fontSize='1rem' component="h1" color='black'>Filter by: Key</Typography>} />
+            <ListItemText primary={<Typography fontSize='1rem' color='black'>Filter by: Key</Typography>} />
           </ListItemButton>
           <Collapse in={openKey} timeout="auto" unmountOnExit>
             <Box p={1}>
@@ -242,7 +242,7 @@ const SortFilter: React.FC<SortFilterProps> = ({ searchQuery, offset, sortOrder,
 
         <ListItem disablePadding>
           <ListItemButton onClick={() => setOpenTempo(!openTempo)}>
-            <ListItemText primary={<Typography component="h1" fontSize='1rem' color='black'>Filter by: BPM</Typography>} />
+            <ListItemText primary={<Typography fontSize='1rem' color='black'>Filter by: BPM</Typography>} />
           </ListItemButton>
           <Collapse in={openTempo} timeout="auto" unmountOnExit>
             <Box p={2}>  {/* Add padding if needed */}
@@ -346,7 +346,7 @@ const SortFilter: React.FC<SortFilterProps> = ({ searchQuery, offset, sortOrder,
             {/*/ filter */}
             <Grid item xs={12} sm={6} container alignItems="center" spacing={1}>
               <Grid item >
-                <Typography component="h1" fontSize='1rem' color='white'>Filter by:</Typography>
+                <Typography fontSize='1rem' color='white'>Filter by:</Typography>
               </Grid>
               <Grid item >
                 <Accordion
@@ -357,7 +357,7 @@ const SortFilter: React.FC<SortFilterProps> = ({ searchQuery, offset, sortOrder,
                   <StyledAccordionSummary
                     expandIcon={<ExpandMoreIcon />}
                   >
-                    <Typography component="h1" fontSize='0.8rem' >Key</Typography>
+                    <Typography fontSize='0.8rem' >Key</Typography>
                   </StyledAccordionSummary>
 
                   <KeyAccordionDetails>
@@ -378,7 +378,7 @@ const SortFilter: React.FC<SortFilterProps> = ({ searchQuery, offset, sortOrder,
                   <StyledAccordionSummary
                     expandIcon={<ExpandMoreIcon />}
                   >
-                    <Typography component="h1" fontSize='0.8rem' >BPM</Typography>
+                    <Typography fontSize='0.8rem' >BPM</Typography>
                   </StyledAccordionSummary>
                   <TempoAccordionDetails>
                     <form onSubmit={handleTempoSubmit}>
@@ -463,7 +463,7 @@ const SortFilter: React.FC<SortFilterProps> = ({ searchQuery, offset, sortOrder,
               </Grid>
               <Grid item > {/* Wrap the SortButton in a Grid item */}
                 <SortButton onClick={() => handleSort("key")}>
-                  <Typography component="h1" fontSize='.9rem' sx={{ textTransform: 'none', }}>
+                  <Typography fontSize='.9rem' sx={{ textTransform: 'none', }}>
                     Key
                   </Typography>
                   {sortBy === "key" && sortOrder === "asc" ? "↑" : "↓"}
@@ -471,7 +471,7 @@ const SortFilter: React.FC<SortFilterProps> = ({ searchQuery, offset, sortOrder,
               </Grid>
               <Grid item> {/* Wrap the next SortButton in a Grid item */}
                 <SortButton onClick={() => handleSort("tempo")}>
-                  <Typography component="h1" fontSize='.9rem'>BPM</Typography>
+                  <Typography fontSize='.9rem'>BPM</Typography>
                   {sortBy === "tempo" && sortOrder === "asc" ? "↑" : "↓"}
                 </SortButton>
               </Grid>
@@ -492,14 +492,14 @@ const SortFilter: React.FC<SortFilterProps> = ({ searchQuery, offset, sortOrder,
           </SortFilterButton>
         </Box>
         <SwipeableDrawer
-    anchor="bottom"
-    open={isOpen}
-    onClose={toggleDrawer(false)}
-    onOpen={toggleDrawer(true)}  // Even though you've disabled swipe to open, it's still good to provide this handler.
-    swipeAreaWidth={0}
->
-    {list()}
-</SwipeableDrawer>
+          anchor="bottom"
+          open={isOpen}
+          onClose={toggleDrawer(false)}
+          onOpen={toggleDrawer(true)}  // Even though you've disabled swipe to open, it's still good to provide this handler.
+          swipeAreaWidth={0}
+        >
+          {list()}
+        </SwipeableDrawer>
 
       </Hidden>
     </div>

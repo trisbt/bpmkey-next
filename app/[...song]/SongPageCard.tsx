@@ -223,9 +223,9 @@ const SongPageCard: React.FC<SongPageCardProps> = ({ songDetails, song, artist, 
                 <Grid item container xs={12} sm={7} md={7.5} lg={9} direction="column" justifyContent="space-between" >
 
                   <Grid item >
-                    <Typography variant="h5" component="h2"color='text.primary'>{songDetails.name}</Typography>
+                    <Typography variant="h5" component="h1"color='text.primary'>{songDetails.name}</Typography>
                     <Link prefetch={false} href={`/artists/${slugifiedArtistName}/${songDetails.artistId}`}>
-                      <Typography variant="h4" component="h2"sx={{
+                      <Typography variant="h4" sx={{
                         transition: 'color 0.3s',
                         '&:hover': {
                           color: '#3f51b5',
@@ -237,7 +237,7 @@ const SongPageCard: React.FC<SongPageCardProps> = ({ songDetails, song, artist, 
                     </Link>
 
                     <Link prefetch={false} href={`/album/${slugifiedAlbumName}/${songDetails.albumId}`}>
-                      <Typography variant="subtitle1" component="h2"sx={{
+                      <Typography variant="subtitle1" component="h1"sx={{
                         transition: 'color 0.3s',
                         '&:hover': {
                           color: '#3f51b5',
@@ -247,7 +247,7 @@ const SongPageCard: React.FC<SongPageCardProps> = ({ songDetails, song, artist, 
                         {songDetails.albums}
                       </Typography>
                     </Link>
-                    <Typography variant="subtitle2" component="h4">Released: {songDetails.release_date}</Typography>
+                    <Typography variant="subtitle2"component="h4" >Released: {songDetails.release_date}</Typography>
 
                     <Grid item container xs={12} alignItems='center' justifyContent='space-between' >
 
@@ -302,25 +302,25 @@ const SongPageCard: React.FC<SongPageCardProps> = ({ songDetails, song, artist, 
                     <Grid item xs={3} >
                       <Paper className='paper-card'>
                         Key
-                        <Typography variant="h5" component="h1"color='text.primary' >{songDetails.key}</Typography>
+                        <Typography variant="h5" color='text.primary' >{songDetails.key}</Typography>
                       </Paper>
                     </Grid>
                     <Grid item xs={3}>
                       <Paper className='paper-card'>
                         Tempo
-                        <Typography variant="h5" component="h1"color='text.primary' >{songDetails.tempo}</Typography>
+                        <Typography variant="h5" color='text.primary' >{songDetails.tempo}</Typography>
                       </Paper>
                     </Grid>
                     <Grid item xs={3}>
                       <Paper className='paper-card'>
                         Duration
-                        <Typography variant="h5" component="h2"color='text.primary' >{msConvert(songDetails.duration_ms)}</Typography>
+                        <Typography variant="h5" color='text.primary' >{msConvert(songDetails.duration_ms)}</Typography>
                       </Paper>
                     </Grid>
                     <Grid item xs={3}>
                       <Paper className='paper-card'>
                         Time Signature
-                        <Typography variant="h5" component="h2"color='text.primary' >{`${songDetails.time_signature} / 4`}</Typography>
+                        <Typography variant="h5" color='text.primary' >{`${songDetails.time_signature} / 4`}</Typography>
                       </Paper>
                     </Grid>
 
@@ -333,25 +333,25 @@ const SongPageCard: React.FC<SongPageCardProps> = ({ songDetails, song, artist, 
                   <Grid item xs={6} md={3} >
                     <Paper className='paper-card'>
                       Key
-                      <Typography variant="h5" component="h2"color='text.primary' >{songDetails.key}</Typography>
+                      <Typography variant="h5" color='text.primary' >{songDetails.key}</Typography>
                     </Paper>
                   </Grid>
                   <Grid item xs={6} md={3}>
                     <Paper className='paper-card'>
                       Tempo
-                      <Typography variant="h5" component="h2"color='text.primary' >{songDetails.tempo}</Typography>
+                      <Typography variant="h5" color='text.primary' >{songDetails.tempo}</Typography>
                     </Paper>
                   </Grid>
                   <Grid item xs={6} md={3}>
                     <Paper className='paper-card'>
                       Duration
-                      <Typography variant="h5" component="h2"color='text.primary' >{msConvert(songDetails.duration_ms)}</Typography>
+                      <Typography variant="h5" color='text.primary' >{msConvert(songDetails.duration_ms)}</Typography>
                     </Paper>
                   </Grid>
                   <Grid item xs={6} md={3}>
                     <Paper className='paper-card'>
                       Time Signature
-                      <Typography variant="h5" component="h2"color='text.primary' >{`${songDetails.time_signature} / 4`}</Typography>
+                      <Typography variant="h5"color='text.primary' >{`${songDetails.time_signature} / 4`}</Typography>
                     </Paper>
                   </Grid>
 
@@ -375,10 +375,10 @@ const SongPageCard: React.FC<SongPageCardProps> = ({ songDetails, song, artist, 
                   {/* loudness */}
                   <Grid item container direction="row" xs={12} alignItems='center'>
                     <Grid item xs={3} sm={2} md={3}>
-                      <Typography variant="subtitle2" component="h3"color='text.primary'>Loudness</Typography>
+                      <Typography variant="subtitle2" color='text.primary'>Loudness</Typography>
                     </Grid>
                     <Grid item>
-                      <Typography variant="subtitle1" component="h3"color='text.primary'>{songDetails.loudness}</Typography>
+                      <Typography variant="subtitle1" color='text.primary'>{songDetails.loudness}</Typography>
                     </Grid>
                   </Grid>
                   <Grid>
@@ -394,10 +394,10 @@ const SongPageCard: React.FC<SongPageCardProps> = ({ songDetails, song, artist, 
                   {/* energy */}
                   <Grid item container direction="row" xs={12} alignItems='center'>
                     <Grid item xs={3} sm={2} md={3}>
-                      <Typography variant="subtitle2" component="h3"color='text.primary'>Energy</Typography>
+                      <Typography variant="subtitle2" color='text.primary'>Energy</Typography>
                     </Grid>
                     <Grid item>
-                      <Typography variant="subtitle1"component="h3" color='text.primary'>{songDetails.energy}</Typography>
+                      <Typography variant="subtitle1"color='text.primary'>{songDetails.energy}</Typography>
                     </Grid>
                   </Grid>
                   <Grid>
@@ -413,10 +413,10 @@ const SongPageCard: React.FC<SongPageCardProps> = ({ songDetails, song, artist, 
                   {/* valence */}
                   <Grid item container direction="row" xs={12} alignItems='center'>
                     <Grid item xs={3} sm={2} md={3}>
-                      <Typography variant="subtitle2" component="h3"color='text.primary'>Valence</Typography>
+                      <Typography variant="subtitle2" color='text.primary'>Valence</Typography>
                     </Grid>
                     <Grid item>
-                      <Typography variant="subtitle1" component="h3"color='text.primary'>{songDetails.valence}</Typography>
+                      <Typography variant="subtitle1" color='text.primary'>{songDetails.valence}</Typography>
                     </Grid>
                   </Grid>
                   <Grid>
@@ -432,10 +432,10 @@ const SongPageCard: React.FC<SongPageCardProps> = ({ songDetails, song, artist, 
                   {/* acousticness */}
                   <Grid item container direction="row" xs={12} alignItems='center'>
                     <Grid item xs={4} sm={2.5} md={3}>
-                      <Typography variant="subtitle2" component="h3"color='text.primary'>Acousticness</Typography>
+                      <Typography variant="subtitle2" color='text.primary'>Acousticness</Typography>
                     </Grid>
                     <Grid item>
-                      <Typography variant="subtitle1" component="h3"color='text.primary'>{songDetails.acousticness}</Typography>
+                      <Typography variant="subtitle1" color='text.primary'>{songDetails.acousticness}</Typography>
                     </Grid>
                   </Grid>
                   <Grid>
@@ -451,10 +451,10 @@ const SongPageCard: React.FC<SongPageCardProps> = ({ songDetails, song, artist, 
                   {/* danceability */}
                   <Grid item container direction="row" xs={12} alignItems='center'>
                     <Grid item xs={4} sm={2} md={3}>
-                      <Typography variant="subtitle2" component="h3"color='text.primary'>Danceability</Typography>
+                      <Typography variant="subtitle2"color='text.primary'>Danceability</Typography>
                     </Grid>
                     <Grid item>
-                      <Typography variant="subtitle1"component="h3" color='text.primary'>{songDetails.danceability}</Typography>
+                      <Typography variant="subtitle1" color='text.primary'>{songDetails.danceability}</Typography>
                     </Grid>
                   </Grid>
                   <Grid>
@@ -471,10 +471,10 @@ const SongPageCard: React.FC<SongPageCardProps> = ({ songDetails, song, artist, 
                   {/* liveness */}
                   <Grid item container direction="row" xs={12} alignItems='center'>
                     <Grid item xs={3} sm={2} md={3}>
-                      <Typography variant="subtitle2" component="h3"color='text.primary'>Liveness</Typography>
+                      <Typography variant="subtitle2" color='text.primary'>Liveness</Typography>
                     </Grid>
                     <Grid item>
-                      <Typography variant="subtitle1"component="h3"color='text.primary'>{songDetails.liveness}</Typography>
+                      <Typography variant="subtitle1"color='text.primary'>{songDetails.liveness}</Typography>
                     </Grid>
                   </Grid>
                   <Grid>
@@ -491,10 +491,10 @@ const SongPageCard: React.FC<SongPageCardProps> = ({ songDetails, song, artist, 
                   {/* popularity */}
                   <Grid item container direction="row" xs={12} alignItems='center'>
                     <Grid item xs={3} sm={2} md={3}>
-                      <Typography variant="subtitle2" component="h3"color='text.primary'>Popularity</Typography>
+                      <Typography variant="subtitle2"color='text.primary'>Popularity</Typography>
                     </Grid>
                     <Grid item>
-                      <Typography variant="subtitle1" component="h3"color='text.primary'>{songDetails.popularity}</Typography>
+                      <Typography variant="subtitle1" color='text.primary'>{songDetails.popularity}</Typography>
                     </Grid>
                   </Grid>
                   <Grid>

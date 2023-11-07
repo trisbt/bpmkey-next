@@ -30,23 +30,23 @@ function Navbar() {
             minHeight: '45px',
           }}>
 
-              <Card sx={{
-                display: 'flex',
-                height: '46px',
-                width: '180px',
-                justifyContent: 'center',
-               
-                backgroundColor: 'transparent',
-                boxShadow: '0',
-                '@media (max-width:500px)': {
-                  justifyContent: 'flex-start',
-                  alignItems: 'center',
-                  paddingLeft:'1px',
-                  height:'35px',
-                  paddingTop:'6px',
-                }
-              }}>
-                <Link prefetch={false} href="/">
+            <Card sx={{
+              display: 'flex',
+              height: '46px',
+              width: '180px',
+              justifyContent: 'center',
+
+              backgroundColor: 'transparent',
+              boxShadow: '0',
+              '@media (max-width:500px)': {
+                justifyContent: 'flex-start',
+                alignItems: 'center',
+                paddingLeft: '1px',
+                height: '35px',
+                paddingTop: '6px',
+              }
+            }}>
+              <Link prefetch={false} href="/">
                 <ThemeProvider theme={logoTheme}>
                   <Typography component="h1" sx={{
                     color: 'white',
@@ -59,15 +59,15 @@ function Navbar() {
                   }}>
                     BPMKEY
                   </Typography>
-                  </ThemeProvider>
-                </Link>
-              </Card>
- 
+                </ThemeProvider>
+              </Link>
+            </Card>
+
 
             {/* desktop and mobile search bar*/}
             <Hidden only={['sm', 'md', 'lg', 'xl']}>
               <Box display='flex' justifyContent='flex-end' sx={{
-                paddingRight:'.8em',
+                paddingRight: '.8em',
                 flexGrow: {
                   flexGrow: 3,  // default value for smaller screens
                   '@media (min-width:500px)': {
@@ -75,7 +75,7 @@ function Navbar() {
                   }
                 }
               }}>
-             
+
               </Box>
             </Hidden>
 

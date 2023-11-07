@@ -61,8 +61,8 @@ const Splash = () => {
 							flexDirection: 'column',
 							borderRadius: '20px',
 						}}>
-							<Typography variant='h2' component="h1"
-
+							<Typography variant='h2'
+								component="h1"
 								sx={{
 									fontWeight: '700',
 									background: 'linear-gradient(45deg, #fcfcfe 10%, #b3e5fc 80%)',
@@ -83,8 +83,8 @@ const Splash = () => {
 								Find A Song&apos;s
 								{/* Under Construction check back soon */}
 							</Typography>
-							<Typography variant='h2' component="h1"
-
+							<Typography variant='h2'
+								component="h1"
 								sx={{
 									fontWeight: '600',
 									fontSize: '3.2em',
@@ -108,59 +108,59 @@ const Splash = () => {
 							</Typography>
 						</Box >
 					</Grid>
-				
-						<Grid item xs={12} sm={6.5} md={4.5} sx={{
+
+					<Grid item xs={12} sm={6.5} md={4.5} sx={{
+						display: 'flex',
+						justifyContent: 'center',
+						flexDirection: 'column',
+						'@media (max-width: 600px)': {
+							height: '20em',
+
+						},
+					}}>
+						<Card sx={{
 							display: 'flex',
 							justifyContent: 'center',
-							flexDirection: 'column',
+							textAlign: 'center',
+							alignItems: 'center',
+							backgroundColor: 'transparent',
+							boxShadow: 0,
+							height: '20em',
 							'@media (max-width: 600px)': {
-								height: '20em',
-
+								alignItems: 'flex-start',
+								height: '16em',
 							},
 						}}>
-							<Card sx={{
-								display: 'flex',
-								justifyContent: 'center',
-								textAlign: 'center',
-								alignItems: 'center',
-								backgroundColor: 'transparent',
-								boxShadow: 0,
-								height: '20em',
-								'@media (max-width: 600px)': {
-									alignItems: 'flex-start',
-									height: '16em',
-								},
-							}}>
-								<SplashCircleOfFifths />
-							</Card>
-							<Box sx={{
-								display: 'flex',
-								justifyContent: 'center',
-								height: '5em',
-								'@media (max-width: 600px)': {
-									height: '8em'
-								},
-							}}>
-								<Typography variant='h2' component="h1"
+							<SplashCircleOfFifths />
+						</Card>
+						<Box sx={{
+							display: 'flex',
+							justifyContent: 'center',
+							height: '5em',
+							'@media (max-width: 600px)': {
+								height: '8em'
+							},
+						}}>
+							<Typography variant='h2'
+								component="h1"
+								sx={{
+									textAlign: 'center',
+									fontWeight: '700',
+									background: '#90caf9',
+									WebkitBackgroundClip: 'text',
+									WebkitTextFillColor: 'transparent',
+									fontSize: '1.2em',
+									// paddingBottom: '5px',
+									'@media (max-width: 600px)': {
+										fontSize: '.8em',
+										marginTop: '.8em'
+									},
+								}}>
+								Try getting a random song by clicking a key
+							</Typography>
+						</Box>
+					</Grid>
 
-									sx={{
-										textAlign: 'center',
-										fontWeight: '700',
-										background: '#90caf9',
-										WebkitBackgroundClip: 'text',
-										WebkitTextFillColor: 'transparent',
-										fontSize: '1.2em',
-										// paddingBottom: '5px',
-										'@media (max-width: 600px)': {
-											fontSize: '.8em',
-											marginTop: '.8em'
-										},
-									}}>
-									Try getting a random song by clicking a key
-								</Typography>
-							</Box>
-						</Grid>
-			
 
 				</Grid>
 			</Card>

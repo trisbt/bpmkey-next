@@ -68,14 +68,14 @@ const CreditsModal: React.FC<CreditsModalProps> = ({ open, handleClose, credits 
                         <CloseOutlined />
                     </IconButton>
 
-                    <Typography variant="h4" component="h1"color='text.primary' >Credits</Typography>
-                    <Typography variant="subtitle1" component="h2"color='text.primary' sx={{
+                    <Typography variant="h4" color='text.primary' >Credits</Typography>
+                    <Typography variant="subtitle1" color='text.primary' sx={{
                         fontStyle: 'italic',
                         paddingBottom: '1em',
                     }}>via Discogs</Typography>
 
                     {credits && credits.length === 1 && typeof credits[0] === 'object' && 'role' in credits[0] && credits[0].role === "no credits available at this time" ? (
-                        <Typography variant="subtitle2" component="h1" color='text.primary' sx={{ textAlign: 'center' }}>
+                        <Typography variant="subtitle2" color='text.primary' sx={{ textAlign: 'center' }}>
                             {credits[0].role}
                         </Typography>
                     ) : (

@@ -166,14 +166,14 @@ const TopTracks: React.FC<TopTracksCardProps> = ({ results }) => {
                               <Grid item xs={9} sm={5} sx={{
                                 paddingLeft: '.5em',
                               }}>
-                                <Typography component="h1" color="text.primary" variant="h5" sx={{
+                                <Typography color="text.primary" variant="h5"component="h1" sx={{
                                   "@media (max-width: 600px)": {
                                     fontSize: '1rem'
                                   },
                                 }}>
                                   {item.name}
                                 </Typography>
-                                <Typography variant="h6" color="text.secondary" component="h1" sx={{
+                                <Typography variant="h6" color="text.secondary"component="h1" sx={{
                                   "@media (max-width: 600px)": {
                                     fontSize: '1rem'
                                   },
@@ -187,7 +187,7 @@ const TopTracks: React.FC<TopTracksCardProps> = ({ results }) => {
                                     </span>
                                   ))}
                                 </Typography>
-                                <Typography variant="subtitle1" color="text.secondary" component="h1" sx={{
+                                <Typography variant="subtitle1" color="text.secondary"component="h1" sx={{
                                   "@media (max-width: 600px)": {
                                     fontSize: '.7em',
                                   }
@@ -203,7 +203,7 @@ const TopTracks: React.FC<TopTracksCardProps> = ({ results }) => {
                               }}>
                                 <Grid item xs={4} sm={6}  >
 
-                                  <Typography variant="subtitle1" color="text.secondary" component="h1"
+                                  <Typography variant="subtitle1" color="text.secondary"component="h1"
                                     sx={{
                                       display: 'flex', flexDirection: 'column', alignItems: 'center', lineHeight: '1rem',
                                       "@media (max-width: 600px)": {
@@ -212,7 +212,7 @@ const TopTracks: React.FC<TopTracksCardProps> = ({ results }) => {
                                     }}
                                   >
                                     Key
-                                    <Typography className='song-sub-info' variant="h4" color="text.primary" component="h1" sx={{
+                                    <Typography className='song-sub-info' variant="h4" color="text.primary" component="div"sx={{
                                       "@media (max-width: 600px)": {
                                         fontSize: '1.5rem',
                                       }
@@ -229,7 +229,7 @@ const TopTracks: React.FC<TopTracksCardProps> = ({ results }) => {
                                   }
                                 }}>
 
-                                  <Typography variant="subtitle1" color="text.secondary" component="h1"
+                                  <Typography variant="subtitle1" color="text.secondary"component="h1"
                                     sx={{
                                       display: 'flex', flexDirection: 'column', alignItems: 'center', lineHeight: '1rem',
                                       "@media (max-width: 600px)": {
@@ -238,7 +238,7 @@ const TopTracks: React.FC<TopTracksCardProps> = ({ results }) => {
                                     }}
                                   >
                                     BPM
-                                    <Typography className='song-sub-info' variant="h4" color="text.primary" component="h1" sx={{
+                                    <Typography className='song-sub-info' variant="h4" color="text.primary" component="div"sx={{
                                       "@media (max-width: 600px)": {
                                         fontSize: '1.5rem',
                                       }
@@ -301,14 +301,14 @@ const TopTracks: React.FC<TopTracksCardProps> = ({ results }) => {
                 </Grid>
 
                 <Grid container item xs={1}
-                    display='flex'
-                    justifyContent='flex-end'
-                  >
-                <Hidden lgDown>           
+                  display='flex'
+                  justifyContent='flex-end'
+                >
+                  <Hidden lgDown>
                     <VerticalAd />
                     <Box height='20em' />
                     <VerticalAd />
-                </Hidden>
+                  </Hidden>
                 </Grid>
 
               </Grid>

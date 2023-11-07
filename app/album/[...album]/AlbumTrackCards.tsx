@@ -101,7 +101,7 @@ const AlbumTrackCards: React.FC<AlbumPageCardProps> = ({ results, album }) => {
 
 	return (
 		<Box>
-			<Grid container item md={12} justifyContent='center' paddingBottom='1em'>
+			<Grid container item xs={12} justifyContent='center' paddingBottom='1em'>
 				<HorizontalAd />
 			</Grid>
 			<Grid container item xs={12} justifyContent='center' alignItems='center' >

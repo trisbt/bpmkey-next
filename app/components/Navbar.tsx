@@ -25,7 +25,7 @@ function Navbar() {
           backgroundColor: '#0047d4',
         }}
       >
-        <Container maxWidth="xl">
+        <Container maxWidth="xl" sx ={{margin:'0'}}>
           <Toolbar disableGutters sx={{
             minHeight: '45px',
           }}>
@@ -46,7 +46,7 @@ function Navbar() {
                 paddingTop: '6px',
               }
             }}>
-              <Link prefetch={false} href="/">
+              <Link  href="/">
                 <ThemeProvider theme={logoTheme}>
                   <Typography component="h1" sx={{
                     color: 'white',

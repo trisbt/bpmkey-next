@@ -12,13 +12,13 @@ function HorizontalAd() {
   }, []);
 
   return (
-    <div style={{ textAlign: 'center', width:'90vw' }}>
+    <div style={{ textAlign: 'center', width:'90vw', display:'flex', justifyContent:'center' }}>
       {/* AdSense Horizontal Ad unit */}
       <ins
         className="adsbygoogle"
         style={{
           display: 'block',
-          width: '468px',
+          width: '100%',
           height: '200px',
           // border: '1px solid red',
 

@@ -24,7 +24,7 @@ const Footer: FC = () => {
             width: '90%'
           }
         }}>
-          <Typography variant="h6" color='#FFFFFF' gutterBottom sx={{
+          <Typography variant="h6" component="h1" color='#FFFFFF' gutterBottom sx={{
             letterSpacing: '1px',
             textAlign: 'center',
             '@media (max-width:600px)': {
@@ -34,7 +34,7 @@ const Footer: FC = () => {
             Bpmkey.com is your plug to finding information for any song, including BPM, Key, and Song Credits.
           </Typography>
           <hr className="border-t-2 border-gray-300 my-4" />
-          <Typography variant="subtitle1" color='#FFFFFF' gutterBottom sx={{
+          <Typography variant="subtitle1" component="h4"color='#FFFFFF' gutterBottom sx={{
             letterSpacing: '1px',
             textAlign: 'center',
             '@media (max-width:600px)': {
@@ -62,7 +62,7 @@ const Footer: FC = () => {
         <Box sx={{
           width: '95%',
         }}>
-          <Typography variant="subtitle2" color='text.secondary' gutterBottom sx={{
+          <Typography variant="subtitle2" component="h4"color='text.secondary' gutterBottom sx={{
             display: 'flex',
             alignItems: 'center',
             '@media (max-width:600px)': {
@@ -88,7 +88,7 @@ const Footer: FC = () => {
             </Link>
           </Typography>
 
-          <Typography variant="subtitle2" color='text.secondary' gutterBottom sx={{
+          <Typography variant="subtitle2" component="h4"color='text.secondary' gutterBottom sx={{
             '@media (max-width:600px)': {
               fontSize: '12px',
             }
@@ -96,7 +96,7 @@ const Footer: FC = () => {
             Credits data provided by Discogs - rate limiting applies
           </Typography>
 
-          <Typography variant="subtitle2" color='text.secondary' gutterBottom sx={{
+          <Typography variant="subtitle2" component="h2"color='text.secondary' gutterBottom sx={{
             '@media (max-width:600px)': {
               fontSize: '12px',
             }

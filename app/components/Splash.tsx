@@ -61,7 +61,7 @@ const Splash = () => {
 							flexDirection: 'column',
 							borderRadius: '20px',
 						}}>
-							<Typography variant='h2' component="h2"
+							<Typography variant='h2' component="h1"
 
 								sx={{
 									fontWeight: '700',
@@ -83,7 +83,7 @@ const Splash = () => {
 								Find A Song&apos;s
 								{/* Under Construction check back soon */}
 							</Typography>
-							<Typography variant='h2' component="h2"
+							<Typography variant='h2' component="h1"
 
 								sx={{
 									fontWeight: '600',
@@ -141,7 +141,7 @@ const Splash = () => {
 									height: '8em'
 								},
 							}}>
-								<Typography variant='h2' component="h2"
+								<Typography variant='h2' component="h1"
 
 									sx={{
 										textAlign: 'center',

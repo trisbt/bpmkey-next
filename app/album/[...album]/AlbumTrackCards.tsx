@@ -120,7 +120,7 @@ const AlbumTrackCards: React.FC<AlbumPageCardProps> = ({ results, album }) => {
 									paddingBottom: '1em',
 								}}
 							>
-								<Typography variant='h4' sx={{
+								<Typography variant='h4'component="h1" sx={{
 									display: 'flex',
 									alignItems: 'center',
 									textAlign: 'center',
@@ -228,14 +228,14 @@ const AlbumTrackCards: React.FC<AlbumPageCardProps> = ({ results, album }) => {
 																<Grid item xs={6} sx={{
 																	paddingLeft: '.5em',
 																}}>
-																	<Typography component="div" color="text.primary" variant="h5" sx={{
+																	<Typography component="h1" color="text.primary" variant="h5" sx={{
 																		"@media (max-width: 600px)": {
 																			fontSize: '.9rem'
 																		},
 																	}}>
 																		{item.name}
 																	</Typography>
-																	<Typography variant="h6" color="text.secondary" component="div" sx={{
+																	<Typography variant="h6" color="text.secondary" component="h1" sx={{
 																		"@media (max-width: 600px)": {
 																			fontSize: '.8rem'
 																		},
@@ -295,7 +295,7 @@ const AlbumTrackCards: React.FC<AlbumPageCardProps> = ({ results, album }) => {
 
 																	<Grid item xs={5}   >
 																		{/* <Card sx={{ width: '90%' }}> */}
-																		<Typography variant="subtitle1" color="text.secondary" component="div"
+																		<Typography variant="subtitle1" color="text.secondary" component="h1" 
 																			sx={{
 																				display: 'flex', flexDirection: 'column', alignItems: 'center', lineHeight: '1rem',
 																				"@media (max-width: 600px)": {
@@ -304,7 +304,7 @@ const AlbumTrackCards: React.FC<AlbumPageCardProps> = ({ results, album }) => {
 																			}}
 																		>
 																			Key
-																			<Typography className='song-sub-info' variant="h4" color="text.primary" component="div" sx={{
+																			<Typography className='song-sub-info' variant="h4" color="text.primary" component="h1"  sx={{
 																				"@media (max-width: 600px)": {
 																					fontSize: '1.2rem',
 																				}
@@ -321,7 +321,7 @@ const AlbumTrackCards: React.FC<AlbumPageCardProps> = ({ results, album }) => {
 																		}
 																	}}>
 																		{/* <Card sx={{ width: '90%' }}> */}
-																		<Typography variant="subtitle1" color="text.secondary" component="div"
+																		<Typography variant="subtitle1" color="text.secondary" component="h1" 
 																			sx={{
 																				display: 'flex', flexDirection: 'column', alignItems: 'center', lineHeight: '1rem',
 																				"@media (max-width: 600px)": {
@@ -330,7 +330,7 @@ const AlbumTrackCards: React.FC<AlbumPageCardProps> = ({ results, album }) => {
 																			}}
 																		>
 																			BPM
-																			<Typography className='song-sub-info' variant="h4" color="text.primary" component="div" sx={{
+																			<Typography className='song-sub-info' variant="h4" color="text.primary" component="h1"  sx={{
 																				"@media (max-width: 600px)": {
 																					fontSize: '1.2rem',
 																				}

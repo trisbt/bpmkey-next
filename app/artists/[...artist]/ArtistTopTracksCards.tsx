@@ -121,7 +121,7 @@ const ArtistTopTracksCards: React.FC<ArtistPageCardProps> = ({ results, artist }
 									backgroundColor: 'transparent'
 								}}
 							>
-								<Typography variant='h4' sx={{
+								<Typography variant='h4'component="h1" sx={{
 									display: 'flex',
 									alignItems: 'center',
 									color: '#e8eaf6',
@@ -237,14 +237,14 @@ const ArtistTopTracksCards: React.FC<ArtistPageCardProps> = ({ results, artist }
 																<Grid item xs={9} sm={5} sx={{
 																	paddingLeft: '.5em',
 																}}>
-																	<Typography component="div" color="text.primary" variant="h5" sx={{
+																	<Typography component="h1" color="text.primary" variant="h5" sx={{
 																		"@media (max-width: 600px)": {
 																			fontSize: '1rem'
 																		},
 																	}}>
 																		{item.name}
 																	</Typography>
-																	<Typography variant="h6" color="text.secondary" component="div" sx={{
+																	<Typography variant="h6" color="text.secondary" component="h1" sx={{
 																		"@media (max-width: 600px)": {
 																			fontSize: '1rem'
 																		},
@@ -258,7 +258,7 @@ const ArtistTopTracksCards: React.FC<ArtistPageCardProps> = ({ results, artist }
 																			</span>
 																		))}
 																	</Typography>
-																	<Typography variant="subtitle1" color="text.secondary" component="div" sx={{
+																	<Typography variant="subtitle1" color="text.secondary" component="h1" sx={{
 																		"@media (max-width: 600px)": {
 																			fontSize: '.7em',
 																		}
@@ -274,7 +274,7 @@ const ArtistTopTracksCards: React.FC<ArtistPageCardProps> = ({ results, artist }
 																}}>
 																	<Grid item xs={3} sm={6}  >
 																		{/* <Card sx={{ width: '90%' }}> */}
-																		<Typography variant="subtitle1" color="text.secondary" component="div"
+																		<Typography variant="subtitle1" color="text.secondary" component="h1"
 																			sx={{
 																				display: 'flex', flexDirection: 'column', alignItems: 'center', lineHeight: '1rem',
 																				"@media (max-width: 600px)": {
@@ -283,7 +283,7 @@ const ArtistTopTracksCards: React.FC<ArtistPageCardProps> = ({ results, artist }
 																			}}
 																		>
 																			Key
-																			<Typography className='song-sub-info' variant="h4" color="text.primary" component="div" sx={{
+																			<Typography className='song-sub-info' variant="h4" color="text.primary" component="h1" sx={{
 																				"@media (max-width: 600px)": {
 																					fontSize: '1.5rem',
 																				}
@@ -300,7 +300,7 @@ const ArtistTopTracksCards: React.FC<ArtistPageCardProps> = ({ results, artist }
 																		}
 																	}}>
 																		{/* <Card sx={{ width: '90%' }}> */}
-																		<Typography variant="subtitle1" color="text.secondary" component="div"
+																		<Typography variant="subtitle1" color="text.secondary" component="h1"
 																			sx={{
 																				display: 'flex', flexDirection: 'column', alignItems: 'center', lineHeight: '1rem',
 																				"@media (max-width: 600px)": {
@@ -309,7 +309,7 @@ const ArtistTopTracksCards: React.FC<ArtistPageCardProps> = ({ results, artist }
 																			}}
 																		>
 																			BPM
-																			<Typography className='song-sub-info' variant="h4" color="text.primary" component="div" sx={{
+																			<Typography className='song-sub-info' variant="h4" color="text.primary" component="h1" sx={{
 																				"@media (max-width: 600px)": {
 																					fontSize: '1.5rem',
 																				}

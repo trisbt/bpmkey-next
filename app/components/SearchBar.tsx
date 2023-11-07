@@ -111,7 +111,7 @@ const SearchBar = () => {
 								<Box sx={{
 									width: '10em'
 								}}>
-									<Typography variant='subtitle2' color='#f5f5f5' fontWeight={800} sx={{
+									<Typography variant='subtitle2' component="h1"color='#f5f5f5' fontWeight={800} sx={{
 										fontSize: '.8em'
 									}}>
 										Search for songs...

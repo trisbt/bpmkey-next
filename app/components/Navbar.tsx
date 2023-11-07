@@ -48,7 +48,7 @@ function Navbar() {
               }}>
                 <Link prefetch={false} href="/">
                 <ThemeProvider theme={logoTheme}>
-                  <Typography  sx={{
+                  <Typography component="h1" sx={{
                     color: 'white',
                     fontSize: '35px',
                     textAlign: 'center',

@@ -12,7 +12,7 @@ function HorizontalAd() {
   }, []);
 
   return (
-    <div style={{ textAlign: 'center', width:'100vw', display:'flex', justifyContent:'center' }}>
+    <div style={{ textAlign: 'center', width: '100vw', display: 'flex', justifyContent: 'center' }}>
       {/* AdSense Horizontal Ad unit */}
       <ins
         className="adsbygoogle"
@@ -24,7 +24,7 @@ function HorizontalAd() {
         }}
         data-ad-client={`${process.env.NEXT_PUBLIC_GOOGLE_ADSENSE}`}
         data-ad-slot="7286492910"
-        data-ad-format="auto"
+        data-ad-format="rectangle, horizontal"
         data-full-width-responsive="true">
       </ins>
     </div>

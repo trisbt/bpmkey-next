@@ -193,17 +193,18 @@ const SearchCards: React.FC<SearchPageCardProps> = ({ results }) => {
 							justifyContent='space-between'
 
 						>
-							<Hidden mdDown>
-								<Grid container item xs={1}
-									display='flex'
-									justifyContent='flex-start'
-								>
 
+							<Grid container item xs={1}
+								display='flex'
+								justifyContent='flex-start'
+							>
+								<Hidden mdDown>
 									<VerticalAd />
 									<Box height='50em' />
 									<VerticalAd />
-								</Grid>
-							</Hidden>
+								</Hidden>
+							</Grid>
+
 							{/* main search */}
 							<Grid container item xs={12} md={10} display='flex'
 								// wrap='no-wrap'
@@ -418,7 +419,7 @@ const SearchCards: React.FC<SearchPageCardProps> = ({ results }) => {
 													>
 														<CardContent sx={{
 															width: '90vw',
-													
+
 														}}>
 															<CardAd />
 														</CardContent>
@@ -432,17 +433,19 @@ const SearchCards: React.FC<SearchPageCardProps> = ({ results }) => {
 									.flat()
 								}
 							</Grid>
-							<Hidden mdDown>
-								<Grid container item xs={1}
-									display='flex'
-									justifyContent='flex-end'
-								>
+
+							<Grid container item xs={1}
+								display='flex'
+								justifyContent='flex-end'
+							>
+								<Hidden mdDown>
 									<VerticalAd />
 
 									<Box height='50em' />
 									<VerticalAd />
-								</Grid>
-							</Hidden>
+								</Hidden>
+							</Grid>
+
 						</Grid >
 
 						<Grid item xs={12} sx={{

@@ -18,15 +18,15 @@ function CardAd() {
                 className="adsbygoogle"
                 style={{
                     display: 'inline-block',
-                    width: '480px',
-                    height: '200px',
-                    // border: '1px solid red',
+                    width: '100%',
+                    height: '150px',
+                    border: '1px solid red',
                 }}
                 data-ad-client={`${process.env.NEXT_PUBLIC_GOOGLE_ADSENSE}`}
                
-                data-ad-slot="4917966981"
+                data-ad-slot="4317079602"
                 data-ad-format="fluid"
-                data-ad-layout-key="-hl+5+v-9g+fn"
+                data-ad-layout-key="-fg-29+da-om+bz"
                 data-full-width-responsive="true"
             >
             </ins>

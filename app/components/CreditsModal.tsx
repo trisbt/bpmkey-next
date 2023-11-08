@@ -20,6 +20,7 @@ const CreditsModal: React.FC<CreditsModalProps> = ({ open, handleClose, credits 
 
     return (
         <Modal
+            disableScrollLock={true}
             open={open}
             onClose={handleClose}
             closeAfterTransition

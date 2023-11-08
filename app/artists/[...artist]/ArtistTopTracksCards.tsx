@@ -121,7 +121,7 @@ const ArtistTopTracksCards: React.FC<ArtistPageCardProps> = ({ results, artist }
 									backgroundColor: 'transparent'
 								}}
 							>
-								<Typography variant='h4' component="h1"sx={{
+								<Typography variant='h4' component="h1" sx={{
 									display: 'flex',
 									alignItems: 'center',
 									color: '#e8eaf6',
@@ -237,7 +237,7 @@ const ArtistTopTracksCards: React.FC<ArtistPageCardProps> = ({ results, artist }
 																<Grid item xs={9} sm={5} sx={{
 																	paddingLeft: '.5em',
 																}}>
-																	<Typography  color="text.primary" variant="h5" component="h1"sx={{
+																	<Typography color="text.primary" variant="h5" component="h1" sx={{
 																		"@media (max-width: 600px)": {
 																			fontSize: '1rem'
 																		},
@@ -300,7 +300,7 @@ const ArtistTopTracksCards: React.FC<ArtistPageCardProps> = ({ results, artist }
 																		}
 																	}}>
 																		{/* <Card sx={{ width: '90%' }}> */}
-																		<Typography variant="subtitle1" color="text.secondary"  component="h1"
+																		<Typography variant="subtitle1" color="text.secondary" component="h1"
 																			sx={{
 																				display: 'flex', flexDirection: 'column', alignItems: 'center', lineHeight: '1rem',
 																				"@media (max-width: 600px)": {
@@ -368,7 +368,7 @@ const ArtistTopTracksCards: React.FC<ArtistPageCardProps> = ({ results, artist }
 												<Grid item xs={11} md={8} key={"ad_" + index} display='flex' justifyContent='center'>
 													<Card
 														sx={{
-															width: '80vw',
+															width: '100vw',
 															display: 'flex',
 															// flexDirection: 'row',
 															justifyContent: 'center',
@@ -377,16 +377,10 @@ const ArtistTopTracksCards: React.FC<ArtistPageCardProps> = ({ results, artist }
 															"&:hover": {
 																backgroundColor: "#e0e0e0",
 															},
-															"@media (max-width: 600px)": {
-																width: '90vw',
-															}
 														}}
 													>
 														<CardContent sx={{
-															width: '80vw',
-															"@media (max-width: 600px)": {
-																width: '90vw',
-															}
+															width: '90vw',
 														}}>
 															<CardAd />
 														</CardContent>

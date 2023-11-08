@@ -25,7 +25,7 @@ const GetSpotifyAlbum = async (id: string) => {
             return { name, id, preview_url, artists };
         });
 
-    const ids = albumTracksData.map((item) => item.id);
+    const ids = albumTracksData.map((item: AlbumItem) => item.id);
     const audioData = await GetSpotifyAdvancedAudio(token, ids);
     const results = [];
     for (let i = 0; i < albumTracksData.length; i++) {

@@ -136,6 +136,9 @@ export interface Recs {
 }
 export interface AlbumDetails {
   name: string;
+  album: string;
+  artist: string;
+  images: string;
   id: string;
   preview_url: string;
   artists: Artist[];

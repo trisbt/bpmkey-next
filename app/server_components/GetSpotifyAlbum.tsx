@@ -5,32 +5,38 @@ import { AlbumItem } from '../types/serverTypes';
 
 const GetSpotifyAlbum = async (id: string) => {
     const token = await GetAccessToken();
-    const mainRes = await fetch(`https://api.spotify.com/v1/albums/${id}/tracks?limit=50`, {
+    const mainRes = await fetch(`https://api.spotify.com/v1/albums/${id}`, {
         headers: {
             'Authorization': 'Bearer ' + token
         }
     });
 
     const data = await mainRes.json();
-    const mainData = data.items
-    .filter((item: AlbumItem) => item.name) 
-    .map((item: AlbumItem) => {
-        const { name, id, album, preview_url, explicit } = item;
-        const artists = item.artists;
-        return { name, id, preview_url, artists, explicit };
-    });
 
-    const ids = mainData.map((item:AlbumItem) => item.id);
+    const albumData = {
+        images: data.images[0].url,
+        artist: data.artists[0].name,
+        album: data.name,
+    };
+    const albumTracksData = data.tracks.items
+        .map((item: AlbumItem) => {
+            const { name, id, preview_url } = item;
+            const artists = item.artists;
+            return { name, id, preview_url, artists };
+        });
+
+    const ids = albumTracksData.map((item: AlbumItem) => item.id);
     const audioData = await GetSpotifyAdvancedAudio(token, ids);
     const results = [];
-    for (let i = 0; i < mainData.length; i++) {
+    for (let i = 0; i < albumTracksData.length; i++) {
         const combinedObject = {
-            ...mainData[i],
+            ...albumTracksData[i],
             ...audioData[i]
         };
         results.push(combinedObject);
     }
-
+    results.push(albumData);
+    // console.log(results)
     return results;
 }
 

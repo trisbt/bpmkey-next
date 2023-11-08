@@ -412,14 +412,10 @@ const SearchCards: React.FC<SearchPageCardProps> = ({ results }) => {
 															"&:hover": {
 																backgroundColor: "#e0e0e0",
 															},
-															"@media (max-width: 600px)": {
-																// width: '90vw',
-															}
 														}}
 													>
 														<CardContent sx={{
 															width: '90vw',
-
 														}}>
 															<CardAd />
 														</CardContent>

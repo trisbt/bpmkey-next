@@ -30,6 +30,7 @@ import { AlbumDetails } from '@/app/types/dataTypes';
 import { AlbumPageCardProps } from '@/app/types/cardTypes';
 import slugify from 'slugify';
 import { Hidden } from '@mui/material';
+import Image from 'next/image';
 import CardAd from '@/app/components/CardAd';
 import VerticalAd from '@/app/components/VerticalAd';
 import HorizontalAd from '@/app/components/HorizontalAd';
@@ -76,6 +77,7 @@ const AlbumTrackCards: React.FC<AlbumPageCardProps> = ({ results, album }) => {
 	const [activeSlice, setActiveSlice] = useState<string[]>([]);
 	const [tempoSelect, setTempoSelect] = useState<[number, number]>([0, 200]);
 	const offset: null = null;
+	const albumData = results[results.length - 1];
 
 	const playAudio = (event: React.MouseEvent, previewUrl: string | null) => {
 		event.stopPropagation();
@@ -108,38 +110,48 @@ const AlbumTrackCards: React.FC<AlbumPageCardProps> = ({ results, album }) => {
 				{searchResults && (
 					<>
 						{/* text row */}
-						<Grid item xs={11} md={8}>
-							<Card
-								sx={{
-									display: 'flex',
-									flexDirection: 'row',
-									margin: '10px 10px 0',
-									boxShadow: 0,
-									justifyContent: 'center',
-									backgroundColor: 'transparent',
-									paddingBottom: '1em',
-								}}
-							>
-								<Typography variant='h4' component="h1" sx={{
-									display: 'flex',
-									alignItems: 'center',
-									textAlign: 'center',
-									color: '#e8eaf6',
-									fontWeight: 'bold',
-									background: '#e8eaf6',
-									WebkitBackgroundClip: 'text',
-									letterSpacing: '1px',
-									borderRadius: '2px',
-									fontStyle: 'italic',
-									'@media (max-width: 600px)': {
-										fontSize: '22px'
-									},
-								}}>
-									{decodeURIComponent(album.replace(/-/g, ' '))}
-								</Typography>
-							</Card>
+						<Grid container item xs={12}  flexDirection='column' justifyContent='center' alignItems='center' >
+							<Grid item xs={11} md={8}>
+								<Card
+									sx={{
+										display: 'flex',
+										flexDirection: 'row',
+										margin: '10px 10px 0',
+										boxShadow: 0,
+										justifyContent: 'center',
+										backgroundColor: 'transparent',
+										paddingBottom: '1em',
+									}}
+								>
+									<Typography variant='h4' component="h1" sx={{
+										display: 'flex',
+										alignItems: 'center',
+										textAlign: 'center',
+										color: '#e8eaf6',
+										fontWeight: 'bold',
+										background: '#e8eaf6',
+										WebkitBackgroundClip: 'text',
+										letterSpacing: '1px',
+										borderRadius: '2px',
+										fontStyle: 'italic',
+										'@media (max-width: 600px)': {
+											fontSize: '22px'
+										},
+									}}>
+										{albumData.album} by {albumData.artist}
+									</Typography>
+								</Card>
+							</Grid>
+							<Grid item xs={11} md={8} paddingBottom='1em'>
+									<Image
+										unoptimized
+										width={500}
+										height={500}
+										src={albumData.images}
+										alt={albumData.album}
+									/>
+								</Grid>
 						</Grid>
-
 						<SortFilter
 							setActiveSlice={setActiveSlice}
 							activeSlice={activeSlice}
@@ -228,14 +240,14 @@ const AlbumTrackCards: React.FC<AlbumPageCardProps> = ({ results, album }) => {
 																<Grid item xs={6} sx={{
 																	paddingLeft: '.5em',
 																}}>
-																	<Typography color="text.primary" component="h1"variant="h5" sx={{
+																	<Typography color="text.primary" component="h1" variant="h5" sx={{
 																		"@media (max-width: 600px)": {
 																			fontSize: '.9rem'
 																		},
 																	}}>
 																		{item.name}
 																	</Typography>
-																	<Typography variant="h6" color="text.secondary" component="h1"sx={{
+																	<Typography variant="h6" color="text.secondary" component="h1" sx={{
 																		"@media (max-width: 600px)": {
 																			fontSize: '.8rem'
 																		},
@@ -304,7 +316,7 @@ const AlbumTrackCards: React.FC<AlbumPageCardProps> = ({ results, album }) => {
 																			}}
 																		>
 																			Key
-																			<Typography className='song-sub-info' variant="h4" color="text.primary" component="div"sx={{
+																			<Typography className='song-sub-info' variant="h4" color="text.primary" component="div" sx={{
 																				"@media (max-width: 600px)": {
 																					fontSize: '1.2rem',
 																				}
@@ -330,7 +342,7 @@ const AlbumTrackCards: React.FC<AlbumPageCardProps> = ({ results, album }) => {
 																			}}
 																		>
 																			BPM
-																			<Typography className='song-sub-info' variant="h4" color="text.primary" component="div"sx={{
+																			<Typography className='song-sub-info' variant="h4" color="text.primary" component="div" sx={{
 																				"@media (max-width: 600px)": {
 																					fontSize: '1.2rem',
 																				}

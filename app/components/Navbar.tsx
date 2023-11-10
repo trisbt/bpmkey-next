@@ -28,65 +28,67 @@ function Navbar() {
         }}
       >
         {/* <Container sx ={{margin:'0', width:'100vw'}}> */}
-          <Toolbar disableGutters sx={{
-            minHeight: '45px',
+        <Toolbar disableGutters sx={{
+          minHeight: '45px',
+          paddingLeft: 1.5,
+          paddingRight: 1.5
+        }}>
+
+          <Card sx={{
+            display: 'flex',
+            height: '46px',
+            width: '180px',
+            justifyContent: 'center',
+
+            backgroundColor: 'transparent',
+            boxShadow: '0',
+            '@media (max-width:500px)': {
+              justifyContent: 'flex-start',
+              alignItems: 'center',
+              paddingLeft: '1px',
+              height: '35px',
+              paddingTop: '6px',
+            }
           }}>
+            <Link href="/">
+              <ThemeProvider theme={logoTheme}>
+                <Typography component="h1" sx={{
+                  color: 'white',
+                  fontSize: '35px',
+                  textAlign: 'center',
+                  transform: 'scaleY(1.4)',
+                  '@media (max-width:500px)': {
+                    fontSize: '28px',
+                  }
+                }}>
+                  BPMKEY
+                </Typography>
+              </ThemeProvider>
+            </Link>
+          </Card>
 
-            <Card sx={{
-              display: 'flex',
-              height: '46px',
-              width: '180px',
-              justifyContent: 'center',
 
-              backgroundColor: 'transparent',
-              boxShadow: '0',
-              '@media (max-width:500px)': {
-                justifyContent: 'flex-start',
-                alignItems: 'center',
-                paddingLeft: '1px',
-                height: '35px',
-                paddingTop: '6px',
+          {/* desktop and mobile search bar*/}
+          <Hidden only={['sm', 'md', 'lg', 'xl']}>
+            <Box display='flex' justifyContent='flex-end' sx={{
+              paddingRight: '.8em',
+              flexGrow: {
+                flexGrow: 3,  // default value for smaller screens
+                '@media (min-width:500px)': {
+                  flexGrow: 6, // value for screens 500px and larger
+                }
               }
             }}>
-              <Link  href="/">
-                <ThemeProvider theme={logoTheme}>
-                  <Typography component="h1" sx={{
-                    color: 'white',
-                    fontSize: '35px',
-                    textAlign: 'center',
-                    transform: 'scaleY(1.4)',
-                    '@media (max-width:500px)': {
-                      fontSize: '28px',
-                    }
-                  }}>
-                    BPMKEY
-                  </Typography>
-                </ThemeProvider>
-              </Link>
-            </Card>
 
-
-            {/* desktop and mobile search bar*/}
-            <Hidden only={['sm', 'md', 'lg', 'xl']}>
-              <Box display='flex' justifyContent='flex-end' sx={{
-                paddingRight: '.8em',
-                flexGrow: {
-                  flexGrow: 3,  // default value for smaller screens
-                  '@media (min-width:500px)': {
-                    flexGrow: 6, // value for screens 500px and larger
-                  }
-                }
-              }}>
-
-              </Box>
-            </Hidden>
-
-            <Box display='flex' flexGrow={1} justifyContent='center' sx={{
-              margin: -1.5,
-            }}>
-              <SearchBar />
             </Box>
-          </Toolbar>
+          </Hidden>
+
+          <Box display='flex' flexGrow={1} justifyContent='center' sx={{
+            margin: -1.5,
+          }}>
+            <SearchBar />
+          </Box>
+        </Toolbar>
         {/* </Container> */}
       </AppBar >
     </div >

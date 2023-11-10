@@ -69,9 +69,6 @@ const TopTracks: React.FC<TopTracksCardProps> = ({ results }) => {
         <Grid container item xs={12} justifyContent='center' alignItems='center' >
           {results && (
             <>
-              <Grid container item xs={12} justifyContent='center' paddingBottom='1em'>
-                <HorizontalAd />
-              </Grid>
         
               {/* text row */}
               <Grid item xs={11} md={8}>
@@ -314,9 +311,7 @@ const TopTracks: React.FC<TopTracksCardProps> = ({ results }) => {
           )}
         </Grid >
       </Box>
-      <Grid container item md={12} justifyContent='center' paddingBottom='1em'>
-        <HorizontalAd />
-      </Grid>
+
     </div >
   );
 

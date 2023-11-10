@@ -60,6 +60,16 @@ const Splash = () => {
 							display: 'flex',
 							flexDirection: 'column',
 							borderRadius: '20px',
+							paddingLeft:'14em',
+							'@media (max-width: 2200px)': {
+								paddingLeft:'10em',
+							},
+							'@media (max-width: 2000px)': {
+								paddingLeft:'5em',
+							},
+							'@media (max-width: 1500px)': {
+								paddingLeft:'0',
+							},
 						}}>
 							<Typography variant='h2'
 								component="h1"

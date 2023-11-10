@@ -22,10 +22,12 @@ function Navbar() {
     <div>
       <AppBar position="static"
         sx={{
+          // display:'flex',
+          // justifyContent:'center',
           backgroundColor: '#0047d4',
         }}
       >
-        <Container maxWidth="xl" sx ={{margin:'0'}}>
+        {/* <Container sx ={{margin:'0', width:'100vw'}}> */}
           <Toolbar disableGutters sx={{
             minHeight: '45px',
           }}>
@@ -85,7 +87,7 @@ function Navbar() {
               <SearchBar />
             </Box>
           </Toolbar>
-        </Container>
+        {/* </Container> */}
       </AppBar >
     </div >
   );

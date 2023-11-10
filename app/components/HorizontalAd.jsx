@@ -12,15 +12,17 @@ function HorizontalAd() {
   }, []);
 
   return (
-    <div style={{ textAlign: 'center', minWidth: '320px', paddingTop: '1em', display: 'flex', justifyContent: 'center' }}>
+    <div style={{ textAlign: 'center', paddingTop: '1em', display: 'flex', justifyContent: 'center' }}>
       {/* AdSense Horizontal Ad unit */}
       <ins
         className="adsbygoogle"
         style={{
           display: 'block',
           width: '100%',
-          height: '200px',
-          // border: '1px solid red',
+          height: '90px',
+          minWidth: '320px',
+          maxWidth: '970px',
+          border: '1px solid red',
         }}
         data-ad-client={`${process.env.NEXT_PUBLIC_GOOGLE_ADSENSE}`}
         data-ad-slot="7286492910"

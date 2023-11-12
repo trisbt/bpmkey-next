@@ -33,6 +33,8 @@ import CardAd from '../components/CardAd';
 import HorizontalAd from '../components/HorizontalAd';
 import CreditsLoader from '../components/CreditsLoader';
 import dynamic from 'next/dynamic'
+import { Suspense } from 'react';
+
 
 
 
@@ -107,20 +109,22 @@ const SongPageCard: React.FC<SongPageCardProps> = ({ songDetails, song, artist, 
   const slugifiedAlbumName = slugify(songDetails.albums, { lower: true, strict: true });
   const slugifiedArtistName = slugify(songDetails.artists[0].name, { lower: true, strict: true });
 
-  const handleClick = async () => {
+  const handleClick = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
     setLoading(true);
-    if (!credits) { // Fetch only if credits haven't been fetched before
-      const res: Credits = await GetCredits(songDetails.albums, songDetails.artists[0].name, songDetails.name);
-      setCredits(res);
-    }
-    setShowCredits(true);
-    setLoading(false);
+      if (!credits) {
+        try {
+          const res = await GetCredits(songDetails.albums, songDetails.artists[0].name, songDetails.name);
+          setCredits(res);
+        } catch (error) {
+          console.error("Failed to fetch credits:", error);
+        }
+      }
+      setShowCredits(true);
+      setLoading(false);
   }
   const CreditsModal = dynamic(
     () => import('../components/CreditsModal'),
-    {
-      loading: () => <CreditsLoader/>,
-    }
   )
 
   return (
@@ -279,36 +283,41 @@ const SongPageCard: React.FC<SongPageCardProps> = ({ songDetails, song, artist, 
                         <PlayButton previewUrl={songDetails.preview_url} />
                       )}
                       {/*credits button render*/}
-                      <Hidden only={['sm', 'md', 'lg', 'xl']}>
-                        {/* This will be displayed only on xs screens */}
-                        {!showCredits ? (
-                          <form action={handleClick}>
+                      <Grid item>
+                        <Hidden only={['sm', 'md', 'lg', 'xl']}>
+                          {/* This will be displayed only on xs screens */}
+                          <form onSubmit={handleClick}>
                             <SmallCreditsButton type="submit">Credits</SmallCreditsButton>
                           </form>
-                        ) : (
-                          <CreditsModal
-                            open={showCredits}
-                            handleClose={() => setShowCredits(false)}
-                            credits={credits}
-                          />
-                        )}
-                      </Hidden>
+                          <>
+                            {loading && <CreditsLoader />}
+                            {showCredits && (
+                              <CreditsModal
+                                open={showCredits}
+                                handleClose={() => setShowCredits(false)}
+                                credits={credits}
+                              />
+                            )}
+                          </>
+                        </Hidden>
 
-                      <Hidden only={['xs']}>
-                        {/* This will be displayed on sm, md, lg, xl screens */}
-                        {!showCredits ? (
-                          <form action={handleClick}>
+                        <Hidden only={['xs']}>
+                          {/* This will be displayed on sm, md, lg, xl screens */}
+                          <form onSubmit={handleClick}>
                             <CreditsButton type="submit">Get Credits</CreditsButton>
-
                           </form>
-                        ) : (
-                            <CreditsModal
-                              open={showCredits}
-                              handleClose={() => setShowCredits(false)}
-                              credits={credits}
-                            />
-                        )}
-                      </Hidden>
+                          <>
+                            {loading && <CreditsLoader />}
+                            {showCredits && (
+                              <CreditsModal
+                                open={showCredits}
+                                handleClose={() => setShowCredits(false)}
+                                credits={credits}
+                              />
+                            )}
+                          </>
+                        </Hidden>
+                      </Grid>
                     </Grid>
                   </Grid>
 

@@ -76,16 +76,17 @@ const SearchCards: React.FC<SearchPageCardProps> = ({ results }) => {
 	const [currentlyPlayingUrl, setCurrentlyPlayingUrl] = useState<string | null>(null);
 	const audioRef = useRef<HTMLAudioElement | null>(null);
 	const [searchResults, setSearchResults] = useState(results);
-	const [offset, setOffset] = useState<number>(1);
+	const [offset, setOffset] = useState<number>(0);
 	const router = useRouter();
 	const searchParams = useSearchParams()
+	const isInitialMount = useRef(true);
 	const searchQuery: string | null = searchParams.get('q');
 	//sort hooks
 	const [sortOrder, setSortOrder] = useState<"asc" | "desc" | null>(null);
 	const [sortBy, setSortBy] = useState<"tempo" | "key" | null>(null);
 	//filter hooks
 	const [activeSlice, setActiveSlice] = useState<string[]>([]);
-	const [tempoSelect, setTempoSelect] = useState<[number, number]>([0, 500]);
+	const [tempoSelect, setTempoSelect] = useState<[number, number]>([0, 200]);
 
 	const playAudio = (event: React.MouseEvent, previewUrl: string | null) => {
 		event.stopPropagation();
@@ -111,25 +112,53 @@ const SearchCards: React.FC<SearchPageCardProps> = ({ results }) => {
 		const nextOffset = offset + 25;
 		setOffset(nextOffset);
 	};
-
+// console.log(offset, searchQuery)
 	//load more effect
-	useEffect(() => {
-		const fetchData = async () => {
-			const newResults = await GetSpotifySearch(searchQuery, offset);
 
-			if (offset === 1) {
-				setSearchResults(newResults);
-			} else {
-				setSearchResults(prevResults => [...prevResults, ...newResults]);
-			}
-		};
-		fetchData();
-	}, [offset, searchQuery]);
+	const [isFirstRender, setIsFirstRender] = useState(true);
+
+  useEffect(() => {
+    // This effect sets the isFirstRender to false after the component mounts
+    setIsFirstRender(false);
+  }, []); // Empty dependency array ensures this effect only runs once
+
+  useEffect(() => {
+    // Skip the first render by checking if isFirstRender is true
+    if (isFirstRender) {
+      return;
+    }
+
+    const fetchData = async () => {
+      const newResults = await GetSpotifySearch(searchQuery, offset);
+
+      if (offset === 0) {
+        setSearchResults(newResults);
+      } else {
+        setSearchResults(prevResults => [...prevResults, ...newResults]);
+      }
+    };
+
+    fetchData();
+  }, [offset, searchQuery]);
+
+
+	// useEffect(() => {
+	// 	const fetchData = async () => {
+	// 		const newResults = await GetSpotifySearch(searchQuery, offset);
+
+	// 		if (offset === 1) {
+	// 			setSearchResults(newResults);
+	// 		} else {
+	// 			setSearchResults(prevResults => [...prevResults, ...newResults]);
+	// 		}
+	// 	};
+	// 	fetchData();
+	// }, [offset, searchQuery]);
 
 	//new search reset offset effect
 	useEffect(() => {
 		if (searchQuery) {
-			setOffset(1);
+			setOffset(0);
 		}
 	}, [searchQuery]);
 
@@ -165,6 +194,7 @@ const SearchCards: React.FC<SearchPageCardProps> = ({ results }) => {
 									letterSpacing: '1px',
 									borderRadius: '2px',
 									fontStyle: 'italic',
+									paddingBottom:'1em',
 									'@media (max-width: 600px)': {
 										fontSize: '20px'
 									},
@@ -318,7 +348,8 @@ const SearchCards: React.FC<SearchPageCardProps> = ({ results }) => {
 																			}}
 																		>
 																			Key
-																			<Typography className='song-sub-info' variant="h4" color="text.primary" sx={{
+																			<Typography className='song-sub-info'  color="text.primary" sx={{
+																				fontSize:'2rem',
 																				"@media (max-width: 600px)": {
 																					fontSize: '1.5rem',
 																				}
@@ -344,7 +375,8 @@ const SearchCards: React.FC<SearchPageCardProps> = ({ results }) => {
 																			}}
 																		>
 																			BPM
-																			<Typography className='song-sub-info' variant="h4" color="text.primary" sx={{
+																			<Typography className='song-sub-info'  color="text.primary" sx={{
+																					fontSize:'2rem',
 																				"@media (max-width: 600px)": {
 																					fontSize: '1.5rem',
 																				}

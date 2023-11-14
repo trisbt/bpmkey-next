@@ -70,7 +70,7 @@ const SearchBar = () => {
 	const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 		setShowInput(false);
-		const searchQuery = slugify(query, { lower: true, strict: true })
+		const searchQuery = slugify(query, { lower: false, strict: true })
 		router.push(`/search?q=${searchQuery}`);
 	};
 

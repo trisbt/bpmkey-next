@@ -17,13 +17,11 @@ const GetTopTracks = async () => {
         //     revalidate: 85600,
         // }
     });
-    // if (!res.ok) {
-    //     throw new Error(`API response failed with status ${res.status}: ${res.statusText}`);
-    // }
+    if (!res.ok) {
+        throw new Error(`API response failed with status ${res.status}: ${res.statusText}`);
+    }
     
     const data = await res.json();
-    // console.log(data)
-    // console.log(data.tracks.items.slice(0, 10).map((item: TopTracksItem) => item.track));
     const trackData = data.tracks.items.slice(0, 10).map((item: TopTracksItem) => item.track);
     const trackID = data.tracks.items.slice(0, 10).map((item: TopTracksItem) => item.track.id);
 

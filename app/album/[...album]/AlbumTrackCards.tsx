@@ -75,7 +75,7 @@ const AlbumTrackCards: React.FC<AlbumPageCardProps> = ({ results, album }) => {
 	const [sortBy, setSortBy] = useState<"tempo" | "key" | null>(null);
 	//filter hooks
 	const [activeSlice, setActiveSlice] = useState<string[]>([]);
-	const [tempoSelect, setTempoSelect] = useState<[number, number]>([0, 200]);
+	const [tempoSelect, setTempoSelect] = useState<[number, number]>([0, 500]);
 	const offset: null = null;
 	const albumData = results[results.length - 1];
 

@@ -18,8 +18,6 @@ const GetAccessToken = async (revalidate = 3600) => {
     next:{
       revalidate: revalidate,
     }
-    
-
   });
 
   if (!res.ok) {

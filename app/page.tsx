@@ -4,8 +4,6 @@ import TopTracks from './components/TopTracks'
 import GetTopTracks from './server_components/GetTopTracks'
 import { ThemeProvider } from '@mui/material'
 import { archivoTheme } from './theme'
-import { Suspense } from 'react'
-import { SkeletonTopTracks } from './components/SkeletonTopTracks'
 import HorizontalAd from './components/HorizontalAd'
 
 
@@ -17,11 +15,9 @@ export default async function Home() {
       <ThemeProvider theme={archivoTheme}>
         <Splash />
       </ThemeProvider>
-      {/* <Suspense fallback={<div />}> */}
       <HorizontalAd />
       <TopTracks results={topTracksData} />
       <HorizontalAd />
-      {/* </Suspense> */}
     </div>
   )
 }

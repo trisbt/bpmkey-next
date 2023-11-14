@@ -129,7 +129,7 @@ const SearchBar = () => {
 								margin: 0,
 								padding: 0,
 								top: 0,
-								left: -16,
+								left: 0,
 								width: '100vw',
 								zIndex: 2,
 								background: 'white',

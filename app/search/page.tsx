@@ -18,7 +18,8 @@ const SearchPage = async ({
 }) => {
 // console.log(searchParams.q)
 // const key = JSON.stringify(searchParams);
-  let offset: number = 1
+  let offset: number = 0;
+
   const results: SearchDetails[] = await GetSpotifySearch(searchParams.q.replace(/-/g, ' '), offset);
   return (
     <div className='background-gradient min-h-[100em]'>

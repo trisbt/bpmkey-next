@@ -125,7 +125,7 @@ const SortFilter: React.FC<SortFilterProps> = ({ searchQuery, offset, sortOrder,
   //filter effect
   useEffect(() => {
     setActiveSlice([]);
-    setTempoSelect([0, 200]);
+    setTempoSelect([0,500]);
   }, [offset, searchQuery]);
 
   //close accordion
@@ -202,7 +202,7 @@ const SortFilter: React.FC<SortFilterProps> = ({ searchQuery, offset, sortOrder,
   //reset filter
   const handleReset = (event: React.MouseEvent<HTMLElement>) => {
     event.preventDefault();
-    setTempoSelect([0, 200]);
+    setTempoSelect([0, 500]);
     setSliderValue([80, 140]);
     setTextFieldTempo('');
     setActiveSlice([]);

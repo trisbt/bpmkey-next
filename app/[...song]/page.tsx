@@ -15,11 +15,11 @@ const SongPage = async ({
   const id = params.song[2];
   const songDetails: SongDetails = await GetSpotifyById(id);
   const seedArtist = songDetails.artistId;
-  const recs: Recs[] = await GetSpotifyRecs(id, seedArtist)
+  // const recs: Recs[] = await GetSpotifyRecs(id, seedArtist)
 
   return (
     <div className='background-gradient min-h-[50em]'>
-      <SongPageCard songDetails={songDetails} artist={artist} song={song} id={id} recs={recs} />
+      <SongPageCard songDetails={songDetails} artist={artist} song={song} id={id} />
     </div>
   )
 }

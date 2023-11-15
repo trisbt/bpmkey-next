@@ -12,6 +12,7 @@ const GetSpotifyById = async (id: string) => {
 
     const trackData = await mainRes.json();
 
+
     const basicData = {
         name: trackData.name,
         images: trackData.album.images[0].url,

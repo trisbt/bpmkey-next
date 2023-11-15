@@ -102,7 +102,7 @@ const SmallCreditsButton = styled(Button)(() => ({
   }
 }));
 
-const SongPageCard: React.FC<SongPageCardProps> = ({ songDetails, song, artist, id, recs }) => {
+const SongPageCard: React.FC<SongPageCardProps> = ({ songDetails, song, artist, id }) => {
   const [showCredits, setShowCredits] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
   const [credits, setCredits] = useState<Credits>(null);

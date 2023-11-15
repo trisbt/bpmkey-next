@@ -1,4 +1,4 @@
-const GetAccessToken = async (revalidate = 3600) => {
+const GetAccessToken = async () => {
   const client_id = process.env.client_id;
   const client_secret = process.env.client_secret;
   const authOptions = {
@@ -15,15 +15,16 @@ const GetAccessToken = async (revalidate = 3600) => {
     method: authOptions.method,
     headers: authOptions.headers,
     body: authOptions.body,
-    next:{
-      revalidate: revalidate,
-    }
+    // next:{
+    //   revalidate: revalidate,
+    // }
   });
 
   if (!res.ok) {
     throw new Error('Spotify API access token not valid');
   }
   const data = await res.json();
+
   return data.access_token;
 }
 

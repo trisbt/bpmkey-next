@@ -15,9 +15,9 @@ const GetAccessToken = async () => {
     method: authOptions.method,
     headers: authOptions.headers,
     body: authOptions.body,
-    // next:{
-    //   revalidate: revalidate,
-    // }
+    next:{
+      revalidate: 3600,
+    }
   });
 
   if (!res.ok) {

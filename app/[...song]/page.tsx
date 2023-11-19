@@ -16,7 +16,7 @@ const SongPage = async ({
   const songDetails: SongDetails = await GetSpotifyById(id);
   const seedArtist = songDetails.artistId;
   // const recs: Recs[] = await GetSpotifyRecs(id, seedArtist)
-
+ 
   return (
     <div className='background-gradient min-h-[50em]'>
       <SongPageCard songDetails={songDetails} artist={artist} song={song} id={id} />
@@ -31,11 +31,17 @@ export async function generateMetadata({
 },
   parent: ResolvingMetadata
 ): Promise<Metadata> {
-  const song = params.song[0];
-  const artist = params.song[1];
+  const id = params.song[2];
+  const songDetails: SongDetails = await GetSpotifyById(id);
+  const metaArtist = songDetails.artists[0].name;
+  const metaSong = songDetails.name;
+  const metaKey = songDetails.key;
+  const metaBPM = songDetails.tempo;
   return {
-    title: `${decodeURI(song.replace(/-/g, ' '))} by ${decodeURI(artist.replace(/-/g, ' '))} Bpm, Key, Credits BpmKey.com`,
-    description: `Key BPM Credits finder for ${artist}`
+    title: `Bpm, Key, Credits for ${metaSong} by ${metaArtist} at BpmKey`,
+    description: `Key, BPM, Credits for ${metaSong} by ${metaArtist},
+    Key: ${metaKey} Tempo: ${metaBPM} Additional metrics include Credits, Loudness,
+    Popularity, Energy`
   }
 }
 

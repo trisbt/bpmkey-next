@@ -30,9 +30,16 @@ export async function generateMetadata({
   parent: ResolvingMetadata
 ): Promise<Metadata> {
   const artist = params.artist[0];
+  const id = params.artist[1];
+  const results: SongDetails[] = await GetSpotifyArtist(id);
+  const metaArtist = results[0].artists[0].name;
+  const metaSong = results[0].name;
+  const metaKey = results[0].key;
+  const metaBPM = results[0].tempo;
   return {
-    title: `${decodeURI(artist.replace(/-/g, ' '))} Top Tracks Bpm, Key, Credits BpmKey.com`,
-    description:`Key BPM Credits finder for ${artist}`
+    title: `Bpm, Key, Credits for Top Tracks by ${metaArtist} at BpmKey`, 
+    description:`Key, BPM, Credits for Top Tracks by ${metaArtist}, like ${metaSong} Key: ${metaKey} BPM: ${metaBPM}.
+    Find Key, Tempo and additional metrics like Credits, Loudness, Popularity, Energy.`
   }
 }
 

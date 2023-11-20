@@ -21,19 +21,8 @@ import LinearProgress from '@mui/material/LinearProgress';
 import Modal from '@mui/material/Modal';
 import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
-import { GetCredits } from '../actions/GetCredits';
-// import CreditsModal from '../components/CreditsModal';
 import { SongPageCardProps } from '../types/cardTypes';
-import { Credits } from '../types/dataTypes';
-import DisplaySettings from '@mui/icons-material/DisplaySettings';
-import SongRecs from './SongRecs';
-import slugify from 'slugify';
-import MultiAd from '../components/MultiAd';
-import CardAd from '../components/CardAd';
-import HorizontalAd from '../components/HorizontalAd';
-import CreditsLoader from '../components/CreditsLoader';
-import dynamic from 'next/dynamic'
-import { Suspense } from 'react';
+
 
 //helpers
 const transformSpotifyURItoURL = (uri: string): string | null => {
@@ -318,7 +307,7 @@ const RickCard = () => {
             </Grid>
 
             <Grid item display='flex' justifyContent='center' >
-              <MultiAd />
+    
             </Grid>
 
             {/* analysis row */}

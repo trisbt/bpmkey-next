@@ -28,9 +28,17 @@ export async function generateMetadata({
   parent: ResolvingMetadata
 ): Promise<Metadata> {
   const album = params.album[0];
+  const id = params.album[1];
+  const results: AlbumDetails[] = await GetSpotifyAlbum(id);
+  const metaArtist = results[results.length - 1].artist;
+  const metaAlbum = results[results.length - 1].album;
+  const metaSong = results[0].name;
+  const metaKey = results[0].key;
+  const metaBPM = results[0].tempo;
   return {
-    title: `${decodeURI(album.replace(/-/g, ' '))} Bpm, Key, Credits BpmKey.com`,
-    description:`Key BPM Credits finder for ${album}`
+    title: `Bpm, Key, Credits for the album ${metaAlbum} by ${metaArtist} at BpmKey`,
+    description:`Key, BPM, Credits for the album ${metaAlbum} by ${metaArtist}, like ${metaSong} Key: ${metaKey} BPM: ${metaBPM}.
+    Find Key, Tempo and additional metrics like Credits, Loudness, Popularity, Energy.`
   }
 }
 

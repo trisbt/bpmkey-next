@@ -2,7 +2,6 @@ import GetAccessToken from "./GetAccessToken";
 import GetSpotifyAdvancedAudio from "./GetSpotifyAdvancedAudio";
 import { GetTracksItem } from "../types/serverTypes";
 const GetSpotifyRecs = async (seedSong: string, seedArtist: string, seedGenres?: string) => {
-
     const token = await GetAccessToken();
 
     let uri = `https://api.spotify.com/v1/recommendations?limit=10&seed_artists=${seedArtist}&seed_tracks=${seedSong}`;
@@ -16,12 +15,13 @@ const GetSpotifyRecs = async (seedSong: string, seedArtist: string, seedGenres?:
             'Authorization': 'Bearer ' + token
         }
     });
+
     // console.log(res.statusText);
     // console.log(res.status);
-    // if (res.status === 429) {
-    //     const retryAfter = res.headers.get('Retry-After');
-    //     console.log(`Retry-After header value: ${retryAfter}`);
-    // }
+    if (res.status === 429) {
+        const retryAfter = res.headers.get('Retry-After');
+        console.error(`Retry-After header value: ${retryAfter}`);
+    }
     const data = await res.json();
 
     const mainData = data.tracks.map((item: GetTracksItem) => {
@@ -36,6 +36,8 @@ const GetSpotifyRecs = async (seedSong: string, seedArtist: string, seedGenres?:
     const ids = data.tracks.map((item: GetTracksItem) => item.id);
 
     const audioData = await GetSpotifyAdvancedAudio(token, ids);
+ 
+
     const results = [];
     for (let i = 0; i < mainData.length; i++) {
         const combinedObject = {
@@ -44,6 +46,7 @@ const GetSpotifyRecs = async (seedSong: string, seedArtist: string, seedGenres?:
         };
         results.push(combinedObject);
     }
+
     return results;
 }
 

@@ -96,7 +96,7 @@ const SongRecs: React.FC<RecsCardProps> = ({ recs }) => {
 
 	return (
 		<div>
-			<Box>
+			<Box sx = {{marginBottom: 2}}>
 				<Grid container item xs={12} justifyContent='center' alignItems='center' >
 					{searchResults && (
 						<>

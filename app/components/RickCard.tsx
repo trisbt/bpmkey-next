@@ -21,21 +21,7 @@ import LinearProgress from '@mui/material/LinearProgress';
 import Modal from '@mui/material/Modal';
 import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
-import { GetCredits } from '../actions/GetCredits';
-// import CreditsModal from '../components/CreditsModal';
 import { SongPageCardProps } from '../types/cardTypes';
-import { Credits } from '../types/dataTypes';
-import DisplaySettings from '@mui/icons-material/DisplaySettings';
-import SongRecs from './SongRecs';
-import slugify from 'slugify';
-import MultiAd from '../components/MultiAd';
-import CardAd from '../components/CardAd';
-import HorizontalAd from '../components/HorizontalAd';
-import CreditsLoader from '../components/CreditsLoader';
-import dynamic from 'next/dynamic'
-import { Suspense } from 'react';
-
-
 
 
 //helpers
@@ -68,70 +54,50 @@ const msConvert = (num: number): string => {
   return minutes + ':' + formattedSeconds;
 }
 
-const CreditsButton = styled(Button)(() => ({
-  '&&': {
-    color: '#fff',
-    backgroundColor: '#212121',
-    '&:hover': {
-      color: 'white',
-      backgroundColor: '#00e676'
-    },
-    fontSize: '15px',
-    width: '200px',
-    height: '50px',
-    lineHeight: '0',
-    boxShadow: 3,
-    borderRadius: '50px',
-  }
-}));
 
-const SmallCreditsButton = styled(Button)(() => ({
-  '&&': {
-    color: '#fff',
-    backgroundColor: '#212121',
-    '&:hover': {
-      color: 'white',
-      backgroundColor: '#00e676'
-    },
-    fontSize: '15px',
-    width: '100px',
-    height: '50px',
-    lineHeight: '0',
-    boxShadow: 3,
-    borderRadius: '50px',
-  }
-}));
-
-const SongPageCard: React.FC<SongPageCardProps> = ({ songDetails, song, artist, id, recs }) => {
-  const [showCredits, setShowCredits] = useState<boolean>(false);
-  const [loading, setLoading] = useState<boolean>(false);
-  const [credits, setCredits] = useState<Credits>(null);
-  const slugifiedAlbumName = slugify(songDetails.albums, { lower: true, strict: true });
-  const slugifiedArtistName = slugify(songDetails.artists[0].name, { lower: true, strict: true });
-
-  const handleClick = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    setLoading(true);
-    if (!credits) {
-      try {
-        const res = await GetCredits(songDetails.albums, songDetails.artists[0].name, songDetails.name);
-        setCredits(res);
-      } catch (error) {
-        console.error("Failed to fetch credits:", error);
-      }
+const RickCard = () => {
+  const songDetails = 
+    {
+      name: 'Never Gonna Give You Up',
+      images: 'https://i.scdn.co/image/ab67616d0000b27315ebbedaacef61af244262a8',
+      albumId: '6eUW0wxWtzkFdaEFsTJto6',
+      artistId: '0gxyHStUsqpMadRV0Di1Qt',
+      id: '4PTG3Z6ehGkBFwjybzWkR8',
+      preview_url: 'https://p.scdn.co/mp3-preview/b4c682084c3fd05538726d0a126b7e14b6e92c83?cid=f0bb764e36ca4e2395b1c38f84c9764c',
+      release_date: '1987-11-12',
+      artists: [
+        {
+          external_urls: [Object],
+          href: 'https://api.spotify.com/v1/artists/0gxyHStUsqpMadRV0Di1Qt',
+          id: '0gxyHStUsqpMadRV0Di1Qt',
+          name: 'Rick Astley',
+          type: 'artist',
+          uri: 'spotify:artist:0gxyHStUsqpMadRV0Di1Qt'
+        }
+      ],
+      albums: 'Whenever You Need Somebody',
+      explicit: false,
+      popularity: 59,
+      key: 'A♭',
+      tempo: 113.5,
+      loudness: -11.823,
+      energy: 0.939,
+      acousticness: 0.115,
+      analysis_url: 'https://api.spotify.com/v1/audio-analysis/4PTG3Z6ehGkBFwjybzWkR8',
+      danceability: 0.721,
+      duration_ms: 213573,
+      instrumentalness: 0.0000379,
+      liveness: 0.108,
+      time_signature: 4,
+      track_href: 'https://api.spotify.com/v1/tracks/4PTG3Z6ehGkBFwjybzWkR8',
+      uri: 'spotify:track:4PTG3Z6ehGkBFwjybzWkR8',
+      valence: 0.914
     }
-    setShowCredits(true);
-    setLoading(false);
-  }
-  const CreditsModal = dynamic(
-    () => import('../components/CreditsModal'),
-  )
+  
 
   return (
     <div className='song-page-main background-gradient'>
-      <Grid container item md={12} justifyContent='center' paddingBottom='1em'>
-        <HorizontalAd />
-      </Grid>
+      
       <Grid item xs={11} md={8}>
 
         <Card
@@ -155,11 +121,12 @@ const SongPageCard: React.FC<SongPageCardProps> = ({ songDetails, song, artist, 
             WebkitBackgroundClip: 'text',
             letterSpacing: '1px',
             borderRadius: '2px',
+            textTransform:'uppercase',
             '@media (max-width: 600px)': {
               fontSize: '22px'
             },
           }}>
-            Bpm, Key, Credits for
+            Something went wrong please retry again
           </Typography>
         </Card>
 
@@ -189,7 +156,7 @@ const SongPageCard: React.FC<SongPageCardProps> = ({ songDetails, song, artist, 
               fontSize: '22px'
             },
           }}>
-            {songDetails.name} by {songDetails.artists[0].name}
+            {/* {songDetails.name} by {songDetails.artists[0].name} */}
           </Typography>
         </Card>
 
@@ -242,29 +209,18 @@ const SongPageCard: React.FC<SongPageCardProps> = ({ songDetails, song, artist, 
 
                   <Grid item >
                     <Typography variant="h5" component="h1" color='text.primary'>{songDetails.name}</Typography>
-                    <Link prefetch={false} href={`/artists/${slugifiedArtistName}/${songDetails.artistId}`}>
-                      <Typography variant="h4" sx={{
-                        transition: 'color 0.3s',
-                        '&:hover': {
-                          color: '#3f51b5',
-                          fontStyle: 'italic'
-                        }
-                      }}
+                    {/* <Link prefetch={false} href={`/artists/${slugifiedArtistName}/${songDetails.artistId}`}> */}
+                      <Typography variant="h4" 
                       >{songDetails.artists[0]?.name}
                       </Typography>
-                    </Link>
+                    {/* </Link> */}
 
-                    <Link prefetch={false} href={`/album/${slugifiedAlbumName}/${songDetails.albumId}`}>
+                    {/* <Link prefetch={false} href={`/album/${slugifiedAlbumName}/${songDetails.albumId}`}> */}
                       <Typography variant="subtitle1" component="h1" sx={{
-                        transition: 'color 0.3s',
-                        '&:hover': {
-                          color: '#3f51b5',
-                          fontStyle: 'italic'
-                        }
                       }}>
                         {songDetails.albums}
                       </Typography>
-                    </Link>
+                    {/* </Link> */}
                     <Typography variant="subtitle2" component="h4" >Released: {songDetails.release_date}</Typography>
 
                     <Grid item container xs={12} alignItems='center' justifyContent='space-between' >
@@ -283,41 +239,7 @@ const SongPageCard: React.FC<SongPageCardProps> = ({ songDetails, song, artist, 
                         <PlayButton previewUrl={songDetails.preview_url} />
                       )}
                       {/*credits button render*/}
-                      <Grid item>
-                        <Hidden only={['sm', 'md', 'lg', 'xl']}>
-                          {/* This will be displayed only on xs screens */}
-                          <form onSubmit={handleClick}>
-                            <SmallCreditsButton type="submit">Credits</SmallCreditsButton>
-                          </form>
-                          <>
-                            {loading && <CreditsLoader />}
-                            {showCredits && (
-                              <CreditsModal
-                                open={showCredits}
-                                handleClose={() => setShowCredits(false)}
-                                credits={credits}
-                              />
-                            )}
-                          </>
-                        </Hidden>
-
-                        <Hidden only={['xs']}>
-                          {/* This will be displayed on sm, md, lg, xl screens */}
-                          <form onSubmit={handleClick}>
-                            <CreditsButton type="submit">Get Credits</CreditsButton>
-                          </form>
-                          <>
-                            {loading && <CreditsLoader />}
-                            {showCredits && (
-                              <CreditsModal
-                                open={showCredits}
-                                handleClose={() => setShowCredits(false)}
-                                credits={credits}
-                              />
-                            )}
-                          </>
-                        </Hidden>
-                      </Grid>
+                  
                     </Grid>
                   </Grid>
 
@@ -385,7 +307,7 @@ const SongPageCard: React.FC<SongPageCardProps> = ({ songDetails, song, artist, 
             </Grid>
 
             <Grid item display='flex' justifyContent='center' >
-              <MultiAd />
+    
             </Grid>
 
             {/* analysis row */}
@@ -549,14 +471,8 @@ const SongPageCard: React.FC<SongPageCardProps> = ({ songDetails, song, artist, 
         )}
 
       </div>
-      <Grid container item md={12} justifyContent='center' paddingBottom='1em'>
-        <HorizontalAd />
-      </Grid>
-      <div className='recs-page-container'>
-      <SongRecs recs={recs} />
-      </div>
     </div>
   )
 }
 
-export default SongPageCard;
+export default RickCard;

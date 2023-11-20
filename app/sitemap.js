@@ -86,7 +86,7 @@ export default async function SiteMap() {
     }
     const topMintTracks = mintResults.map(item => {
         return {
-            url: `https://bpmkey.com/${slugify(item.name, { lower: true, strict: true })}/${slugify(item.artists[0].name, { lower: true, strict: true })}/${item.id}`,
+            url: `https://www.bpmkey.com/${slugify(item.name, { lower: true, strict: true })}/${slugify(item.artists[0].name, { lower: true, strict: true })}/${item.id}`,
             lastModified: new Date(),
         }
     })

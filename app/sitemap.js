@@ -20,7 +20,7 @@ export default async function SiteMap() {
     }
     const topTracks = results.map(item => {
         return {
-            url: `https://bpmkey.com/${slugify(item.name, { lower: true, strict: true })}/${slugify(item.artists[0].name, { lower: true, strict: true })}/${item.id}`,
+            url: `https://www.bpmkey.com/${slugify(item.name, { lower: true, strict: true })}/${slugify(item.artists[0].name, { lower: true, strict: true })}/${item.id}`,
             lastModified: new Date(),
         }
     })
@@ -117,7 +117,7 @@ export default async function SiteMap() {
 
         const featTracks = playlistResults.map(track => {
             return {
-                url: `https://bpmkey.com/${slugify(track.name, { lower: true, strict: true })}/${slugify(track.artists[0].name, { lower: true, strict: true })}/${track.id}`,
+                url: `https://www.bpmkey.com/${slugify(track.name, { lower: true, strict: true })}/${slugify(track.artists[0].name, { lower: true, strict: true })}/${track.id}`,
                 lastModified: new Date(),
             };
         });
@@ -127,7 +127,7 @@ export default async function SiteMap() {
 
     return [
         {
-            url: 'https://bpmkey.com',
+            url: 'https://www.bpmkey.com',
             lastModified: new Date(),
         },
         ...topTracks,

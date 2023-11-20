@@ -112,16 +112,16 @@ const SongPageCard: React.FC<SongPageCardProps> = ({ songDetails, song, artist, 
   const handleClick = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
-      if (!credits) {
-        try {
-          const res = await GetCredits(songDetails.albums, songDetails.artists[0].name, songDetails.name);
-          setCredits(res);
-        } catch (error) {
-          console.error("Failed to fetch credits:", error);
-        }
+    if (!credits) {
+      try {
+        const res = await GetCredits(songDetails.albums, songDetails.artists[0].name, songDetails.name);
+        setCredits(res);
+      } catch (error) {
+        console.error("Failed to fetch credits:", error);
       }
-      setShowCredits(true);
-      setLoading(false);
+    }
+    setShowCredits(true);
+    setLoading(false);
   }
   const CreditsModal = dynamic(
     () => import('../components/CreditsModal'),
@@ -390,6 +390,15 @@ const SongPageCard: React.FC<SongPageCardProps> = ({ songDetails, song, artist, 
 
             {/* analysis row */}
             <Grid item container xs={12} justifyContent='center' >
+              <Grid item container xs={11} md={11}
+                flexDirection='column'
+                alignContent="center"
+                // alignItems='center'
+                justifyContent='center'
+              >
+                <Typography style = {{textAlign:'center'}}variant="h4" color='text.primary'>Song Metrics</Typography>
+                <hr className="border-t-2 border-gray-400 my-4 w-full mt-2"  />
+              </Grid>
 
               <Grid item container xs={12} >
                 <CardContent sx={{
@@ -534,15 +543,6 @@ const SongPageCard: React.FC<SongPageCardProps> = ({ songDetails, song, artist, 
                 </CardContent>
               </Grid>
 
-              <Grid item container xs={10} md={6}
-                flexDirection='column'
-                alignContent="center"
-                alignItems='center'
-                justifyContent='center'
-              >
-
-
-              </Grid>
             </Grid>
 
           </Card>

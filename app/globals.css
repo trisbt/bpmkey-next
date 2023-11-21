@@ -51,6 +51,12 @@
 .background-gradient {
   background-image: repeating-linear-gradient(140deg, rgb(109, 97, 168), #282c34 25%, rgb(80, 108, 185));
 }
+body {
+  color: rgb(var(--foreground-rgb));
+  background: linear-gradient(to bottom,
+      transparent,
+      rgb(var(--background-end-rgb))) rgb(var(--background-start-rgb));
+}
 .customLink {
   text-decoration: none;
   color: inherit;
@@ -98,12 +104,7 @@
   justify-content: center;
 }
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))) rgb(var(--background-start-rgb));
-}
+
 .pie-container {
   display: flex;
   margin-bottom: 1em;
@@ -145,6 +146,7 @@ hr {
 .splash{
   display: flex;
 }
+
 
 @media (max-width: 600px) {
   .card-buttons {

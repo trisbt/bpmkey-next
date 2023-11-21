@@ -34,6 +34,8 @@ import { Hidden } from '@mui/material';
 import CardAd from '@/app/components/CardAd';
 import VerticalAd from '@/app/components/VerticalAd';
 import HorizontalAd from '@/app/components/HorizontalAd';
+import SpotifyIcon from '@/app/SpotifyIcon';
+import { transformSpotifyURItoURL } from '@/app/utils';
 
 const SmallPlayButton = styled(IconButton)(() => ({
 	'&&': {
@@ -45,8 +47,8 @@ const SmallPlayButton = styled(IconButton)(() => ({
 		backgroundColor: '#00e676'
 	},
 	fontSize: '15px',
-	width: '40px',
-	height: '40px',
+	width: '42px',
+	height: '42px',
 }));
 
 const SortButton = styled(Button)(({ theme }) => ({
@@ -100,6 +102,12 @@ const ArtistTopTracksCards: React.FC<ArtistPageCardProps> = ({ results, artist }
 		}
 	};
 
+	const spotifyRedirect = (e, uri) => {
+		e.stopPropagation();
+		e.preventDefault();
+		router.push(transformSpotifyURItoURL(uri) as string);
+	}
+
 	return (
 		<Box>
 			<Grid container item md={12} justifyContent='center' paddingBottom='1em'>
@@ -135,7 +143,7 @@ const ArtistTopTracksCards: React.FC<ArtistPageCardProps> = ({ results, artist }
 										fontSize: '20px'
 									},
 								}}>
-									Top Tracks by {decodeURIComponent(artist.replace(/-/g, ' '))}
+									Top Tracks by {results[0].artists[0].name}
 								</Typography>
 							</Card>
 						</Grid>
@@ -201,9 +209,9 @@ const ArtistTopTracksCards: React.FC<ArtistPageCardProps> = ({ results, artist }
 											<Grid item xs={11} md={8} key={index}>
 												{/* each card */}
 												<Link prefetch={false} href={`
-									/${slugify(item.name, { lower: true, strict: true })}
-									/${slugify(item.artists[0].name, { lower: true, strict: true })}
-									/${item.id}`}>
+													/${slugify(item.name, { lower: true, strict: true })}
+													/${slugify(item.artists[0].name, { lower: true, strict: true })}
+													/${item.id}`}>
 													<Card
 														sx={{
 															display: 'flex',
@@ -294,10 +302,10 @@ const ArtistTopTracksCards: React.FC<ArtistPageCardProps> = ({ results, artist }
 																		{/* </Card> */}
 																	</Grid>
 
-																	<Grid item xs={3.5} sm={6} sx={{
-																		"@media (max-width: 600px)": {
-																			marginRight: '.5em',
-																		}
+																	<Grid item xs={3} sm={6} sx={{
+																		// "@media (max-width: 600px)": {
+																		// 	marginRight: '.5em',
+																		// }
 																	}}>
 																		{/* <Card sx={{ width: '90%' }}> */}
 																		<Typography variant="subtitle1" color="text.secondary" component="h1"
@@ -356,6 +364,22 @@ const ArtistTopTracksCards: React.FC<ArtistPageCardProps> = ({ results, artist }
 																		)}
 																		<audio ref={audioRef} onEnded={() => setCurrentlyPlayingUrl(null)}></audio>
 																	</Grid>
+
+																	<Grid item xs={3} sm={6} sx={{
+																		display: 'flex',
+																		justifyContent: 'center'
+																	}}>
+																		<Button onClick={(e) => spotifyRedirect(e, item.uri)} sx={{
+																			padding: '0',
+																			'&:hover': {
+																				color: 'transparent',
+																				backgroundColor: 'transparent'
+																			},
+																		}}>
+																			<SpotifyIcon />
+																		</Button>
+																	</Grid>
+
 																</Grid>
 															</Grid>
 														</CardContent>

@@ -12,11 +12,12 @@ const GetSpotifyAlbum = async (id: string) => {
     });
 
     const data = await mainRes.json();
-
+    
     const albumData = {
         images: data.images[0].url,
         artist: data.artists[0].name,
         album: data.name,
+        uri: data.uri
     };
     const albumTracksData = data.tracks.items
         .map((item: AlbumItem) => {

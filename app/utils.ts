@@ -67,3 +67,21 @@ export const reverseKeyModeConvert = (key: string): { key: number, mode: number 
     };
     return reverseChart[key] ?? null;
 };
+
+export const transformSpotifyURItoURL = (uri: string): string | null => {
+    const match = uri.match(/spotify:track:([a-zA-Z0-9]+)/);
+
+    if (match && match[1]) {
+        return `https://open.spotify.com/track/${match[1]}`;
+    }
+    return null;
+};
+
+export const transformSpotifyAlbumURItoURL = (uri: string): string | null => {
+    const match = uri.match(/spotify:album:([a-zA-Z0-9]+)/);
+
+    if (match && match[1]) {
+        return `https://open.spotify.com/album/${match[1]}`;
+    }
+    return null;
+};

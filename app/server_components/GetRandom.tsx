@@ -159,6 +159,7 @@ const GetRandom = async (key: string) => {
             'Authorization': 'Bearer ' + token
         }
     });
+
     const dataByKey = await resByKey.json();
     const getRandomInt = () => Math.floor(Math.random() * 5);
     const index = getRandomInt();

@@ -13,7 +13,7 @@ import { PlayButtonProps } from '../types/dataTypes';
 const StyledPlayButton = styled(Button)(() => ({
 	'&&': {
 		color: '#fff',
-		backgroundColor: '#212121',
+		backgroundColor: 'black',
 		'&:hover': {
 			color: 'white',
 			backgroundColor: '#00e676'
@@ -30,7 +30,7 @@ const StyledPlayButton = styled(Button)(() => ({
 const StyledPlayButtonSmall = styled(Button)(() => ({
 	'&&': {
 		color: '#fff',
-		backgroundColor: '#212121',
+		backgroundColor: 'black',
 		'&:hover': {
 			color: 'white',
 			backgroundColor: '#00e676'

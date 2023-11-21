@@ -81,7 +81,7 @@ const AlbumTrackCards: React.FC<AlbumPageCardProps> = ({ results, album }) => {
 	const [tempoSelect, setTempoSelect] = useState<[number, number]>([0, 500]);
 	const offset: null = null;
 	const albumData = results[results.length - 1];
-	const albumSpotifyLink = transformSpotifyAlbumURItoURL(albumData.uri)
+	const albumSpotifyLink: string | null = transformSpotifyAlbumURItoURL(albumData.uri);
 
 	const playAudio = (event: React.MouseEvent, previewUrl: string | null) => {
 		event.stopPropagation();
@@ -104,7 +104,7 @@ const AlbumTrackCards: React.FC<AlbumPageCardProps> = ({ results, album }) => {
 		}
 	};
 
-	const spotifyRedirect = (e, uri) => {
+	const spotifyRedirect = (e: React.MouseEvent, uri: string) => {
 		e.stopPropagation();
 		e.preventDefault();
 		router.push(transformSpotifyURItoURL(uri) as string);
@@ -161,9 +161,13 @@ const AlbumTrackCards: React.FC<AlbumPageCardProps> = ({ results, album }) => {
 								justifyContent: 'center',
 								paddingBottom: '.6em',
 							}}>
-								<Link href={albumSpotifyLink}>
+								{albumSpotifyLink ? (
+									<Link href={albumSpotifyLink}>
+										<SpotifyLogo />
+									</Link>
+								) : (
 									<SpotifyLogo />
-								</Link>
+								)}
 							</Grid>
 
 							<Grid item xs={11} md={8} paddingBottom='1em'>
@@ -287,13 +291,7 @@ const AlbumTrackCards: React.FC<AlbumPageCardProps> = ({ results, album }) => {
 																			</span>
 																		))}
 																	</Typography>
-																	<Typography variant="subtitle1" color="text.secondary" component="h1" sx={{
-																		"@media (max-width: 600px)": {
-																			fontSize: '.7em',
-																		}
-																	}}>
-																		{item.albums}
-																	</Typography>
+																
 																</Grid>
 																<Grid item xs={3} sm={2} >
 																	{/* <Image

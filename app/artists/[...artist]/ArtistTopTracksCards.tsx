@@ -102,7 +102,7 @@ const ArtistTopTracksCards: React.FC<ArtistPageCardProps> = ({ results, artist }
 		}
 	};
 
-	const spotifyRedirect = (e, uri) => {
+	const spotifyRedirect = (e: React.MouseEvent, uri: string) => {
 		e.stopPropagation();
 		e.preventDefault();
 		router.push(transformSpotifyURItoURL(uri) as string);

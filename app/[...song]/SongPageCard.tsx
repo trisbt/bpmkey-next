@@ -34,19 +34,11 @@ import HorizontalAd from '../components/HorizontalAd';
 import CreditsLoader from '../components/CreditsLoader';
 import dynamic from 'next/dynamic'
 import { Suspense } from 'react';
+import { transformSpotifyURItoURL } from '../utils';
+import SpotifyBlackIcon from '../SpotifyIcon';
+import SpotifyGreenIcon from '../SpotifyIconSongPage';
 
 
-
-
-//helpers
-const transformSpotifyURItoURL = (uri: string): string | null => {
-  const match = uri.match(/spotify:track:([a-zA-Z0-9]+)/);
-
-  if (match && match[1]) {
-    return `https://open.spotify.com/track/${match[1]}`;
-  }
-  return null;
-}
 //progress value color function
 function determineColor(value: number): string {
   if (value > 80) {
@@ -71,7 +63,7 @@ const msConvert = (num: number): string => {
 const CreditsButton = styled(Button)(() => ({
   '&&': {
     color: '#fff',
-    backgroundColor: '#212121',
+    backgroundColor: 'black',
     '&:hover': {
       color: 'white',
       backgroundColor: '#00e676'
@@ -88,7 +80,7 @@ const CreditsButton = styled(Button)(() => ({
 const SmallCreditsButton = styled(Button)(() => ({
   '&&': {
     color: '#fff',
-    backgroundColor: '#212121',
+    backgroundColor: 'black',
     '&:hover': {
       color: 'white',
       backgroundColor: '#00e676'
@@ -267,17 +259,13 @@ const SongPageCard: React.FC<SongPageCardProps> = ({ songDetails, song, artist, 
                     </Link>
                     <Typography variant="subtitle2" component="h4" >Released: {songDetails.release_date}</Typography>
 
-                    <Grid item container xs={12} alignItems='center' justifyContent='space-between' >
+                    <Grid item container xs={12} alignItems='center' justifyContent='space-between' paddingTop = {1}>
 
                       {/*link spotify render*/}
                       <Link prefetch={false} href={transformSpotifyURItoURL(songDetails.uri) as string}>
-
-                        <svg
-                          // style={{ marginLeft: '-8px', paddingTop: '5px' }}
-                          xmlns="http://www.w3.org/2000/svg" width="62" height="62" viewBox="0 0 24 24">
-                          <path fill="#00e676" d="M17.9 10.9C14.7 9 9.35 8.8 6.3 9.75c-.5.15-1-.15-1.15-.6c-.15-.5.15-1 .6-1.15c3.55-1.05 9.4-.85 13.1 1.35c.45.25.6.85.35 1.3c-.25.35-.85.5-1.3.25m-.1 2.8c-.25.35-.7.5-1.05.25c-2.7-1.65-6.8-2.15-9.95-1.15c-.4.1-.85-.1-.95-.5c-.1-.4.1-.85.5-.95c3.65-1.1 8.15-.55 11.25 1.35c.3.15.45.65.2 1m-1.2 2.75c-.2.3-.55.4-.85.2c-2.35-1.45-5.3-1.75-8.8-.95c-.35.1-.65-.15-.75-.45c-.1-.35.15-.65.45-.75c3.8-.85 7.1-.5 9.7 1.1c.35.15.4.55.25.85M12 2A10 10 0 0 0 2 12a10 10 0 0 0 10 10a10 10 0 0 0 10-10A10 10 0 0 0 12 2Z" />
-                        </svg>
+                        <SpotifyGreenIcon />
                       </Link>
+
                       {/*play button render*/}
                       {songDetails.preview_url && (
                         <PlayButton previewUrl={songDetails.preview_url} />
@@ -396,8 +384,8 @@ const SongPageCard: React.FC<SongPageCardProps> = ({ songDetails, song, artist, 
                 // alignItems='center'
                 justifyContent='center'
               >
-                <Typography style = {{textAlign:'center'}}variant="h4" color='text.primary'>Song Metrics</Typography>
-                <hr className="border-t-2 border-gray-400 my-4 w-full mt-2"  />
+                <Typography style={{ textAlign: 'center',  fontStyle: 'italic', }} variant="h4" color='text.primary'>Song Metrics</Typography>
+                <hr className="border-t-2 border-gray-400 my-4 w-full mt-2" />
               </Grid>
 
               <Grid item container xs={12} >

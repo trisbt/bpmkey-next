@@ -34,6 +34,9 @@ import Image from 'next/image';
 import CardAd from '@/app/components/CardAd';
 import VerticalAd from '@/app/components/VerticalAd';
 import HorizontalAd from '@/app/components/HorizontalAd';
+import SpotifyLogo from '@/app/SpotifyLogo';
+import SpotifyIcon from '@/app/SpotifyIcon';
+import { transformSpotifyAlbumURItoURL, transformSpotifyURItoURL } from '@/app/utils';
 
 const SmallPlayButton = styled(IconButton)(() => ({
 	'&&': {
@@ -45,8 +48,8 @@ const SmallPlayButton = styled(IconButton)(() => ({
 		backgroundColor: '#00e676'
 	},
 	fontSize: '15px',
-	width: '40px',
-	height: '40px',
+	width: '42px',
+	height: '42px',
 }));
 
 const SortButton = styled(Button)(({ theme }) => ({
@@ -78,6 +81,7 @@ const AlbumTrackCards: React.FC<AlbumPageCardProps> = ({ results, album }) => {
 	const [tempoSelect, setTempoSelect] = useState<[number, number]>([0, 500]);
 	const offset: null = null;
 	const albumData = results[results.length - 1];
+	const albumSpotifyLink: string | null = transformSpotifyAlbumURItoURL(albumData.uri);
 
 	const playAudio = (event: React.MouseEvent, previewUrl: string | null) => {
 		event.stopPropagation();
@@ -100,6 +104,11 @@ const AlbumTrackCards: React.FC<AlbumPageCardProps> = ({ results, album }) => {
 		}
 	};
 
+	const spotifyRedirect = (e: React.MouseEvent, uri: string) => {
+		e.stopPropagation();
+		e.preventDefault();
+		router.push(transformSpotifyURItoURL(uri) as string);
+	}
 
 	return (
 		<Box>
@@ -110,7 +119,7 @@ const AlbumTrackCards: React.FC<AlbumPageCardProps> = ({ results, album }) => {
 				{searchResults && (
 					<>
 						{/* text row */}
-						<Grid container item xs={12}  flexDirection='column' justifyContent='center' alignItems='center' >
+						<Grid container item xs={12} flexDirection='column' justifyContent='center' alignItems='center' >
 							<Grid item xs={11} md={8}>
 								<Card
 									sx={{
@@ -120,7 +129,7 @@ const AlbumTrackCards: React.FC<AlbumPageCardProps> = ({ results, album }) => {
 										boxShadow: 0,
 										justifyContent: 'center',
 										backgroundColor: 'transparent',
-										paddingBottom: '1em',
+										paddingBottom: '.6em',
 									}}
 								>
 									<Typography variant='h4' component="h1" sx={{
@@ -134,23 +143,42 @@ const AlbumTrackCards: React.FC<AlbumPageCardProps> = ({ results, album }) => {
 										letterSpacing: '1px',
 										borderRadius: '2px',
 										fontStyle: 'italic',
+										paddingLeft: '1em',
+										paddingRight: '1em',
 										'@media (max-width: 600px)': {
 											fontSize: '22px'
 										},
 									}}>
 										{albumData.album} by {albumData.artist}
 									</Typography>
+
 								</Card>
 							</Grid>
+
+							<Grid item xs={11} md={8} sx={{
+								width: '100%',
+								display: 'flex',
+								justifyContent: 'center',
+								paddingBottom: '.6em',
+							}}>
+								{albumSpotifyLink ? (
+									<Link href={albumSpotifyLink}>
+										<SpotifyLogo />
+									</Link>
+								) : (
+									<SpotifyLogo />
+								)}
+							</Grid>
+
 							<Grid item xs={11} md={8} paddingBottom='1em'>
-									<Image
-										unoptimized
-										width={500}
-										height={500}
-										src={albumData.images}
-										alt={albumData.album}
-									/>
-								</Grid>
+								<Image
+									unoptimized
+									width={500}
+									height={500}
+									src={albumData.images}
+									alt={albumData.album}
+								/>
+							</Grid>
 						</Grid>
 						<SortFilter
 							setActiveSlice={setActiveSlice}
@@ -214,9 +242,9 @@ const AlbumTrackCards: React.FC<AlbumPageCardProps> = ({ results, album }) => {
 											<Grid item xs={11} md={8} key={index}>
 												{/* each card */}
 												<Link prefetch={false} href={`
-									/${slugify(item.name, { lower: true, strict: true })}
-									/${slugify(item.artists[0].name, { lower: true, strict: true })}
-									/${item.id}`}>
+													/${slugify(item.name, { lower: true, strict: true })}
+													/${slugify(item.artists[0].name, { lower: true, strict: true })}
+													/${item.id}`}>
 													<Card
 														sx={{
 															display: 'flex',
@@ -229,27 +257,29 @@ const AlbumTrackCards: React.FC<AlbumPageCardProps> = ({ results, album }) => {
 														}}
 													>
 														<CardContent sx={{
-															width: '100vw',
+															width: '80vw',
 															paddingBottom: '15px',
 															'&:last-child': {
 																paddingBottom: '15px',
 															}
 														}}>
-															<Grid container item >
+															<Grid container >
+																{/* image */}
+
 																{/* song info */}
-																<Grid item xs={6} sx={{
+																<Grid item xs={9} sm={5} sx={{
 																	paddingLeft: '.5em',
 																}}>
-																	<Typography color="text.primary" component="h1" variant="h5" sx={{
+																	<Typography color="text.primary" variant="h5" component="h1" sx={{
 																		"@media (max-width: 600px)": {
-																			fontSize: '.9rem'
+																			fontSize: '1rem'
 																		},
 																	}}>
 																		{item.name}
 																	</Typography>
 																	<Typography variant="h6" color="text.secondary" component="h1" sx={{
 																		"@media (max-width: 600px)": {
-																			fontSize: '.8rem'
+																			fontSize: '1rem'
 																		},
 																	}}>
 																		{item.artists.map((artist, index) => (
@@ -261,16 +291,72 @@ const AlbumTrackCards: React.FC<AlbumPageCardProps> = ({ results, album }) => {
 																			</span>
 																		))}
 																	</Typography>
-
-
+																
 																</Grid>
-																<Grid container item xs={6} alignItems='center' rowSpacing={1} sx={{
+																<Grid item xs={3} sm={2} >
+																	{/* <Image
+																		unoptimized
+																		width={150}
+																		height={150}
+																		src={item.images}
+																		alt={item.name}
+																	/> */}
+																</Grid>
+																<Grid container item xs={12} sm={5} alignItems='center' rowSpacing={1} sx={{
 																	"@media (max-width: 600px)": {
-																		// paddingTop: '.8rem',
+																		paddingTop: '.8rem',
 																	}
 																}}>
+																	<Grid item xs={3} sm={6}  >
+																		{/* <Card sx={{ width: '90%' }}> */}
+																		<Typography variant="subtitle1" color="text.secondary" component="h1"
+																			sx={{
+																				display: 'flex', flexDirection: 'column', alignItems: 'center', lineHeight: '1rem',
+																				"@media (max-width: 600px)": {
+																					fontSize: '.8em',
+																				}
+																			}}
+																		>
+																			Key
+																			<Typography className='song-sub-info' variant="h4" color="text.primary" component="div" sx={{
+																				"@media (max-width: 600px)": {
+																					fontSize: '1.5rem',
+																				}
+																			}}>
+																				{item.key}
+																			</Typography>
+																		</Typography>
+																		{/* </Card> */}
+																	</Grid>
 
-																	<Grid item xs={4} sx={{
+																	<Grid item xs={3} sm={6} sx={{
+																		// "@media (max-width: 600px)": {
+																		// 	marginRight: '.5em',
+																		// }
+																	}}>
+																		{/* <Card sx={{ width: '90%' }}> */}
+																		<Typography variant="subtitle1" color="text.secondary" component="h1"
+																			sx={{
+																				display: 'flex', flexDirection: 'column', alignItems: 'center', lineHeight: '1rem',
+																				"@media (max-width: 600px)": {
+																					fontSize: '.8em',
+																				}
+																			}}
+																		>
+																			BPM
+																			<Typography className='song-sub-info' variant="h4" color="text.primary" component="div" sx={{
+																				"@media (max-width: 600px)": {
+																					fontSize: '1.5rem',
+																				}
+																			}}>
+																				{item.tempo}
+																			</Typography>
+																		</Typography>
+																		{/* </Card> */}
+																	</Grid>
+
+																	{/* preview button */}
+																	<Grid item xs={3} sm={6} sx={{
 																		display: 'flex',
 																		justifyContent: 'center'
 																	}} >
@@ -278,6 +364,7 @@ const AlbumTrackCards: React.FC<AlbumPageCardProps> = ({ results, album }) => {
 																			<SmallPlayButton className='preview-button' sx={{
 																				boxShadow: 3,
 																				borderRadius: '50px',
+																				// display: { xs: 'flex', sm: 'none', md: 'none' },
 																			}}
 																				onClick={(event) => playAudio(event, item.preview_url || null)}
 																			>
@@ -305,52 +392,19 @@ const AlbumTrackCards: React.FC<AlbumPageCardProps> = ({ results, album }) => {
 																		<audio ref={audioRef} onEnded={() => setCurrentlyPlayingUrl(null)}></audio>
 																	</Grid>
 
-																	<Grid item xs={5}   >
-																		{/* <Card sx={{ width: '90%' }}> */}
-																		<Typography variant="subtitle1" color="text.secondary" component="h1"
-																			sx={{
-																				display: 'flex', flexDirection: 'column', alignItems: 'center', lineHeight: '1rem',
-																				"@media (max-width: 600px)": {
-																					fontSize: '.8em',
-																				}
-																			}}
-																		>
-																			Key
-																			<Typography className='song-sub-info' variant="h4" color="text.primary" component="div" sx={{
-																				"@media (max-width: 600px)": {
-																					fontSize: '1.2rem',
-																				}
-																			}}>
-																				{item.key}
-																			</Typography>
-																		</Typography>
-																		{/* </Card> */}
-																	</Grid>
-
-																	<Grid item xs={3} sx={{
-																		"@media (max-width: 600px)": {
-																			// marginRight: '.5em',
-																		}
+																	<Grid item xs={3} sm={6} sx={{
+																		display: 'flex',
+																		justifyContent: 'center'
 																	}}>
-																		{/* <Card sx={{ width: '90%' }}> */}
-																		<Typography variant="subtitle1" color="text.secondary" component="h1"
-																			sx={{
-																				display: 'flex', flexDirection: 'column', alignItems: 'center', lineHeight: '1rem',
-																				"@media (max-width: 600px)": {
-																					fontSize: '.8em',
-																				}
-																			}}
-																		>
-																			BPM
-																			<Typography className='song-sub-info' variant="h4" color="text.primary" component="div" sx={{
-																				"@media (max-width: 600px)": {
-																					fontSize: '1.2rem',
-																				}
-																			}}>
-																				{item.tempo}
-																			</Typography>
-																		</Typography>
-																		{/* </Card> */}
+																		<Button onClick={(e) => spotifyRedirect(e, item.uri)} sx={{
+																			padding: '0',
+																			'&:hover': {
+																				color: 'transparent',
+																				backgroundColor: 'transparent'
+																			},
+																		}}>
+																			<SpotifyIcon />
+																		</Button>
 																	</Grid>
 
 																</Grid>

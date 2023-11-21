@@ -36,6 +36,8 @@ import slugify from 'slugify';
 import CardAd from '@/app/components/CardAd';
 import VerticalAd from '@/app/components/VerticalAd';
 import HorizontalAd from '@/app/components/HorizontalAd';
+import SpotifyBlackIcon from '../SpotifyIcon';
+import { transformSpotifyURItoURL } from '@/app/utils';
 
 const SmallPlayButton = styled(IconButton)(() => ({
 	'&&': {
@@ -47,8 +49,8 @@ const SmallPlayButton = styled(IconButton)(() => ({
 		backgroundColor: '#00e676'
 	},
 	fontSize: '15px',
-	width: '40px',
-	height: '40px',
+	width: '42px',
+	height: '42px',
 }));
 const LoadButton = styled(Button)(({ theme }) => ({
 	'&&': {
@@ -108,38 +110,45 @@ const SearchCards: React.FC<SearchPageCardProps> = ({ results }) => {
 			}
 		}
 	};
+
+	const spotifyRedirect = (e: React.MouseEvent, uri:string) => {
+		e.stopPropagation();
+		e.preventDefault();
+		router.push(transformSpotifyURItoURL(uri) as string);
+	}
+
 	const handleLoadMore = () => {
 		const nextOffset = offset + 25;
 		setOffset(nextOffset);
 	};
-// console.log(offset, searchQuery)
+
 	//load more effect
 
 	const [isFirstRender, setIsFirstRender] = useState(true);
 
-  useEffect(() => {
-    // This effect sets the isFirstRender to false after the component mounts
-    setIsFirstRender(false);
-  }, []); // Empty dependency array ensures this effect only runs once
+	useEffect(() => {
+		// This effect sets the isFirstRender to false after the component mounts
+		setIsFirstRender(false);
+	}, []); // Empty dependency array ensures this effect only runs once
 
-  useEffect(() => {
-    // Skip the first render by checking if isFirstRender is true
-    if (isFirstRender) {
-      return;
-    }
+	useEffect(() => {
+		// Skip the first render by checking if isFirstRender is true
+		if (isFirstRender) {
+			return;
+		}
 
-    const fetchData = async () => {
-      const newResults = await GetSpotifySearch(searchQuery, offset);
+		const fetchData = async () => {
+			const newResults = await GetSpotifySearch(searchQuery, offset);
 
-      if (offset === 0) {
-        setSearchResults(newResults);
-      } else {
-        setSearchResults(prevResults => [...prevResults, ...newResults]);
-      }
-    };
+			if (offset === 0) {
+				setSearchResults(newResults);
+			} else {
+				setSearchResults(prevResults => [...prevResults, ...newResults]);
+			}
+		};
 
-    fetchData();
-  }, [offset, searchQuery]);
+		fetchData();
+	}, [offset, searchQuery]);
 
 
 	// useEffect(() => {
@@ -194,7 +203,7 @@ const SearchCards: React.FC<SearchPageCardProps> = ({ results }) => {
 									letterSpacing: '1px',
 									borderRadius: '2px',
 									fontStyle: 'italic',
-									paddingBottom:'1em',
+									paddingBottom: '1em',
 									'@media (max-width: 600px)': {
 										fontSize: '20px'
 									},
@@ -302,14 +311,14 @@ const SearchCards: React.FC<SearchPageCardProps> = ({ results }) => {
 																<Grid item xs={9} sm={5} sx={{
 																	paddingLeft: '.5em',
 																}}>
-																	<Typography color="text.primary" variant="h5" component="h1"sx={{
+																	<Typography color="text.primary" variant="h5" component="h1" sx={{
 																		"@media (max-width: 600px)": {
 																			fontSize: '1rem'
 																		},
 																	}}>
 																		{item.name}
 																	</Typography>
-																	<Typography variant="h6" color="text.secondary" component="h1"sx={{
+																	<Typography variant="h6" color="text.secondary" component="h1" sx={{
 																		"@media (max-width: 600px)": {
 																			fontSize: '1rem'
 																		},
@@ -323,7 +332,7 @@ const SearchCards: React.FC<SearchPageCardProps> = ({ results }) => {
 																			</span>
 																		))}
 																	</Typography>
-																	<Typography variant="subtitle1" color="text.secondary"component="h1" sx={{
+																	<Typography variant="subtitle1" color="text.secondary" component="h1" sx={{
 																		"@media (max-width: 600px)": {
 																			fontSize: '.7em',
 																		}
@@ -337,9 +346,9 @@ const SearchCards: React.FC<SearchPageCardProps> = ({ results }) => {
 																		paddingTop: '.8rem',
 																	}
 																}}>
-																	<Grid item xs={4} sm={6}  >
+																	<Grid item xs={3} sm={6}  >
 																		{/* <Card sx={{ width: '90%' }}> */}
-																		<Typography variant="subtitle1" component="h1"color="text.secondary"
+																		<Typography variant="subtitle1" component="h1" color="text.secondary"
 																			sx={{
 																				display: 'flex', flexDirection: 'column', alignItems: 'center', lineHeight: '1rem',
 																				"@media (max-width: 600px)": {
@@ -348,8 +357,8 @@ const SearchCards: React.FC<SearchPageCardProps> = ({ results }) => {
 																			}}
 																		>
 																			Key
-																			<Typography className='song-sub-info'  color="text.primary" sx={{
-																				fontSize:'2rem',
+																			<Typography className='song-sub-info' color="text.primary" sx={{
+																				fontSize: '2rem',
 																				"@media (max-width: 600px)": {
 																					fontSize: '1.5rem',
 																				}
@@ -360,10 +369,10 @@ const SearchCards: React.FC<SearchPageCardProps> = ({ results }) => {
 																		{/* </Card> */}
 																	</Grid>
 
-																	<Grid item xs={4} sm={6} sx={{
-																		"@media (max-width: 600px)": {
-																			marginRight: '.5em',
-																		}
+																	<Grid item xs={3} sm={6} sx={{
+																		// "@media (max-width: 600px)": {
+																		// 	marginRight: '.5em',
+																		// }
 																	}}>
 																		{/* <Card sx={{ width: '90%' }}> */}
 																		<Typography variant="subtitle1" color="text.secondary" component="h1"
@@ -375,8 +384,8 @@ const SearchCards: React.FC<SearchPageCardProps> = ({ results }) => {
 																			}}
 																		>
 																			BPM
-																			<Typography className='song-sub-info'  color="text.primary" sx={{
-																					fontSize:'2rem',
+																			<Typography className='song-sub-info' color="text.primary" sx={{
+																				fontSize: '2rem',
 																				"@media (max-width: 600px)": {
 																					fontSize: '1.5rem',
 																				}
@@ -423,6 +432,22 @@ const SearchCards: React.FC<SearchPageCardProps> = ({ results }) => {
 																		)}
 																		<audio ref={audioRef} onEnded={() => setCurrentlyPlayingUrl(null)}></audio>
 																	</Grid>
+
+																	<Grid item xs={3} sm={6} sx={{
+																		display: 'flex',
+																		justifyContent: 'center'
+																	}}>
+																		<Button onClick={(e) => spotifyRedirect(e, item.uri)} sx={{
+																			padding: '0',
+																			'&:hover': {
+																				color: 'transparent',
+																				backgroundColor: 'transparent'
+																			},
+																		}}>
+																			<SpotifyBlackIcon />
+																		</Button>
+																	</Grid>
+
 																</Grid>
 															</Grid>
 														</CardContent>

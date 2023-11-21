@@ -2,6 +2,7 @@
 import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 import { useRef, useState } from 'react';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import StopIcon from '@mui/icons-material/Stop';
@@ -22,7 +23,8 @@ import slugify from 'slugify';
 import VerticalAd from './VerticalAd';
 import HorizontalAd from './HorizontalAd';
 import { Hidden } from '@mui/material';
-import CardAd from './CardAd';
+import { transformSpotifyURItoURL } from '../utils';
+import SpotifyBlackIcon from '../SpotifyIcon';
 
 const SmallPlayButton = styled(IconButton)(() => ({
   '&&': {
@@ -34,13 +36,14 @@ const SmallPlayButton = styled(IconButton)(() => ({
     backgroundColor: '#00e676'
   },
   fontSize: '15px',
-  width: '40px',
-  height: '40px',
+  width: '42px',
+  height: '42px',
 }));
 
 const TopTracks: React.FC<TopTracksCardProps> = ({ results }) => {
   const [currentlyPlayingUrl, setCurrentlyPlayingUrl] = useState<string | null>(null);
   const audioRef = useRef<HTMLAudioElement | null>(null);
+  const router = useRouter();
 
   const playAudio = (event: React.MouseEvent, previewUrl: string | null) => {
     event.stopPropagation();
@@ -62,14 +65,18 @@ const TopTracks: React.FC<TopTracksCardProps> = ({ results }) => {
       }
     }
   };
-
+  const spotifyRedirect = (e: React.MouseEvent, uri: string) => {
+    e.stopPropagation();
+    e.preventDefault();
+    router.push(transformSpotifyURItoURL(uri) as string);
+  }
   return (
     <div>
       <Box >
         <Grid container item xs={12} justifyContent='center' alignItems='center' >
           {results && (
             <>
-        
+
               {/* text row */}
               <Grid item xs={11} md={8}>
                 <Card
@@ -132,6 +139,7 @@ const TopTracks: React.FC<TopTracksCardProps> = ({ results }) => {
                           sx={{
                             display: 'flex',
                             flexDirection: 'row',
+                            // justifyContent:'center',
                             margin: '10px 10px 0',
                             boxShadow: 3,
                             "&:hover": {
@@ -161,14 +169,14 @@ const TopTracks: React.FC<TopTracksCardProps> = ({ results }) => {
                               <Grid item xs={9} sm={5} sx={{
                                 paddingLeft: '.5em',
                               }}>
-                                <Typography color="text.primary" variant="h5"component="h1" sx={{
+                                <Typography color="text.primary" variant="h5" component="h1" sx={{
                                   "@media (max-width: 600px)": {
                                     fontSize: '1rem'
                                   },
                                 }}>
                                   {item.name}
                                 </Typography>
-                                <Typography variant="h6" color="text.secondary"component="h1" sx={{
+                                <Typography variant="h6" color="text.secondary" component="h1" sx={{
                                   "@media (max-width: 600px)": {
                                     fontSize: '1rem'
                                   },
@@ -182,7 +190,7 @@ const TopTracks: React.FC<TopTracksCardProps> = ({ results }) => {
                                     </span>
                                   ))}
                                 </Typography>
-                                <Typography variant="subtitle1" color="text.secondary"component="h1" sx={{
+                                <Typography variant="subtitle1" color="text.secondary" component="h1" sx={{
                                   "@media (max-width: 600px)": {
                                     fontSize: '.7em',
                                   }
@@ -196,9 +204,9 @@ const TopTracks: React.FC<TopTracksCardProps> = ({ results }) => {
                                   paddingTop: '.8rem',
                                 }
                               }}>
-                                <Grid item xs={4} sm={6}  >
+                                <Grid item xs={3} sm={6}  >
 
-                                  <Typography variant="subtitle1" color="text.secondary"component="h1"
+                                  <Typography variant="subtitle1" color="text.secondary" component="h1"
                                     sx={{
                                       display: 'flex', flexDirection: 'column', alignItems: 'center', lineHeight: '1rem',
                                       "@media (max-width: 600px)": {
@@ -207,7 +215,7 @@ const TopTracks: React.FC<TopTracksCardProps> = ({ results }) => {
                                     }}
                                   >
                                     Key
-                                    <Typography className='song-sub-info' variant="h4" color="text.primary" component="div"sx={{
+                                    <Typography className='song-sub-info' variant="h4" color="text.primary" component="div" sx={{
                                       "@media (max-width: 600px)": {
                                         fontSize: '1.5rem',
                                       }
@@ -218,13 +226,13 @@ const TopTracks: React.FC<TopTracksCardProps> = ({ results }) => {
 
                                 </Grid>
 
-                                <Grid item xs={4} sm={6} sx={{
+                                <Grid item xs={3} sm={6} sx={{
                                   "@media (max-width: 600px)": {
-                                    marginRight: '.5em',
+                                    // marginRight: '.5em',
                                   }
                                 }}>
 
-                                  <Typography variant="subtitle1" color="text.secondary"component="h1"
+                                  <Typography variant="subtitle1" color="text.secondary" component="h1"
                                     sx={{
                                       display: 'flex', flexDirection: 'column', alignItems: 'center', lineHeight: '1rem',
                                       "@media (max-width: 600px)": {
@@ -233,7 +241,7 @@ const TopTracks: React.FC<TopTracksCardProps> = ({ results }) => {
                                     }}
                                   >
                                     BPM
-                                    <Typography className='song-sub-info' variant="h4" color="text.primary" component="div"sx={{
+                                    <Typography className='song-sub-info' variant="h4" color="text.primary" component="div" sx={{
                                       "@media (max-width: 600px)": {
                                         fontSize: '1.5rem',
                                       }
@@ -280,6 +288,22 @@ const TopTracks: React.FC<TopTracksCardProps> = ({ results }) => {
                                   )}
                                   <audio ref={audioRef} />
                                 </Grid>
+
+                                <Grid item xs={3} sm={6} sx={{
+                                  display: 'flex',
+                                  justifyContent: 'center'
+                                }}>
+                                  <Button onClick={(e) => spotifyRedirect(e, item.uri)} sx={{
+                                    padding: '0',
+                                    '&:hover': {
+                                      color: 'transparent',
+                                      backgroundColor: 'transparent'
+                                    },
+                                  }}>
+                                    <SpotifyBlackIcon />
+                                  </Button>
+                                </Grid>
+
                               </Grid>
                             </Grid>
                           </CardContent>
@@ -288,11 +312,6 @@ const TopTracks: React.FC<TopTracksCardProps> = ({ results }) => {
                     </Grid>
                   ))}
 
-                  {/* <Hidden lgUp> */}
-                  <Grid container item xs={11} md={10} justifyContent='center' paddingBottom='1em'>
-                    {/* <CardAd /> */}
-                  </Grid>
-                  {/* </Hidden> */}
                 </Grid>
 
                 <Grid container item xs={1}

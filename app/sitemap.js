@@ -69,61 +69,61 @@ export default async function SiteMap() {
     //     }
     // })
     //mint dance tracks
-    const mintReq = await fetch('https://api.spotify.com/v1/playlists/37i9dQZF1DX4dyzvuaRJ0n/tracks', {
-        headers: {
-            'Authorization': 'Bearer ' + token,
-        }
-    });
-    const mintData = await mintReq.json();
-    const mintTrackData = mintData.items.map((item) => item.track);
+    // const mintReq = await fetch('https://api.spotify.com/v1/playlists/37i9dQZF1DX4dyzvuaRJ0n/tracks', {
+    //     headers: {
+    //         'Authorization': 'Bearer ' + token,
+    //     }
+    // });
+    // const mintData = await mintReq.json();
+    // const mintTrackData = mintData.items.map((item) => item.track);
 
-    const mintResults = [];
-    for (let i = 0; i < mintTrackData.length; i++) {
-        const combinedObject = {
-            ...mintTrackData[i],
-        };
-        mintResults.push(combinedObject);
-    }
-    const topMintTracks = mintResults.map(item => {
-        return {
-            url: `https://www.bpmkey.com/${slugify(item.name, { lower: true, strict: true })}/${slugify(item.artists[0].name, { lower: true, strict: true })}/${item.id}`,
-            lastModified: new Date(),
-        }
-    })
+    // const mintResults = [];
+    // for (let i = 0; i < mintTrackData.length; i++) {
+    //     const combinedObject = {
+    //         ...mintTrackData[i],
+    //     };
+    //     mintResults.push(combinedObject);
+    // }
+    // const topMintTracks = mintResults.map(item => {
+    //     return {
+    //         url: `https://www.bpmkey.com/${slugify(item.name, { lower: true, strict: true })}/${slugify(item.artists[0].name, { lower: true, strict: true })}/${item.id}`,
+    //         lastModified: new Date(),
+    //     }
+    // })
     //get all featured playlists
-    const featReq = await fetch('https://api.spotify.com/v1/browse/featured-playlists', {
-        headers: {
-            'Authorization': 'Bearer ' + token,
-        }
-    });
-    const featData = await featReq.json();
-    const featHrefs = featData.playlists.items.map(item => item.href + '/tracks');
-    const allResults = []; 
+    // const featReq = await fetch('https://api.spotify.com/v1/browse/featured-playlists', {
+    //     headers: {
+    //         'Authorization': 'Bearer ' + token,
+    //     }
+    // });
+    // const featData = await featReq.json();
+    // const featHrefs = featData.playlists.items.map(item => item.href + '/tracks');
+    // const allResults = []; 
 
-    for (const href of featHrefs) {
-        const playlistReq = await fetch(href, {
-            headers: {
-                'Authorization': 'Bearer ' + token,
-            }
-        });
-        const playlistData = await playlistReq.json();
-        const playlistTrackData = playlistData.items.map(item => item.track);
+    // for (const href of featHrefs) {
+    //     const playlistReq = await fetch(href, {
+    //         headers: {
+    //             'Authorization': 'Bearer ' + token,
+    //         }
+    //     });
+    //     const playlistData = await playlistReq.json();
+    //     const playlistTrackData = playlistData.items.map(item => item.track);
 
-        const playlistResults = [];
-        for (let track of playlistTrackData) {
-            const combinedObject = { ...track };
-            playlistResults.push(combinedObject);
-        }
+    //     const playlistResults = [];
+    //     for (let track of playlistTrackData) {
+    //         const combinedObject = { ...track };
+    //         playlistResults.push(combinedObject);
+    //     }
 
-        const featTracks = playlistResults.map(track => {
-            return {
-                url: `https://www.bpmkey.com/${slugify(track.name, { lower: true, strict: true })}/${slugify(track.artists[0].name, { lower: true, strict: true })}/${track.id}`,
-                lastModified: new Date(),
-            };
-        });
+    //     const featTracks = playlistResults.map(track => {
+    //         return {
+    //             url: `https://www.bpmkey.com/${slugify(track.name, { lower: true, strict: true })}/${slugify(track.artists[0].name, { lower: true, strict: true })}/${track.id}`,
+    //             lastModified: new Date(),
+    //         };
+    //     });
 
-        allResults.push(...featTracks); 
-    }
+    //     allResults.push(...featTracks); 
+    // }
 
     return [
         {
@@ -133,8 +133,8 @@ export default async function SiteMap() {
         ...topTracks,
         // ...topRapTracks,
         // ...toplatinTracks,
-        ...allResults,
-        ...topMintTracks,
+        // ...allResults,
+        // ...topMintTracks,
 
     ]
 }

@@ -139,7 +139,7 @@ const TopTracks: React.FC<TopTracksCardProps> = ({ results }) => {
                           sx={{
                             display: 'flex',
                             flexDirection: 'row',
-                            // justifyContent:'center',
+                            justifyContent:'center',
                             margin: '10px 10px 0',
                             boxShadow: 3,
                             "&:hover": {

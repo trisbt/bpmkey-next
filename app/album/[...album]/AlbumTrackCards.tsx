@@ -248,6 +248,7 @@ const AlbumTrackCards: React.FC<AlbumPageCardProps> = ({ results, album }) => {
 													<Card
 														sx={{
 															display: 'flex',
+															justifyContent:'center',
 															flexDirection: 'row',
 															margin: '10px 10px 0',
 															boxShadow: 3,

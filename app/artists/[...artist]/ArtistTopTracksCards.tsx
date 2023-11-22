@@ -216,6 +216,7 @@ const ArtistTopTracksCards: React.FC<ArtistPageCardProps> = ({ results, artist }
 														sx={{
 															display: 'flex',
 															flexDirection: 'row',
+															justifyContent:'center',
 															margin: '10px 10px 0',
 															boxShadow: 3,
 															"&:hover": {

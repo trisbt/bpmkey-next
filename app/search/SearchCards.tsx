@@ -281,6 +281,7 @@ const SearchCards: React.FC<SearchPageCardProps> = ({ results }) => {
 													<Card
 														sx={{
 															display: 'flex',
+															justifyContent:'center',
 															flexDirection: 'row',
 															margin: '10px 10px 0',
 															boxShadow: 3,

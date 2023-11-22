@@ -22,17 +22,10 @@ import Modal from '@mui/material/Modal';
 import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
 import { SongPageCardProps } from '../types/cardTypes';
+import { transformSpotifyURItoURL } from '../utils';
+import SpotifyBlackIcon from '../SpotifyIcon';
+import SpotifyGreenIcon from '../SpotifyIconSongPage';
 
-
-//helpers
-const transformSpotifyURItoURL = (uri: string): string | null => {
-  const match = uri.match(/spotify:track:([a-zA-Z0-9]+)/);
-
-  if (match && match[1]) {
-    return `https://open.spotify.com/track/${match[1]}`;
-  }
-  return null;
-}
 //progress value color function
 function determineColor(value: number): string {
   if (value > 80) {

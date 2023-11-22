@@ -125,7 +125,7 @@ const SortFilter: React.FC<SortFilterProps> = ({ searchQuery, offset, sortOrder,
   //filter effect
   useEffect(() => {
     setActiveSlice([]);
-    setTempoSelect([0,500]);
+    setTempoSelect([0, 500]);
   }, [offset, searchQuery]);
 
   //close accordion
@@ -337,16 +337,19 @@ const SortFilter: React.FC<SortFilterProps> = ({ searchQuery, offset, sortOrder,
           border={1}
           borderColor="grey.500"
           borderRadius={2} m={0} sx={{
+            backgroundColor: 'black',
             width: '65vw',
             '@media (max-width: 900px)': {
               width: '90vw',
             }
           }}>
-          <Grid item container className='py-1' justifyContent='space-between' xs={12} spacing={1}>
+          <Grid item container className='py-2' justifyContent='space-between' xs={12} spacing={1}>
             {/*/ filter */}
             <Grid item xs={12} sm={6} container alignItems="center" spacing={1}>
-              <Grid item >
-                <Typography fontSize='1rem' color='white'>Filter by:</Typography>
+              <Grid item>
+                <Typography fontSize='1rem' sx={{
+                  paddingLeft: '8px'
+                }} color='white'>Filter by:</Typography>
               </Grid>
               <Grid item >
                 <Accordion

@@ -99,8 +99,10 @@ const SongPageCard: React.FC<SongPageCardProps> = ({ songDetails, song, artist, 
   const [loading, setLoading] = useState<boolean>(false);
   const [credits, setCredits] = useState<Credits>(null);
   const slugifiedAlbumName = slugify(songDetails.albums, { lower: true, strict: true });
-  const slugifiedArtistName = slugify(songDetails.artists[0].name, { lower: true, strict: true });
-
+  const slugifiedArtistName = (artist) => {
+    return slugify(artist, { lower: true, strict: true });
+  }
+  
   const handleClick = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
@@ -234,18 +236,28 @@ const SongPageCard: React.FC<SongPageCardProps> = ({ songDetails, song, artist, 
 
                   <Grid item >
                     <Typography variant="h5" component="h1" color='text.primary'>{songDetails.name}</Typography>
-                    <Link prefetch={false} href={`/artists/${slugifiedArtistName}/${songDetails.artistId}`}>
-                      <Typography variant="h4" sx={{
-                        transition: 'color 0.3s',
-                        '&:hover': {
-                          color: '#3f51b5',
-                          fontStyle: 'italic'
-                        }
-                      }}
-                      >{songDetails.artists[0]?.name}
-                      </Typography>
-                    </Link>
+                    <div className='flex flex-row'>
+                      {songDetails.artists.map((artist, index) => (
+                        <div key={index} className='flex-row'>
+                          <Link prefetch={false} href={`/artists/${slugifiedArtistName(artist.name)}/${artist.id}`}>
+                            <Typography variant="h5" component="h1" sx={{
+                              fontSize: '1.7em',
+                              transition: 'color 0.3s',
+                              '&:hover': {
+                                color: '#3f51b5',
+                                fontStyle: 'italic'
+                              }
+                            }}>
+                              {artist.name}
+                              {index < songDetails.artists.length - 1 && (
+                                <span style={{ fontStyle: 'italic', marginLeft: '5px', marginRight: '5px' }}>|</span>
+                              )}
+                            </Typography>
+                          </Link>
 
+                        </div>
+                      ))}
+                    </div>
                     <Link prefetch={false} href={`/album/${slugifiedAlbumName}/${songDetails.albumId}`}>
                       <Typography variant="subtitle1" component="h1" sx={{
                         transition: 'color 0.3s',
@@ -259,7 +271,7 @@ const SongPageCard: React.FC<SongPageCardProps> = ({ songDetails, song, artist, 
                     </Link>
                     <Typography variant="subtitle2" component="h4" >Released: {songDetails.release_date}</Typography>
 
-                    <Grid item container xs={12} alignItems='center' justifyContent='space-between' paddingTop = {1}>
+                    <Grid item container xs={12} alignItems='center' justifyContent='space-between' paddingTop={1}>
 
                       {/*link spotify render*/}
                       <Link prefetch={false} href={transformSpotifyURItoURL(songDetails.uri) as string}>
@@ -384,7 +396,7 @@ const SongPageCard: React.FC<SongPageCardProps> = ({ songDetails, song, artist, 
                 // alignItems='center'
                 justifyContent='center'
               >
-                <Typography style={{ textAlign: 'center',  fontStyle: 'italic', }} variant="h4" color='text.primary'>Song Metrics</Typography>
+                <Typography style={{ textAlign: 'center', fontStyle: 'italic', }} variant="h4" color='text.primary'>Song Metrics</Typography>
                 <hr className="border-t-2 border-gray-400 my-4 w-full mt-2" />
               </Grid>
 

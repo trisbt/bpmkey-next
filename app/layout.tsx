@@ -16,7 +16,7 @@ export const viewport = {
 
 export const metadata: Metadata = {
   title: `BpmKey - Find A Song's Key, BPM, and Credits`,
-  description: `Find any Song's Key, Tempo / BPM and additional metrics like Credits, Loudness, Popularity, and Energy.`,
+  description: `Find any song's Key, BPM and additional metrics like Song Credits, Loudness, Popularity, and Energy.`,
 }
 
 export default function RootLayout({

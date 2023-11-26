@@ -99,10 +99,10 @@ const SongPageCard: React.FC<SongPageCardProps> = ({ songDetails, song, artist, 
   const [loading, setLoading] = useState<boolean>(false);
   const [credits, setCredits] = useState<Credits>(null);
   const slugifiedAlbumName = slugify(songDetails.albums, { lower: true, strict: true });
-  const slugifiedArtistName = (artist) => {
+  const slugifiedArtistName = (artist: string) => {
     return slugify(artist, { lower: true, strict: true });
   }
-  
+
   const handleClick = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);

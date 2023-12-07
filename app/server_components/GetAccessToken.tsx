@@ -24,7 +24,6 @@ const GetAccessToken = async () => {
     throw new Error('Spotify API access token not valid');
   }
   const data = await res.json();
-
   return data.access_token;
 }
 

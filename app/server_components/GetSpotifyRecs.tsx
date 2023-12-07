@@ -17,7 +17,7 @@ const GetSpotifyRecs = async (seedSong: string, seedArtist: string, seedGenres?:
     });
 
     // console.log(res.statusText);
-    // console.log(res.status);
+    // console.log('recs', res.status);
     if (res.status === 429) {
         const retryAfter = res.headers.get('Retry-After');
         console.error(`Retry-After header value: ${retryAfter}`);

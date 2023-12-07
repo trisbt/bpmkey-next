@@ -26,7 +26,6 @@ import { GetCredits } from '../actions/GetCredits';
 import { SongPageCardProps } from '../types/cardTypes';
 import { Credits } from '../types/dataTypes';
 import DisplaySettings from '@mui/icons-material/DisplaySettings';
-import SongRecs from './SongRecs';
 import slugify from 'slugify';
 import MultiAd from '../components/MultiAd';
 import CardAd from '../components/CardAd';
@@ -94,7 +93,7 @@ const SmallCreditsButton = styled(Button)(() => ({
   }
 }));
 
-const SongPageCard: React.FC<SongPageCardProps> = ({ songDetails, song, artist, id, }) => {
+const SongPageCard: React.FC<SongPageCardProps> = ({ songDetails, song, artist, id }) => {
   const [showCredits, setShowCredits] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
   const [credits, setCredits] = useState<Credits>(null);
@@ -119,7 +118,10 @@ const SongPageCard: React.FC<SongPageCardProps> = ({ songDetails, song, artist, 
   }
   const CreditsModal = dynamic(
     () => import('../components/CreditsModal'),
-  )
+  );
+  const SongRecs = dynamic(
+    () => import('./SongRecs'),
+  );
 
   return (
     <div className='song-page-main background-gradient'>
@@ -553,7 +555,7 @@ const SongPageCard: React.FC<SongPageCardProps> = ({ songDetails, song, artist, 
         <HorizontalAd />
       </Grid>
       {/* <div className='recs-page-container'>
-      <SongRecs recs={recs} />
+      <SongRecs recs = {recs}/>
       </div> */}
     </div>
   )

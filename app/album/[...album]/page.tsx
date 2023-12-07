@@ -38,7 +38,10 @@ export async function generateMetadata({
   return {
     title: `Bpm, Key, Credits for the album ${metaAlbum} by ${metaArtist} at BpmKey`,
     description:`Key, BPM, Credits for the album ${metaAlbum} by ${metaArtist}, like ${metaSong} Key: ${metaKey} BPM: ${metaBPM}.
-    Find Key, Tempo and additional metrics like Credits, Loudness, Popularity, Energy.`
+    Find Key, Tempo and additional metrics like Credits, Loudness, Popularity, Energy.`,
+    alternates:{
+      canonical:`https://www.bpmkey.com/album/${params.album[0]}/${id}`
+    }
   }
 }
 

@@ -30,6 +30,7 @@ import { reverseKeyConvert } from '@/app/utils';
 import { RecsCardProps } from '../types/cardTypes';
 import { Recs } from '../types/dataTypes';
 import slugify from 'slugify';
+import GetSpotifyRecs from '../server_components/GetSpotifyRecs';
 
 const SmallPlayButton = styled(IconButton)(() => ({
 	'&&': {
@@ -72,6 +73,21 @@ const SongRecs: React.FC<RecsCardProps> = ({ recs }) => {
 	const [activeSlice, setActiveSlice] = useState<string[]>([]);
 	const [tempoSelect, setTempoSelect] = useState<[number, number]>([0, 500]);
 	const offset: null = null;
+
+	// useEffect(() => {
+	// 	const fetchRecs = async () => {
+	// 		try {
+	// 			const data = await GetSpotifyRecs(id, artist);
+	// 			console.log(data);
+	// 			setSearchResults(data);
+	// 		} catch (error) {
+	// 			console.error('Error fetching data:', error);
+	// 		}
+	// 	};
+	
+	// 	fetchRecs();
+	// }, [id, artist]);
+	
 
 	const playAudio = (event: React.MouseEvent, previewUrl: string | null) => {
 		event.stopPropagation();

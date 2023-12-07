@@ -8,7 +8,7 @@ const GetSpotifyAdvancedAudio = async (token: string, ids: string[]) => {
     },
     // cache: 'no-store',
   });
-
+  // console.log('adv', res.status)
   const data = await res.json();
   const audioData = data.audio_features.map((item: AdvancedAudioItem) => {
     if (item) {

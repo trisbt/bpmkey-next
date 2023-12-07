@@ -275,9 +275,9 @@ const SearchCards: React.FC<SearchPageCardProps> = ({ results }) => {
 											<Grid item xs={11} md={8} key={index}>
 												{/* each card */}
 												<Link prefetch={false} href={`
-									/${slugify(item.name, { lower: true, strict: true })}
-									/${slugify(item.artists[0].name, { lower: true, strict: true })}
-									/${item.id}`}>
+												/${slugify(item.name, { lower: true, strict: true })}
+												/${slugify(item.artists[0].name, { lower: true, strict: true })}
+												/${item.id}`}>
 													<Card
 														sx={{
 															display: 'flex',

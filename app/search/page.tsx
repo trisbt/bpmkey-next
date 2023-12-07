@@ -40,7 +40,10 @@ export async function generateMetadata({
   const searchQ = searchParams.q;
   return {
     title: `results for ${decodeURI(searchQ)} Bpm, Key, Credits BpmKey.com`,
-    description: `Key BPM Credits finder for ${searchQ}`
+    description: `Key BPM Credits finder for ${searchQ}`,
+    alternates:{
+      canonical: `https://www.bpmkey.com/search?q=${searchQ}`
+    }
   }
 }
 

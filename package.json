@@ -16,6 +16,7 @@
     "@mui/material-next": "^6.0.0-alpha.97",
     "@mui/x-charts": "^6.0.0-alpha.7",
     "@vercel/analytics": "^1.1.1",
+    "@vercel/speed-insights": "^1.0.1",
     "chart.js": "^4.3.3",
     "chartjs-plugin-datalabels": "^2.2.0",
     "d3-shape": "^3.2.0",

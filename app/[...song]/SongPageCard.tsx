@@ -238,7 +238,7 @@ const SongPageCard: React.FC<SongPageCardProps> = ({ songDetails, song, artist, 
 
                   <Grid item >
                     <Typography variant="h5" component="h1" color='text.primary'>{songDetails.name}</Typography>
-                    <div className='flex flex-row'>
+                    <div className='flex flex-row flex-wrap'>
                       {songDetails.artists.map((artist, index) => (
                         <div key={index} className='flex-row'>
                           <Link prefetch={false} href={`/artists/${slugifiedArtistName(artist.name)}/${artist.id}`}>

@@ -4,7 +4,7 @@ import Navbar from './components/Navbar'
 import Footer from './components/Footer'
 import Loading from './loading'
 import { Suspense } from 'react'
-import { Analytics } from '@vercel/analytics/react'
+import { SpeedInsights } from "@vercel/speed-insights/next"
 import ThemeRegistry from './ThemeRegistry'
 import Script from 'next/script'
 
@@ -46,7 +46,7 @@ export default function RootLayout({
             <div style={{ flex: 1 }}>
               {/* <Suspense fallback={<Loading />}> */}
                 {children}
-                <Analytics />
+                <SpeedInsights/>
               {/* </Suspense> */}
             </div>
             <Footer />

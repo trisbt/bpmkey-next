@@ -8,12 +8,15 @@ const GetSpotifyAdvancedAudio = async (token: string, ids: string[]) => {
     },
     // cache: 'no-store',
   });
-  //   console.log(res.statusText);
-  //   console.log('recs', res.headers);
-  //   if (res.status === 429) {
-  //     const retryAfter = res.headers.get('Retry-After');
-  //     console.error(`Retry-After header value: ${retryAfter}`);
+  //   console.log(res.headers);
+  // const retryAfter = res.headers.get('Retry-After');
+  // if (retryAfter) {
+  //     console.log(`Retry-After header value: ${retryAfter}`);
+  // } else {
+  //     console.log(`Retry-After header is not present in the response.`);
+  //     // Implement fallback logic here
   // }
+  
 
   const data = await res.json();
   const audioData = data.audio_features.map((item: AdvancedAudioItem) => {

@@ -4,4 +4,7 @@ Disallow: /
 User-agent: AhrefsBot
 Disallow: /
 
+User-agent: MegaIndex.ru
+Disallow: /
+
 Sitemap: https://www.bpmkey.com/sitemap.xml

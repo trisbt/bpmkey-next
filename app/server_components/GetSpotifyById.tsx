@@ -11,7 +11,6 @@ const GetSpotifyById = async (id: string) => {
     });
 
     const trackData = await mainRes.json();
-
     // console.log('id', mainRes.status)
     const basicData = {
         name: trackData.name,

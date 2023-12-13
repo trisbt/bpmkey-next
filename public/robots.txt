@@ -17,4 +17,8 @@ Disallow: /
 User-agent: Yandex
 Disallow: /
 
+# Crawlers Setup
+User-agent: *
+Crawl-delay: 25
+
 Sitemap: https://www.bpmkey.com/sitemap.xml

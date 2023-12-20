@@ -386,8 +386,10 @@ const SongPageCard: React.FC<SongPageCardProps> = ({ songDetails, song, artist, 
               </Grid>
             </Grid>
 
-            <Grid item display='flex' justifyContent='center' >
-              <MultiAd />
+            <Grid item display='flex' justifyContent='center'sx ={{
+              marginTop:'2em',
+            }} >
+              {/* <MultiAd /> */}
             </Grid>
 
             {/* analysis row */}

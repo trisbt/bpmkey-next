@@ -6,7 +6,6 @@ const GetSpotifyAdvancedAudio = async (token: string, ids: string[]) => {
     headers: {
       'Authorization': 'Bearer ' + token
     },
-    // cache: 'no-store',
   });
   //   console.log(res.headers);
   // const retryAfter = res.headers.get('Retry-After');

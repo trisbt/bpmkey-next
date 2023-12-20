@@ -120,7 +120,7 @@ const TopTracks: React.FC<TopTracksCardProps> = ({ results }) => {
                   justifyContent='flex-start'
                 >
                   <Hidden lgDown>
-                    <VerticalAd />
+                    {/* <VerticalAd /> */}
                     <Box height='20em' />
                     <VerticalAd />
                   </Hidden>
@@ -319,7 +319,7 @@ const TopTracks: React.FC<TopTracksCardProps> = ({ results }) => {
                   justifyContent='flex-end'
                 >
                   <Hidden lgDown>
-                    <VerticalAd />
+                    {/* <VerticalAd /> */}
                     <Box height='20em' />
                     <VerticalAd />
                   </Hidden>

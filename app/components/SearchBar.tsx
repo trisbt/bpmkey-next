@@ -77,6 +77,7 @@ const SearchBar = () => {
 
 	return (
 		<ThemeProvider theme={theme}>
+			
 			<div className='searchform-container'>
 				<Hidden smDown>
 					<form className='searchform' onSubmit={handleSubmit} style={{

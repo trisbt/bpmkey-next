@@ -24,13 +24,21 @@
 } */
 
 .background-image {
-  background-image: linear-gradient(to bottom, rgba(40, 60, 80, 0.5) 0%, #282c34 20%, rgba(80, 108, 185, 1) 90%), url('../public/Musicplugbg.jpg');
-  background-size: contain;
+  background-image: linear-gradient(
+    to bottom, 
+    rgba(40, 60, 80, 0.5) 0%, 
+    #282c34 85%, 
+    rgba(80, 108, 185, 1) 100%), 
+    url('../public/Musicplugbg.jpg');
+  background-size: cover;
+  background-position: top center;
+  background-repeat: no-repeat;
+  background-attachment: fixed; 
 }
 
 /* .background-image {
   position: relative; 
-  min-height: 40em; 
+  min-height: 100vh; 
 }
 
 .background-image::before {
@@ -40,13 +48,23 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: linear-gradient(to bottom, rgba(40, 60, 80, 0.5) 0%, #282c34 20%, rgba(80, 108, 185, 1) 90%), url('../public/Musicplugbg.jpg');
-  background-size: contain;
+  background: linear-gradient(to bottom, rgba(40, 60, 80, 0.5) 0%, #282c34 40%, rgba(80, 108, 185, 1) 90%), url('../public/Musicplugbg.jpg');
+  background-size: 100% auto;
   transform: perspective(1000px) rotateY(10deg) ;
   transform-origin: right center;
   z-index: -1; 
+  height: 95%;
+} 
+.background-image::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 10%;
+  background:rgba(80, 108, 185, 1) ;
+  z-index: 1;
 } */
-
 
 .background-gradient {
   background-image: repeating-linear-gradient(140deg, rgb(109, 97, 168), #282c34 25%, rgb(80, 108, 185));
@@ -165,5 +183,28 @@ hr {
 @media (orientation: landscape) {
   .landscape\:w-screen {
     width: 100vw;
+  }
+}
+/* @media (max-width: 768px) {
+  .background-image::before {
+    background: linear-gradient(to bottom, rgba(40, 60, 80, 0.5) 0%, #282c34 18%, rgba(80, 108, 185, 1) 90%), url('../public/Musicplugbg.jpg');
+
+    background-size: 190% auto; 
+  }
+} */
+@media (max-width: 450px){
+  .background-image {
+    background-size: 190% auto;
+    background-position: top center;
+    background-image: linear-gradient(
+      to bottom, 
+      rgba(40, 60, 80, 0.5) 0%, 
+      #282c34 16%, 
+      rgba(80, 108, 185, 1) 90%), 
+      url('../public/Musicplugbg.jpg');
+      /* margin: 0;
+      padding: 0; */
+      /* min-height: 100vh; */
+      background-attachment: scroll;
   }
 }

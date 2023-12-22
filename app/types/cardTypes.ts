@@ -5,7 +5,7 @@ export interface SongPageCardProps {
     song: string;
     artist: string;
     id: string;
-    recs?: Recs[];
+    recs: Recs[];
 }
 
 export interface AlbumPageCardProps {

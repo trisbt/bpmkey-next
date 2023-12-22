@@ -1,12 +1,11 @@
-import Image from 'next/image'
-import Splash from './components/Splash'
-import TopTracks from './components/TopTracks'
-import GetTopTracks from './server_components/GetTopTracks'
-import { ThemeProvider } from '@mui/material'
-import { archivoTheme } from './theme'
-import HorizontalAd from './components/HorizontalAd'
-
-
+import Image from 'next/image';
+import Splash from './components/Splash';
+import TopTracks from './components/TopTracks';
+import GetTopTracks from './server_components/GetTopTracks';
+import { ThemeProvider } from '@mui/material';
+import { archivoTheme } from './theme';
+import HorizontalAd from './components/HorizontalAd';
+// import CloudRender from './components/CloudRender'
 
 export default async function Home() {
   const topTracksData = await GetTopTracks();
@@ -15,6 +14,7 @@ export default async function Home() {
       <ThemeProvider theme={archivoTheme}>
         <Splash />
       </ThemeProvider>
+      {/* <CloudRender/> */}
       <HorizontalAd />
       <TopTracks results={topTracksData} />
       <HorizontalAd />

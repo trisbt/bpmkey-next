@@ -65,6 +65,7 @@ const TopTracks: React.FC<TopTracksCardProps> = ({ results }) => {
       }
     }
   };
+
   const spotifyRedirect = (e: React.MouseEvent, uri: string) => {
     e.stopPropagation();
     e.preventDefault();
@@ -72,7 +73,7 @@ const TopTracks: React.FC<TopTracksCardProps> = ({ results }) => {
   }
   return (
     <div>
-      <Box >
+      <Box>
         <Grid container item xs={12} justifyContent='center' alignItems='center' >
           {results && (
             <>
@@ -158,7 +159,7 @@ const TopTracks: React.FC<TopTracksCardProps> = ({ results }) => {
                               {/* image */}
                               <Grid item xs={3} sm={2} >
                                 <Image
-
+                                  
                                   src={item.album.images[0].url}
                                   alt={item.name}
                                   width={150}
@@ -286,7 +287,7 @@ const TopTracks: React.FC<TopTracksCardProps> = ({ results }) => {
                                       )}
                                     </SmallPlayButton>
                                   )}
-                                  <audio ref={audioRef} />
+																<audio ref={audioRef} />
                                 </Grid>
 
                                 <Grid item xs={3} sm={6} sx={{

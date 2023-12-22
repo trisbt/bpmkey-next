@@ -188,7 +188,7 @@ const SongRecs: React.FC<RecsCardProps> = ({ recs }) => {
 								})
 								.map((item: Recs, index: number) => (
 
-									<Grid item xs={11} md={8} key={index}>
+									<Grid item xs={11} md={10} key={index}>
 										{/* each card */}
 										<Link prefetch={false} href={`
 										/${slugify(item.name, { lower: true, strict: true })}
@@ -198,6 +198,7 @@ const SongRecs: React.FC<RecsCardProps> = ({ recs }) => {
 												sx={{
 													display: 'flex',
 													flexDirection: 'row',
+													justifyContent:'center',
 													margin: '10px 10px 0',
 													boxShadow: 3,
 													"&:hover": {

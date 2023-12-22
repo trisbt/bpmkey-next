@@ -1,27 +1,43 @@
 import GetAccessToken from "./GetAccessToken";
 import GetSpotifyAdvancedAudio from "./GetSpotifyAdvancedAudio";
 import { GetTracksItem } from "../types/serverTypes";
+
+const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
+
+const fetchWithRetry = async (uri, options, retries = 3, backoff = 300) => {
+    try {
+        const res = await fetch(uri, options);
+        if (!res.ok && res.status === 429 && retries > 0) {
+            const retryAfter = res.headers.get('Retry-After') || backoff;
+            await sleep(retryAfter * 1000);
+            return fetchWithRetry(uri, options, retries - 1, backoff * 2);
+        }
+        return res;
+    } catch (error) {
+        if (retries > 0) {
+            await sleep(backoff);
+            return fetchWithRetry(uri, options, retries - 1, backoff * 2);
+        }
+        throw error;
+    }
+};
+
 const GetSpotifyRecs = async (seedSong: string, seedArtist: string, seedGenres?: string) => {
     const token = await GetAccessToken();
-
     let uri = `https://api.spotify.com/v1/recommendations?limit=10&seed_artists=${seedArtist}&seed_tracks=${seedSong}`;
 
     if (seedGenres) {
         uri += `&seed_genres=${seedGenres}`;
     }
 
-    const res = await fetch(uri, {
-        headers: {
-            'Authorization': 'Bearer ' + token
-        }
+    const res = await fetchWithRetry(uri, {
+        headers: { 'Authorization': 'Bearer ' + token }
     });
 
-    // console.log(res.statusText);
-    // console.log('recs', res.status);
-    if (res.status === 429) {
-        const retryAfter = res.headers.get('Retry-After');
-        console.error(`Retry-After header value: ${retryAfter}`);
+    if (!res.ok) {
+        throw new Error(`API request failed with status ${res.status}`);
     }
+
     const data = await res.json();
 
     const mainData = data.tracks.map((item: GetTracksItem) => {

@@ -93,7 +93,7 @@ const SmallCreditsButton = styled(Button)(() => ({
   }
 }));
 
-const SongPageCard: React.FC<SongPageCardProps> = ({ songDetails, song, artist, id }) => {
+const SongPageCard: React.FC<SongPageCardProps> = ({ songDetails, song, artist, id, recs }) => {
   const [showCredits, setShowCredits] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
   const [credits, setCredits] = useState<Credits>(null);
@@ -556,9 +556,12 @@ const SongPageCard: React.FC<SongPageCardProps> = ({ songDetails, song, artist, 
       <Grid container item md={12} justifyContent='center' paddingBottom='1em'>
         <HorizontalAd />
       </Grid>
-      {/* <div className='recs-page-container'>
+      <div className='recs-page-container'>
       <SongRecs recs = {recs}/>
-      </div> */}
+      </div>
+      <Grid container item md={12} justifyContent='center' paddingBottom='1em'>
+        <HorizontalAd />
+      </Grid>
     </div>
   )
 }

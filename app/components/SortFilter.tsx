@@ -206,6 +206,9 @@ const SortFilter: React.FC<SortFilterProps> = ({ searchQuery, offset, sortOrder,
     setSliderValue([80, 140]);
     setTextFieldTempo('');
     setActiveSlice([]);
+
+    setSortOrder(null);
+    setSortBy(null);
   };
 
   const handleOutsideClick = (event: Event) => {

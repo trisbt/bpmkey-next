@@ -31,6 +31,16 @@ export const valuetext = (value: number): string => {
     return `${value} bpm`;
 }
 
+export const minMaxKey = (key: number): [number, number] => {
+    if(key === 0){
+        return [11, 1];
+    }else if(key === 11){
+        return [10, 0];
+    }else{
+        return [key - 1, key + 1];
+    }
+};
+
 export const reverseKeyConvert: ReverseKeyConvertFunction = (key: string): number | null => {
     const reverseChart: { [key: string]: number } = {
         'C': 0, 'Am': 0,
@@ -50,7 +60,7 @@ export const reverseKeyConvert: ReverseKeyConvertFunction = (key: string): numbe
     return reverseChart[key] ?? null;
 };
 
-export const reverseKeyModeConvert = (key: string): { key: number, mode: number } | null => {
+export const reverseKeyModeConvert = (key: string): { key: number, mode: number } => {
     const reverseChart: { [key: string]: { key: number, mode: number } } = {
         'C': { key: 0, mode: 1 }, 'Am': { key: 0, mode: 0 },
         'D♭': { key: 1, mode: 1 }, 'B♭m': { key: 1, mode: 0 },
@@ -85,3 +95,31 @@ export const transformSpotifyAlbumURItoURL = (uri: string): string | null => {
     }
     return null;
 };
+
+export const sleep = (ms:number): Promise<void> => {
+    return new Promise(resolve => setTimeout(resolve, ms))
+};
+
+export const fetchWithRetry = async (
+    uri: string,
+    options: RequestInit,
+    retries: number = 3,
+    backoff: number = 300
+  ): Promise<Response> => {
+    try {
+      const res = await fetch(uri, options);
+      if (!res.ok && res.status === 429 && retries > 0) {
+        const retryAfter = res.headers.get('Retry-After');
+        const waitTime = retryAfter ? parseInt(retryAfter, 10) * 1000 : backoff * 1000;
+        await sleep(waitTime);
+        return fetchWithRetry(uri, options, retries - 1, backoff * 2);
+      }
+      return res;
+    } catch (error) {
+      if (retries > 0) {
+        await sleep(backoff * 1000);
+        return fetchWithRetry(uri, options, retries - 1, backoff * 2);
+      }
+      throw error;
+    }
+  };

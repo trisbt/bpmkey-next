@@ -9,18 +9,21 @@ import { Analytics } from '@vercel/analytics/react';
 import ThemeRegistry from './ThemeRegistry'
 import Script from 'next/script'
 
-export const viewport = {
-  width: 'device-width',
-  initialScale: 1,
-  maximumScale: 1,
-}
+// export const viewport = {
+//   width: 'device-width',
+//   initialScale: 1,
+//   maximumScale: 1,
+// }
 
 export const metadata: Metadata = {
   title: `BpmKey - Find A Song's Key, BPM, and Credits`,
   description: `Find any song's Key, BPM and additional metrics like Song Credits, Loudness, Popularity, and Energy.`,
   alternates:{
     canonical: 'https://www.bpmkey.com'
-  }
+  },
+  viewport: 
+    "width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, viewport-fit=cover"
+  
 }
 
 export default function RootLayout({

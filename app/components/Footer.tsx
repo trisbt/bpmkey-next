@@ -63,6 +63,7 @@ const Footer: FC = () => {
       >
         <Box sx={{
           width: '95%',
+          paddingBottom: '.5em',
         }}>
           <Typography variant="subtitle2" color='text.secondary' gutterBottom sx={{
             display: 'flex',

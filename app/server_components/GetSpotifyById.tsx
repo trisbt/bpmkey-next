@@ -1,5 +1,6 @@
 import GetAccessToken from "./GetAccessToken";
 import GetSpotifyAdvancedAudio from "./GetSpotifyAdvancedAudio";
+import { fetchWithRetry } from "../utils";
 // import { Redis } from '@upstash/redis';
 // import { Ratelimit } from '@upstash/ratelimit';
 // import { request } from "http";
@@ -29,14 +30,18 @@ const GetSpotifyById = async (id: string) => {
 
     const token = await GetAccessToken();
 
-    const mainRes = await fetch(`https://api.spotify.com/v1/tracks/${id}`, {
-        headers: {
-            'Authorization': 'Bearer ' + token
-        }
+    let uri = `https://api.spotify.com/v1/tracks/${id}`;
+
+    const res = await fetchWithRetry(uri, {
+        headers: { 'Authorization': 'Bearer ' + token }
     });
 
-    const trackData = await mainRes.json();
-    // console.log('id', mainRes.status)
+    if (!res.ok) {
+        throw new Error(`API request failed with status ${res.status}`);
+    }
+
+    const trackData = await res.json();
+
     const basicData = {
         name: trackData.name,
         images: trackData.album.images[0].url,

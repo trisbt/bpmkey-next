@@ -68,11 +68,11 @@ const SongRecs: React.FC<RecsCardProps> = ({ recs }) => {
 	const searchParams = useSearchParams()
 	const searchQuery: string | null = searchParams.get('q');
 	//sort hooks
-	const [sortOrder, setSortOrder] = useState<"asc" | "desc" | null>(null);
-	const [sortBy, setSortBy] = useState<"tempo" | "key" | null>(null);
+	// const [sortOrder, setSortOrder] = useState<"asc" | "desc" | null>(null);
+	// const [sortBy, setSortBy] = useState<"tempo" | "key" | null>(null);
 	//filter hooks
-	const [activeSlice, setActiveSlice] = useState<string[]>([]);
-	const [tempoSelect, setTempoSelect] = useState<[number, number]>([0, 500]);
+	// const [activeSlice, setActiveSlice] = useState<string[]>([]);
+	// const [tempoSelect, setTempoSelect] = useState<[number, number]>([0, 500]);
 	const offset: null = null;
 
 	// useEffect(() => {
@@ -149,12 +149,12 @@ const SongRecs: React.FC<RecsCardProps> = ({ recs }) => {
 											fontSize: '20px'
 										},
 									}}>
-										You may also like
+										Songs with Similar Key and Tempo
 									</Typography>
 								</Card>
 							</Grid>
 
-							<SortFilter
+							{/* <SortFilter
 								setActiveSlice={setActiveSlice}
 								activeSlice={activeSlice}
 								tempoSelect={tempoSelect}
@@ -165,27 +165,27 @@ const SongRecs: React.FC<RecsCardProps> = ({ recs }) => {
 								sortOrder={sortOrder}
 								setSortBy={setSortBy}
 								sortBy={sortBy}
-							/>
+							/> */}
 
 							{/* main search */}
 							{searchResults
-								.filter(item =>
-									(!activeSlice || activeSlice.length === 0 || activeSlice.includes(item.key))
-									&& item.tempo >= tempoSelect[0]
-									&& item.tempo <= tempoSelect[1]
-								)
-								.sort((a, b) => {
-									if (sortBy && sortOrder) {
-										if (sortBy === "key") {
-											const aValue = reverseKeyConvert(a.key) || 0;
-											const bValue = reverseKeyConvert(b.key) || 0;
-											return sortOrder === "asc" ? aValue - bValue : bValue - aValue;
-										} else {
-											return sortOrder === "asc" ? a[sortBy] - b[sortBy] : b[sortBy] - a[sortBy];
-										}
-									}
-									return 0;
-								})
+								// .filter(item =>
+								// 	(!activeSlice || activeSlice.length === 0 || activeSlice.includes(item.key))
+								// 	&& item.tempo >= tempoSelect[0]
+								// 	&& item.tempo <= tempoSelect[1]
+								// )
+								// .sort((a, b) => {
+								// 	if (sortBy && sortOrder) {
+								// 		if (sortBy === "key") {
+								// 			const aValue = reverseKeyConvert(a.key) || 0;
+								// 			const bValue = reverseKeyConvert(b.key) || 0;
+								// 			return sortOrder === "asc" ? aValue - bValue : bValue - aValue;
+								// 		} else {
+								// 			return sortOrder === "asc" ? a[sortBy] - b[sortBy] : b[sortBy] - a[sortBy];
+								// 		}
+								// 	}
+								// 	return 0;
+								// })
 								.map((item: Recs, index: number) => (
 
 									<Grid item xs={11} md={10} key={index}>

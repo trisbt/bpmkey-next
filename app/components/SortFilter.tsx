@@ -49,7 +49,7 @@ interface SortFilterProps {
 }
 
 interface SortButtonProps extends ButtonProps {
-  sortBy?: string; 
+  sortBy?:  "tempo" | "key" | null;
 }
 
 const SortBPMButton = styled(Button)<SortButtonProps>(({ theme, sortBy }) => ({
@@ -144,11 +144,11 @@ const SortFilter: React.FC<SortFilterProps> = ({ searchQuery, offset, sortOrder,
   const bpmAccordionRef = useRef<HTMLDivElement | null>(null);
   const [filterOpen, setFilterOpen] = useState<boolean>(false);
 
- 
   //filter effect
   useEffect(() => {
     setActiveSlice([]);
     setTempoSelect([0, 500]);
+    setSortBy(null);
   }, [offset, searchQuery]);
 
   //close accordion
@@ -255,7 +255,9 @@ const SortFilter: React.FC<SortFilterProps> = ({ searchQuery, offset, sortOrder,
     >
       <List>
 
-        <ListItem disablePadding>
+        <ListItem disablePadding sx = {{
+          borderBottom: '1px solid #e0e0e0',
+        }}>
           <ListItemButton onClick={() => setOpenKey(!openKey)}>
             <ListItemText primary={<Typography fontSize='1rem' color='black'>Filter by: Key</Typography>} />
           </ListItemButton>
@@ -266,7 +268,9 @@ const SortFilter: React.FC<SortFilterProps> = ({ searchQuery, offset, sortOrder,
           </Collapse>
         </ListItem>
 
-        <ListItem disablePadding>
+        <ListItem disablePadding sx = {{
+          borderBottom: '1px solid #e0e0e0',
+        }}>
           <ListItemButton onClick={() => setOpenTempo(!openTempo)}>
             <ListItemText primary={<Typography fontSize='1rem' color='black'>Filter by: BPM</Typography>} />
           </ListItemButton>
@@ -323,7 +327,9 @@ const SortFilter: React.FC<SortFilterProps> = ({ searchQuery, offset, sortOrder,
         </ListItem>
 
         {/*sort key*/}
-        <ListItem disablePadding>
+        <ListItem disablePadding sx = {{
+          borderBottom: '1px solid #e0e0e0',
+        }}>
           <ListItemButton 
             key={sortBy}
             onClick={() => handleSort("key")}
@@ -341,8 +347,10 @@ const SortFilter: React.FC<SortFilterProps> = ({ searchQuery, offset, sortOrder,
           </ListItemButton>
         </ListItem>
           
-            {/*sort tempo*/}
-        <ListItem disablePadding>
+        {/*sort tempo*/}
+        <ListItem disablePadding sx = {{
+          borderBottom: '1px solid #e0e0e0',
+        }}>
           <ListItemButton 
             key={sortBy}
             onClick={() => handleSort("tempo")}
@@ -506,7 +514,7 @@ const SortFilter: React.FC<SortFilterProps> = ({ searchQuery, offset, sortOrder,
               </Grid>
 
               <Grid item >
-                <SortKeyButton onClick={() => handleSort("key")} >
+                <SortKeyButton onClick={() => handleSort("key")} sortBy={sortBy}>
                   <Typography fontSize='.9rem' sx={{ textTransform: 'none', }}>
                     Key
                   </Typography>
@@ -515,7 +523,7 @@ const SortFilter: React.FC<SortFilterProps> = ({ searchQuery, offset, sortOrder,
               </Grid>
 
               <Grid item>
-                <SortBPMButton onClick={() => handleSort("tempo")} >
+                <SortBPMButton onClick={() => handleSort("tempo")} sortBy={sortBy}>
                   <Typography fontSize='.9rem'>BPM</Typography>
                   {sortBy === "tempo" && sortOrder === "asc" ? "↑" : "↓"}
                 </SortBPMButton>

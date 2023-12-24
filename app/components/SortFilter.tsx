@@ -49,7 +49,7 @@ interface SortFilterProps {
 }
 
 interface SortButtonProps extends ButtonProps {
-  sortBy?: string; 
+  sortBy?:  "tempo" | "key" | null;
 }
 
 const SortBPMButton = styled(Button)<SortButtonProps>(({ theme, sortBy }) => ({

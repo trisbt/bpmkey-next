@@ -48,17 +48,35 @@ interface SortFilterProps {
   setTempoSelect: React.Dispatch<React.SetStateAction<[number, number]>>;
 }
 
-const SortButton = styled(Button)(({ theme }) => ({
+const SortBPMButton = styled(Button)(({ theme, sortBy }) => ({
   '&&': {
     minHeight: '4px',
+    marginRight: '5px',
     padding: '0px 10px',
     color: 'white',
+    backgroundColor: sortBy === "tempo" ? '#00e676' : 'transparent',
   },
   '&:hover': {
     backgroundColor: '#00e676',
     color: theme.palette.secondary.contrastText,
   },
 }));
+
+const SortKeyButton = styled(Button)(({ theme, sortBy }) => ({
+  '&&': {
+    minHeight: '4px',
+    marginLeft: '5px',
+    marginRight: '3px',
+    padding: '0px',
+    color: 'white',
+    backgroundColor: sortBy === "key" ? '#00e676' : 'transparent',
+  },
+  '&:hover': {
+    backgroundColor: '#00e676',
+    color: theme.palette.secondary.contrastText,
+  },
+}));
+
 const SortFilterButton = styled(Button)(({ theme }) => ({
   '&&': {
     minHeight: '4px',
@@ -156,19 +174,19 @@ const SortFilter: React.FC<SortFilterProps> = ({ searchQuery, offset, sortOrder,
     setIsOpen(open);
   };
 
-
   //sorting
   const handleSort = (attribute: "tempo" | "key") => {
-    if (sortBy === attribute && sortOrder === "asc") {
-      setSortOrder("desc");
+    if (sortBy === attribute) {
+      setSortOrder(sortOrder === "asc" ? "desc" : "asc");
     } else {
+     
       setSortBy(attribute);
-      setSortOrder("asc");
+      setSortOrder("asc"); 
     }
   };
+  
 
   //tempo filter
-
   const handleTempoSelect = (event: Event, value: number | number[], activeThumb: number) => {
     if (Array.isArray(value)) {
       setSliderValue(value as [number, number]);
@@ -206,7 +224,7 @@ const SortFilter: React.FC<SortFilterProps> = ({ searchQuery, offset, sortOrder,
     setSliderValue([80, 140]);
     setTextFieldTempo('');
     setActiveSlice([]);
-
+    // setIsSelected(false);
     setSortOrder(null);
     setSortBy(null);
   };
@@ -299,20 +317,34 @@ const SortFilter: React.FC<SortFilterProps> = ({ searchQuery, offset, sortOrder,
           </Collapse>
         </ListItem>
 
+        {/*sort key*/}
         <ListItem disablePadding>
-          <ListItemButton onClick={() => handleSort("key")}>
+          <ListItemButton 
+            key={sortBy}
+            onClick={() => handleSort("key")}
+            sx={{
+              backgroundColor: sortBy === "key" ? '#00e676' : 'transparent',
+            }}
+          >
             <ListItemText sx={{
               fontSize: '1rem',
-              color: 'black'
+              color: 'black',
             }}>
               Sort by: Key
             </ListItemText>
             {sortBy === "key" && sortOrder === "asc" ? "↑" : "↓"}
           </ListItemButton>
         </ListItem>
-
+          
+            {/*sort tempo*/}
         <ListItem disablePadding>
-          <ListItemButton onClick={() => handleSort("tempo")}>
+          <ListItemButton 
+            key={sortBy}
+            onClick={() => handleSort("tempo")}
+            sx={{
+              backgroundColor: sortBy === "tempo" ? '#00e676' : 'transparent',
+            }}
+          >
             <ListItemText sx={{
               fontSize: '1rem',
               color: 'black'
@@ -464,23 +496,26 @@ const SortFilter: React.FC<SortFilterProps> = ({ searchQuery, offset, sortOrder,
                 justifyContent: 'flex-start',
               }
             }}>
-              <Grid item> {/* Wrap Typography in a Grid item */}
+              <Grid item>
                 <Typography fontSize='1rem' color='white'>Sort by: </Typography>
               </Grid>
-              <Grid item > {/* Wrap the SortButton in a Grid item */}
-                <SortButton onClick={() => handleSort("key")}>
+
+              <Grid item >
+                <SortKeyButton onClick={() => handleSort("key")} >
                   <Typography fontSize='.9rem' sx={{ textTransform: 'none', }}>
                     Key
                   </Typography>
                   {sortBy === "key" && sortOrder === "asc" ? "↑" : "↓"}
-                </SortButton>
+                </SortKeyButton>
               </Grid>
-              <Grid item> {/* Wrap the next SortButton in a Grid item */}
-                <SortButton onClick={() => handleSort("tempo")}>
+
+              <Grid item>
+                <SortBPMButton onClick={() => handleSort("tempo")} >
                   <Typography fontSize='.9rem'>BPM</Typography>
                   {sortBy === "tempo" && sortOrder === "asc" ? "↑" : "↓"}
-                </SortButton>
+                </SortBPMButton>
               </Grid>
+
             </Grid>
           </Grid>
         </Box>

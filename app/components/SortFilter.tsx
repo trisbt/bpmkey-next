@@ -140,6 +140,7 @@ const SortFilter: React.FC<SortFilterProps> = ({ searchQuery, offset, sortOrder,
   const bpmAccordionRef = useRef<HTMLDivElement | null>(null);
   const [filterOpen, setFilterOpen] = useState<boolean>(false);
 
+ 
   //filter effect
   useEffect(() => {
     setActiveSlice([]);

@@ -15,7 +15,7 @@ export default async function Home() {
         <Splash />
       </ThemeProvider>
       {/* <CloudRender/> */}
-      <HorizontalAd />
+      {/* <HorizontalAd /> */}
       <TopTracks results={topTracksData} />
       <HorizontalAd />
     </div>

@@ -6,7 +6,7 @@ import { ChartEvent, ActiveElement, ChartTypeRegistry, Point, BubbleDataPoint } 
 import { Pie, Doughnut } from 'react-chartjs-2';
 import Grid from '@mui/material/Grid'
 import ChartDataLabels from 'chartjs-plugin-datalabels';
-import {Context} from 'chartjs-plugin-datalabels';
+import { Context } from 'chartjs-plugin-datalabels';
 import { grey } from '@mui/material/colors';
 import { CircleOfFifthsProps } from '../types/dataTypes';
 
@@ -51,10 +51,11 @@ const hoverColors: string[] = ['#b71c1c', '#ff5722', '#ff9800', '#ffeb3b', '#8bc
 
 
 const CircleOfFifths: React.FC<CircleOfFifthsProps> = ({ activeSlice, setActiveSlice }) => {
+  const chartKey = activeSlice.join(',');
 
   const handleChartInteraction = (
-    event: ChartEvent, 
-    elements: ActiveElement[], 
+    event: ChartEvent,
+    elements: ActiveElement[],
     chart: Chart<keyof ChartTypeRegistry, (number | Point | [number, number] | BubbleDataPoint | null)[], unknown>
   ) => {
     if (elements && elements.length) {
@@ -153,11 +154,13 @@ const CircleOfFifths: React.FC<CircleOfFifthsProps> = ({ activeSlice, setActiveS
     <div className='pie-container'>
       <Grid container spacing={0} sx={{
         height: '300px',
+        width: '220px'
       }}>
         <Grid item xs={12} sx={{
           height: '270px',
         }}>
           <Doughnut
+            key={chartKey}
             data={chartData}
             plugins={[ChartDataLabels as any]}
             height={340}

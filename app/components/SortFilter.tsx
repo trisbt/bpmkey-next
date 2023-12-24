@@ -2,7 +2,7 @@
 import React from 'react'
 import { useState, useEffect, useRef } from 'react';
 import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
+import Button, { ButtonProps } from '@mui/material/Button';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
@@ -48,7 +48,11 @@ interface SortFilterProps {
   setTempoSelect: React.Dispatch<React.SetStateAction<[number, number]>>;
 }
 
-const SortBPMButton = styled(Button)(({ theme, sortBy }) => ({
+interface SortButtonProps extends ButtonProps {
+  sortBy?: string; 
+}
+
+const SortBPMButton = styled(Button)<SortButtonProps>(({ theme, sortBy }) => ({
   '&&': {
     minHeight: '4px',
     marginRight: '5px',
@@ -62,7 +66,7 @@ const SortBPMButton = styled(Button)(({ theme, sortBy }) => ({
   },
 }));
 
-const SortKeyButton = styled(Button)(({ theme, sortBy }) => ({
+const SortKeyButton = styled(Button)<SortButtonProps>(({ theme, sortBy }) => ({
   '&&': {
     minHeight: '4px',
     marginLeft: '5px',

@@ -154,7 +154,11 @@ const CircleOfFifths: React.FC<CircleOfFifthsProps> = ({ activeSlice, setActiveS
     <div className='pie-container'>
       <Grid container spacing={0} sx={{
         height: '300px',
-        width: '220px'
+        '@media (max-width: 580px)': {
+          width: '270px',
+        },
+        width: '220px',
+      
       }}>
         <Grid item xs={12} sx={{
           height: '270px',

@@ -144,11 +144,11 @@ const SortFilter: React.FC<SortFilterProps> = ({ searchQuery, offset, sortOrder,
   const bpmAccordionRef = useRef<HTMLDivElement | null>(null);
   const [filterOpen, setFilterOpen] = useState<boolean>(false);
 
-  console.log(sortBy)
   //filter effect
   useEffect(() => {
     setActiveSlice([]);
     setTempoSelect([0, 500]);
+    setSortBy(null);
   }, [offset, searchQuery]);
 
   //close accordion
@@ -255,7 +255,9 @@ const SortFilter: React.FC<SortFilterProps> = ({ searchQuery, offset, sortOrder,
     >
       <List>
 
-        <ListItem disablePadding>
+        <ListItem disablePadding sx = {{
+          borderBottom: '1px solid #e0e0e0',
+        }}>
           <ListItemButton onClick={() => setOpenKey(!openKey)}>
             <ListItemText primary={<Typography fontSize='1rem' color='black'>Filter by: Key</Typography>} />
           </ListItemButton>
@@ -266,7 +268,9 @@ const SortFilter: React.FC<SortFilterProps> = ({ searchQuery, offset, sortOrder,
           </Collapse>
         </ListItem>
 
-        <ListItem disablePadding>
+        <ListItem disablePadding sx = {{
+          borderBottom: '1px solid #e0e0e0',
+        }}>
           <ListItemButton onClick={() => setOpenTempo(!openTempo)}>
             <ListItemText primary={<Typography fontSize='1rem' color='black'>Filter by: BPM</Typography>} />
           </ListItemButton>
@@ -323,7 +327,9 @@ const SortFilter: React.FC<SortFilterProps> = ({ searchQuery, offset, sortOrder,
         </ListItem>
 
         {/*sort key*/}
-        <ListItem disablePadding>
+        <ListItem disablePadding sx = {{
+          borderBottom: '1px solid #e0e0e0',
+        }}>
           <ListItemButton 
             key={sortBy}
             onClick={() => handleSort("key")}
@@ -342,7 +348,9 @@ const SortFilter: React.FC<SortFilterProps> = ({ searchQuery, offset, sortOrder,
         </ListItem>
           
         {/*sort tempo*/}
-        <ListItem disablePadding>
+        <ListItem disablePadding sx = {{
+          borderBottom: '1px solid #e0e0e0',
+        }}>
           <ListItemButton 
             key={sortBy}
             onClick={() => handleSort("tempo")}

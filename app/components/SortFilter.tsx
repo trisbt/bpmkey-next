@@ -144,7 +144,7 @@ const SortFilter: React.FC<SortFilterProps> = ({ searchQuery, offset, sortOrder,
   const bpmAccordionRef = useRef<HTMLDivElement | null>(null);
   const [filterOpen, setFilterOpen] = useState<boolean>(false);
 
- 
+  console.log(sortBy)
   //filter effect
   useEffect(() => {
     setActiveSlice([]);
@@ -341,7 +341,7 @@ const SortFilter: React.FC<SortFilterProps> = ({ searchQuery, offset, sortOrder,
           </ListItemButton>
         </ListItem>
           
-            {/*sort tempo*/}
+        {/*sort tempo*/}
         <ListItem disablePadding>
           <ListItemButton 
             key={sortBy}
@@ -506,7 +506,7 @@ const SortFilter: React.FC<SortFilterProps> = ({ searchQuery, offset, sortOrder,
               </Grid>
 
               <Grid item >
-                <SortKeyButton onClick={() => handleSort("key")} >
+                <SortKeyButton onClick={() => handleSort("key")} sortBy={sortBy}>
                   <Typography fontSize='.9rem' sx={{ textTransform: 'none', }}>
                     Key
                   </Typography>
@@ -515,7 +515,7 @@ const SortFilter: React.FC<SortFilterProps> = ({ searchQuery, offset, sortOrder,
               </Grid>
 
               <Grid item>
-                <SortBPMButton onClick={() => handleSort("tempo")} >
+                <SortBPMButton onClick={() => handleSort("tempo")} sortBy={sortBy}>
                   <Typography fontSize='.9rem'>BPM</Typography>
                   {sortBy === "tempo" && sortOrder === "asc" ? "↑" : "↓"}
                 </SortBPMButton>

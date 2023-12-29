@@ -87,20 +87,22 @@ const TopTracks: React.FC<TopTracksCardProps> = ({ results }) => {
                     margin: '0px 10px 0',
                     boxShadow: 3,
                     justifyContent: 'center',
-                    backgroundColor: 'rgb(0, 71, 212, .6)',
+                    backgroundColor: 'rgb(0, 71, 212)',
+                    // width: '100%',
                   }}
                 >
                   <Typography variant='h4' component="h1"
                     sx={{
                       display: 'flex',
                       alignItems: 'center',
+                      margin: '10px 10px 10px',
                       color: '#e8eaf6',
                       fontWeight: 'bold',
                       background: '#e8eaf6',
                       WebkitBackgroundClip: 'text',
                       WebkitTextFillColor: 'transparent',
                       letterSpacing: '1px',
-                      borderRadius: '2px',
+                      // borderRadius: '2px',
                       '@media (max-width: 600px)': {
                         fontSize: '24px'
                       },

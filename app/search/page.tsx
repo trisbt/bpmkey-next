@@ -4,28 +4,25 @@ import GetSpotifySearch from '../server_components/GetSpotifySearch';
 import SearchCards from './SearchCards';
 import { SearchDetails } from '../types/dataTypes';
 import type { Metadata, ResolvingMetadata } from 'next'
-// import { Suspense } from 'react';
-// import Loading from '../loading';
-// import dynamic from 'next/dynamic'
-// const SearchCards = dynamic(() => import('./SearchCards'), {
-//     // ssr: false,
-// })
+import { Suspense } from 'react';
+import Loading from '../loading';
+
+//TODO need to setup loading fallback for new search params. Currently Next.js 13.5 and up having issues displaying. Added key to Suspense 
+
 
 const SearchPage = async ({
   searchParams,
 }: {
   searchParams: { q: string };
 }) => {
-// console.log(searchParams.q)
-// const key = JSON.stringify(searchParams);
   let offset: number = 0;
 
   const results: SearchDetails[] = await GetSpotifySearch(searchParams.q.replace(/-/g, ' '), offset);
   return (
     <div className='background-gradient min-h-[100em]'>
-      {/* <Suspense key = {key} fallback={<Loading/>}> */}
+      <Suspense key = {searchParams.q} fallback={<Loading/>}>
         <SearchCards results={results} />
-      {/* </Suspense> */}
+      </Suspense>
     </div>
   )
 }

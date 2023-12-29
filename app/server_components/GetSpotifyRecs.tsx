@@ -7,13 +7,11 @@ import { reverseKeyModeConvert, sleep, fetchWithRetry, minMaxKey } from "../util
 const GetSpotifyRecs = async (
   seedSong: string, 
   seedArtist: string, 
-  // seedGenres?: string, 
   targetBpm: number, 
   targetKey: string,
   ) => {
     const token = await GetAccessToken();
-    let uri = `https://api.spotify.com/v1/recommendations?limit=10&seed_artists=${seedArtist}&seed_tracks=${seedSong}`;
-
+    let uri = `https://api.spotify.com/v1/recommendations?limit=11&seed_artists=${seedArtist}&seed_tracks=${seedSong}`;
     // if (seedGenres) {
     //     uri += `&seed_genres=${seedGenres}`;
     // }
@@ -51,7 +49,7 @@ const GetSpotifyRecs = async (
     const ids = data.tracks.map((item: GetTracksItem) => item.id);
 
     const audioData = await GetSpotifyAdvancedAudio(token, ids);
- 
+    
 
     const results = [];
     for (let i = 0; i < mainData.length; i++) {
@@ -59,7 +57,9 @@ const GetSpotifyRecs = async (
             ...mainData[i],
             ...audioData[i]
         };
-        results.push(combinedObject);
+        if(combinedObject.id !== seedSong){
+          results.push(combinedObject);
+        }
     }
 
     return results;

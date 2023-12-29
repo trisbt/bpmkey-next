@@ -386,8 +386,8 @@ const SongPageCard: React.FC<SongPageCardProps> = ({ songDetails, song, artist, 
               </Grid>
             </Grid>
 
-            <Grid item display='flex' justifyContent='center'sx ={{
-              marginTop:'2em',
+            <Grid item display='flex' justifyContent='center' sx={{
+              marginTop: '2em',
             }} >
               {/* <MultiAd /> */}
             </Grid>
@@ -556,12 +556,17 @@ const SongPageCard: React.FC<SongPageCardProps> = ({ songDetails, song, artist, 
       <Grid container item md={12} justifyContent='center' paddingBottom='1em'>
         <HorizontalAd />
       </Grid>
-      <div className='recs-page-container'>
-      <SongRecs recs = {recs}/>
-      </div>
-      <Grid container item md={12} justifyContent='center' paddingBottom='1em'>
-        <HorizontalAd />
-      </Grid>
+      {recs.length > 0 && (
+        <>
+          <div className='recs-page-container'>
+            <SongRecs recs={recs} />
+          </div>
+          <Grid container item md={12} justifyContent='center' paddingBottom='1em'>
+            <HorizontalAd />
+          </Grid>
+        </>
+      )}
+
     </div>
   )
 }

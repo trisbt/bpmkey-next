@@ -17,7 +17,8 @@ const SongPage = async ({
   const seedArtist = songDetails.artistId;
   const targetKey = songDetails.key;
   const targetBpm = songDetails.tempo;
-  const recs: Recs[] = await GetSpotifyRecs(id, seedArtist,targetBpm, targetKey)
+
+  const recs: Recs[] = await GetSpotifyRecs(id, seedArtist, targetBpm, targetKey)
   // const recs = [];
 
 

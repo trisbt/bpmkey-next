@@ -123,7 +123,6 @@ const SearchCards: React.FC<SearchPageCardProps> = ({ results }) => {
 	};
 
 	//load more effect
-
 	const [isFirstRender, setIsFirstRender] = useState(true);
 
 	useEffect(() => {
@@ -150,19 +149,6 @@ const SearchCards: React.FC<SearchPageCardProps> = ({ results }) => {
 		fetchData();
 	}, [offset, searchQuery]);
 
-
-	// useEffect(() => {
-	// 	const fetchData = async () => {
-	// 		const newResults = await GetSpotifySearch(searchQuery, offset);
-
-	// 		if (offset === 1) {
-	// 			setSearchResults(newResults);
-	// 		} else {
-	// 			setSearchResults(prevResults => [...prevResults, ...newResults]);
-	// 		}
-	// 	};
-	// 	fetchData();
-	// }, [offset, searchQuery]);
 
 	//new search reset offset effect
 	useEffect(() => {

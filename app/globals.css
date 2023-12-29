@@ -164,10 +164,23 @@ ul div {
 hr {
   margin: 10px;
 }
+
 .splash{
   display: flex;
 }
 
+.canvas{
+  display: flex;
+  margin-top: 2em;
+  margin-bottom: 3em;
+  border: 1px solid rgba(192,192,192,0.5);
+	box-shadow: '0 0 10px 1px rgba(192,192,192,0.3)';
+  width: 87%;
+  background: linear-gradient(105deg, rgba(0, 0, 0, .9) 0%, rgba(38, 50, 56, 0.8) 90%);
+  height: 15em;
+  border-radius: .5em;
+  
+}
 
 @media (max-width: 600px) {
   .card-buttons {

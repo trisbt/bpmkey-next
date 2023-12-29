@@ -56,19 +56,19 @@ const Splash = () => {
 							paddingLeft: 4,
 						}
 					}}>
-						<Box sx={{
+						<Box component='div' sx={{
 							display: 'flex',
 							flexDirection: 'column',
 							borderRadius: '20px',
-							paddingLeft:'14em',
+							paddingLeft: '14em',
 							'@media (max-width: 2200px)': {
-								paddingLeft:'10em',
+								paddingLeft: '10em',
 							},
 							'@media (max-width: 2000px)': {
-								paddingLeft:'5em',
+								paddingLeft: '5em',
 							},
 							'@media (max-width: 1500px)': {
-								paddingLeft:'0',
+								paddingLeft: '0',
 							},
 						}}>
 							<Typography variant='h2'
@@ -143,7 +143,7 @@ const Splash = () => {
 						}}>
 							<SplashCircleOfFifths />
 						</Card>
-						<Box sx={{
+						<Box component='div' sx={{
 							display: 'flex',
 							justifyContent: 'center',
 							height: '5em',

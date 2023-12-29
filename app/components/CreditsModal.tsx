@@ -36,7 +36,7 @@ const CreditsModal: React.FC<CreditsModalProps> = ({ open, handleClose, credits 
             }}
         >
             <Fade in={open}>
-                <Box
+                <Box component='div'
                     sx={{
                         display: 'flex',
                         flexDirection: 'column',
@@ -80,7 +80,7 @@ const CreditsModal: React.FC<CreditsModalProps> = ({ open, handleClose, credits 
                             {credits[0].role}
                         </Typography>
                     ) : (
-                        <Box sx={{
+                        <Box component='div' sx={{
                             // maxHeight: 'calc(75% - 3em)',
                             overflowY: 'auto',
                         }}>

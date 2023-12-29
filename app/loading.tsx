@@ -3,7 +3,7 @@ import { CircularProgress, Box } from "@mui/material";
 export default function Loading() {
     return (
         <div className='song-page-main background-gradient min-h-[150em] min-w-[100vw]'>
-            <Box sx={{
+            <Box component='div' sx={{
                 position: 'fixed',
                 top: 0,
                 left: 0,

@@ -109,7 +109,7 @@ const ArtistTopTracksCards: React.FC<ArtistPageCardProps> = ({ results, artist }
 	}
 
 	return (
-		<Box>
+		<Box component='div'>
 			<Grid container item md={12} justifyContent='center' paddingBottom='1em'>
 				<HorizontalAd />
 			</Grid>
@@ -173,7 +173,7 @@ const ArtistTopTracksCards: React.FC<ArtistPageCardProps> = ({ results, artist }
 							>
 								<Hidden lgDown>
 									<VerticalAd />
-									<Box height='20em' />
+									<Box component='div' height='20em' />
 									<VerticalAd />
 								</Hidden>
 							</Grid>
@@ -216,7 +216,7 @@ const ArtistTopTracksCards: React.FC<ArtistPageCardProps> = ({ results, artist }
 														sx={{
 															display: 'flex',
 															flexDirection: 'row',
-															justifyContent:'center',
+															justifyContent: 'center',
 															margin: '10px 10px 0',
 															boxShadow: 3,
 															"&:hover": {
@@ -426,7 +426,7 @@ const ArtistTopTracksCards: React.FC<ArtistPageCardProps> = ({ results, artist }
 							>
 								<Hidden lgDown>
 									<VerticalAd />
-									<Box height='20em' />
+									<Box component='div' height='20em' />
 									<VerticalAd />
 								</Hidden>
 							</Grid>

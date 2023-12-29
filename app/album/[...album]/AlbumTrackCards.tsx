@@ -111,7 +111,7 @@ const AlbumTrackCards: React.FC<AlbumPageCardProps> = ({ results, album }) => {
 	}
 
 	return (
-		<Box>
+		<Box component='div'>
 			<Grid container item xs={12} justifyContent='center' paddingBottom='1em' >
 				<HorizontalAd />
 			</Grid>
@@ -204,7 +204,7 @@ const AlbumTrackCards: React.FC<AlbumPageCardProps> = ({ results, album }) => {
 							>
 								<Hidden lgDown>
 									<VerticalAd />
-									<Box height='20em' />
+									<Box component='div' height='20em' />
 									<VerticalAd />
 								</Hidden>
 							</Grid>
@@ -248,7 +248,7 @@ const AlbumTrackCards: React.FC<AlbumPageCardProps> = ({ results, album }) => {
 													<Card
 														sx={{
 															display: 'flex',
-															justifyContent:'center',
+															justifyContent: 'center',
 															flexDirection: 'row',
 															margin: '10px 10px 0',
 															boxShadow: 3,
@@ -292,7 +292,7 @@ const AlbumTrackCards: React.FC<AlbumPageCardProps> = ({ results, album }) => {
 																			</span>
 																		))}
 																	</Typography>
-																
+
 																</Grid>
 																<Grid item xs={3} sm={2} >
 																	{/* <Image
@@ -453,7 +453,7 @@ const AlbumTrackCards: React.FC<AlbumPageCardProps> = ({ results, album }) => {
 							>
 								<Hidden lgDown>
 									<VerticalAd />
-									<Box height='20em' />
+									<Box component='div' height='20em' />
 									<VerticalAd />
 								</Hidden>
 							</Grid>

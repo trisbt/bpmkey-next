@@ -5,7 +5,7 @@ import GetTopTracks from './server_components/GetTopTracks';
 import { ThemeProvider } from '@mui/material';
 import { archivoTheme } from './theme';
 import HorizontalAd from './components/HorizontalAd';
-// import CloudRender from './components/CloudRender'
+import CloudRender from './components/CloudRender'
 
 export default async function Home() {
   const topTracksData = await GetTopTracks();
@@ -14,7 +14,7 @@ export default async function Home() {
       <ThemeProvider theme={archivoTheme}>
         <Splash />
       </ThemeProvider>
-      {/* <CloudRender/> */}
+      <CloudRender/>
       {/* <HorizontalAd /> */}
       <TopTracks results={topTracksData} />
       <HorizontalAd />

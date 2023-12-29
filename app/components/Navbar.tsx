@@ -67,7 +67,7 @@ function Navbar() {
 
           {/* desktop and mobile search bar*/}
           <Hidden only={['sm', 'md', 'lg', 'xl']}>
-            <Box display='flex' justifyContent='flex-end' sx={{
+            <Box component='div' display='flex' justifyContent='flex-end' sx={{
               paddingRight: '.8em',
               flexGrow: {
                 flexGrow: 3,  // default value for smaller screens
@@ -80,7 +80,7 @@ function Navbar() {
             </Box>
           </Hidden>
 
-          <Box display='flex' flexGrow={1} justifyContent='center' sx={{
+          <Box component='div' display='flex' flexGrow={1} justifyContent='center' sx={{
             margin: -1.5,
           }}>
             <SearchBar />

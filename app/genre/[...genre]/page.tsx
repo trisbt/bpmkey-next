@@ -7,10 +7,12 @@ import type { Metadata, ResolvingMetadata } from 'next'
 const GenrePage = async ({
   params,
 }: {
-  params: { genre: [string] };
+  params: { genre: [string, string] };
 }) => {
   const genre = params.genre[0];
-  const spotifyPlaylistResults: SongDetails[] = await GetSpotifyPlaylist(genre);
+  const genreID = params.genre[1];
+  // console.log(genreID)
+  const spotifyPlaylistResults: SongDetails[] = await GetSpotifyPlaylist(genreID);
   const {playlistImage, playlistURL, playlistName, playlistDescription, results}  = spotifyPlaylistResults;
   return (
     <div className='background-gradient'>
@@ -22,13 +24,14 @@ const GenrePage = async ({
 export async function generateMetadata({
   params,
 }: {
-  params: { genre: [string] };
+  params: { genre: [string, string] };
 },
   parent: ResolvingMetadata
 ): Promise<Metadata> {
   const genre = params.genre[0];
-  const spotifyPlaylistResults: SongDetails[] = await GetSpotifyPlaylist(genre);
-  console.log()
+  const genreID = params.genre[1];
+  const spotifyPlaylistResults: SongDetails[] = await GetSpotifyPlaylist(genreID);
+
   const metaArtist = spotifyPlaylistResults.results[0].artists[0].name;
   const metaSong = spotifyPlaylistResults.results[0].name;
   const metaKey = spotifyPlaylistResults.results[0].key;
@@ -38,7 +41,7 @@ export async function generateMetadata({
     description:`Key, BPM, Credits for ${genre}, like ${metaSong} Key: ${metaKey} BPM: ${metaBPM}.
     Find Key, Tempo and additional metrics like Credits, Loudness, Popularity, Energy.`,
     alternates:{
-      canonical:`https://www.bpmkey.com/genre/${genre}`
+      canonical:`https://www.bpmkey.com/genre/${genre}/${genreID}`
     }
   }
 }

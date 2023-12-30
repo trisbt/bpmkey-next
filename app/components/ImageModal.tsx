@@ -50,7 +50,7 @@ const ImageModal: React.FC<ImageModalProps> = ({ songDetails }) => {
                 }}
             >
                 <Fade in={open}>
-                    <Box
+                    <Box 
                         component="img"
                         src={songDetails.images}
                         alt={songDetails.name}

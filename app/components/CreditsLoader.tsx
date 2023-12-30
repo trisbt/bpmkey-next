@@ -3,7 +3,7 @@ import { CircularProgress, Box } from "@mui/material";
 export default function CreditsLoader() {
     return (
         <div className='song-page-main background-gradient'>
-            <Box sx={{
+            <Box component='div' sx={{
                 position: 'fixed',
                 top: 0,
                 left: 0,

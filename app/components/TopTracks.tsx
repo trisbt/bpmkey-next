@@ -25,6 +25,7 @@ import HorizontalAd from './HorizontalAd';
 import { Hidden } from '@mui/material';
 import { transformSpotifyURItoURL } from '../utils';
 import SpotifyBlackIcon from '../SpotifyIcon';
+import { Inter } from 'next/font/google';
 
 const SmallPlayButton = styled(IconButton)(() => ({
   '&&': {
@@ -73,13 +74,13 @@ const TopTracks: React.FC<TopTracksCardProps> = ({ results }) => {
   }
   return (
     <div>
-      <Box>
+      <Box component='div'>
         <Grid container item xs={12} justifyContent='center' alignItems='center' >
           {results && (
             <>
 
               {/* text row */}
-              <Grid item xs={11} md={8}>
+              <Grid item xs={11} md={9} lg={8}>
                 <Card
                   sx={{
                     display: 'flex',
@@ -87,20 +88,23 @@ const TopTracks: React.FC<TopTracksCardProps> = ({ results }) => {
                     margin: '0px 10px 0',
                     boxShadow: 3,
                     justifyContent: 'center',
-                    backgroundColor: 'rgb(0, 71, 212, .6)',
+                    backgroundColor: 'rgb(0, 71, 212)',
+                    // width: '100%',
                   }}
                 >
                   <Typography variant='h4' component="h1"
                     sx={{
                       display: 'flex',
                       alignItems: 'center',
+                      margin: '5px 10px 5px',
                       color: '#e8eaf6',
                       fontWeight: 'bold',
+                      fontFamily: 'Inter, sans-serif',
                       background: '#e8eaf6',
                       WebkitBackgroundClip: 'text',
                       WebkitTextFillColor: 'transparent',
                       letterSpacing: '1px',
-                      borderRadius: '2px',
+                      // borderRadius: '2px',
                       '@media (max-width: 600px)': {
                         fontSize: '24px'
                       },
@@ -122,7 +126,7 @@ const TopTracks: React.FC<TopTracksCardProps> = ({ results }) => {
                 >
                   <Hidden lgDown>
                     {/* <VerticalAd /> */}
-                    <Box height='20em' />
+                    <Box component='div' height='20em' />
                     <VerticalAd />
                   </Hidden>
                 </Grid>
@@ -140,7 +144,7 @@ const TopTracks: React.FC<TopTracksCardProps> = ({ results }) => {
                           sx={{
                             display: 'flex',
                             flexDirection: 'row',
-                            justifyContent:'center',
+                            justifyContent: 'center',
                             margin: '10px 10px 0',
                             boxShadow: 3,
                             "&:hover": {
@@ -159,7 +163,7 @@ const TopTracks: React.FC<TopTracksCardProps> = ({ results }) => {
                               {/* image */}
                               <Grid item xs={3} sm={2} >
                                 <Image
-                                  
+
                                   src={item.album.images[0].url}
                                   alt={item.name}
                                   width={150}
@@ -287,7 +291,7 @@ const TopTracks: React.FC<TopTracksCardProps> = ({ results }) => {
                                       )}
                                     </SmallPlayButton>
                                   )}
-																<audio ref={audioRef} />
+                                  <audio ref={audioRef} />
                                 </Grid>
 
                                 <Grid item xs={3} sm={6} sx={{
@@ -321,7 +325,7 @@ const TopTracks: React.FC<TopTracksCardProps> = ({ results }) => {
                 >
                   <Hidden lgDown>
                     {/* <VerticalAd /> */}
-                    <Box height='20em' />
+                    <Box component='div' height='20em' />
                     <VerticalAd />
                   </Hidden>
                 </Grid>

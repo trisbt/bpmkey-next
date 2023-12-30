@@ -1,6 +1,5 @@
 'use client'
 import React from 'react'
-import Image from 'next/image';
 import { useState, useRef, useEffect } from 'react';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
@@ -25,17 +24,20 @@ import { useRouter } from 'next/navigation';
 import { useSearchParams } from 'next/navigation'
 import Link from 'next/link';
 import CircleOfFifths from '@/app/components/CircleOfFifths';
-import SortFilter from '@/app/components/SortFilter';
 import { reverseKeyConvert } from '@/app/utils';
-import { SongDetails } from '@/app/types/dataTypes';
-import { ArtistPageCardProps } from '@/app/types/cardTypes';
+import SortFilter from '@/app/components/SortFilter';
+import { GenreCardProps } from '@/app/types/cardTypes';
+import { GenreDetails } from '@/app/types/dataTypes';
 import slugify from 'slugify';
 import { Hidden } from '@mui/material';
+import Image from 'next/image';
 import CardAd from '@/app/components/CardAd';
 import VerticalAd from '@/app/components/VerticalAd';
 import HorizontalAd from '@/app/components/HorizontalAd';
+import SpotifyLogo from '@/app/SpotifyLogo';
 import SpotifyIcon from '@/app/SpotifyIcon';
-import { transformSpotifyURItoURL } from '@/app/utils';
+import { transformSpotifyAlbumURItoURL, transformSpotifyURItoURL } from '@/app/utils';
+
 
 const SmallPlayButton = styled(IconButton)(() => ({
 	'&&': {
@@ -56,7 +58,6 @@ const SortButton = styled(Button)(({ theme }) => ({
 		minHeight: '4px',
 		padding: '0px 10px',
 		color: 'white',
-		// backgroundColor: 'white',
 	},
 	'&:hover': {
 		backgroundColor: '#00e676',
@@ -66,10 +67,10 @@ const SortButton = styled(Button)(({ theme }) => ({
 
 
 
-const ArtistTopTracksCards: React.FC<ArtistPageCardProps> = ({ results, artist }) => {
+const GenreTrackCards: React.FC<GenreCardProps> = ({ results, playlistImage, playlistURL, playlistDescription, playlistName }) => {
 	const [currentlyPlayingUrl, setCurrentlyPlayingUrl] = useState<string | null>(null);
 	const audioRef = useRef<HTMLAudioElement | null>(null);
-	const [searchResults, setSearchResults] = useState<SongDetails[]>(results);
+	const [searchResults, setSearchResults] = useState<GenreDetails[]>(results);
 	const router = useRouter();
 	const searchParams = useSearchParams()
 	const searchQuery: string | null = searchParams.get('q');
@@ -80,7 +81,7 @@ const ArtistTopTracksCards: React.FC<ArtistPageCardProps> = ({ results, artist }
 	const [activeSlice, setActiveSlice] = useState<string[]>([]);
 	const [tempoSelect, setTempoSelect] = useState<[number, number]>([0, 500]);
 	const offset: null = null;
-
+	
 	const playAudio = (event: React.MouseEvent, previewUrl: string | null) => {
 		event.stopPropagation();
 		event.preventDefault();
@@ -110,42 +111,94 @@ const ArtistTopTracksCards: React.FC<ArtistPageCardProps> = ({ results, artist }
 
 	return (
 		<Box component='div'>
-			<Grid container item md={12} justifyContent='center' paddingBottom='1em'>
+			<Grid container item xs={12} justifyContent='center' paddingBottom='1em' >
 				<HorizontalAd />
 			</Grid>
 			<Grid container item xs={12} justifyContent='center' alignItems='center' >
 				{searchResults && (
 					<>
-
 						{/* text row */}
-						<Grid item xs={11} md={8}>
-							<Card
-								sx={{
-									display: 'flex',
-									flexDirection: 'row',
-									margin: '10px 10px 10px',
-									boxShadow: 0,
-									justifyContent: 'center',
-									backgroundColor: 'transparent'
-								}}
-							>
-								<Typography variant='h4' component="h1" sx={{
-									display: 'flex',
-									alignItems: 'center',
-									color: '#e8eaf6',
-									fontWeight: 'bold',
-									background: '#e8eaf6',
-									WebkitBackgroundClip: 'text',
-									letterSpacing: '1px',
-									borderRadius: '2px',
-									fontStyle: 'italic',
-									'@media (max-width: 600px)': {
-										fontSize: '20px'
-									},
-								}}>
-									Top Tracks by {results[0].artists[0].name}
-								</Typography>
-							</Card>
+						<Grid container item xs={12} flexDirection='column' justifyContent='center' alignItems='center' >
+							<Grid item xs={11} md={8}>
+								<Card
+									sx={{
+										display: 'flex',
+										flexDirection: 'column',
+										alignItems: 'center',
+										margin: '10px 10px 0',
+										boxShadow: 0,
+										justifyContent: 'center',
+										backgroundColor: 'transparent',
+										paddingBottom: '.6em',
+									}}
+								>
+									<Typography variant='h4' component="h1" sx={{
+										display: 'flex',
+										marginBottom: '.5em',
+										alignItems: 'center',
+										textAlign: 'center',
+										color: '#e8eaf6',
+										fontWeight: 'bold',
+										background: '#e8eaf6',
+										WebkitBackgroundClip: 'text',
+										letterSpacing: '1px',
+										borderRadius: '2px',
+										// fontStyle: 'italic',
+										paddingLeft: '1em',
+										paddingRight: '1em',
+										'@media (max-width: 600px)': {
+											fontSize: '22px'
+										},
+									}}>
+										{playlistName}
+									</Typography>
+									<Typography variant='h6' component="h1" sx={{
+										display: 'flex',
+										alignItems: 'center',
+										textAlign: 'center',
+										color: '#e8eaf6',
+										fontWeight: 'bold',
+										background: '#e8eaf6',
+										WebkitBackgroundClip: 'text',
+										letterSpacing: '1px',
+										borderRadius: '2px',
+										fontStyle: 'italic',
+										paddingLeft: '1em',
+										paddingRight: '1em',
+										'@media (max-width: 600px)': {
+											fontSize: '15px'
+										},
+									}}>
+										{playlistDescription}
+									</Typography>
+
+								</Card>
+							</Grid>
+
+							<Grid item xs={11} md={8} sx={{
+								width: '100%',
+								display: 'flex',
+								justifyContent: 'center',
+								paddingBottom: '.6em',
+							}}>
+								{playlistURL ? (
+									<Link href={playlistURL}>
+										<SpotifyLogo />
+									</Link>
+								) : (
+									<SpotifyLogo />
+								)}
+							</Grid>
+
+							<Grid item xs={11} md={8} paddingBottom='1em'>
+								<Image
+									unoptimized
+									width={500}
+									height={500}
+									src={playlistImage}
+									alt={playlistImage}
+								/>
+							</Grid>
 						</Grid>
 
 						<SortFilter
@@ -185,6 +238,8 @@ const ArtistTopTracksCards: React.FC<ArtistPageCardProps> = ({ results, artist }
 								justifyContent='center'
 
 							>
+
+								{/* main search */}
 								{searchResults
 									.filter(item =>
 										(!activeSlice || activeSlice.length === 0 || activeSlice.includes(item.key))
@@ -203,7 +258,7 @@ const ArtistTopTracksCards: React.FC<ArtistPageCardProps> = ({ results, artist }
 										}
 										return 0;
 									})
-									.map((item: SongDetails, index: number) => {
+									.map((item:GenreDetails, index: number) => {
 										const elements: React.ReactNode[] = [];
 										elements.push(
 											<Grid item xs={11} md={8} key={index}>
@@ -215,8 +270,8 @@ const ArtistTopTracksCards: React.FC<ArtistPageCardProps> = ({ results, artist }
 													<Card
 														sx={{
 															display: 'flex',
-															flexDirection: 'row',
 															justifyContent: 'center',
+															flexDirection: 'row',
 															margin: '10px 10px 0',
 															boxShadow: 3,
 															"&:hover": {
@@ -236,10 +291,10 @@ const ArtistTopTracksCards: React.FC<ArtistPageCardProps> = ({ results, artist }
 																<Grid item xs={3} sm={2} >
 																	<Image
 																		unoptimized
+																		src={item.album.images[0].url}
+																		alt={item.name}
 																		width={150}
 																		height={150}
-																		src={item.images}
-																		alt={item.name}
 																	/>
 																</Grid>
 																{/* song info */}
@@ -272,9 +327,10 @@ const ArtistTopTracksCards: React.FC<ArtistPageCardProps> = ({ results, artist }
 																			fontSize: '.7em',
 																		}
 																	}}>
-																		{item.albums}
+																		{item.album.name}
 																	</Typography>
 																</Grid>
+
 
 																<Grid container item xs={12} sm={5} alignItems='center' rowSpacing={1} sx={{
 																	"@media (max-width: 600px)": {
@@ -435,11 +491,11 @@ const ArtistTopTracksCards: React.FC<ArtistPageCardProps> = ({ results, artist }
 					</>
 				)}
 			</Grid >
-			<Grid container item md={12} justifyContent='center' paddingBottom='1em'>
+			<Grid container item md={12} justifyContent='center' paddingBottom='1em' >
 				<HorizontalAd />
 			</Grid>
 		</Box>
 	)
 }
 
-export default ArtistTopTracksCards;
+export default GenreTrackCards;

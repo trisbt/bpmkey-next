@@ -7,8 +7,7 @@ import SpotifyFooterLogo from '../SpotifyFooterLogo';
 const Footer: FC = () => {
   return (
     <div>
-      <Box
-      component="div"
+      <Box component='div'
         sx={{
           backgroundColor: '#0047d4',
           padding: '20px',
@@ -20,13 +19,13 @@ const Footer: FC = () => {
           alignItems: 'center',
         }}
       >
-        <Box sx={{
+        <Box component='div' sx={{
           width: '75%',
           '@media (max-width:600px)': {
             width: '90%'
           }
         }}>
-          <Typography variant="h6" component = "h1" color='#FFFFFF' gutterBottom sx={{
+          <Typography variant="h6" component="h1" color='#FFFFFF' gutterBottom sx={{
             letterSpacing: '1px',
             textAlign: 'center',
             '@media (max-width:600px)': {
@@ -49,7 +48,7 @@ const Footer: FC = () => {
       </Box>
       <hr className="border-gray-400" />
 
-      <Box
+      <Box component='div'
         sx={{
           backgroundColor: '#FFFFFF',
           padding: '10px',
@@ -61,14 +60,14 @@ const Footer: FC = () => {
           alignItems: 'center'
         }}
       >
-        <Box sx={{
+        <Box component='div' sx={{
           width: '95%',
           paddingBottom: '.5em',
         }}>
           <Typography variant="subtitle2" color='text.secondary' gutterBottom sx={{
             display: 'flex',
             alignItems: 'center',
-            
+
             '@media (max-width:600px)': {
               fontSize: '12px',
             }
@@ -76,7 +75,7 @@ const Footer: FC = () => {
           }}>
             Song data provided by
             <Link prefetch={false} href={'https://www.spotify.com'} className="customLink">
-              <SpotifyFooterLogo/>
+              <SpotifyFooterLogo />
 
             </Link>
           </Typography>

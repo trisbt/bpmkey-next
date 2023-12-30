@@ -77,7 +77,7 @@ const SearchBar = () => {
 
 	return (
 		<ThemeProvider theme={theme}>
-			
+
 			<div className='searchform-container'>
 				<Hidden smDown>
 					<form className='searchform' onSubmit={handleSubmit} style={{
@@ -107,12 +107,12 @@ const SearchBar = () => {
 				<Hidden smUp>
 
 					{!showInput ? (
-						<Box>
+						<Box component='div'>
 							<SmallColorButton onClick={() => setShowInput(true)} variant='outlined'>
-								<Box sx={{
+								<Box component='div' sx={{
 									width: '10em'
 								}}>
-									<Typography variant='subtitle2' component="h1"color='#f5f5f5' fontWeight={800} sx={{
+									<Typography variant='subtitle2' component="h1" color='#f5f5f5' fontWeight={800} sx={{
 										fontSize: '.8em'
 									}}>
 										Search for songs...

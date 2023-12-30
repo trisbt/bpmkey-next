@@ -111,7 +111,7 @@ const SearchCards: React.FC<SearchPageCardProps> = ({ results }) => {
 		}
 	};
 
-	const spotifyRedirect = (e: React.MouseEvent, uri:string) => {
+	const spotifyRedirect = (e: React.MouseEvent, uri: string) => {
 		e.stopPropagation();
 		e.preventDefault();
 		router.push(transformSpotifyURItoURL(uri) as string);
@@ -158,7 +158,7 @@ const SearchCards: React.FC<SearchPageCardProps> = ({ results }) => {
 	}, [searchQuery]);
 
 	return (
-		<Box>
+		<Box component='div'>
 			<Grid container item xs={12} justifyContent='center' alignItems='center' >
 				{searchResults.length > 0 && (
 					<>
@@ -225,7 +225,7 @@ const SearchCards: React.FC<SearchPageCardProps> = ({ results }) => {
 							>
 								<Hidden mdDown>
 									<VerticalAd />
-									<Box height='50em' />
+									<Box component='div' height='50em' />
 									<VerticalAd />
 								</Hidden>
 							</Grid>
@@ -267,7 +267,7 @@ const SearchCards: React.FC<SearchPageCardProps> = ({ results }) => {
 													<Card
 														sx={{
 															display: 'flex',
-															justifyContent:'center',
+															justifyContent: 'center',
 															flexDirection: 'row',
 															margin: '10px 10px 0',
 															boxShadow: 3,
@@ -481,7 +481,7 @@ const SearchCards: React.FC<SearchPageCardProps> = ({ results }) => {
 								<Hidden mdDown>
 									<VerticalAd />
 
-									<Box height='50em' />
+									<Box component='div' height='50em' />
 									<VerticalAd />
 								</Hidden>
 							</Grid>

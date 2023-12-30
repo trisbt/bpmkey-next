@@ -24,14 +24,15 @@ const Splash = () => {
 				// 	linear-gradient(-45deg, rgba(38, 50, 56, 0.8) 0%, rgba(200, 200, 100, 0.5) 20%)
 				// `,
 				background: `
-						linear-gradient(105deg, rgba(0, 0, 0, .9) 0%, rgba(38, 50, 56, 0.8) 90%)
+						// linear-gradient(105deg, rgba(0, 0, 0, .9) 0%, rgba(38, 50, 56, 0.8) 90%)
+						linear-gradient(105deg, rgba(0, 0, 0, .9) 0%, rgba(2, 26, 38, 0.8) 90%);
 				
 				`,
 				border: '1px solid rgba(192,192,192,0.5)',
 				boxShadow: '0 0 10px 1px rgba(192,192,192,0.3)',
 				'@media (max-width: 600px)': {
 					height: '26em',
-					width: '95vw',
+					width: '88vw',
 					marginTop: '1em',
 					marginBottom: '2em',
 				},
@@ -39,7 +40,7 @@ const Splash = () => {
 			}}>
 				<Grid container item xs={12} sx={{
 					display: 'flex',
-					marginTop: '10px',
+					// marginTop: '10px',
 					height: '32em',
 					'@media (max-width: 600px)': {
 						// paddingBottom:4
@@ -56,19 +57,19 @@ const Splash = () => {
 							paddingLeft: 4,
 						}
 					}}>
-						<Box sx={{
+						<Box component='div' sx={{
 							display: 'flex',
 							flexDirection: 'column',
 							borderRadius: '20px',
-							paddingLeft:'14em',
+							paddingLeft: '14em',
 							'@media (max-width: 2200px)': {
-								paddingLeft:'10em',
+								paddingLeft: '10em',
 							},
 							'@media (max-width: 2000px)': {
-								paddingLeft:'5em',
+								paddingLeft: '5em',
 							},
 							'@media (max-width: 1500px)': {
-								paddingLeft:'0',
+								paddingLeft: '0',
 							},
 						}}>
 							<Typography variant='h2'
@@ -143,7 +144,7 @@ const Splash = () => {
 						}}>
 							<SplashCircleOfFifths />
 						</Card>
-						<Box sx={{
+						<Box component='div' sx={{
 							display: 'flex',
 							justifyContent: 'center',
 							height: '5em',

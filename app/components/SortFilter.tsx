@@ -49,7 +49,7 @@ interface SortFilterProps {
 }
 
 interface SortButtonProps extends ButtonProps {
-  sortBy?:  "tempo" | "key" | null;
+  sortBy?: "tempo" | "key" | null;
 }
 
 const SortBPMButton = styled(Button)<SortButtonProps>(({ theme, sortBy }) => ({
@@ -184,12 +184,12 @@ const SortFilter: React.FC<SortFilterProps> = ({ searchQuery, offset, sortOrder,
     if (sortBy === attribute) {
       setSortOrder(sortOrder === "asc" ? "desc" : "asc");
     } else {
-     
+
       setSortBy(attribute);
-      setSortOrder("asc"); 
+      setSortOrder("asc");
     }
   };
-  
+
 
   //tempo filter
   const handleTempoSelect = (event: Event, value: number | number[], activeThumb: number) => {
@@ -247,7 +247,7 @@ const SortFilter: React.FC<SortFilterProps> = ({ searchQuery, offset, sortOrder,
   };
 
   const list = () => (
-    <Box
+    <Box component='div'
       sx={{ width: 'auto' }}
       role="presentation"
     // onClick={toggleDrawer(false)}
@@ -255,30 +255,30 @@ const SortFilter: React.FC<SortFilterProps> = ({ searchQuery, offset, sortOrder,
     >
       <List>
 
-        <ListItem disablePadding sx = {{
+        <ListItem disablePadding sx={{
           borderBottom: '1px solid #e0e0e0',
         }}>
           <ListItemButton onClick={() => setOpenKey(!openKey)}>
             <ListItemText primary={<Typography fontSize='1rem' color='black'>Filter by: Key</Typography>} />
           </ListItemButton>
           <Collapse in={openKey} timeout="auto" unmountOnExit>
-            <Box p={1}>
+            <Box component='div' p={1}>
               <CircleOfFifths activeSlice={activeSlice} setActiveSlice={setActiveSlice} />
             </Box>
           </Collapse>
         </ListItem>
 
-        <ListItem disablePadding sx = {{
+        <ListItem disablePadding sx={{
           borderBottom: '1px solid #e0e0e0',
         }}>
           <ListItemButton onClick={() => setOpenTempo(!openTempo)}>
             <ListItemText primary={<Typography fontSize='1rem' color='black'>Filter by: BPM</Typography>} />
           </ListItemButton>
           <Collapse in={openTempo} timeout="auto" unmountOnExit>
-            <Box p={2}>  {/* Add padding if needed */}
+            <Box component='div' p={2}>  {/* Add padding if needed */}
               {/* Place your Tempo Component here */}
               <form onSubmit={handleTempoSubmit}>
-                <Box sx={{
+                <Box component='div' sx={{
                   display: 'flex',
                   height: '120px',
                   width: '220px',
@@ -327,10 +327,10 @@ const SortFilter: React.FC<SortFilterProps> = ({ searchQuery, offset, sortOrder,
         </ListItem>
 
         {/*sort key*/}
-        <ListItem disablePadding sx = {{
+        <ListItem disablePadding sx={{
           borderBottom: '1px solid #e0e0e0',
         }}>
-          <ListItemButton 
+          <ListItemButton
             key={sortBy}
             onClick={() => handleSort("key")}
             sx={{
@@ -346,12 +346,12 @@ const SortFilter: React.FC<SortFilterProps> = ({ searchQuery, offset, sortOrder,
             {sortBy === "key" && sortOrder === "asc" ? "↑" : "↓"}
           </ListItemButton>
         </ListItem>
-          
+
         {/*sort tempo*/}
-        <ListItem disablePadding sx = {{
+        <ListItem disablePadding sx={{
           borderBottom: '1px solid #e0e0e0',
         }}>
-          <ListItemButton 
+          <ListItemButton
             key={sortBy}
             onClick={() => handleSort("tempo")}
             sx={{
@@ -381,7 +381,7 @@ const SortFilter: React.FC<SortFilterProps> = ({ searchQuery, offset, sortOrder,
     <div>
       {/* desktop screen */}
       <Hidden smDown>
-        <Box
+        <Box component='div'
           border={1}
           borderColor="grey.500"
           borderRadius={2} m={0} sx={{
@@ -412,7 +412,7 @@ const SortFilter: React.FC<SortFilterProps> = ({ searchQuery, offset, sortOrder,
                   </StyledAccordionSummary>
 
                   <KeyAccordionDetails>
-                    <Box>
+                    <Box component='div'>
                       <CircleOfFifths activeSlice={activeSlice} setActiveSlice={setActiveSlice} />
                     </Box>
                   </KeyAccordionDetails>
@@ -433,7 +433,7 @@ const SortFilter: React.FC<SortFilterProps> = ({ searchQuery, offset, sortOrder,
                   </StyledAccordionSummary>
                   <TempoAccordionDetails>
                     <form onSubmit={handleTempoSubmit}>
-                      <Box sx={{
+                      <Box component='div' sx={{
                         display: 'flex',
                         height: '200px',
                         width: '270px',
@@ -484,7 +484,7 @@ const SortFilter: React.FC<SortFilterProps> = ({ searchQuery, offset, sortOrder,
               </Grid>
 
               <Grid item paddingLeft={'2px'}>
-                <Box
+                <Box component='div'
                   onClick={handleReset}
                   color="#ffecb3"
                   sx={{
@@ -535,7 +535,7 @@ const SortFilter: React.FC<SortFilterProps> = ({ searchQuery, offset, sortOrder,
       </Hidden>
       {/* mobile screen */}
       <Hidden smUp>
-        <Box sx={{
+        <Box component='div' sx={{
           display: 'flex',
           justifyContent: 'flex-start',
           width: '86vw'

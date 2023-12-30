@@ -36,7 +36,7 @@ export async function generateMetadata({
 ): Promise<Metadata> {
   const searchQ = searchParams.q;
   return {
-    title: `results for ${decodeURI(searchQ)} Bpm, Key, Credits BpmKey.com`,
+    title: `results for ${decodeURI(searchQ)} Bpm, Key, Credits`,
     description: `Key BPM Credits finder for ${searchQ}`,
     alternates:{
       canonical: `https://www.bpmkey.com/search?q=${searchQ}`

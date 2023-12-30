@@ -36,7 +36,7 @@ export async function generateMetadata({
   const metaKey = results[0].key;
   const metaBPM = results[0].tempo;
   return {
-    title: `Bpm, Key, Credits for the album ${metaAlbum} by ${metaArtist} at BpmKey`,
+    title: `Bpm, Key, Credits for the album ${metaAlbum} by ${metaArtist}`,
     description:`Key, BPM, Credits for the album ${metaAlbum} by ${metaArtist}, like ${metaSong} Key: ${metaKey} BPM: ${metaBPM}.
     Find Key, Tempo and additional metrics like Credits, Loudness, Popularity, Energy.`,
     alternates:{

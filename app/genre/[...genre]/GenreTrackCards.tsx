@@ -66,10 +66,10 @@ const SortButton = styled(Button)(({ theme }) => ({
 
 
 
-const AlbumTrackCards: React.FC<AlbumPageCardProps> = ({ results, album }) => {
+const GenreTrackCards = ({ results, playlistImage, playlistURL, playlistDescription, playlistName }) => {
 	const [currentlyPlayingUrl, setCurrentlyPlayingUrl] = useState<string | null>(null);
 	const audioRef = useRef<HTMLAudioElement | null>(null);
-	const [searchResults, setSearchResults] = useState<AlbumDetails[]>(results);
+	const [searchResults, setSearchResults] = useState(results);
 	const router = useRouter();
 	const searchParams = useSearchParams()
 	const searchQuery: string | null = searchParams.get('q');
@@ -80,8 +80,8 @@ const AlbumTrackCards: React.FC<AlbumPageCardProps> = ({ results, album }) => {
 	const [activeSlice, setActiveSlice] = useState<string[]>([]);
 	const [tempoSelect, setTempoSelect] = useState<[number, number]>([0, 500]);
 	const offset: null = null;
-	const albumData = results[results.length - 1];
-	const albumSpotifyLink: string | null = transformSpotifyAlbumURItoURL(albumData.uri);
+	// const albumData = results[results.length - 1];
+	// const albumSpotifyLink: string | null = transformSpotifyAlbumURItoURL(albumData.uri);
 
 	const playAudio = (event: React.MouseEvent, previewUrl: string | null) => {
 		event.stopPropagation();
@@ -124,7 +124,8 @@ const AlbumTrackCards: React.FC<AlbumPageCardProps> = ({ results, album }) => {
 								<Card
 									sx={{
 										display: 'flex',
-										flexDirection: 'row',
+										flexDirection: 'column',
+										alignItems:'center',
 										margin: '10px 10px 0',
 										boxShadow: 0,
 										justifyContent: 'center',
@@ -133,6 +134,26 @@ const AlbumTrackCards: React.FC<AlbumPageCardProps> = ({ results, album }) => {
 									}}
 								>
 									<Typography variant='h4' component="h1" sx={{
+										display: 'flex',
+										marginBottom:'.5em',
+										alignItems: 'center',
+										textAlign: 'center',
+										color: '#e8eaf6',
+										fontWeight: 'bold',
+										background: '#e8eaf6',
+										WebkitBackgroundClip: 'text',
+										letterSpacing: '1px',
+										borderRadius: '2px',
+										// fontStyle: 'italic',
+										paddingLeft: '1em',
+										paddingRight: '1em',
+										'@media (max-width: 600px)': {
+											fontSize: '22px'
+										},
+									}}>
+										{playlistName}
+									</Typography>
+									<Typography variant='h6' component="h1" sx={{
 										display: 'flex',
 										alignItems: 'center',
 										textAlign: 'center',
@@ -146,10 +167,10 @@ const AlbumTrackCards: React.FC<AlbumPageCardProps> = ({ results, album }) => {
 										paddingLeft: '1em',
 										paddingRight: '1em',
 										'@media (max-width: 600px)': {
-											fontSize: '22px'
+											fontSize: '15px'
 										},
 									}}>
-										{albumData.album} by {albumData.artist}
+										{playlistDescription}
 									</Typography>
 
 								</Card>
@@ -161,8 +182,8 @@ const AlbumTrackCards: React.FC<AlbumPageCardProps> = ({ results, album }) => {
 								justifyContent: 'center',
 								paddingBottom: '.6em',
 							}}>
-								{albumSpotifyLink ? (
-									<Link href={albumSpotifyLink}>
+								{playlistURL ? (
+									<Link href={playlistURL}>
 										<SpotifyLogo />
 									</Link>
 								) : (
@@ -175,12 +196,12 @@ const AlbumTrackCards: React.FC<AlbumPageCardProps> = ({ results, album }) => {
 									unoptimized
 									width={500}
 									height={500}
-									src={albumData.images}
-									alt={albumData.album}
+									src={playlistImage}
+									alt={playlistImage}
 								/>
 							</Grid>
 						</Grid>
-						
+
 						<SortFilter
 							setActiveSlice={setActiveSlice}
 							activeSlice={activeSlice}
@@ -193,6 +214,7 @@ const AlbumTrackCards: React.FC<AlbumPageCardProps> = ({ results, album }) => {
 							setSortBy={setSortBy}
 							sortBy={sortBy}
 						/>
+
 						<Grid container item xs={12} display='flex' direction='row'
 							// wrap='no-wrap'
 							alignItems='flex-start'
@@ -267,7 +289,15 @@ const AlbumTrackCards: React.FC<AlbumPageCardProps> = ({ results, album }) => {
 														}}>
 															<Grid container >
 																{/* image */}
-
+																<Grid item xs={3} sm={2} >
+																	<Image
+																		unoptimized
+																		src={item.album.images[0].url}
+																		alt={item.name}
+																		width={150}
+																		height={150}
+																	/>
+																</Grid>
 																{/* song info */}
 																<Grid item xs={9} sm={5} sx={{
 																	paddingLeft: '.5em',
@@ -293,17 +323,16 @@ const AlbumTrackCards: React.FC<AlbumPageCardProps> = ({ results, album }) => {
 																			</span>
 																		))}
 																	</Typography>
+																	<Typography variant="subtitle1" color="text.secondary" component="h1" sx={{
+																		"@media (max-width: 600px)": {
+																			fontSize: '.7em',
+																		}
+																	}}>
+																		{item.albums}
+																	</Typography>
+																</Grid>
 
-																</Grid>
-																<Grid item xs={3} sm={2} >
-																	{/* <Image
-																		unoptimized
-																		width={150}
-																		height={150}
-																		src={item.images}
-																		alt={item.name}
-																	/> */}
-																</Grid>
+													
 																<Grid container item xs={12} sm={5} alignItems='center' rowSpacing={1} sx={{
 																	"@media (max-width: 600px)": {
 																		paddingTop: '.8rem',
@@ -470,4 +499,4 @@ const AlbumTrackCards: React.FC<AlbumPageCardProps> = ({ results, album }) => {
 	)
 }
 
-export default AlbumTrackCards;
+export default GenreTrackCards;

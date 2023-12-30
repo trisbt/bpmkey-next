@@ -11,7 +11,6 @@ const GenrePage = async ({
 }) => {
   const genre = params.genre[0];
   const genreID = params.genre[1];
-  // console.log(genreID)
   const spotifyPlaylistResults: SongDetails[] = await GetSpotifyPlaylist(genreID);
   const {playlistImage, playlistURL, playlistName, playlistDescription, results}  = spotifyPlaylistResults;
   return (

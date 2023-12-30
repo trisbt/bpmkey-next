@@ -6,6 +6,8 @@ import { Billboard, Text, TrackballControls } from '@react-three/drei';
 import { useRouter } from 'next/navigation';
 import slugify from 'slugify';
 import { Typography, Card } from '@mui/material';
+import { Inter } from 'next/font/google';
+
 
 const genres = {
   "Top Lists": {
@@ -258,8 +260,6 @@ function Cloud({ radius = 25 }) {
   return words.map(([pos, genre], index) => <Word key={index} position={pos} genre={genre} />);
 }
 
-
-
 const CloudRender = () => {
 
   return (
@@ -283,8 +283,9 @@ const CloudRender = () => {
               sx={{
                 display: 'flex',
                 alignItems: 'center',
-                margin: '10px 10px 10px',
+                margin: '5px 10px 5px',
                 // textTransform: 'uppercase',
+                fontFamily: 'Inter, sans-serif',
                 color: '#e8eaf6',
                 fontWeight: 'bold',
                 background: '#e8eaf6',
@@ -301,15 +302,17 @@ const CloudRender = () => {
            </Typography>
       </Card>
     <div className='canvas'>
+    <Suspense fallback={null}>
     <Canvas dpr={[1, 2]} camera={{ position: [0, 0, 30], fov: 90 }}>
       <fog attach="fog" args={['#202025', 0, 100]} />
-      <Suspense fallback={null}>
+    
         <group rotation={[10, 10.5, 10]}>
           <Cloud count={8} radius={20} />
         </group>
-      </Suspense>
+     
       <TrackballControls minDistance={10} maxDistance={32}/>
     </Canvas>
+    </Suspense>
     </div> 
     </div>
   );

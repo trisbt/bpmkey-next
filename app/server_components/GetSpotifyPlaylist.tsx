@@ -22,7 +22,10 @@ const GetSpotifyPlaylist = async (genre: string) => {
   const playlistImage = genrePlaylist.playlists.items[0].images[0].url
   const playlistName = genrePlaylist.playlists.items[0].name;
   const playlistDescription = genrePlaylist.playlists.items[0].description;
-
+  const coverIndex = playlistDescription.indexOf("Cover");
+  
+  const trimmedDescription = coverIndex !== -1 ? playlistDescription.slice(0, coverIndex) : playlistDescription;
+  
   //get the playlist tracks
   const playlistTracksFetch = await fetch(`https://api.spotify.com/v1/playlists/${playlistId}/tracks`, {
     headers: {
@@ -55,7 +58,7 @@ const GetSpotifyPlaylist = async (genre: string) => {
     playlistURL: playlistURL,
     playlistImage: playlistImage,
     playlistName: playlistName,
-    playlistDescription: playlistDescription,
+    playlistDescription: trimmedDescription,
   };
 
 }

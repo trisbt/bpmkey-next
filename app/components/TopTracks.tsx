@@ -25,6 +25,7 @@ import HorizontalAd from './HorizontalAd';
 import { Hidden } from '@mui/material';
 import { transformSpotifyURItoURL } from '../utils';
 import SpotifyBlackIcon from '../SpotifyIcon';
+import { Inter } from 'next/font/google';
 
 const SmallPlayButton = styled(IconButton)(() => ({
   '&&': {
@@ -79,7 +80,7 @@ const TopTracks: React.FC<TopTracksCardProps> = ({ results }) => {
             <>
 
               {/* text row */}
-              <Grid item xs={11} md={8}>
+              <Grid item xs={11} md={9} lg={8}>
                 <Card
                   sx={{
                     display: 'flex',
@@ -95,9 +96,10 @@ const TopTracks: React.FC<TopTracksCardProps> = ({ results }) => {
                     sx={{
                       display: 'flex',
                       alignItems: 'center',
-                      margin: '10px 10px 10px',
+                      margin: '5px 10px 5px',
                       color: '#e8eaf6',
                       fontWeight: 'bold',
+                      fontFamily: 'Inter, sans-serif',
                       background: '#e8eaf6',
                       WebkitBackgroundClip: 'text',
                       WebkitTextFillColor: 'transparent',

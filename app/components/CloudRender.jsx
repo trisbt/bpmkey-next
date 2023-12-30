@@ -7,6 +7,7 @@ import { useRouter } from 'next/navigation';
 import slugify from 'slugify';
 import { Typography, Card } from '@mui/material';
 import { Inter } from 'next/font/google';
+import { blue } from '@mui/material/colors';
 
 
 const genres = {
@@ -264,21 +265,22 @@ const CloudRender = () => {
 
   return (
     <div className='canvas-container'>
-      <Card
-        sx={{
-          display: 'flex',
-             flexDirection: 'row',
-             // margin: '0px 10px 0',
-             marginBottom:'.5em',
-             boxShadow: 3,
-             justifyContent: 'center',
-             backgroundColor: 'rgb(0, 71, 212)',
-             width: '95%',
-             '@media (max-width: 900px)': {
-               width: '100%',
-             },
+        <Card
+            className="waveBackground"
+            sx={{
+                display: 'flex',
+                flexDirection: 'row',
+                marginBottom: '.5em',
+                boxShadow: 3,
+                backgroundColor: 'rgb(0, 71, 212)',
+                justifyContent: 'center',
+                width: '95%',
+                '@media (max-width: 900px)': {
+                width: '100%',
+                },
+
             }}
-            >     
+            >
             <Typography variant='h4' component="h1"
               sx={{
                 display: 'flex',

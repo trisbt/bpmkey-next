@@ -1,7 +1,7 @@
 import GetAccessToken from "./GetAccessToken"
 import GetSpotifyAdvancedAudio from "./GetSpotifyAdvancedAudio";
 import { keyConvert, tempoRound } from "../utils";
-import { GetTracksItem } from "../types/serverTypes";
+import { TopTracksItem, GetTracksItem } from "../types/serverTypes";
 
 const GetSpotifyPlaylist = async (genre: string) => {
   const token = await GetAccessToken();
@@ -16,16 +16,16 @@ const GetSpotifyPlaylist = async (genre: string) => {
     throw new Error(`API response failed with status ${genrePlaylistFetch.status}: ${genrePlaylistFetch.statusText}`);
   }
   const genrePlaylist = await genrePlaylistFetch.json();
-  
+
   const playlistId = genrePlaylist.playlists.items[0].id;
   const playlistURL = genrePlaylist.playlists.items[0].href;
   const playlistImage = genrePlaylist.playlists.items[0].images[0].url
   const playlistName = genrePlaylist.playlists.items[0].name;
   const playlistDescription = genrePlaylist.playlists.items[0].description;
   const coverIndex = playlistDescription.indexOf("Cover");
-  
+
   const trimmedDescription = coverIndex !== -1 ? playlistDescription.slice(0, coverIndex) : playlistDescription;
-  
+
   //get the playlist tracks
   const playlistTracksFetch = await fetch(`https://api.spotify.com/v1/playlists/${playlistId}/tracks`, {
     headers: {
@@ -37,8 +37,10 @@ const GetSpotifyPlaylist = async (genre: string) => {
   }
   const playlistTracks = await playlistTracksFetch.json();
   // console.log(playlistTracks.items)
-  const trackData = playlistTracks.items.map((item: TopTracksItem) => item.track).filter(track => track !== null);
-  const trackID = trackData.map(track => track.id);
+  const trackData = playlistTracks.items
+    .map((item: { track: GetTracksItem | null }) => item.track)
+    .filter((track: GetTracksItem | null): track is GetTracksItem => track !== null);
+  const trackID = trackData.map((track: GetTracksItem) => track.id);
 
 
   const audioData = await GetSpotifyAdvancedAudio(token, trackID);

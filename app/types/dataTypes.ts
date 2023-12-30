@@ -158,7 +158,30 @@ export interface AlbumDetails {
   uri: string;
   valence: number;
 }
-
+export interface GenreDetails {
+  name: string;
+  id: string;
+  preview_url: string | null;
+  release_date: string;
+  artists: Artist[];
+  album: Album;
+  explicit: boolean;
+  popularity: number;
+  key: string;
+  tempo: number;
+  loudness: number;
+  energy: number;
+  acousticness: number;
+  analysis_url: string;
+  danceability: number;
+  duration_ms: number;
+  instrumentalness: number;
+  liveness: number;
+  time_signature: number;
+  track_href: string;
+  uri: string;
+  valence: number;
+}
 export type Credits = ProcessedCredit[] | string[] | null;
 
 export type ProcessedCredit = {

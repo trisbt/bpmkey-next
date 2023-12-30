@@ -1,4 +1,4 @@
-import { SongDetails, AlbumDetails, TopTracksDetails, SearchDetails, Recs } from "./dataTypes";
+import { SongDetails, AlbumDetails, TopTracksDetails, SearchDetails, Recs, GenreDetails } from "./dataTypes";
 
 export interface SongPageCardProps {
     songDetails: SongDetails;
@@ -24,4 +24,11 @@ export interface SearchPageCardProps{
 }
 export interface TopTracksCardProps{
     results: TopTracksDetails[];
+}
+export interface GenreCardProps {
+    results: GenreDetails[];
+    playlistImage: string, 
+    playlistURL: string, 
+    playlistDescription: string, 
+    playlistName: string, 
 }

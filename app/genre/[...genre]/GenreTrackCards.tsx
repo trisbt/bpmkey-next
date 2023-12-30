@@ -26,8 +26,8 @@ import Link from 'next/link';
 import CircleOfFifths from '@/app/components/CircleOfFifths';
 import { reverseKeyConvert } from '@/app/utils';
 import SortFilter from '@/app/components/SortFilter';
-import { AlbumDetails } from '@/app/types/dataTypes';
-import { AlbumPageCardProps } from '@/app/types/cardTypes';
+import { GenreCardProps } from '@/app/types/cardTypes';
+import { GenreDetails } from '@/app/types/dataTypes';
 import slugify from 'slugify';
 import { Hidden } from '@mui/material';
 import Image from 'next/image';
@@ -37,6 +37,7 @@ import HorizontalAd from '@/app/components/HorizontalAd';
 import SpotifyLogo from '@/app/SpotifyLogo';
 import SpotifyIcon from '@/app/SpotifyIcon';
 import { transformSpotifyAlbumURItoURL, transformSpotifyURItoURL } from '@/app/utils';
+
 
 const SmallPlayButton = styled(IconButton)(() => ({
 	'&&': {
@@ -66,10 +67,10 @@ const SortButton = styled(Button)(({ theme }) => ({
 
 
 
-const GenreTrackCards = ({ results, playlistImage, playlistURL, playlistDescription, playlistName }) => {
+const GenreTrackCards: React.FC<GenreCardProps> = ({ results, playlistImage, playlistURL, playlistDescription, playlistName }) => {
 	const [currentlyPlayingUrl, setCurrentlyPlayingUrl] = useState<string | null>(null);
 	const audioRef = useRef<HTMLAudioElement | null>(null);
-	const [searchResults, setSearchResults] = useState(results);
+	const [searchResults, setSearchResults] = useState<GenreDetails[]>(results);
 	const router = useRouter();
 	const searchParams = useSearchParams()
 	const searchQuery: string | null = searchParams.get('q');
@@ -80,9 +81,7 @@ const GenreTrackCards = ({ results, playlistImage, playlistURL, playlistDescript
 	const [activeSlice, setActiveSlice] = useState<string[]>([]);
 	const [tempoSelect, setTempoSelect] = useState<[number, number]>([0, 500]);
 	const offset: null = null;
-	// const albumData = results[results.length - 1];
-	// const albumSpotifyLink: string | null = transformSpotifyAlbumURItoURL(albumData.uri);
-
+	
 	const playAudio = (event: React.MouseEvent, previewUrl: string | null) => {
 		event.stopPropagation();
 		event.preventDefault();
@@ -125,7 +124,7 @@ const GenreTrackCards = ({ results, playlistImage, playlistURL, playlistDescript
 									sx={{
 										display: 'flex',
 										flexDirection: 'column',
-										alignItems:'center',
+										alignItems: 'center',
 										margin: '10px 10px 0',
 										boxShadow: 0,
 										justifyContent: 'center',
@@ -135,7 +134,7 @@ const GenreTrackCards = ({ results, playlistImage, playlistURL, playlistDescript
 								>
 									<Typography variant='h4' component="h1" sx={{
 										display: 'flex',
-										marginBottom:'.5em',
+										marginBottom: '.5em',
 										alignItems: 'center',
 										textAlign: 'center',
 										color: '#e8eaf6',
@@ -259,7 +258,7 @@ const GenreTrackCards = ({ results, playlistImage, playlistURL, playlistDescript
 										}
 										return 0;
 									})
-									.map((item: AlbumDetails, index: number) => {
+									.map((item:GenreDetails, index: number) => {
 										const elements: React.ReactNode[] = [];
 										elements.push(
 											<Grid item xs={11} md={8} key={index}>
@@ -328,11 +327,11 @@ const GenreTrackCards = ({ results, playlistImage, playlistURL, playlistDescript
 																			fontSize: '.7em',
 																		}
 																	}}>
-																		{item.albums}
+																		{item.album.name}
 																	</Typography>
 																</Grid>
 
-													
+
 																<Grid container item xs={12} sm={5} alignItems='center' rowSpacing={1} sx={{
 																	"@media (max-width: 600px)": {
 																		paddingTop: '.8rem',

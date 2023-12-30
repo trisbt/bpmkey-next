@@ -1,7 +1,7 @@
 import React from 'react';
 import GetSpotifyPlaylist from '@/app/server_components/GetSpotifyPlaylist'
 import GenreTrackCards from './GenreTrackCards';
-import { SongDetails } from '@/app/types/dataTypes'
+import { GenreCardProps } from '@/app/types/cardTypes'
 import type { Metadata, ResolvingMetadata } from 'next'
 
 const GenrePage = async ({
@@ -11,7 +11,7 @@ const GenrePage = async ({
 }) => {
   const genre = params.genre[0];
   const genreID = params.genre[1];
-  const spotifyPlaylistResults: SongDetails[] = await GetSpotifyPlaylist(genreID);
+  const spotifyPlaylistResults: GenreCardProps = await GetSpotifyPlaylist(genreID);
   const {playlistImage, playlistURL, playlistName, playlistDescription, results}  = spotifyPlaylistResults;
   return (
     <div className='background-gradient'>
@@ -29,7 +29,7 @@ export async function generateMetadata({
 ): Promise<Metadata> {
   const genre = params.genre[0];
   const genreID = params.genre[1];
-  const spotifyPlaylistResults: SongDetails[] = await GetSpotifyPlaylist(genreID);
+  const spotifyPlaylistResults: GenreCardProps = await GetSpotifyPlaylist(genreID);
 
   const metaArtist = spotifyPlaylistResults.results[0].artists[0].name;
   const metaSong = spotifyPlaylistResults.results[0].name;

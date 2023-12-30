@@ -4,11 +4,8 @@ import { useRef, useState, useMemo, useEffect, Suspense } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { Billboard, Text, TrackballControls } from '@react-three/drei';
 import { useRouter } from 'next/navigation';
-import slugify from 'slugify';
 import { Typography, Card } from '@mui/material';
-import { Inter } from 'next/font/google';
-import { blue } from '@mui/material/colors';
-
+import CircularProgress from '@mui/material/CircularProgress';
 
 const genres = {
   "Top Lists": {
@@ -196,7 +193,7 @@ const genres = {
       "id": "0JQ5DAqbMKFDkd668ypn6O"
   }
 }
-function Word({ genre, children, ...props }) {
+function Word({ setIsLoading, genre, children, ...props }) {
   const color = new THREE.Color();
   const fontProps = {
     // font: '/Inter-Bold.woff',
@@ -213,8 +210,9 @@ function Word({ genre, children, ...props }) {
 
   const handleClick = async (e) => {
     e.stopPropagation();
-    const url = `genre/${slugify(genre.name, { lower: true, strict: true })}/${genre.id}`;
-    router.push(url);
+    setIsLoading(true);
+        const url = `genre/${genre.id}`;
+        await router.push(url);
   };
 
   useEffect(() => {
@@ -235,7 +233,7 @@ function Word({ genre, children, ...props }) {
   );
 }
 
-function Cloud({ radius = 25 }) {
+function Cloud({ setIsLoading, radius = 25 }) {
   const genresArray = Object.keys(genres).map(key => genres[key]);
   const count = genresArray.length; // Use the number of genres as count
 
@@ -258,11 +256,31 @@ function Cloud({ radius = 25 }) {
     return temp;
   }, [count, radius]);
 
-  return words.map(([pos, genre], index) => <Word key={index} position={pos} genre={genre} />);
+  return words.map(([pos, genre], index) => <Word key={index} position={pos} genre={genre} setIsLoading={setIsLoading}/>);
 }
 
 const CloudRender = () => {
-
+    const [isLoading, setIsLoading] = useState(false);
+    const router = useRouter();
+    useEffect(() => {
+        // Define the event handler inside useEffect
+        const handleRouteChange = () => {
+          setIsLoading(false);
+        };
+    
+        // Attach the event listener
+        if (router && router.events) {
+          router.events.on('routeChangeStart', handleRouteChange);
+        }
+    
+        // Clean up the event listener
+        return () => {
+          if (router && router.events) {
+            router.events.off('routeChangeStart', handleRouteChange);
+          }
+        };
+      }, [router]);
+  
   return (
     <div className='canvas-container'>
         <Card
@@ -309,12 +327,23 @@ const CloudRender = () => {
       <fog attach="fog" args={['#202025', 0, 100]} />
     
         <group rotation={[10, 10.5, 10]}>
-          <Cloud count={8} radius={20} />
+          <Cloud count={8} radius={20} setIsLoading={setIsLoading} />
         </group>
      
       <TrackballControls minDistance={10} maxDistance={32}/>
     </Canvas>
     </Suspense>
+    {isLoading && (
+                    <div style={{
+                        position: 'absolute',
+                        top: '50%',
+                        left: '50%',
+                        transform: 'translate(-50%, -50%)',
+                        zIndex: 10
+                    }}>
+                        <CircularProgress size='4em'/>
+                    </div>
+                )}
     </div> 
     </div>
   );

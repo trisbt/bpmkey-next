@@ -18,13 +18,11 @@ const GetSpotifyPlaylist = async (genre: string) => {
   const genrePlaylist = await genrePlaylistFetch.json();
 
   const playlistId = genrePlaylist.playlists.items[0].id;
-  const playlistURL = genrePlaylist.playlists.items[0].href;
+  const playlistURL = genrePlaylist.playlists.items[0].external_urls.spotify;
   const playlistImage = genrePlaylist.playlists.items[0].images[0].url
   const playlistName = genrePlaylist.playlists.items[0].name;
   const playlistDescription = genrePlaylist.playlists.items[0].description;
-  const coverIndex = playlistDescription.indexOf("Cover");
-
-  const trimmedDescription = coverIndex !== -1 ? playlistDescription.slice(0, coverIndex) : playlistDescription;
+  const trimmedDescription = playlistDescription.replace(/<a href="[^"]*">|<\/a>/g, '');
 
   //get the playlist tracks
   const playlistTracksFetch = await fetch(`https://api.spotify.com/v1/playlists/${playlistId}/tracks`, {

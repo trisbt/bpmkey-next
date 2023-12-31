@@ -208,6 +208,20 @@ function Word({ setIsLoading, genre, children, ...props }) {
   const out = () => setHovered(false);
   const router = useRouter();
 
+  const handleTouchStart = (e) => {
+    // e.preventDefault(); // Prevent default touch behavior
+    e.stopPropagation();
+    setHovered(true);
+  };
+  
+  const handleTouchEnd = (e) => {
+    // e.preventDefault(); // Prevent default touch behavior
+    e.stopPropagation();
+    setHovered(false);
+    handleClick(e);
+  };
+  
+
   const handleClick = async (e) => {
     e.stopPropagation();
     setIsLoading(true);
@@ -226,7 +240,14 @@ function Word({ setIsLoading, genre, children, ...props }) {
 
   return (
     <Billboard {...props}>
-      <Text ref={ref} onPointerOver={over} onPointerOut={out} onClick={handleClick} {...fontProps}>
+      <Text 
+      ref={ref} 
+      onPointerOver={over} 
+      onPointerOut={out} 
+      onClick={handleClick} 
+      onPointerDown={handleTouchStart} 
+      onPointerUp={handleTouchEnd} 
+      {...fontProps}>
       {genre.name}
       </Text>
     </Billboard>

@@ -11,7 +11,7 @@ import { grey } from '@mui/material/colors';
 import GetRandom from '../server_components/GetRandom';
 import { useRouter } from 'next/navigation';
 import CircularProgress from '@mui/material/CircularProgress';
-import Backdrop  from '@mui/material/Backdrop';
+import Backdrop from '@mui/material/Backdrop';
 import slugify from 'slugify';
 
 Chart.register(ArcElement)
@@ -193,7 +193,7 @@ const SplashCircleOfFifths = () => {
                         transform: 'translate(-50%, -50%)',
                         zIndex: 10
                     }}>
-                        <CircularProgress size='4em'/>
+                        <CircularProgress size='4em' />
                     </div>
                 )}
             </div>

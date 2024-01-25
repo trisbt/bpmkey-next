@@ -1,8 +1,4 @@
-User-agent: Googlebot
-Disallow:
-
 User-agent: *
-Disallow: /
-
+Disallow:
 
 Sitemap: https://www.bpmkey.com/sitemap.xml

@@ -45,6 +45,8 @@ const TopTracks: React.FC<TopTracksCardProps> = ({ results }) => {
   const [currentlyPlayingUrl, setCurrentlyPlayingUrl] = useState<string | null>(null);
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const router = useRouter();
+  const [isPlaying, setIsPlaying] = useState(false);
+
 
   const playAudio = (event: React.MouseEvent, previewUrl: string | null) => {
     event.stopPropagation();

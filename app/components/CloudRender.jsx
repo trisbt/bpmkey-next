@@ -193,15 +193,17 @@ const genres = {
       "id": "0JQ5DAqbMKFDkd668ypn6O"
   }
 }
+//TODO make mobile press hold
 function Word({ setIsLoading, genre, children, ...props }) {
-  const color = new THREE.Color();
-  const fontProps = {
-    // font: '/Inter-Bold.woff',
-    fontSize: 3,
-    letterSpacing: -0.05,
-    lineHeight: 1,
-    'material-toneMapped': false,
-  };
+
+    const color = new THREE.Color();
+    const fontProps = {
+        // font: '/Inter-Bold.woff',
+        fontSize: 3,
+        letterSpacing: -0.05,
+        lineHeight: 1,
+        'material-toneMapped': false,
+    };
   const ref = useRef();
   const [hovered, setHovered] = useState(false);
   const over = (e) => (e.stopPropagation(), setHovered(true));
@@ -209,21 +211,22 @@ function Word({ setIsLoading, genre, children, ...props }) {
   const router = useRouter();
 
   const handleTouchStart = (e) => {
-    // e.preventDefault(); // Prevent default touch behavior
-    e.stopPropagation();
+    // e.preventDefault(); 
+    // e.stopPropagation();
+    console.log('touchstart')
     setHovered(true);
   };
   
   const handleTouchEnd = (e) => {
-    // e.preventDefault(); // Prevent default touch behavior
-    e.stopPropagation();
+    // e.preventDefault(); 
+    // e.stopPropagation();
     setHovered(false);
     handleClick(e);
   };
   
 
   const handleClick = async (e) => {
-    e.stopPropagation();
+    // e.stopPropagation();
     setIsLoading(true);
         const url = `genre/${genre.id}`;
         await router.push(url);
@@ -245,8 +248,10 @@ function Word({ setIsLoading, genre, children, ...props }) {
       onPointerOver={over} 
       onPointerOut={out} 
       onClick={handleClick} 
-      onPointerDown={handleTouchStart} 
-      onPointerUp={handleTouchEnd} 
+      onTouchStart={handleTouchStart}
+      onTouchEnd={handleTouchEnd}
+    //   onPointerDown={handleTouchStart} 
+    //   onPointerUp={handleTouchEnd} 
       {...fontProps}>
       {genre.name}
       </Text>
@@ -344,7 +349,7 @@ const CloudRender = () => {
       </Card>
     <div className='canvas'>
     <Suspense fallback={null}>
-    <Canvas dpr={[1, 2]} camera={{ position: [0, 0, 30], fov: 90 }}>
+    <Canvas dpr={[1, 2]} camera={{ position: [0, 0, 30], fov: 90 }} >
       <fog attach="fog" args={['#202025', 0, 100]} />
     
         <group rotation={[10, 10.5, 10]}>

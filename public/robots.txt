@@ -1,16 +1,9 @@
 User-agent: *
-Disallow: /
-
-
-User-agent: *
 Disallow: /cgi-bin/
 Disallow: /tmp/
 Disallow: /junk/
 Disallow: /wordpress
 Disallow: /wp-admin
-
-User-agent: petalbot
-Disallow: /
 
 User-agent: PetalBot
 Disallow: /

@@ -5,6 +5,12 @@ Disallow: /junk/
 Disallow: /wordpress
 Disallow: /wp-admin
 
+User-agent: Bytedance
+Disallow: /
+
+User-agent: Bytespider
+Disallow: /
+
 User-agent: PetalBot
 Disallow: /
 

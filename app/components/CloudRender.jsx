@@ -250,8 +250,8 @@ function Word({ setIsLoading, genre, children, ...props }) {
       onClick={handleClick} 
       onTouchStart={handleTouchStart}
       onTouchEnd={handleTouchEnd}
-    //   onPointerDown={handleTouchStart} 
-    //   onPointerUp={handleTouchEnd} 
+      onPointerDown={handleTouchStart} 
+      onPointerUp={handleTouchEnd} 
       {...fontProps}>
       {genre.name}
       </Text>
@@ -359,17 +359,17 @@ const CloudRender = () => {
       <TrackballControls minDistance={10} maxDistance={32}/>
     </Canvas>
     </Suspense>
-    {isLoading && (
-                    <div style={{
-                        position: 'absolute',
-                        top: '50%',
-                        left: '50%',
-                        transform: 'translate(-50%, -50%)',
-                        zIndex: 10
-                    }}>
-                        <CircularProgress size='4em'/>
-                    </div>
-                )}
+        {isLoading && (
+            <div style={{
+                position: 'absolute',
+                top: '50%',
+                left: '50%',
+                transform: 'translate(-50%, -50%)',
+                zIndex: 10
+            }}>
+                <CircularProgress size='4em'/>
+            </div>
+        )}
     </div> 
     </div>
   );

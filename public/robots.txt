@@ -1,9 +1,3 @@
-Disallow: /cgi-bin/
-Disallow: /tmp/
-Disallow: /junk/
-Disallow: /wordpress
-Disallow: /wp-admin
-
 User-agent: *
 Disallow: /
 

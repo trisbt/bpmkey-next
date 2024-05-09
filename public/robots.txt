@@ -5,7 +5,7 @@ Disallow: /junk/
 Disallow: /wordpress
 Disallow: /wp-admin
 
-Crawl-delay: 60
+Crawl-delay: 10
 
 User-agent: SemrushBot
 Disallow: /

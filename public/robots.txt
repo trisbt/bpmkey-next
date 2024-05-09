@@ -7,6 +7,9 @@ Disallow: /wp-admin
 
 Crawl-delay: 60
 
+User-agent: SemrushBot
+Disallow: /
+
 User-agent: Bytedance
 Disallow: /
 

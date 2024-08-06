@@ -14,7 +14,7 @@ import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import { Theme } from '@mui/material';
 import Accordion from '@mui/material/Accordion';
-import PlayButton from '../components/PlayButton';
+import PlayButton from '../ui/PlayButton';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import StopIcon from '@mui/icons-material/Stop';
 import AccordionSummary from '@mui/material/AccordionSummary';
@@ -24,14 +24,14 @@ import Slider from '@mui/material/Slider';
 import { useRouter } from 'next/navigation';
 import { useSearchParams } from 'next/navigation'
 import Link from 'next/link';
-import CircleOfFifths from '@/app/components/CircleOfFifths';
-import SortFilter from '@/app/components/SortFilter';
+import CircleOfFifths from '@/app/ui/CircleOfFifths';
+import SortFilter from '@/app/ui/SortFilter';
 import { reverseKeyConvert } from '@/app/utils';
 import { RecsCardProps } from '../types/cardTypes';
 import { Recs } from '../types/dataTypes';
 import slugify from 'slugify';
 import { transformSpotifyURItoURL } from '../utils';
-import SpotifyBlackIcon from '../SpotifyIcon';
+import SpotifyBlackIcon from '../ui/icon components/SpotifyIcon';
 
 const SmallPlayButton = styled(IconButton)(() => ({
 	'&&': {

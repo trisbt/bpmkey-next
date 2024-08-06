@@ -20,11 +20,11 @@ import PlayButton from './PlayButton';
 import { TopTracksCardProps } from '../types/cardTypes';
 import { TopTracksDetails } from '../types/dataTypes';
 import slugify from 'slugify';
-import VerticalAd from './VerticalAd';
-import HorizontalAd from './HorizontalAd';
+import VerticalAd from './ad components/VerticalAd';
+import HorizontalAd from './ad components/HorizontalAd';
 import { Hidden } from '@mui/material';
 import { transformSpotifyURItoURL } from '../utils';
-import SpotifyBlackIcon from '../SpotifyIcon';
+import SpotifyBlackIcon from './icon components/SpotifyIcon';
 import { Inter } from 'next/font/google';
 
 const SmallPlayButton = styled(IconButton)(() => ({

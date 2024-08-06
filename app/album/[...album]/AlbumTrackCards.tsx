@@ -13,7 +13,7 @@ import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import { Theme } from '@mui/material';
 import Accordion from '@mui/material/Accordion';
-import PlayButton from '@/app/components/PlayButton';
+import PlayButton from '@/app/ui/PlayButton';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import StopIcon from '@mui/icons-material/Stop';
 import AccordionSummary from '@mui/material/AccordionSummary';
@@ -23,19 +23,19 @@ import Slider from '@mui/material/Slider';
 import { useRouter } from 'next/navigation';
 import { useSearchParams } from 'next/navigation'
 import Link from 'next/link';
-import CircleOfFifths from '@/app/components/CircleOfFifths';
+import CircleOfFifths from '@/app/ui/CircleOfFifths';
 import { reverseKeyConvert } from '@/app/utils';
-import SortFilter from '@/app/components/SortFilter';
+import SortFilter from '@/app/ui/SortFilter';
 import { AlbumDetails } from '@/app/types/dataTypes';
 import { AlbumPageCardProps } from '@/app/types/cardTypes';
 import slugify from 'slugify';
 import { Hidden } from '@mui/material';
 import Image from 'next/image';
-import CardAd from '@/app/components/CardAd';
-import VerticalAd from '@/app/components/VerticalAd';
-import HorizontalAd from '@/app/components/HorizontalAd';
-import SpotifyLogo from '@/app/SpotifyLogo';
-import SpotifyIcon from '@/app/SpotifyIcon';
+import CardAd from '@/app/ui/ad components/CardAd';
+import VerticalAd from '@/app/ui/ad components/VerticalAd';
+import HorizontalAd from '@/app/ui/ad components/HorizontalAd';
+import SpotifyLogo from '@/app/ui/icon components/SpotifyLogo';
+import SpotifyIcon from '@/app/ui/icon components/SpotifyIcon';
 import { transformSpotifyAlbumURItoURL, transformSpotifyURItoURL } from '@/app/utils';
 
 const SmallPlayButton = styled(IconButton)(() => ({
@@ -180,7 +180,7 @@ const AlbumTrackCards: React.FC<AlbumPageCardProps> = ({ results, album }) => {
 								/>
 							</Grid>
 						</Grid>
-						
+
 						<SortFilter
 							setActiveSlice={setActiveSlice}
 							activeSlice={activeSlice}

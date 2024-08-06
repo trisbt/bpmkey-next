@@ -1,12 +1,12 @@
 import Image from 'next/image';
 import dynamic from 'next/dynamic';
-import Splash from './components/Splash';
-import TopTracks from './components/TopTracks';
+import Splash from './ui/Splash';
+import TopTracks from './ui/TopTracks';
 import GetTopTracks from './server_components/GetTopTracks';
 import { ThemeProvider } from '@mui/material';
 import { archivoTheme, theme } from './theme';
-import HorizontalAd from './components/HorizontalAd';
-import CloudRender from './components/CloudRender';
+import HorizontalAd from './ui/ad components/HorizontalAd';
+import CloudRender from './ui/CloudRender';
 
 
 export default async function Home() {
@@ -19,7 +19,7 @@ export default async function Home() {
       >
         <Splash />
       </ThemeProvider>
-        <CloudRender />
+      <CloudRender />
       <TopTracks results={topTracksData} />
       <HorizontalAd />
     </div>

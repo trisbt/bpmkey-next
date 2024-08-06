@@ -13,7 +13,7 @@ import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import { Theme } from '@mui/material';
 import Accordion from '@mui/material/Accordion';
-import PlayButton from '@/app/components/PlayButton';
+import PlayButton from '@/app/ui/PlayButton';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import StopIcon from '@mui/icons-material/Stop';
 import AccordionSummary from '@mui/material/AccordionSummary';
@@ -23,19 +23,19 @@ import Slider from '@mui/material/Slider';
 import { useRouter } from 'next/navigation';
 import { useSearchParams } from 'next/navigation'
 import Link from 'next/link';
-import CircleOfFifths from '@/app/components/CircleOfFifths';
+import CircleOfFifths from '@/app/ui/CircleOfFifths';
 import { reverseKeyConvert } from '@/app/utils';
-import SortFilter from '@/app/components/SortFilter';
+import SortFilter from '@/app/ui/SortFilter';
 import { GenreCardProps } from '@/app/types/cardTypes';
 import { GenreDetails } from '@/app/types/dataTypes';
 import slugify from 'slugify';
 import { Hidden } from '@mui/material';
 import Image from 'next/image';
-import CardAd from '@/app/components/CardAd';
-import VerticalAd from '@/app/components/VerticalAd';
-import HorizontalAd from '@/app/components/HorizontalAd';
-import SpotifyLogo from '@/app/SpotifyLogo';
-import SpotifyIcon from '@/app/SpotifyIcon';
+import CardAd from '@/app/ui/ad components/CardAd';
+import VerticalAd from '@/app/ui/ad components/VerticalAd';
+import HorizontalAd from '@/app/ui/ad components/HorizontalAd';
+import SpotifyLogo from '@/app/ui/icon components/SpotifyLogo';
+import SpotifyIcon from '@/app/ui/icon components/SpotifyIcon';
 import { transformSpotifyAlbumURItoURL, transformSpotifyURItoURL } from '@/app/utils';
 
 
@@ -81,7 +81,7 @@ const GenreTrackCards: React.FC<GenreCardProps> = ({ results, playlistImage, pla
 	const [activeSlice, setActiveSlice] = useState<string[]>([]);
 	const [tempoSelect, setTempoSelect] = useState<[number, number]>([0, 500]);
 	const offset: null = null;
-	
+
 	const playAudio = (event: React.MouseEvent, previewUrl: string | null) => {
 		event.stopPropagation();
 		event.preventDefault();
@@ -258,7 +258,7 @@ const GenreTrackCards: React.FC<GenreCardProps> = ({ results, playlistImage, pla
 										}
 										return 0;
 									})
-									.map((item:GenreDetails, index: number) => {
+									.map((item: GenreDetails, index: number) => {
 										const elements: React.ReactNode[] = [];
 										elements.push(
 											<Grid item xs={11} md={8} key={index}>

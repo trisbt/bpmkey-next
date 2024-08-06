@@ -14,7 +14,7 @@ import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import { Theme } from '@mui/material';
 import Accordion from '@mui/material/Accordion';
-import PlayButton from '../components/PlayButton';
+import PlayButton from '../ui/PlayButton';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import StopIcon from '@mui/icons-material/Stop';
 import AccordionSummary from '@mui/material/AccordionSummary';
@@ -27,16 +27,16 @@ import { useRouter } from 'next/navigation';
 import { useSearchParams } from 'next/navigation'
 import Link from 'next/link';
 import GetSpotifySearch from '../server_components/GetSpotifySearch';
-import CircleOfFifths from '../components/CircleOfFifths';
-import SortFilter from '../components/SortFilter';
+import CircleOfFifths from '../ui/CircleOfFifths';
+import SortFilter from '../ui/SortFilter';
 import { reverseKeyConvert } from '@/app/utils';
 import { SearchPageCardProps } from '../types/cardTypes';
 import { SearchDetails } from '../types/dataTypes';
 import slugify from 'slugify';
-import CardAd from '@/app/components/CardAd';
-import VerticalAd from '@/app/components/VerticalAd';
-import HorizontalAd from '@/app/components/HorizontalAd';
-import SpotifyBlackIcon from '../SpotifyIcon';
+import CardAd from '@/app/ui/ad components/CardAd';
+import VerticalAd from '@/app/ui/ad components/VerticalAd';
+import HorizontalAd from '@/app/ui/ad components/HorizontalAd';
+import SpotifyBlackIcon from '../ui/icon components/SpotifyIcon';
 import { transformSpotifyURItoURL } from '@/app/utils';
 
 const SmallPlayButton = styled(IconButton)(() => ({

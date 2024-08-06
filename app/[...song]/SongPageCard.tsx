@@ -4,8 +4,8 @@ import { useRouter } from 'next/router';
 import { useState } from 'react';
 import Link from 'next/link';
 import GetSpotifyById from '../server_components/GetSpotifyById';
-import PlayButton from '../components/PlayButton';
-import ImageModal from '../components/ImageModal';
+import PlayButton from '../ui/PlayButton';
+import ImageModal from '../ui/image components/ImageModal';
 import { styled } from "@mui/material/styles";
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
@@ -27,15 +27,15 @@ import { SongPageCardProps } from '../types/cardTypes';
 import { Credits } from '../types/dataTypes';
 import DisplaySettings from '@mui/icons-material/DisplaySettings';
 import slugify from 'slugify';
-import MultiAd from '../components/MultiAd';
-import CardAd from '../components/CardAd';
-import HorizontalAd from '../components/HorizontalAd';
-import CreditsLoader from '../components/CreditsLoader';
+import MultiAd from '../ui/MultiAd';
+import CardAd from '../ui/ad components/CardAd';
+import HorizontalAd from '../ui/ad components/HorizontalAd';
+import CreditsLoader from '../ui/CreditsLoader';
 import dynamic from 'next/dynamic'
 import { Suspense } from 'react';
 import { transformSpotifyURItoURL } from '../utils';
-import SpotifyBlackIcon from '../SpotifyIcon';
-import SpotifyGreenIcon from '../SpotifyIconSongPage';
+import SpotifyBlackIcon from '../ui/icon components/SpotifyIcon';
+import SpotifyGreenIcon from '../ui/icon components/SpotifyIconSongPage';
 
 
 //progress value color function
@@ -117,7 +117,7 @@ const SongPageCard: React.FC<SongPageCardProps> = ({ songDetails, song, artist, 
     setLoading(false);
   }
   const CreditsModal = dynamic(
-    () => import('../components/CreditsModal'),
+    () => import('../ui/CreditsModal'),
   );
   const SongRecs = dynamic(
     () => import('./SongRecs'),

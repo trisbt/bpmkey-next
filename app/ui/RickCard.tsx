@@ -4,8 +4,8 @@ import { useRouter } from 'next/router';
 import { useState } from 'react';
 import Link from 'next/link';
 import GetSpotifyById from '../server_components/GetSpotifyById';
-import PlayButton from '../components/PlayButton';
-import ImageModal from '../components/ImageModal';
+import PlayButton from './PlayButton';
+import ImageModal from './image components/ImageModal';
 import { styled } from "@mui/material/styles";
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
@@ -23,8 +23,8 @@ import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
 import { SongPageCardProps } from '../types/cardTypes';
 import { transformSpotifyURItoURL } from '../utils';
-import SpotifyBlackIcon from '../SpotifyIcon';
-import SpotifyGreenIcon from '../SpotifyIconSongPage';
+import SpotifyBlackIcon from './icon components/SpotifyIcon';
+import SpotifyGreenIcon from './icon components/SpotifyIconSongPage';
 
 //progress value color function
 function determineColor(value: number): string {
@@ -49,48 +49,48 @@ const msConvert = (num: number): string => {
 
 
 const RickCard = () => {
-  const songDetails = 
-    {
-      name: 'Never Gonna Give You Up',
-      images: 'https://i.scdn.co/image/ab67616d0000b27315ebbedaacef61af244262a8',
-      albumId: '6eUW0wxWtzkFdaEFsTJto6',
-      artistId: '0gxyHStUsqpMadRV0Di1Qt',
-      id: '4PTG3Z6ehGkBFwjybzWkR8',
-      preview_url: 'https://p.scdn.co/mp3-preview/b4c682084c3fd05538726d0a126b7e14b6e92c83?cid=f0bb764e36ca4e2395b1c38f84c9764c',
-      release_date: '1987-11-12',
-      artists: [
-        {
-          external_urls: [Object],
-          href: 'https://api.spotify.com/v1/artists/0gxyHStUsqpMadRV0Di1Qt',
-          id: '0gxyHStUsqpMadRV0Di1Qt',
-          name: 'Rick Astley',
-          type: 'artist',
-          uri: 'spotify:artist:0gxyHStUsqpMadRV0Di1Qt'
-        }
-      ],
-      albums: 'Whenever You Need Somebody',
-      explicit: false,
-      popularity: 59,
-      key: 'A♭',
-      tempo: 113.5,
-      loudness: -11.823,
-      energy: 0.939,
-      acousticness: 0.115,
-      analysis_url: 'https://api.spotify.com/v1/audio-analysis/4PTG3Z6ehGkBFwjybzWkR8',
-      danceability: 0.721,
-      duration_ms: 213573,
-      instrumentalness: 0.0000379,
-      liveness: 0.108,
-      time_signature: 4,
-      track_href: 'https://api.spotify.com/v1/tracks/4PTG3Z6ehGkBFwjybzWkR8',
-      uri: 'spotify:track:4PTG3Z6ehGkBFwjybzWkR8',
-      valence: 0.914
-    }
-  
+  const songDetails =
+  {
+    name: 'Never Gonna Give You Up',
+    images: 'https://i.scdn.co/image/ab67616d0000b27315ebbedaacef61af244262a8',
+    albumId: '6eUW0wxWtzkFdaEFsTJto6',
+    artistId: '0gxyHStUsqpMadRV0Di1Qt',
+    id: '4PTG3Z6ehGkBFwjybzWkR8',
+    preview_url: 'https://p.scdn.co/mp3-preview/b4c682084c3fd05538726d0a126b7e14b6e92c83?cid=f0bb764e36ca4e2395b1c38f84c9764c',
+    release_date: '1987-11-12',
+    artists: [
+      {
+        external_urls: [Object],
+        href: 'https://api.spotify.com/v1/artists/0gxyHStUsqpMadRV0Di1Qt',
+        id: '0gxyHStUsqpMadRV0Di1Qt',
+        name: 'Rick Astley',
+        type: 'artist',
+        uri: 'spotify:artist:0gxyHStUsqpMadRV0Di1Qt'
+      }
+    ],
+    albums: 'Whenever You Need Somebody',
+    explicit: false,
+    popularity: 59,
+    key: 'A♭',
+    tempo: 113.5,
+    loudness: -11.823,
+    energy: 0.939,
+    acousticness: 0.115,
+    analysis_url: 'https://api.spotify.com/v1/audio-analysis/4PTG3Z6ehGkBFwjybzWkR8',
+    danceability: 0.721,
+    duration_ms: 213573,
+    instrumentalness: 0.0000379,
+    liveness: 0.108,
+    time_signature: 4,
+    track_href: 'https://api.spotify.com/v1/tracks/4PTG3Z6ehGkBFwjybzWkR8',
+    uri: 'spotify:track:4PTG3Z6ehGkBFwjybzWkR8',
+    valence: 0.914
+  }
+
 
   return (
     <div className='song-page-main background-gradient'>
-      
+
       <Grid item xs={11} md={8}>
 
         <Card
@@ -114,7 +114,7 @@ const RickCard = () => {
             WebkitBackgroundClip: 'text',
             letterSpacing: '1px',
             borderRadius: '2px',
-            textTransform:'uppercase',
+            textTransform: 'uppercase',
             '@media (max-width: 600px)': {
               fontSize: '22px'
             },
@@ -203,16 +203,16 @@ const RickCard = () => {
                   <Grid item >
                     <Typography variant="h5" component="h1" color='text.primary'>{songDetails.name}</Typography>
                     {/* <Link prefetch={false} href={`/artists/${slugifiedArtistName}/${songDetails.artistId}`}> */}
-                      <Typography variant="h4" 
-                      >{songDetails.artists[0]?.name}
-                      </Typography>
+                    <Typography variant="h4"
+                    >{songDetails.artists[0]?.name}
+                    </Typography>
                     {/* </Link> */}
 
                     {/* <Link prefetch={false} href={`/album/${slugifiedAlbumName}/${songDetails.albumId}`}> */}
-                      <Typography variant="subtitle1" component="h1" sx={{
-                      }}>
-                        {songDetails.albums}
-                      </Typography>
+                    <Typography variant="subtitle1" component="h1" sx={{
+                    }}>
+                      {songDetails.albums}
+                    </Typography>
                     {/* </Link> */}
                     <Typography variant="subtitle2" component="h4" >Released: {songDetails.release_date}</Typography>
 
@@ -232,7 +232,7 @@ const RickCard = () => {
                         <PlayButton previewUrl={songDetails.preview_url} />
                       )}
                       {/*credits button render*/}
-                  
+
                     </Grid>
                   </Grid>
 
@@ -300,7 +300,7 @@ const RickCard = () => {
             </Grid>
 
             <Grid item display='flex' justifyContent='center' >
-    
+
             </Grid>
 
             {/* analysis row */}
@@ -311,8 +311,8 @@ const RickCard = () => {
                 // alignItems='center'
                 justifyContent='center'
               >
-                <Typography style = {{textAlign:'center'}}variant="h4" color='text.primary'>Song Metrics</Typography>
-                <hr className="border-t-2 border-gray-400 my-4 w-full mt-2"  />
+                <Typography style={{ textAlign: 'center' }} variant="h4" color='text.primary'>Song Metrics</Typography>
+                <hr className="border-t-2 border-gray-400 my-4 w-full mt-2" />
               </Grid>
 
               <Grid item container xs={12} >

@@ -1,5 +1,5 @@
 'use client'
-import RickCard from "@/app/components/RickCard"
+import RickCard from "@/app/ui/RickCard"
 
 export default function Error({
   error,
@@ -18,7 +18,7 @@ export default function Error({
 
       // height:"100vh"
     }}>
-      <RickCard/>
+      <RickCard />
       {/* <button onClick={() => reset()}>Try again</button> */}
     </div>
   )

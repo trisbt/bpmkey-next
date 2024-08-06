@@ -30,7 +30,7 @@ import ListItemText from '@mui/material/ListItemText';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
 import Collapse from '@mui/material/Collapse';
-import CircleOfFifths from '../components/CircleOfFifths';
+import CircleOfFifths from './CircleOfFifths';
 import { valuetext } from '../utils';
 
 type Anchor = 'bottom';

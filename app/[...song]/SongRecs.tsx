@@ -32,32 +32,9 @@ import { Recs } from '../types/dataTypes';
 import slugify from 'slugify';
 import { transformSpotifyURItoURL } from '../utils';
 import SpotifyBlackIcon from '../ui/icon components/SpotifyIcon';
-
-const SmallPlayButton = styled(IconButton)(() => ({
-	'&&': {
-		color: 'white',
-		backgroundColor: 'black',
-	},
-	'&:hover': {
-		color: 'white',
-		backgroundColor: '#00e676'
-	},
-	fontSize: '15px',
-	width: '40px',
-	height: '40px',
-}));
-
-const SortButton = styled(Button)(({ theme }) => ({
-	'&&': {
-		minHeight: '4px',
-		padding: '0px 10px',
-		color: 'white',
-	},
-	'&:hover': {
-		backgroundColor: '#00e676',
-		color: theme.palette.secondary.contrastText,
-	},
-}));
+import SmallPlayButton from '../ui/buttons/SmallPlayButton';
+import SortButton from '../ui/buttons/SortButton';
+import { playAudio } from '../handlers/playAudio';
 
 const SongRecs: React.FC<RecsCardProps> = ({ recs }) => {
 	const [currentlyPlayingUrl, setCurrentlyPlayingUrl] = useState<string | null>(null);
@@ -67,27 +44,6 @@ const SongRecs: React.FC<RecsCardProps> = ({ recs }) => {
 	const searchParams = useSearchParams()
 	const searchQuery: string | null = searchParams.get('q');
 	const offset: null = null;
-
-	const playAudio = (event: React.MouseEvent, previewUrl: string | null) => {
-		event.stopPropagation();
-		event.preventDefault();
-		if (audioRef.current && previewUrl) {
-			audioRef.current.volume = .3;
-
-			if (audioRef.current.src === previewUrl && !audioRef.current.paused) {
-				audioRef.current.pause();
-				setCurrentlyPlayingUrl(null);
-			} else {
-				if (!audioRef.current.paused) {
-					// Stop currently playing audio if there is any
-					audioRef.current.pause();
-				}
-				audioRef.current.src = previewUrl;
-				audioRef.current.play();
-				setCurrentlyPlayingUrl(previewUrl);
-			}
-		}
-	};
 
 	const spotifyRedirect = (e: React.MouseEvent, uri: string) => {
 		e.stopPropagation();
@@ -212,7 +168,6 @@ const SongRecs: React.FC<RecsCardProps> = ({ recs }) => {
 															}
 														}}>
 															<Grid item xs={3} sm={6}  >
-																{/* <Card sx={{ width: '90%' }}> */}
 																<Typography variant="subtitle1" component="h1" color="text.secondary"
 																	sx={{
 																		display: 'flex', flexDirection: 'column', alignItems: 'center', lineHeight: '1rem',
@@ -231,15 +186,9 @@ const SongRecs: React.FC<RecsCardProps> = ({ recs }) => {
 																		{item.key}
 																	</Typography>
 																</Typography>
-																{/* </Card> */}
 															</Grid>
 
-															<Grid item xs={3} sm={6} sx={{
-																// "@media (max-width: 600px)": {
-																// 	marginRight: '.5em',
-																// }
-															}}>
-																{/* <Card sx={{ width: '90%' }}> */}
+															<Grid item xs={3} sm={6}>
 																<Typography variant="subtitle1" color="text.secondary" component="h1"
 																	sx={{
 																		display: 'flex', flexDirection: 'column', alignItems: 'center', lineHeight: '1rem',
@@ -258,7 +207,6 @@ const SongRecs: React.FC<RecsCardProps> = ({ recs }) => {
 																		{item.tempo}
 																	</Typography>
 																</Typography>
-																{/* </Card> */}
 															</Grid>
 
 															{/* preview button */}
@@ -272,7 +220,7 @@ const SongRecs: React.FC<RecsCardProps> = ({ recs }) => {
 																		borderRadius: '50px',
 
 																	}}
-																		onClick={(event) => playAudio(event, item.preview_url || null)}
+																		onClick={(event) => playAudio(event, item.preview_url, audioRef, setCurrentlyPlayingUrl || null)}
 																	>
 																		{currentlyPlayingUrl === item.preview_url ? (
 																			<>

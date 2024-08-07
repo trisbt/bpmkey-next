@@ -41,6 +41,7 @@ import { transformSpotifyURItoURL } from '@/app/utils';
 import SortButton from '@/app/ui/buttons/SortButton';
 import SmallPlayButton from '@/app/ui/buttons/SmallPlayButton';
 import LoadButton from '../ui/buttons/LoadButton';
+import { playAudio } from '../handlers/playAudio';
 
 const SearchCards: React.FC<SearchPageCardProps> = ({ results }) => {
 	const [currentlyPlayingUrl, setCurrentlyPlayingUrl] = useState<string | null>(null);
@@ -57,27 +58,6 @@ const SearchCards: React.FC<SearchPageCardProps> = ({ results }) => {
 	//filter hooks
 	const [activeSlice, setActiveSlice] = useState<string[]>([]);
 	const [tempoSelect, setTempoSelect] = useState<[number, number]>([0, 200]);
-
-	const playAudio = (event: React.MouseEvent, previewUrl: string | null) => {
-		event.stopPropagation();
-		event.preventDefault();
-		if (audioRef.current && previewUrl) {
-			audioRef.current.volume = .3;
-
-			if (audioRef.current.src === previewUrl && !audioRef.current.paused) {
-				audioRef.current.pause();
-				setCurrentlyPlayingUrl(null);
-			} else {
-				if (!audioRef.current.paused) {
-					// Stop currently playing audio if there is any
-					audioRef.current.pause();
-				}
-				audioRef.current.src = previewUrl;
-				audioRef.current.play();
-				setCurrentlyPlayingUrl(previewUrl);
-			}
-		}
-	};
 
 	const spotifyRedirect = (e: React.MouseEvent, uri: string) => {
 		e.stopPropagation();
@@ -96,7 +76,7 @@ const SearchCards: React.FC<SearchPageCardProps> = ({ results }) => {
 	useEffect(() => {
 		// This effect sets the isFirstRender to false after the component mounts
 		setIsFirstRender(false);
-	}, []); 
+	}, []);
 
 	useEffect(() => {
 		// Skip the first render by checking if isFirstRender is true
@@ -350,7 +330,7 @@ const SearchCards: React.FC<SearchPageCardProps> = ({ results }) => {
 																				borderRadius: '50px',
 
 																			}}
-																				onClick={(event) => playAudio(event, item.preview_url || null)}
+																				onClick={(event) => playAudio(event, item.preview_url, audioRef, setCurrentlyPlayingUrl || null)}
 																			>
 																				{currentlyPlayingUrl === item.preview_url ? (
 																					<>

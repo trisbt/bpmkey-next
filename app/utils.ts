@@ -115,6 +115,19 @@ export const msConvert = (num: number): string => {
     return minutes + ':' + formattedSeconds;
 };
 
+//progress value color function
+export const determineColor = (value: number): string => {
+    if (value > 80) {
+      return 'linear-gradient(to right, rgba(66,187,7,0.7595413165266106) 0%, rgba(149,255,2,0.7595413165266106) 100%)';
+    } else if (value > 50) {
+      return 'linear-gradient(to right, #f9a825, #ffea00)';
+    } else if (value >= 25 && value < 50) {
+      return 'linear-gradient(to right, #e65100, #ff9800)';
+    } else {
+      return 'linear-gradient(to right, rgba(184,4,4,0.7595413165266106) 0%, rgba(255,2,2,0.7595413165266106) 100%)';
+    }
+  }
+
 // Pause execution for a specified number of milliseconds
 export const sleep = (ms:number): Promise<void> => {
     return new Promise(resolve => setTimeout(resolve, ms))

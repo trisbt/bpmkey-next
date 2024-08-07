@@ -26,48 +26,14 @@ import { Hidden } from '@mui/material';
 import { transformSpotifyURItoURL } from '../utils';
 import SpotifyBlackIcon from './icon components/SpotifyIcon';
 import { Inter } from 'next/font/google';
-
-const SmallPlayButton = styled(IconButton)(() => ({
-  '&&': {
-    color: 'white',
-    backgroundColor: 'black',
-  },
-  '&:hover': {
-    color: 'white',
-    backgroundColor: '#00e676'
-  },
-  fontSize: '15px',
-  width: '42px',
-  height: '42px',
-}));
+import SmallPlayButton from './buttons/SmallPlayButton';
+import { playAudio } from '../handlers/playAudio';
 
 const TopTracks: React.FC<TopTracksCardProps> = ({ results }) => {
   const [currentlyPlayingUrl, setCurrentlyPlayingUrl] = useState<string | null>(null);
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const router = useRouter();
   const [isPlaying, setIsPlaying] = useState(false);
-
-
-  const playAudio = (event: React.MouseEvent, previewUrl: string | null) => {
-    event.stopPropagation();
-    event.preventDefault();
-    if (audioRef.current && previewUrl) {
-      audioRef.current.volume = .3;
-
-      if (audioRef.current.src === previewUrl && !audioRef.current.paused) {
-        audioRef.current.pause();
-        setCurrentlyPlayingUrl(null);
-      } else {
-        if (!audioRef.current.paused) {
-          // Stop currently playing audio if there is any
-          audioRef.current.pause();
-        }
-        audioRef.current.src = previewUrl;
-        audioRef.current.play();
-        setCurrentlyPlayingUrl(previewUrl);
-      }
-    }
-  };
 
   const spotifyRedirect = (e: React.MouseEvent, uri: string) => {
     e.stopPropagation();
@@ -91,7 +57,6 @@ const TopTracks: React.FC<TopTracksCardProps> = ({ results }) => {
                     boxShadow: 3,
                     justifyContent: 'center',
                     backgroundColor: 'rgb(0, 71, 212)',
-                    // width: '100%',
                   }}
                 >
                   <Typography variant='h4' component="h1"
@@ -106,7 +71,6 @@ const TopTracks: React.FC<TopTracksCardProps> = ({ results }) => {
                       WebkitBackgroundClip: 'text',
                       WebkitTextFillColor: 'transparent',
                       letterSpacing: '1px',
-                      // borderRadius: '2px',
                       '@media (max-width: 600px)': {
                         fontSize: '24px'
                       },
@@ -268,9 +232,8 @@ const TopTracks: React.FC<TopTracksCardProps> = ({ results }) => {
                                     <SmallPlayButton className='preview-button' sx={{
                                       boxShadow: 3,
                                       borderRadius: '50px',
-                                      // display: { xs: 'flex', sm: 'none', md: 'none' },
                                     }}
-                                      onClick={(event) => playAudio(event, item.preview_url || null)}
+																		onClick={(event) => playAudio(event, item.preview_url, audioRef, setCurrentlyPlayingUrl || null)}
                                     >
                                       {currentlyPlayingUrl === item.preview_url ? (
                                         <>

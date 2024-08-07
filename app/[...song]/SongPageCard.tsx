@@ -38,19 +38,7 @@ import SpotifyBlackIcon from '../ui/icon components/SpotifyIcon';
 import SpotifyGreenIcon from '../ui/icon components/SpotifyIconSongPage';
 import CreditsButton from '../ui/buttons/CreditsButton';
 import SmallCreditsButton from '../ui/buttons/SmallCreditsButton';
-
-//progress value color function
-function determineColor(value: number): string {
-  if (value > 80) {
-    return 'linear-gradient(to right, rgba(66,187,7,0.7595413165266106) 0%, rgba(149,255,2,0.7595413165266106) 100%)';
-  } else if (value > 50) {
-    return 'linear-gradient(to right, #f9a825, #ffea00)';
-  } else if (value >= 25 && value < 50) {
-    return 'linear-gradient(to right, #e65100, #ff9800)';
-  } else {
-    return 'linear-gradient(to right, rgba(184,4,4,0.7595413165266106) 0%, rgba(255,2,2,0.7595413165266106) 100%)';
-  }
-}
+import { determineColor } from '../utils';
 
 const SongPageCard: React.FC<SongPageCardProps> = ({ songDetails, song, artist, id, recs }) => {
   const [showCredits, setShowCredits] = useState<boolean>(false);
@@ -61,6 +49,7 @@ const SongPageCard: React.FC<SongPageCardProps> = ({ songDetails, song, artist, 
     return slugify(artist, { lower: true, strict: true });
   }
 
+  // get credits for the song card
   const handleClick = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);

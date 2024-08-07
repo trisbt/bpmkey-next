@@ -39,6 +39,7 @@ import SpotifyIcon from '@/app/ui/icon components/SpotifyIcon';
 import { transformSpotifyAlbumURItoURL, transformSpotifyURItoURL } from '@/app/utils';
 import SortButton from '@/app/ui/buttons/SortButton';
 import SmallPlayButton from '@/app/ui/buttons/SmallPlayButton';
+import { playAudio } from '@/app/handlers/playAudio';
 
 const AlbumTrackCards: React.FC<AlbumPageCardProps> = ({ results, album }) => {
 	const [currentlyPlayingUrl, setCurrentlyPlayingUrl] = useState<string | null>(null);
@@ -56,27 +57,6 @@ const AlbumTrackCards: React.FC<AlbumPageCardProps> = ({ results, album }) => {
 	const offset: null = null;
 	const albumData = results[results.length - 1];
 	const albumSpotifyLink: string | null = transformSpotifyAlbumURItoURL(albumData.uri);
-
-	const playAudio = (event: React.MouseEvent, previewUrl: string | null) => {
-		event.stopPropagation();
-		event.preventDefault();
-		if (audioRef.current && previewUrl) {
-			audioRef.current.volume = .3;
-
-			if (audioRef.current.src === previewUrl && !audioRef.current.paused) {
-				audioRef.current.pause();
-				setCurrentlyPlayingUrl(null);
-			} else {
-				if (!audioRef.current.paused) {
-					// Stop currently playing audio if there is any
-					audioRef.current.pause();
-				}
-				audioRef.current.src = previewUrl;
-				audioRef.current.play();
-				setCurrentlyPlayingUrl(previewUrl);
-			}
-		}
-	};
 
 	const spotifyRedirect = (e: React.MouseEvent, uri: string) => {
 		e.stopPropagation();
@@ -326,7 +306,7 @@ const AlbumTrackCards: React.FC<AlbumPageCardProps> = ({ results, album }) => {
 																				boxShadow: 3,
 																				borderRadius: '50px',
 																			}}
-																				onClick={(event) => playAudio(event, item.preview_url || null)}
+																				onClick={(event) => playAudio(event, item.preview_url, audioRef, setCurrentlyPlayingUrl || null)}
 																			>
 																				{currentlyPlayingUrl === item.preview_url ? (
 																					<>

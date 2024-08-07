@@ -111,7 +111,7 @@ const SearchCards: React.FC<SearchPageCardProps> = ({ results }) => {
 				{searchResults.length > 0 && (
 					<>
 						<Grid container item md={12} justifyContent='center' paddingBottom='1em'>
-							<HorizontalAd />
+							{/* <HorizontalAd /> */}
 						</Grid>
 						{/* text row */}
 						<Grid item xs={11} md={8}>
@@ -169,9 +169,9 @@ const SearchCards: React.FC<SearchPageCardProps> = ({ results }) => {
 								justifyContent='flex-start'
 							>
 								<Hidden mdDown>
-									<VerticalAd />
+									{/* <VerticalAd />
 									<Box component='div' height='50em' />
-									<VerticalAd />
+									<VerticalAd /> */}
 								</Hidden>
 							</Grid>
 
@@ -378,30 +378,30 @@ const SearchCards: React.FC<SearchPageCardProps> = ({ results }) => {
 												</Link>
 											</Grid>
 										);
-										if ((index + 1) % 5 === 0) {
-											elements.push(
-												<Grid item xs={11} md={8} key={"ad_" + index} display='flex' justifyContent='center'>
-													<Card
-														sx={{
-															width: '100vw',
-															display: 'flex',
-															justifyContent: 'center',
-															margin: '10px 10px 0',
-															boxShadow: 3,
-															"&:hover": {
-																backgroundColor: "#e0e0e0",
-															},
-														}}
-													>
-														<CardContent sx={{
-															width: '90vw',
-														}}>
-															<CardAd />
-														</CardContent>
-													</Card>
-												</Grid>
-											);
-										}
+										// if ((index + 1) % 5 === 0) {
+										// 	elements.push(
+										// 		<Grid item xs={11} md={8} key={"ad_" + index} display='flex' justifyContent='center'>
+										// 			<Card
+										// 				sx={{
+										// 					width: '100vw',
+										// 					display: 'flex',
+										// 					justifyContent: 'center',
+										// 					margin: '10px 10px 0',
+										// 					boxShadow: 3,
+										// 					"&:hover": {
+										// 						backgroundColor: "#e0e0e0",
+										// 					},
+										// 				}}
+										// 			>
+										// 				{/* <CardContent sx={{
+										// 					width: '90vw',
+										// 				}}>
+										// 					<CardAd />
+										// 				</CardContent> */}
+										// 			</Card>
+										// 		</Grid>
+										// 	);
+										// }
 
 										return elements;
 									})
@@ -414,10 +414,10 @@ const SearchCards: React.FC<SearchPageCardProps> = ({ results }) => {
 								justifyContent='flex-end'
 							>
 								<Hidden mdDown>
-									<VerticalAd />
+									{/* <VerticalAd />
 
 									<Box component='div' height='50em' />
-									<VerticalAd />
+									<VerticalAd /> */}
 								</Hidden>
 							</Grid>
 
@@ -438,7 +438,7 @@ const SearchCards: React.FC<SearchPageCardProps> = ({ results }) => {
 							</div>
 						</Grid>
 						<Grid container item md={12} justifyContent='center' paddingBottom='1em'>
-							<HorizontalAd />
+							{/* <HorizontalAd /> */}
 						</Grid>
 					</>
 				)}

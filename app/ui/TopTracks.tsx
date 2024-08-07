@@ -92,8 +92,8 @@ const TopTracks: React.FC<TopTracksCardProps> = ({ results }) => {
                 >
                   <Hidden lgDown>
                     {/* <VerticalAd /> */}
-                    <Box component='div' height='20em' />
-                    <VerticalAd />
+                    {/* <Box component='div' height='20em' />
+                    <VerticalAd /> */}
                   </Hidden>
                 </Grid>
 
@@ -290,8 +290,8 @@ const TopTracks: React.FC<TopTracksCardProps> = ({ results }) => {
                 >
                   <Hidden lgDown>
                     {/* <VerticalAd /> */}
-                    <Box component='div' height='20em' />
-                    <VerticalAd />
+                    {/* <Box component='div' height='20em' />
+                    <VerticalAd /> */}
                   </Hidden>
                 </Grid>
 

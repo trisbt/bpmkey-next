@@ -67,7 +67,7 @@ const AlbumTrackCards: React.FC<AlbumPageCardProps> = ({ results, album }) => {
 	return (
 		<Box component='div'>
 			<Grid container item xs={12} justifyContent='center' paddingBottom='1em' >
-				<HorizontalAd />
+				{/* <HorizontalAd /> */}
 			</Grid>
 			<Grid container item xs={12} justifyContent='center' alignItems='center' >
 				{searchResults && (
@@ -158,9 +158,9 @@ const AlbumTrackCards: React.FC<AlbumPageCardProps> = ({ results, album }) => {
 								justifyContent='flex-start'
 							>
 								<Hidden lgDown>
-									<VerticalAd />
+									{/* <VerticalAd />
 									<Box component='div' height='20em' />
-									<VerticalAd />
+									<VerticalAd /> */}
 								</Hidden>
 							</Grid>
 
@@ -354,30 +354,30 @@ const AlbumTrackCards: React.FC<AlbumPageCardProps> = ({ results, album }) => {
 												</Link>
 											</Grid>
 										);
-										if ((index + 1) % 5 === 0) {
-											elements.push(
-												<Grid item xs={11} md={8} key={"ad_" + index} display='flex' justifyContent='center'>
-													<Card
-														sx={{
-															width: '100vw',
-															display: 'flex',
-															justifyContent: 'center',
-															margin: '10px 10px 0',
-															boxShadow: 3,
-															"&:hover": {
-																backgroundColor: "#e0e0e0",
-															},
-														}}
-													>
-														<CardContent sx={{
-															width: '90vw',
-														}}>
-															<CardAd />
-														</CardContent>
-													</Card>
-												</Grid>
-											);
-										}
+										// if ((index + 1) % 5 === 0) {
+										// 	elements.push(
+										// 		<Grid item xs={11} md={8} key={"ad_" + index} display='flex' justifyContent='center'>
+										// 			<Card
+										// 				sx={{
+										// 					width: '100vw',
+										// 					display: 'flex',
+										// 					justifyContent: 'center',
+										// 					margin: '10px 10px 0',
+										// 					boxShadow: 3,
+										// 					"&:hover": {
+										// 						backgroundColor: "#e0e0e0",
+										// 					},
+										// 				}}
+										// 			>
+										// 				{/* <CardContent sx={{
+										// 					width: '90vw',
+										// 				}}>
+										// 					<CardAd />
+										// 				</CardContent> */}
+										// 			</Card>
+										// 		</Grid>
+										// 	);
+										// }
 
 										return elements;
 									})
@@ -390,9 +390,9 @@ const AlbumTrackCards: React.FC<AlbumPageCardProps> = ({ results, album }) => {
 								justifyContent='flex-end'
 							>
 								<Hidden lgDown>
-									<VerticalAd />
+									{/* <VerticalAd />
 									<Box component='div' height='20em' />
-									<VerticalAd />
+									<VerticalAd /> */}
 								</Hidden>
 							</Grid>
 						</Grid >
@@ -401,7 +401,7 @@ const AlbumTrackCards: React.FC<AlbumPageCardProps> = ({ results, album }) => {
 				)}
 			</Grid >
 			<Grid container item md={12} justifyContent='center' paddingBottom='1em' >
-				<HorizontalAd />
+				{/* <HorizontalAd /> */}
 			</Grid>
 		</Box>
 	)

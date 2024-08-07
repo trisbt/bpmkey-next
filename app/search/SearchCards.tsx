@@ -128,7 +128,7 @@ const SearchCards: React.FC<SearchPageCardProps> = ({ results }) => {
 	useEffect(() => {
 		// This effect sets the isFirstRender to false after the component mounts
 		setIsFirstRender(false);
-	}, []); // Empty dependency array ensures this effect only runs once
+	}, []); 
 
 	useEffect(() => {
 		// Skip the first render by checking if isFirstRender is true
@@ -162,11 +162,9 @@ const SearchCards: React.FC<SearchPageCardProps> = ({ results }) => {
 			<Grid container item xs={12} justifyContent='center' alignItems='center' >
 				{searchResults.length > 0 && (
 					<>
-						{/* <Hidden lgUp> */}
 						<Grid container item md={12} justifyContent='center' paddingBottom='1em'>
 							<HorizontalAd />
 						</Grid>
-						{/* </Hidden> */}
 						{/* text row */}
 						<Grid item xs={11} md={8}>
 							<Card
@@ -213,7 +211,6 @@ const SearchCards: React.FC<SearchPageCardProps> = ({ results }) => {
 						/>
 
 						<Grid container display='flex' direction='row'
-							// wrap='no-wrap'
 							alignItems='flex-start'
 							justifyContent='space-between'
 
@@ -232,7 +229,6 @@ const SearchCards: React.FC<SearchPageCardProps> = ({ results }) => {
 
 							{/* main search */}
 							<Grid container item xs={12} md={10} display='flex'
-								// wrap='no-wrap'
 								alignItems='flex-start'
 								justifyContent='center'
 
@@ -334,7 +330,6 @@ const SearchCards: React.FC<SearchPageCardProps> = ({ results }) => {
 																	}
 																}}>
 																	<Grid item xs={3} sm={6}  >
-																		{/* <Card sx={{ width: '90%' }}> */}
 																		<Typography variant="subtitle1" component="h1" color="text.secondary"
 																			sx={{
 																				display: 'flex', flexDirection: 'column', alignItems: 'center', lineHeight: '1rem',
@@ -353,15 +348,9 @@ const SearchCards: React.FC<SearchPageCardProps> = ({ results }) => {
 																				{item.key}
 																			</Typography>
 																		</Typography>
-																		{/* </Card> */}
 																	</Grid>
 
-																	<Grid item xs={3} sm={6} sx={{
-																		// "@media (max-width: 600px)": {
-																		// 	marginRight: '.5em',
-																		// }
-																	}}>
-																		{/* <Card sx={{ width: '90%' }}> */}
+																	<Grid item xs={3} sm={6} >
 																		<Typography variant="subtitle1" color="text.secondary" component="h1"
 																			sx={{
 																				display: 'flex', flexDirection: 'column', alignItems: 'center', lineHeight: '1rem',
@@ -380,7 +369,6 @@ const SearchCards: React.FC<SearchPageCardProps> = ({ results }) => {
 																				{item.tempo}
 																			</Typography>
 																		</Typography>
-																		{/* </Card> */}
 																	</Grid>
 
 																	{/* preview button */}
@@ -449,7 +437,6 @@ const SearchCards: React.FC<SearchPageCardProps> = ({ results }) => {
 														sx={{
 															width: '100vw',
 															display: 'flex',
-															// flexDirection: 'row',
 															justifyContent: 'center',
 															margin: '10px 10px 0',
 															boxShadow: 3,

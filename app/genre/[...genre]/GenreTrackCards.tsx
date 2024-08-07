@@ -143,7 +143,6 @@ const GenreTrackCards: React.FC<GenreCardProps> = ({ results, playlistImage, pla
 										WebkitBackgroundClip: 'text',
 										letterSpacing: '1px',
 										borderRadius: '2px',
-										// fontStyle: 'italic',
 										paddingLeft: '1em',
 										paddingRight: '1em',
 										'@media (max-width: 600px)': {
@@ -233,7 +232,6 @@ const GenreTrackCards: React.FC<GenreCardProps> = ({ results, playlistImage, pla
 
 							{/* main search */}
 							<Grid container item xs={12} lg={10} display='flex'
-								// wrap='no-wrap'
 								alignItems='flex-start'
 								justifyContent='center'
 
@@ -338,7 +336,6 @@ const GenreTrackCards: React.FC<GenreCardProps> = ({ results, playlistImage, pla
 																	}
 																}}>
 																	<Grid item xs={3} sm={6}  >
-																		{/* <Card sx={{ width: '90%' }}> */}
 																		<Typography variant="subtitle1" color="text.secondary" component="h1"
 																			sx={{
 																				display: 'flex', flexDirection: 'column', alignItems: 'center', lineHeight: '1rem',
@@ -356,15 +353,9 @@ const GenreTrackCards: React.FC<GenreCardProps> = ({ results, playlistImage, pla
 																				{item.key}
 																			</Typography>
 																		</Typography>
-																		{/* </Card> */}
 																	</Grid>
 
-																	<Grid item xs={3} sm={6} sx={{
-																		// "@media (max-width: 600px)": {
-																		// 	marginRight: '.5em',
-																		// }
-																	}}>
-																		{/* <Card sx={{ width: '90%' }}> */}
+																	<Grid item xs={3} sm={6} >
 																		<Typography variant="subtitle1" color="text.secondary" component="h1"
 																			sx={{
 																				display: 'flex', flexDirection: 'column', alignItems: 'center', lineHeight: '1rem',
@@ -382,7 +373,6 @@ const GenreTrackCards: React.FC<GenreCardProps> = ({ results, playlistImage, pla
 																				{item.tempo}
 																			</Typography>
 																		</Typography>
-																		{/* </Card> */}
 																	</Grid>
 
 																	{/* preview button */}
@@ -394,7 +384,6 @@ const GenreTrackCards: React.FC<GenreCardProps> = ({ results, playlistImage, pla
 																			<SmallPlayButton className='preview-button' sx={{
 																				boxShadow: 3,
 																				borderRadius: '50px',
-																				// display: { xs: 'flex', sm: 'none', md: 'none' },
 																			}}
 																				onClick={(event) => playAudio(event, item.preview_url || null)}
 																			>
@@ -451,7 +440,6 @@ const GenreTrackCards: React.FC<GenreCardProps> = ({ results, playlistImage, pla
 														sx={{
 															width: '100vw',
 															display: 'flex',
-															// flexDirection: 'row',
 															justifyContent: 'center',
 															margin: '10px 10px 0',
 															boxShadow: 3,

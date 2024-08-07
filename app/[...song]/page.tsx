@@ -19,8 +19,6 @@ const SongPage = async ({
   const targetBpm = songDetails.tempo;
 
   const recs: Recs[] = await GetSpotifyRecs(id, seedArtist, targetBpm, targetKey)
-  // const recs = [];
-
 
   return (
     <div className='background-gradient min-h-[50em]'>

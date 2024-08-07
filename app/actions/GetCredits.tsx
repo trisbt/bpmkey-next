@@ -2,6 +2,7 @@
 import React from 'react'
 import { Credits, ProcessedCredit, CreditsResult } from '../types/dataTypes';
 
+// Main entry for discogs credits API
 interface SearchResultItem {
 	uri?: string;
 }

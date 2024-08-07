@@ -15,11 +15,8 @@ export default function Error({
       justifyContent: 'center',
       textAlign: 'center',
       color: 'white'
-
-      // height:"100vh"
     }}>
       <RickCard />
-      {/* <button onClick={() => reset()}>Try again</button> */}
     </div>
   )
 }

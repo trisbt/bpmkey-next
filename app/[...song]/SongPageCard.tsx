@@ -22,7 +22,6 @@ import Modal from '@mui/material/Modal';
 import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
 import { GetCredits } from '../actions/GetCredits';
-// import CreditsModal from '../components/CreditsModal';
 import { SongPageCardProps } from '../types/cardTypes';
 import { Credits } from '../types/dataTypes';
 import DisplaySettings from '@mui/icons-material/DisplaySettings';
@@ -31,6 +30,7 @@ import MultiAd from '../ui/MultiAd';
 import CardAd from '../ui/ad components/CardAd';
 import HorizontalAd from '../ui/ad components/HorizontalAd';
 import CreditsLoader from '../ui/CreditsLoader';
+import { msConvert } from '../utils';
 import dynamic from 'next/dynamic'
 import { Suspense } from 'react';
 import { transformSpotifyURItoURL } from '../utils';
@@ -49,14 +49,6 @@ function determineColor(value: number): string {
   } else {
     return 'linear-gradient(to right, rgba(184,4,4,0.7595413165266106) 0%, rgba(255,2,2,0.7595413165266106) 100%)';
   }
-}
-//convert song duration format
-const msConvert = (num: number): string => {
-  let totalSeconds = Math.floor(num / 1000);
-  let minutes = Math.floor(totalSeconds / 60);
-  let seconds = totalSeconds % 60;
-  let formattedSeconds = seconds < 10 ? '0' + seconds : seconds;
-  return minutes + ':' + formattedSeconds;
 }
 
 const CreditsButton = styled(Button)(() => ({
@@ -138,7 +130,6 @@ const SongPageCard: React.FC<SongPageCardProps> = ({ songDetails, song, artist, 
             boxShadow: 0,
             justifyContent: 'center',
             backgroundColor: 'transparent',
-            // paddingBottom: '1em',
           }}
         >
           <Typography variant="h4" component="h1" sx={{
@@ -175,7 +166,6 @@ const SongPageCard: React.FC<SongPageCardProps> = ({ songDetails, song, artist, 
             alignItems: 'center',
             textAlign: 'center',
             color: '#e8eaf6',
-            // fontWeight: 'bold',
             background: '#e8eaf6',
             WebkitBackgroundClip: 'text',
             letterSpacing: '1px',

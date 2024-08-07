@@ -1,5 +1,6 @@
 import { KeyMapping, KeyConvertFunction, ReverseKeyConvertFunction } from "./types/dataTypes";
 
+// Convert key and mode number to a key string
 export const keyConvert: KeyConvertFunction = (num: number, mode: number): string => {
     const chart: KeyMapping = {
         '0': ['C', 'Am'],
@@ -24,13 +25,18 @@ export const keyConvert: KeyConvertFunction = (num: number, mode: number): strin
         return "Unknown";
     }
 }
+
+// Round tempo to nearest half
 export const tempoRound = (num: number): number => {
     return Math.round(num * 2) / 2;
 }
+
+// Convert numeric tempo value to string
 export const valuetext = (value: number): string => {
     return `${value} bpm`;
 }
 
+// Return adjacent numerical keys
 export const minMaxKey = (key: number): [number, number] => {
     if(key === 0){
         return [11, 1];
@@ -41,6 +47,7 @@ export const minMaxKey = (key: number): [number, number] => {
     }
 };
 
+// Convert string key to key numerical
 export const reverseKeyConvert: ReverseKeyConvertFunction = (key: string): number | null => {
     const reverseChart: { [key: string]: number } = {
         'C': 0, 'Am': 0,
@@ -60,6 +67,7 @@ export const reverseKeyConvert: ReverseKeyConvertFunction = (key: string): numbe
     return reverseChart[key] ?? null;
 };
 
+// Convert string key to mode numerical
 export const reverseKeyModeConvert = (key: string): { key: number, mode: number } => {
     const reverseChart: { [key: string]: { key: number, mode: number } } = {
         'C': { key: 0, mode: 1 }, 'Am': { key: 0, mode: 0 },
@@ -78,6 +86,7 @@ export const reverseKeyModeConvert = (key: string): { key: number, mode: number 
     return reverseChart[key] ?? null;
 };
 
+// Convert Spotify URI to URL
 export const transformSpotifyURItoURL = (uri: string): string | null => {
     const match = uri.match(/spotify:track:([a-zA-Z0-9]+)/);
 
@@ -87,6 +96,7 @@ export const transformSpotifyURItoURL = (uri: string): string | null => {
     return null;
 };
 
+// Convert Spotify Album URI to URL
 export const transformSpotifyAlbumURItoURL = (uri: string): string | null => {
     const match = uri.match(/spotify:album:([a-zA-Z0-9]+)/);
 
@@ -96,10 +106,21 @@ export const transformSpotifyAlbumURItoURL = (uri: string): string | null => {
     return null;
 };
 
+// Convert milliseconds to a string in the format of "minutes:seconds 
+export const msConvert = (num: number): string => {
+    let totalSeconds = Math.floor(num / 1000);
+    let minutes = Math.floor(totalSeconds / 60);
+    let seconds = totalSeconds % 60;
+    let formattedSeconds = seconds < 10 ? '0' + seconds : seconds;
+    return minutes + ':' + formattedSeconds;
+};
+
+// Pause execution for a specified number of milliseconds
 export const sleep = (ms:number): Promise<void> => {
     return new Promise(resolve => setTimeout(resolve, ms))
 };
 
+// Perform a fetch request with automatic retries in case of rate limiting
 export const fetchWithRetry = async (
     uri: string,
     options: RequestInit,
@@ -122,4 +143,4 @@ export const fetchWithRetry = async (
       }
       throw error;
     }
-  };
+};

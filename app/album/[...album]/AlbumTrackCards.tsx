@@ -212,7 +212,6 @@ const AlbumTrackCards: React.FC<AlbumPageCardProps> = ({ results, album }) => {
 
 							{/* main search */}
 							<Grid container item xs={12} lg={10} display='flex'
-								// wrap='no-wrap'
 								alignItems='flex-start'
 								justifyContent='center'
 
@@ -296,13 +295,6 @@ const AlbumTrackCards: React.FC<AlbumPageCardProps> = ({ results, album }) => {
 
 																</Grid>
 																<Grid item xs={3} sm={2} >
-																	{/* <Image
-																		unoptimized
-																		width={150}
-																		height={150}
-																		src={item.images}
-																		alt={item.name}
-																	/> */}
 																</Grid>
 																<Grid container item xs={12} sm={5} alignItems='center' rowSpacing={1} sx={{
 																	"@media (max-width: 600px)": {
@@ -310,7 +302,6 @@ const AlbumTrackCards: React.FC<AlbumPageCardProps> = ({ results, album }) => {
 																	}
 																}}>
 																	<Grid item xs={3} sm={6}  >
-																		{/* <Card sx={{ width: '90%' }}> */}
 																		<Typography variant="subtitle1" color="text.secondary" component="h1"
 																			sx={{
 																				display: 'flex', flexDirection: 'column', alignItems: 'center', lineHeight: '1rem',
@@ -328,15 +319,10 @@ const AlbumTrackCards: React.FC<AlbumPageCardProps> = ({ results, album }) => {
 																				{item.key}
 																			</Typography>
 																		</Typography>
-																		{/* </Card> */}
 																	</Grid>
 
 																	<Grid item xs={3} sm={6} sx={{
-																		// "@media (max-width: 600px)": {
-																		// 	marginRight: '.5em',
-																		// }
 																	}}>
-																		{/* <Card sx={{ width: '90%' }}> */}
 																		<Typography variant="subtitle1" color="text.secondary" component="h1"
 																			sx={{
 																				display: 'flex', flexDirection: 'column', alignItems: 'center', lineHeight: '1rem',
@@ -354,7 +340,6 @@ const AlbumTrackCards: React.FC<AlbumPageCardProps> = ({ results, album }) => {
 																				{item.tempo}
 																			</Typography>
 																		</Typography>
-																		{/* </Card> */}
 																	</Grid>
 
 																	{/* preview button */}
@@ -366,7 +351,6 @@ const AlbumTrackCards: React.FC<AlbumPageCardProps> = ({ results, album }) => {
 																			<SmallPlayButton className='preview-button' sx={{
 																				boxShadow: 3,
 																				borderRadius: '50px',
-																				// display: { xs: 'flex', sm: 'none', md: 'none' },
 																			}}
 																				onClick={(event) => playAudio(event, item.preview_url || null)}
 																			>
@@ -423,7 +407,6 @@ const AlbumTrackCards: React.FC<AlbumPageCardProps> = ({ results, album }) => {
 														sx={{
 															width: '100vw',
 															display: 'flex',
-															// flexDirection: 'row',
 															justifyContent: 'center',
 															margin: '10px 10px 0',
 															boxShadow: 3,

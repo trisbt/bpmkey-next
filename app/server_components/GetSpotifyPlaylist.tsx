@@ -34,7 +34,6 @@ const GetSpotifyPlaylist = async (genre: string) => {
     throw new Error(`API response failed with status ${playlistTracksFetch.status}: ${playlistTracksFetch.statusText}`);
   }
   const playlistTracks = await playlistTracksFetch.json();
-  // console.log(playlistTracks.items)
   const trackData = playlistTracks.items
     .map((item: { track: GetTracksItem | null }) => item.track)
     .filter((track: GetTracksItem | null): track is GetTracksItem => track !== null);

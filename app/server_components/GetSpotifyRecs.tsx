@@ -23,7 +23,6 @@ const GetSpotifyRecs = async (
       let minMax = minMaxKey(revKey);
       uri += `&min_key=${minMax[0]}`;
       uri += `&max_key=${minMax[1]}`;
-      // uri += `&target_key=${reverseKeyModeConvert(targetKey).key}`;
       uri += `&target_mode=${reverseKeyModeConvert(targetKey).mode}`;
     }
 

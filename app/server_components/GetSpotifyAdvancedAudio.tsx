@@ -7,15 +7,6 @@ const GetSpotifyAdvancedAudio = async (token: string, ids: string[]) => {
       'Authorization': 'Bearer ' + token
     },
   });
-  //   console.log(res.headers);
-  // const retryAfter = res.headers.get('Retry-After');
-  // if (retryAfter) {
-  //     console.log(`Retry-After header value: ${retryAfter}`);
-  // } else {
-  //     console.log(`Retry-After header is not present in the response.`);
-  //     // Implement fallback logic here
-  // }
-  
 
   const data = await res.json();
   const audioData = data.audio_features.map((item: AdvancedAudioItem) => {

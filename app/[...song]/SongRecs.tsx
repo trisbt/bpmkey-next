@@ -63,32 +63,10 @@ const SongRecs: React.FC<RecsCardProps> = ({ recs }) => {
 	const [currentlyPlayingUrl, setCurrentlyPlayingUrl] = useState<string | null>(null);
 	const audioRef = useRef<HTMLAudioElement | null>(null);
 	const [searchResults, setSearchResults] = useState<Recs[]>(recs);
-	// const [offset, setOffset] = useState<number>(1);
 	const router = useRouter();
 	const searchParams = useSearchParams()
 	const searchQuery: string | null = searchParams.get('q');
-	//sort hooks
-	// const [sortOrder, setSortOrder] = useState<"asc" | "desc" | null>(null);
-	// const [sortBy, setSortBy] = useState<"tempo" | "key" | null>(null);
-	//filter hooks
-	// const [activeSlice, setActiveSlice] = useState<string[]>([]);
-	// const [tempoSelect, setTempoSelect] = useState<[number, number]>([0, 500]);
 	const offset: null = null;
-
-	// useEffect(() => {
-	// 	const fetchRecs = async () => {
-	// 		try {
-	// 			const data = await GetSpotifyRecs(id, artist);
-	// 			console.log(data);
-	// 			setSearchResults(data);
-	// 		} catch (error) {
-	// 			console.error('Error fetching data:', error);
-	// 		}
-	// 	};
-
-	// 	fetchRecs();
-	// }, [id, artist]);
-
 
 	const playAudio = (event: React.MouseEvent, previewUrl: string | null) => {
 		event.stopPropagation();
@@ -154,38 +132,8 @@ const SongRecs: React.FC<RecsCardProps> = ({ recs }) => {
 								</Card>
 							</Grid>
 
-							{/* <SortFilter
-								setActiveSlice={setActiveSlice}
-								activeSlice={activeSlice}
-								tempoSelect={tempoSelect}
-								setTempoSelect={setTempoSelect}
-								offset={offset}
-								searchQuery={searchQuery}
-								setSortOrder={setSortOrder}
-								sortOrder={sortOrder}
-								setSortBy={setSortBy}
-								sortBy={sortBy}
-							/> */}
-
 							{/* main search */}
 							{searchResults
-								// .filter(item =>
-								// 	(!activeSlice || activeSlice.length === 0 || activeSlice.includes(item.key))
-								// 	&& item.tempo >= tempoSelect[0]
-								// 	&& item.tempo <= tempoSelect[1]
-								// )
-								// .sort((a, b) => {
-								// 	if (sortBy && sortOrder) {
-								// 		if (sortBy === "key") {
-								// 			const aValue = reverseKeyConvert(a.key) || 0;
-								// 			const bValue = reverseKeyConvert(b.key) || 0;
-								// 			return sortOrder === "asc" ? aValue - bValue : bValue - aValue;
-								// 		} else {
-								// 			return sortOrder === "asc" ? a[sortBy] - b[sortBy] : b[sortBy] - a[sortBy];
-								// 		}
-								// 	}
-								// 	return 0;
-								// })
 								.map((item: Recs, index: number) => (
 
 									<Grid item xs={11} md={10} key={index}>

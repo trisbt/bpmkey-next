@@ -56,7 +56,6 @@ const SortButton = styled(Button)(({ theme }) => ({
 		minHeight: '4px',
 		padding: '0px 10px',
 		color: 'white',
-		// backgroundColor: 'white',
 	},
 	'&:hover': {
 		backgroundColor: '#00e676',
@@ -162,7 +161,6 @@ const ArtistTopTracksCards: React.FC<ArtistPageCardProps> = ({ results, artist }
 						/>
 
 						<Grid container item xs={12} display='flex' direction='row'
-							// wrap='no-wrap'
 							alignItems='flex-start'
 							justifyContent='space-between'
 
@@ -180,7 +178,6 @@ const ArtistTopTracksCards: React.FC<ArtistPageCardProps> = ({ results, artist }
 
 							{/* main search */}
 							<Grid container item xs={12} lg={10} display='flex'
-								// wrap='no-wrap'
 								alignItems='flex-start'
 								justifyContent='center'
 
@@ -282,7 +279,6 @@ const ArtistTopTracksCards: React.FC<ArtistPageCardProps> = ({ results, artist }
 																	}
 																}}>
 																	<Grid item xs={3} sm={6}  >
-																		{/* <Card sx={{ width: '90%' }}> */}
 																		<Typography variant="subtitle1" color="text.secondary" component="h1"
 																			sx={{
 																				display: 'flex', flexDirection: 'column', alignItems: 'center', lineHeight: '1rem',
@@ -300,15 +296,9 @@ const ArtistTopTracksCards: React.FC<ArtistPageCardProps> = ({ results, artist }
 																				{item.key}
 																			</Typography>
 																		</Typography>
-																		{/* </Card> */}
 																	</Grid>
 
-																	<Grid item xs={3} sm={6} sx={{
-																		// "@media (max-width: 600px)": {
-																		// 	marginRight: '.5em',
-																		// }
-																	}}>
-																		{/* <Card sx={{ width: '90%' }}> */}
+																	<Grid item xs={3} sm={6} >
 																		<Typography variant="subtitle1" color="text.secondary" component="h1"
 																			sx={{
 																				display: 'flex', flexDirection: 'column', alignItems: 'center', lineHeight: '1rem',
@@ -326,7 +316,6 @@ const ArtistTopTracksCards: React.FC<ArtistPageCardProps> = ({ results, artist }
 																				{item.tempo}
 																			</Typography>
 																		</Typography>
-																		{/* </Card> */}
 																	</Grid>
 
 																	{/* preview button */}
@@ -338,7 +327,6 @@ const ArtistTopTracksCards: React.FC<ArtistPageCardProps> = ({ results, artist }
 																			<SmallPlayButton className='preview-button' sx={{
 																				boxShadow: 3,
 																				borderRadius: '50px',
-																				// display: { xs: 'flex', sm: 'none', md: 'none' },
 																			}}
 																				onClick={(event) => playAudio(event, item.preview_url || null)}
 																			>
@@ -395,7 +383,6 @@ const ArtistTopTracksCards: React.FC<ArtistPageCardProps> = ({ results, artist }
 														sx={{
 															width: '100vw',
 															display: 'flex',
-															// flexDirection: 'row',
 															justifyContent: 'center',
 															margin: '10px 10px 0',
 															boxShadow: 3,

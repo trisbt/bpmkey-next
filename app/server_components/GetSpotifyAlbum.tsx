@@ -37,7 +37,6 @@ const GetSpotifyAlbum = async (id: string) => {
         results.push(combinedObject);
     }
     results.push(albumData);
-    // console.log(results)
     return results;
 }
 

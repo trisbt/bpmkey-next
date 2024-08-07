@@ -36,7 +36,8 @@ import { Suspense } from 'react';
 import { transformSpotifyURItoURL } from '../utils';
 import SpotifyBlackIcon from '../ui/icon components/SpotifyIcon';
 import SpotifyGreenIcon from '../ui/icon components/SpotifyIconSongPage';
-
+import CreditsButton from '../ui/buttons/CreditsButton';
+import SmallCreditsButton from '../ui/buttons/SmallCreditsButton';
 
 //progress value color function
 function determineColor(value: number): string {
@@ -50,40 +51,6 @@ function determineColor(value: number): string {
     return 'linear-gradient(to right, rgba(184,4,4,0.7595413165266106) 0%, rgba(255,2,2,0.7595413165266106) 100%)';
   }
 }
-
-const CreditsButton = styled(Button)(() => ({
-  '&&': {
-    color: '#fff',
-    backgroundColor: 'black',
-    '&:hover': {
-      color: 'white',
-      backgroundColor: '#00e676'
-    },
-    fontSize: '15px',
-    width: '200px',
-    height: '50px',
-    lineHeight: '0',
-    boxShadow: 3,
-    borderRadius: '50px',
-  }
-}));
-
-const SmallCreditsButton = styled(Button)(() => ({
-  '&&': {
-    color: '#fff',
-    backgroundColor: 'black',
-    '&:hover': {
-      color: 'white',
-      backgroundColor: '#00e676'
-    },
-    fontSize: '15px',
-    width: '100px',
-    height: '50px',
-    lineHeight: '0',
-    boxShadow: 3,
-    borderRadius: '50px',
-  }
-}));
 
 const SongPageCard: React.FC<SongPageCardProps> = ({ songDetails, song, artist, id, recs }) => {
   const [showCredits, setShowCredits] = useState<boolean>(false);

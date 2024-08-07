@@ -38,41 +38,9 @@ import VerticalAd from '@/app/ui/ad components/VerticalAd';
 import HorizontalAd from '@/app/ui/ad components/HorizontalAd';
 import SpotifyBlackIcon from '../ui/icon components/SpotifyIcon';
 import { transformSpotifyURItoURL } from '@/app/utils';
-
-const SmallPlayButton = styled(IconButton)(() => ({
-	'&&': {
-		color: 'white',
-		backgroundColor: 'black',
-	},
-	'&:hover': {
-		color: 'white',
-		backgroundColor: '#00e676'
-	},
-	fontSize: '15px',
-	width: '42px',
-	height: '42px',
-}));
-const LoadButton = styled(Button)(({ theme }) => ({
-	'&&': {
-		color: theme.palette.primary.contrastText,
-		backgroundColor: theme.palette.secondary.dark,
-	},
-	'&:hover': {
-		backgroundColor: theme.palette.secondary.light,
-		color: theme.palette.secondary.contrastText,
-	},
-}));
-const SortButton = styled(Button)(({ theme }) => ({
-	'&&': {
-		minHeight: '4px',
-		padding: '0px 10px',
-		color: 'white',
-	},
-	'&:hover': {
-		backgroundColor: '#00e676',
-		color: theme.palette.secondary.contrastText,
-	},
-}));
+import SortButton from '@/app/ui/buttons/SortButton';
+import SmallPlayButton from '@/app/ui/buttons/SmallPlayButton';
+import LoadButton from '../ui/buttons/LoadButton';
 
 const SearchCards: React.FC<SearchPageCardProps> = ({ results }) => {
 	const [currentlyPlayingUrl, setCurrentlyPlayingUrl] = useState<string | null>(null);

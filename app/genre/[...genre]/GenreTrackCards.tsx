@@ -37,35 +37,8 @@ import HorizontalAd from '@/app/ui/ad components/HorizontalAd';
 import SpotifyLogo from '@/app/ui/icon components/SpotifyLogo';
 import SpotifyIcon from '@/app/ui/icon components/SpotifyIcon';
 import { transformSpotifyAlbumURItoURL, transformSpotifyURItoURL } from '@/app/utils';
-
-
-const SmallPlayButton = styled(IconButton)(() => ({
-	'&&': {
-		color: 'white',
-		backgroundColor: 'black',
-	},
-	'&:hover': {
-		color: 'white',
-		backgroundColor: '#00e676'
-	},
-	fontSize: '15px',
-	width: '42px',
-	height: '42px',
-}));
-
-const SortButton = styled(Button)(({ theme }) => ({
-	'&&': {
-		minHeight: '4px',
-		padding: '0px 10px',
-		color: 'white',
-	},
-	'&:hover': {
-		backgroundColor: '#00e676',
-		color: theme.palette.secondary.contrastText,
-	},
-}));
-
-
+import SortButton from '@/app/ui/buttons/SortButton';
+import SmallPlayButton from '@/app/ui/buttons/SmallPlayButton';
 
 const GenreTrackCards: React.FC<GenreCardProps> = ({ results, playlistImage, playlistURL, playlistDescription, playlistName }) => {
 	const [currentlyPlayingUrl, setCurrentlyPlayingUrl] = useState<string | null>(null);

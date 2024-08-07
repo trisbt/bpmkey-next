@@ -21,7 +21,7 @@ export default async function Home() {
       </ThemeProvider>
       <CloudRender />
       <TopTracks results={topTracksData} />
-      <HorizontalAd />
+      {/* <HorizontalAd /> */}
     </div>
   )
 }

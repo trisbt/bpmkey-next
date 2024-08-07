@@ -14,7 +14,7 @@ import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import { Theme } from '@mui/material';
 import Accordion from '@mui/material/Accordion';
-import PlayButton from '../ui/PlayButton';
+import PlayButton from '../ui/buttons/PlayButton';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import StopIcon from '@mui/icons-material/Stop';
 import AccordionSummary from '@mui/material/AccordionSummary';

@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 import { useState } from 'react';
 import Link from 'next/link';
 import GetSpotifyById from '../server_components/GetSpotifyById';
-import PlayButton from './PlayButton';
+import PlayButton from './buttons/PlayButton';
 import ImageModal from './image components/ImageModal';
 import { styled } from "@mui/material/styles";
 import Box from '@mui/material/Box';

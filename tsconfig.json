@@ -35,7 +35,7 @@
     ".next/types/**/*.ts",
     "app/sitemap.js",
     "app/ui/ad components/VerticalAd.jsx"
-, "app/ui/ad components/HorizontalAd.jsx", "app/ui/ad components/CardAd.jsx", "app/ui/MultiAd.jsx", "app/[...song]/error.tsx"  ],
+, "app/ui/ad components/HorizontalAd.jsx", "app/ui/ad components/CardAd.jsx", "app/ui/ad components/MultiAd.jsx", "app/[...song]/error.tsx"  ],
   "exclude": [
     "node_modules"
   ]

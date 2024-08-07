@@ -16,7 +16,7 @@ import IconButton from '@mui/material/IconButton';
 import { styled } from "@mui/material/styles";
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
-import PlayButton from './PlayButton';
+import PlayButton from './buttons/PlayButton';
 import { TopTracksCardProps } from '../types/cardTypes';
 import { TopTracksDetails } from '../types/dataTypes';
 import slugify from 'slugify';
@@ -233,7 +233,7 @@ const TopTracks: React.FC<TopTracksCardProps> = ({ results }) => {
                                       boxShadow: 3,
                                       borderRadius: '50px',
                                     }}
-																		onClick={(event) => playAudio(event, item.preview_url, audioRef, setCurrentlyPlayingUrl || null)}
+                                      onClick={(event) => playAudio(event, item.preview_url, audioRef, setCurrentlyPlayingUrl || null)}
                                     >
                                       {currentlyPlayingUrl === item.preview_url ? (
                                         <>

@@ -14,7 +14,7 @@ import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import { Theme } from '@mui/material';
 import Accordion from '@mui/material/Accordion';
-import PlayButton from '../components/PlayButton';
+import PlayButton from '../ui/buttons/PlayButton';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import StopIcon from '@mui/icons-material/Stop';
 import AccordionSummary from '@mui/material/AccordionSummary';
@@ -27,52 +27,21 @@ import { useRouter } from 'next/navigation';
 import { useSearchParams } from 'next/navigation'
 import Link from 'next/link';
 import GetSpotifySearch from '../server_components/GetSpotifySearch';
-import CircleOfFifths from '../components/CircleOfFifths';
-import SortFilter from '../components/SortFilter';
+import CircleOfFifths from '../ui/CircleOfFifths';
+import SortFilter from '../ui/SortFilter';
 import { reverseKeyConvert } from '@/app/utils';
 import { SearchPageCardProps } from '../types/cardTypes';
 import { SearchDetails } from '../types/dataTypes';
 import slugify from 'slugify';
-import CardAd from '@/app/components/CardAd';
-import VerticalAd from '@/app/components/VerticalAd';
-import HorizontalAd from '@/app/components/HorizontalAd';
-import SpotifyBlackIcon from '../SpotifyIcon';
+import CardAd from '@/app/ui/ad components/CardAd';
+import VerticalAd from '@/app/ui/ad components/VerticalAd';
+import HorizontalAd from '@/app/ui/ad components/HorizontalAd';
+import SpotifyBlackIcon from '../ui/icon components/SpotifyIcon';
 import { transformSpotifyURItoURL } from '@/app/utils';
-
-const SmallPlayButton = styled(IconButton)(() => ({
-	'&&': {
-		color: 'white',
-		backgroundColor: 'black',
-	},
-	'&:hover': {
-		color: 'white',
-		backgroundColor: '#00e676'
-	},
-	fontSize: '15px',
-	width: '42px',
-	height: '42px',
-}));
-const LoadButton = styled(Button)(({ theme }) => ({
-	'&&': {
-		color: theme.palette.primary.contrastText,
-		backgroundColor: theme.palette.secondary.dark,
-	},
-	'&:hover': {
-		backgroundColor: theme.palette.secondary.light,
-		color: theme.palette.secondary.contrastText,
-	},
-}));
-const SortButton = styled(Button)(({ theme }) => ({
-	'&&': {
-		minHeight: '4px',
-		padding: '0px 10px',
-		color: 'white',
-	},
-	'&:hover': {
-		backgroundColor: '#00e676',
-		color: theme.palette.secondary.contrastText,
-	},
-}));
+import SortButton from '@/app/ui/buttons/SortButton';
+import SmallPlayButton from '@/app/ui/buttons/SmallPlayButton';
+import LoadButton from '../ui/buttons/LoadButton';
+import { playAudio } from '../handlers/playAudio';
 
 const SearchCards: React.FC<SearchPageCardProps> = ({ results }) => {
 	const [currentlyPlayingUrl, setCurrentlyPlayingUrl] = useState<string | null>(null);
@@ -89,27 +58,6 @@ const SearchCards: React.FC<SearchPageCardProps> = ({ results }) => {
 	//filter hooks
 	const [activeSlice, setActiveSlice] = useState<string[]>([]);
 	const [tempoSelect, setTempoSelect] = useState<[number, number]>([0, 200]);
-
-	const playAudio = (event: React.MouseEvent, previewUrl: string | null) => {
-		event.stopPropagation();
-		event.preventDefault();
-		if (audioRef.current && previewUrl) {
-			audioRef.current.volume = .3;
-
-			if (audioRef.current.src === previewUrl && !audioRef.current.paused) {
-				audioRef.current.pause();
-				setCurrentlyPlayingUrl(null);
-			} else {
-				if (!audioRef.current.paused) {
-					// Stop currently playing audio if there is any
-					audioRef.current.pause();
-				}
-				audioRef.current.src = previewUrl;
-				audioRef.current.play();
-				setCurrentlyPlayingUrl(previewUrl);
-			}
-		}
-	};
 
 	const spotifyRedirect = (e: React.MouseEvent, uri: string) => {
 		e.stopPropagation();
@@ -128,7 +76,7 @@ const SearchCards: React.FC<SearchPageCardProps> = ({ results }) => {
 	useEffect(() => {
 		// This effect sets the isFirstRender to false after the component mounts
 		setIsFirstRender(false);
-	}, []); // Empty dependency array ensures this effect only runs once
+	}, []);
 
 	useEffect(() => {
 		// Skip the first render by checking if isFirstRender is true
@@ -162,11 +110,9 @@ const SearchCards: React.FC<SearchPageCardProps> = ({ results }) => {
 			<Grid container item xs={12} justifyContent='center' alignItems='center' >
 				{searchResults.length > 0 && (
 					<>
-						{/* <Hidden lgUp> */}
 						<Grid container item md={12} justifyContent='center' paddingBottom='1em'>
 							<HorizontalAd />
 						</Grid>
-						{/* </Hidden> */}
 						{/* text row */}
 						<Grid item xs={11} md={8}>
 							<Card
@@ -213,7 +159,6 @@ const SearchCards: React.FC<SearchPageCardProps> = ({ results }) => {
 						/>
 
 						<Grid container display='flex' direction='row'
-							// wrap='no-wrap'
 							alignItems='flex-start'
 							justifyContent='space-between'
 
@@ -232,7 +177,6 @@ const SearchCards: React.FC<SearchPageCardProps> = ({ results }) => {
 
 							{/* main search */}
 							<Grid container item xs={12} md={10} display='flex'
-								// wrap='no-wrap'
 								alignItems='flex-start'
 								justifyContent='center'
 
@@ -334,7 +278,6 @@ const SearchCards: React.FC<SearchPageCardProps> = ({ results }) => {
 																	}
 																}}>
 																	<Grid item xs={3} sm={6}  >
-																		{/* <Card sx={{ width: '90%' }}> */}
 																		<Typography variant="subtitle1" component="h1" color="text.secondary"
 																			sx={{
 																				display: 'flex', flexDirection: 'column', alignItems: 'center', lineHeight: '1rem',
@@ -353,15 +296,9 @@ const SearchCards: React.FC<SearchPageCardProps> = ({ results }) => {
 																				{item.key}
 																			</Typography>
 																		</Typography>
-																		{/* </Card> */}
 																	</Grid>
 
-																	<Grid item xs={3} sm={6} sx={{
-																		// "@media (max-width: 600px)": {
-																		// 	marginRight: '.5em',
-																		// }
-																	}}>
-																		{/* <Card sx={{ width: '90%' }}> */}
+																	<Grid item xs={3} sm={6} >
 																		<Typography variant="subtitle1" color="text.secondary" component="h1"
 																			sx={{
 																				display: 'flex', flexDirection: 'column', alignItems: 'center', lineHeight: '1rem',
@@ -380,7 +317,6 @@ const SearchCards: React.FC<SearchPageCardProps> = ({ results }) => {
 																				{item.tempo}
 																			</Typography>
 																		</Typography>
-																		{/* </Card> */}
 																	</Grid>
 
 																	{/* preview button */}
@@ -394,7 +330,7 @@ const SearchCards: React.FC<SearchPageCardProps> = ({ results }) => {
 																				borderRadius: '50px',
 
 																			}}
-																				onClick={(event) => playAudio(event, item.preview_url || null)}
+																				onClick={(event) => playAudio(event, item.preview_url, audioRef, setCurrentlyPlayingUrl || null)}
 																			>
 																				{currentlyPlayingUrl === item.preview_url ? (
 																					<>
@@ -449,7 +385,6 @@ const SearchCards: React.FC<SearchPageCardProps> = ({ results }) => {
 														sx={{
 															width: '100vw',
 															display: 'flex',
-															// flexDirection: 'row',
 															justifyContent: 'center',
 															margin: '10px 10px 0',
 															boxShadow: 3,

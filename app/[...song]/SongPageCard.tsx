@@ -4,8 +4,8 @@ import { useRouter } from 'next/router';
 import { useState } from 'react';
 import Link from 'next/link';
 import GetSpotifyById from '../server_components/GetSpotifyById';
-import PlayButton from '../components/PlayButton';
-import ImageModal from '../components/ImageModal';
+import PlayButton from '../ui/buttons/PlayButton';
+import ImageModal from '../ui/image components/ImageModal';
 import { styled } from "@mui/material/styles";
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
@@ -22,76 +22,23 @@ import Modal from '@mui/material/Modal';
 import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
 import { GetCredits } from '../actions/GetCredits';
-// import CreditsModal from '../components/CreditsModal';
 import { SongPageCardProps } from '../types/cardTypes';
 import { Credits } from '../types/dataTypes';
 import DisplaySettings from '@mui/icons-material/DisplaySettings';
 import slugify from 'slugify';
-import MultiAd from '../components/MultiAd';
-import CardAd from '../components/CardAd';
-import HorizontalAd from '../components/HorizontalAd';
-import CreditsLoader from '../components/CreditsLoader';
+import MultiAd from '../ui/ad components/MultiAd';
+import CardAd from '../ui/ad components/CardAd';
+import HorizontalAd from '../ui/ad components/HorizontalAd';
+import CreditsLoader from '../ui/CreditsLoader';
+import { msConvert } from '../utils';
 import dynamic from 'next/dynamic'
 import { Suspense } from 'react';
 import { transformSpotifyURItoURL } from '../utils';
-import SpotifyBlackIcon from '../SpotifyIcon';
-import SpotifyGreenIcon from '../SpotifyIconSongPage';
-
-
-//progress value color function
-function determineColor(value: number): string {
-  if (value > 80) {
-    return 'linear-gradient(to right, rgba(66,187,7,0.7595413165266106) 0%, rgba(149,255,2,0.7595413165266106) 100%)';
-  } else if (value > 50) {
-    return 'linear-gradient(to right, #f9a825, #ffea00)';
-  } else if (value >= 25 && value < 50) {
-    return 'linear-gradient(to right, #e65100, #ff9800)';
-  } else {
-    return 'linear-gradient(to right, rgba(184,4,4,0.7595413165266106) 0%, rgba(255,2,2,0.7595413165266106) 100%)';
-  }
-}
-//convert song duration format
-const msConvert = (num: number): string => {
-  let totalSeconds = Math.floor(num / 1000);
-  let minutes = Math.floor(totalSeconds / 60);
-  let seconds = totalSeconds % 60;
-  let formattedSeconds = seconds < 10 ? '0' + seconds : seconds;
-  return minutes + ':' + formattedSeconds;
-}
-
-const CreditsButton = styled(Button)(() => ({
-  '&&': {
-    color: '#fff',
-    backgroundColor: 'black',
-    '&:hover': {
-      color: 'white',
-      backgroundColor: '#00e676'
-    },
-    fontSize: '15px',
-    width: '200px',
-    height: '50px',
-    lineHeight: '0',
-    boxShadow: 3,
-    borderRadius: '50px',
-  }
-}));
-
-const SmallCreditsButton = styled(Button)(() => ({
-  '&&': {
-    color: '#fff',
-    backgroundColor: 'black',
-    '&:hover': {
-      color: 'white',
-      backgroundColor: '#00e676'
-    },
-    fontSize: '15px',
-    width: '100px',
-    height: '50px',
-    lineHeight: '0',
-    boxShadow: 3,
-    borderRadius: '50px',
-  }
-}));
+import SpotifyBlackIcon from '../ui/icon components/SpotifyIcon';
+import SpotifyGreenIcon from '../ui/icon components/SpotifyIconSongPage';
+import CreditsButton from '../ui/buttons/CreditsButton';
+import SmallCreditsButton from '../ui/buttons/SmallCreditsButton';
+import { determineColor } from '../utils';
 
 const SongPageCard: React.FC<SongPageCardProps> = ({ songDetails, song, artist, id, recs }) => {
   const [showCredits, setShowCredits] = useState<boolean>(false);
@@ -102,6 +49,7 @@ const SongPageCard: React.FC<SongPageCardProps> = ({ songDetails, song, artist, 
     return slugify(artist, { lower: true, strict: true });
   }
 
+  // get credits for the song card
   const handleClick = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
@@ -117,7 +65,7 @@ const SongPageCard: React.FC<SongPageCardProps> = ({ songDetails, song, artist, 
     setLoading(false);
   }
   const CreditsModal = dynamic(
-    () => import('../components/CreditsModal'),
+    () => import('../ui/CreditsModal'),
   );
   const SongRecs = dynamic(
     () => import('./SongRecs'),
@@ -138,7 +86,6 @@ const SongPageCard: React.FC<SongPageCardProps> = ({ songDetails, song, artist, 
             boxShadow: 0,
             justifyContent: 'center',
             backgroundColor: 'transparent',
-            // paddingBottom: '1em',
           }}
         >
           <Typography variant="h4" component="h1" sx={{
@@ -175,7 +122,6 @@ const SongPageCard: React.FC<SongPageCardProps> = ({ songDetails, song, artist, 
             alignItems: 'center',
             textAlign: 'center',
             color: '#e8eaf6',
-            // fontWeight: 'bold',
             background: '#e8eaf6',
             WebkitBackgroundClip: 'text',
             letterSpacing: '1px',

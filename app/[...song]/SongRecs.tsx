@@ -14,7 +14,7 @@ import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import { Theme } from '@mui/material';
 import Accordion from '@mui/material/Accordion';
-import PlayButton from '../components/PlayButton';
+import PlayButton from '../ui/buttons/PlayButton';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import StopIcon from '@mui/icons-material/Stop';
 import AccordionSummary from '@mui/material/AccordionSummary';
@@ -24,92 +24,26 @@ import Slider from '@mui/material/Slider';
 import { useRouter } from 'next/navigation';
 import { useSearchParams } from 'next/navigation'
 import Link from 'next/link';
-import CircleOfFifths from '@/app/components/CircleOfFifths';
-import SortFilter from '@/app/components/SortFilter';
+import CircleOfFifths from '@/app/ui/CircleOfFifths';
+import SortFilter from '@/app/ui/SortFilter';
 import { reverseKeyConvert } from '@/app/utils';
 import { RecsCardProps } from '../types/cardTypes';
 import { Recs } from '../types/dataTypes';
 import slugify from 'slugify';
 import { transformSpotifyURItoURL } from '../utils';
-import SpotifyBlackIcon from '../SpotifyIcon';
-
-const SmallPlayButton = styled(IconButton)(() => ({
-	'&&': {
-		color: 'white',
-		backgroundColor: 'black',
-	},
-	'&:hover': {
-		color: 'white',
-		backgroundColor: '#00e676'
-	},
-	fontSize: '15px',
-	width: '40px',
-	height: '40px',
-}));
-
-const SortButton = styled(Button)(({ theme }) => ({
-	'&&': {
-		minHeight: '4px',
-		padding: '0px 10px',
-		color: 'white',
-	},
-	'&:hover': {
-		backgroundColor: '#00e676',
-		color: theme.palette.secondary.contrastText,
-	},
-}));
+import SpotifyBlackIcon from '../ui/icon components/SpotifyIcon';
+import SmallPlayButton from '../ui/buttons/SmallPlayButton';
+import SortButton from '../ui/buttons/SortButton';
+import { playAudio } from '../handlers/playAudio';
 
 const SongRecs: React.FC<RecsCardProps> = ({ recs }) => {
 	const [currentlyPlayingUrl, setCurrentlyPlayingUrl] = useState<string | null>(null);
 	const audioRef = useRef<HTMLAudioElement | null>(null);
 	const [searchResults, setSearchResults] = useState<Recs[]>(recs);
-	// const [offset, setOffset] = useState<number>(1);
 	const router = useRouter();
 	const searchParams = useSearchParams()
 	const searchQuery: string | null = searchParams.get('q');
-	//sort hooks
-	// const [sortOrder, setSortOrder] = useState<"asc" | "desc" | null>(null);
-	// const [sortBy, setSortBy] = useState<"tempo" | "key" | null>(null);
-	//filter hooks
-	// const [activeSlice, setActiveSlice] = useState<string[]>([]);
-	// const [tempoSelect, setTempoSelect] = useState<[number, number]>([0, 500]);
 	const offset: null = null;
-
-	// useEffect(() => {
-	// 	const fetchRecs = async () => {
-	// 		try {
-	// 			const data = await GetSpotifyRecs(id, artist);
-	// 			console.log(data);
-	// 			setSearchResults(data);
-	// 		} catch (error) {
-	// 			console.error('Error fetching data:', error);
-	// 		}
-	// 	};
-
-	// 	fetchRecs();
-	// }, [id, artist]);
-
-
-	const playAudio = (event: React.MouseEvent, previewUrl: string | null) => {
-		event.stopPropagation();
-		event.preventDefault();
-		if (audioRef.current && previewUrl) {
-			audioRef.current.volume = .3;
-
-			if (audioRef.current.src === previewUrl && !audioRef.current.paused) {
-				audioRef.current.pause();
-				setCurrentlyPlayingUrl(null);
-			} else {
-				if (!audioRef.current.paused) {
-					// Stop currently playing audio if there is any
-					audioRef.current.pause();
-				}
-				audioRef.current.src = previewUrl;
-				audioRef.current.play();
-				setCurrentlyPlayingUrl(previewUrl);
-			}
-		}
-	};
 
 	const spotifyRedirect = (e: React.MouseEvent, uri: string) => {
 		e.stopPropagation();
@@ -154,38 +88,8 @@ const SongRecs: React.FC<RecsCardProps> = ({ recs }) => {
 								</Card>
 							</Grid>
 
-							{/* <SortFilter
-								setActiveSlice={setActiveSlice}
-								activeSlice={activeSlice}
-								tempoSelect={tempoSelect}
-								setTempoSelect={setTempoSelect}
-								offset={offset}
-								searchQuery={searchQuery}
-								setSortOrder={setSortOrder}
-								sortOrder={sortOrder}
-								setSortBy={setSortBy}
-								sortBy={sortBy}
-							/> */}
-
 							{/* main search */}
 							{searchResults
-								// .filter(item =>
-								// 	(!activeSlice || activeSlice.length === 0 || activeSlice.includes(item.key))
-								// 	&& item.tempo >= tempoSelect[0]
-								// 	&& item.tempo <= tempoSelect[1]
-								// )
-								// .sort((a, b) => {
-								// 	if (sortBy && sortOrder) {
-								// 		if (sortBy === "key") {
-								// 			const aValue = reverseKeyConvert(a.key) || 0;
-								// 			const bValue = reverseKeyConvert(b.key) || 0;
-								// 			return sortOrder === "asc" ? aValue - bValue : bValue - aValue;
-								// 		} else {
-								// 			return sortOrder === "asc" ? a[sortBy] - b[sortBy] : b[sortBy] - a[sortBy];
-								// 		}
-								// 	}
-								// 	return 0;
-								// })
 								.map((item: Recs, index: number) => (
 
 									<Grid item xs={11} md={10} key={index}>
@@ -264,7 +168,6 @@ const SongRecs: React.FC<RecsCardProps> = ({ recs }) => {
 															}
 														}}>
 															<Grid item xs={3} sm={6}  >
-																{/* <Card sx={{ width: '90%' }}> */}
 																<Typography variant="subtitle1" component="h1" color="text.secondary"
 																	sx={{
 																		display: 'flex', flexDirection: 'column', alignItems: 'center', lineHeight: '1rem',
@@ -283,15 +186,9 @@ const SongRecs: React.FC<RecsCardProps> = ({ recs }) => {
 																		{item.key}
 																	</Typography>
 																</Typography>
-																{/* </Card> */}
 															</Grid>
 
-															<Grid item xs={3} sm={6} sx={{
-																// "@media (max-width: 600px)": {
-																// 	marginRight: '.5em',
-																// }
-															}}>
-																{/* <Card sx={{ width: '90%' }}> */}
+															<Grid item xs={3} sm={6}>
 																<Typography variant="subtitle1" color="text.secondary" component="h1"
 																	sx={{
 																		display: 'flex', flexDirection: 'column', alignItems: 'center', lineHeight: '1rem',
@@ -310,7 +207,6 @@ const SongRecs: React.FC<RecsCardProps> = ({ recs }) => {
 																		{item.tempo}
 																	</Typography>
 																</Typography>
-																{/* </Card> */}
 															</Grid>
 
 															{/* preview button */}
@@ -324,7 +220,7 @@ const SongRecs: React.FC<RecsCardProps> = ({ recs }) => {
 																		borderRadius: '50px',
 
 																	}}
-																		onClick={(event) => playAudio(event, item.preview_url || null)}
+																		onClick={(event) => playAudio(event, item.preview_url, audioRef, setCurrentlyPlayingUrl || null)}
 																	>
 																		{currentlyPlayingUrl === item.preview_url ? (
 																			<>

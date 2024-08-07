@@ -13,7 +13,6 @@ const GenrePage = async ({
   const genreID = params.genre[0];
   const spotifyPlaylistResults: GenreCardProps = await GetSpotifyPlaylist(genreID);
   const {playlistImage, playlistURL, playlistName, playlistDescription, results}  = spotifyPlaylistResults;
-  // console.log(spotifyPlaylistResults)
   return (
     <div className='background-gradient'>
       <GenreTrackCards results={results} playlistURL={playlistURL} playlistImage={playlistImage} playlistName={playlistName}playlistDescription={playlistDescription}/>
@@ -28,7 +27,6 @@ export async function generateMetadata({
 },
   parent: ResolvingMetadata
 ): Promise<Metadata> {
-  // const genre = params.genre[0];
   const genreID = params.genre[0];
   const spotifyPlaylistResults: GenreCardProps = await GetSpotifyPlaylist(genreID);
   const {playlistImage, playlistURL, playlistName, playlistDescription}  = spotifyPlaylistResults;

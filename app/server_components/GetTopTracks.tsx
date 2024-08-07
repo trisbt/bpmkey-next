@@ -1,5 +1,5 @@
 'use server'
-import TopTracks from "../components/TopTracks";
+import TopTracks from "../ui/TopTracks";
 import GetAccessToken from "./GetAccessToken";
 import GetSpotifyAdvancedAudio from "./GetSpotifyAdvancedAudio";
 import { GetTracksItem, TopTracksItem } from "../types/serverTypes";
@@ -16,7 +16,7 @@ const GetTopTracks = async () => {
     if (!res.ok) {
         throw new Error(`API response failed with status ${res.status}: ${res.statusText}`);
     }
-    
+
     const data = await res.json();
     const trackData = data.tracks.items.slice(0, 10).map((item: TopTracksItem) => item.track);
     const trackID = data.tracks.items.slice(0, 10).map((item: TopTracksItem) => item.track.id);
@@ -32,7 +32,7 @@ const GetTopTracks = async () => {
         };
         results.push(combinedObject);
     }
-    return results ;
+    return results;
 }
 
 export default GetTopTracks;

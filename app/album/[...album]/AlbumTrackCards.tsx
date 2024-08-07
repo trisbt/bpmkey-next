@@ -13,7 +13,7 @@ import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import { Theme } from '@mui/material';
 import Accordion from '@mui/material/Accordion';
-import PlayButton from '@/app/components/PlayButton';
+import PlayButton from '@/app/ui/buttons/PlayButton';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import StopIcon from '@mui/icons-material/Stop';
 import AccordionSummary from '@mui/material/AccordionSummary';
@@ -23,48 +23,23 @@ import Slider from '@mui/material/Slider';
 import { useRouter } from 'next/navigation';
 import { useSearchParams } from 'next/navigation'
 import Link from 'next/link';
-import CircleOfFifths from '@/app/components/CircleOfFifths';
+import CircleOfFifths from '@/app/ui/CircleOfFifths';
 import { reverseKeyConvert } from '@/app/utils';
-import SortFilter from '@/app/components/SortFilter';
+import SortFilter from '@/app/ui/SortFilter';
 import { AlbumDetails } from '@/app/types/dataTypes';
 import { AlbumPageCardProps } from '@/app/types/cardTypes';
 import slugify from 'slugify';
 import { Hidden } from '@mui/material';
 import Image from 'next/image';
-import CardAd from '@/app/components/CardAd';
-import VerticalAd from '@/app/components/VerticalAd';
-import HorizontalAd from '@/app/components/HorizontalAd';
-import SpotifyLogo from '@/app/SpotifyLogo';
-import SpotifyIcon from '@/app/SpotifyIcon';
+import CardAd from '@/app/ui/ad components/CardAd';
+import VerticalAd from '@/app/ui/ad components/VerticalAd';
+import HorizontalAd from '@/app/ui/ad components/HorizontalAd';
+import SpotifyLogo from '@/app/ui/icon components/SpotifyLogo';
+import SpotifyIcon from '@/app/ui/icon components/SpotifyIcon';
 import { transformSpotifyAlbumURItoURL, transformSpotifyURItoURL } from '@/app/utils';
-
-const SmallPlayButton = styled(IconButton)(() => ({
-	'&&': {
-		color: 'white',
-		backgroundColor: 'black',
-	},
-	'&:hover': {
-		color: 'white',
-		backgroundColor: '#00e676'
-	},
-	fontSize: '15px',
-	width: '42px',
-	height: '42px',
-}));
-
-const SortButton = styled(Button)(({ theme }) => ({
-	'&&': {
-		minHeight: '4px',
-		padding: '0px 10px',
-		color: 'white',
-	},
-	'&:hover': {
-		backgroundColor: '#00e676',
-		color: theme.palette.secondary.contrastText,
-	},
-}));
-
-
+import SortButton from '@/app/ui/buttons/SortButton';
+import SmallPlayButton from '@/app/ui/buttons/SmallPlayButton';
+import { playAudio } from '@/app/handlers/playAudio';
 
 const AlbumTrackCards: React.FC<AlbumPageCardProps> = ({ results, album }) => {
 	const [currentlyPlayingUrl, setCurrentlyPlayingUrl] = useState<string | null>(null);
@@ -82,27 +57,6 @@ const AlbumTrackCards: React.FC<AlbumPageCardProps> = ({ results, album }) => {
 	const offset: null = null;
 	const albumData = results[results.length - 1];
 	const albumSpotifyLink: string | null = transformSpotifyAlbumURItoURL(albumData.uri);
-
-	const playAudio = (event: React.MouseEvent, previewUrl: string | null) => {
-		event.stopPropagation();
-		event.preventDefault();
-		if (audioRef.current && previewUrl) {
-			audioRef.current.volume = .3;
-
-			if (audioRef.current.src === previewUrl && !audioRef.current.paused) {
-				audioRef.current.pause();
-				setCurrentlyPlayingUrl(null);
-			} else {
-				if (!audioRef.current.paused) {
-					// Stop currently playing audio if there is any
-					audioRef.current.pause();
-				}
-				audioRef.current.src = previewUrl;
-				audioRef.current.play();
-				setCurrentlyPlayingUrl(previewUrl);
-			}
-		}
-	};
 
 	const spotifyRedirect = (e: React.MouseEvent, uri: string) => {
 		e.stopPropagation();
@@ -180,7 +134,7 @@ const AlbumTrackCards: React.FC<AlbumPageCardProps> = ({ results, album }) => {
 								/>
 							</Grid>
 						</Grid>
-						
+
 						<SortFilter
 							setActiveSlice={setActiveSlice}
 							activeSlice={activeSlice}
@@ -212,7 +166,6 @@ const AlbumTrackCards: React.FC<AlbumPageCardProps> = ({ results, album }) => {
 
 							{/* main search */}
 							<Grid container item xs={12} lg={10} display='flex'
-								// wrap='no-wrap'
 								alignItems='flex-start'
 								justifyContent='center'
 
@@ -296,13 +249,6 @@ const AlbumTrackCards: React.FC<AlbumPageCardProps> = ({ results, album }) => {
 
 																</Grid>
 																<Grid item xs={3} sm={2} >
-																	{/* <Image
-																		unoptimized
-																		width={150}
-																		height={150}
-																		src={item.images}
-																		alt={item.name}
-																	/> */}
 																</Grid>
 																<Grid container item xs={12} sm={5} alignItems='center' rowSpacing={1} sx={{
 																	"@media (max-width: 600px)": {
@@ -310,7 +256,6 @@ const AlbumTrackCards: React.FC<AlbumPageCardProps> = ({ results, album }) => {
 																	}
 																}}>
 																	<Grid item xs={3} sm={6}  >
-																		{/* <Card sx={{ width: '90%' }}> */}
 																		<Typography variant="subtitle1" color="text.secondary" component="h1"
 																			sx={{
 																				display: 'flex', flexDirection: 'column', alignItems: 'center', lineHeight: '1rem',
@@ -328,15 +273,10 @@ const AlbumTrackCards: React.FC<AlbumPageCardProps> = ({ results, album }) => {
 																				{item.key}
 																			</Typography>
 																		</Typography>
-																		{/* </Card> */}
 																	</Grid>
 
 																	<Grid item xs={3} sm={6} sx={{
-																		// "@media (max-width: 600px)": {
-																		// 	marginRight: '.5em',
-																		// }
 																	}}>
-																		{/* <Card sx={{ width: '90%' }}> */}
 																		<Typography variant="subtitle1" color="text.secondary" component="h1"
 																			sx={{
 																				display: 'flex', flexDirection: 'column', alignItems: 'center', lineHeight: '1rem',
@@ -354,7 +294,6 @@ const AlbumTrackCards: React.FC<AlbumPageCardProps> = ({ results, album }) => {
 																				{item.tempo}
 																			</Typography>
 																		</Typography>
-																		{/* </Card> */}
 																	</Grid>
 
 																	{/* preview button */}
@@ -366,9 +305,8 @@ const AlbumTrackCards: React.FC<AlbumPageCardProps> = ({ results, album }) => {
 																			<SmallPlayButton className='preview-button' sx={{
 																				boxShadow: 3,
 																				borderRadius: '50px',
-																				// display: { xs: 'flex', sm: 'none', md: 'none' },
 																			}}
-																				onClick={(event) => playAudio(event, item.preview_url || null)}
+																				onClick={(event) => playAudio(event, item.preview_url, audioRef, setCurrentlyPlayingUrl || null)}
 																			>
 																				{currentlyPlayingUrl === item.preview_url ? (
 																					<>
@@ -423,7 +361,6 @@ const AlbumTrackCards: React.FC<AlbumPageCardProps> = ({ results, album }) => {
 														sx={{
 															width: '100vw',
 															display: 'flex',
-															// flexDirection: 'row',
 															justifyContent: 'center',
 															margin: '10px 10px 0',
 															boxShadow: 3,

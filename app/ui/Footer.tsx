@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import Link from 'next/link';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
-import SpotifyFooterLogo from '../SpotifyFooterLogo';
+import SpotifyFooterLogo from './icon components/SpotifyFooterLogo';
 
 const Footer: FC = () => {
   return (

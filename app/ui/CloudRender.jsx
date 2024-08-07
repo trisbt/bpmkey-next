@@ -211,22 +211,17 @@ function Word({ setIsLoading, genre, children, ...props }) {
   const router = useRouter();
 
   const handleTouchStart = (e) => {
-    // e.preventDefault(); 
-    // e.stopPropagation();
-    console.log('touchstart')
     setHovered(true);
   };
   
   const handleTouchEnd = (e) => {
-    // e.preventDefault(); 
-    // e.stopPropagation();
     setHovered(false);
     handleClick(e);
   };
   
 
+  // Handler to go to genre page
   const handleClick = async (e) => {
-    // e.stopPropagation();
     setIsLoading(true);
         const url = `genre/${genre.id}`;
         await router.push(url);
@@ -280,7 +275,7 @@ function Cloud({ setIsLoading, radius = 25 }) {
     }
 
     return temp;
-  }, [count, radius]);
+  }, [count, radius, genresArray]);
 
   return words.map(([pos, genre], index) => <Word key={index} position={pos} genre={genre} setIsLoading={setIsLoading}/>);
 }
